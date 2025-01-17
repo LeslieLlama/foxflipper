@@ -124,5 +124,435 @@ layout_mode = 2
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 
+[node name="CurrentRoundLabel" type="Label" parent="."]
+modulate = Color(0.815686, 0.396078, 0.34902, 1)
+layout_mode = 0
+offset_left = 391.0
+offset_top = 98.0
+offset_right = 501.0
+offset_bottom = 161.0
+text = "Round 
+1/6"
+
+[node name="RoundScoreLabel" type="Label" parent="."]
+modulate = Color(0.815686, 0.396078, 0.34902, 1)
+layout_mode = 0
+offset_left = 792.0
+offset_top = 313.0
+offset_right = 902.0
+offset_bottom = 376.0
+text = "000000/"
+
+[node name="RequiredScoreLabel" type="Label" parent="."]
+modulate = Color(0.396078, 0.654902, 0.756863, 1)
+layout_mode = 0
+offset_left = 820.0
+offset_top = 331.0
+offset_right = 930.0
+offset_bottom = 394.0
+text = "000000"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 133.0
+offset_top = 236.0
+offset_right = 261.0
+offset_bottom = 259.0
+text = "Total Points: 100"
+
+[node name="HeadsBetting" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 90.0
+offset_top = -60.0
+offset_right = 290.0
+offset_bottom = 19.0
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="HeadsBetting"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -84.0
+offset_top = -12.5
+offset_right = -44.0
+offset_bottom = 10.5
+grow_horizontal = 0
+grow_vertical = 2
+text = "50"
+
+[node name="HeadsCoinSprite" type="Sprite2D" parent="HeadsBetting"]
+position = Vector2(37, 36)
+scale = Vector2(0.1065, 0.110442)
+texture = ExtResource("1_ch256")
+region_enabled = true
+region_rect = Rect2(30.0001, 466, 431, 422)
+
+[node name="AddValue" type="Button" parent="HeadsBetting"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -44.0
+offset_top = -18.5
+offset_right = -8.0
+offset_bottom = 16.5
+grow_horizontal = 0
+grow_vertical = 2
+text = "+"
+
+[node name="RemoveValue" type="Button" parent="HeadsBetting"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -135.0
+offset_top = -18.5
+offset_right = -99.0
+offset_bottom = 16.5
+grow_horizontal = 0
+grow_vertical = 2
+text = "-"
+
+[node name="TailsBetting" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 91.0
+offset_top = 28.0
+offset_right = 291.0
+offset_bottom = 107.0
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="TailsBetting"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -85.0
+offset_top = -11.5
+offset_right = -45.0
+offset_bottom = 11.5
+grow_horizontal = 0
+grow_vertical = 2
+text = "50"
+
+[node name="HeadsCoinSprite" type="Sprite2D" parent="TailsBetting"]
+position = Vector2(37, 36)
+scale = Vector2(0.1065, 0.110442)
+texture = ExtResource("1_ch256")
+region_enabled = true
+region_rect = Rect2(25.6105, 30.4149, 432.261, 421.632)
+
+[node name="AddValue" type="Button" parent="TailsBetting"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -44.0
+offset_top = -18.5
+offset_right = -8.0
+offset_bottom = 16.5
+grow_horizontal = 0
+grow_vertical = 2
+text = "+"
+
+[node name="RemoveValue" type="Button" parent="TailsBetting"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -135.0
+offset_top = -18.5
+offset_right = -99.0
+offset_bottom = 16.5
+grow_horizontal = 0
+grow_vertical = 2
+text = "-"
+
+[node name="ShopPanel" type="Panel" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -358.0
+offset_top = -324.0
+offset_bottom = 325.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="ShopTitle" type="Label" parent="ShopPanel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -98.0
+offset_right = 99.0
+offset_bottom = 43.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 34
+text = "Shop"
+horizontal_alignment = 1
+
+[node name="ShopTitle2" type="Label" parent="ShopPanel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -112.0
+offset_top = 37.5
+offset_right = 126.0
+offset_bottom = 84.5
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 22
+text = "Purchases: 0/2"
+horizontal_alignment = 1
+
+[node name="BuyPointsPanel" type="Panel" parent="ShopPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -120.0
+offset_top = -232.0
+offset_right = 113.0
+offset_bottom = -144.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="ShopPanel/BuyPointsPanel"]
+layout_mode = 0
+offset_right = 175.0
+offset_bottom = 88.0
+text = "+50 points"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="ShopPanel/BuyPointsPanel"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -57.5
+offset_top = -23.0
+offset_right = -10.5
+offset_bottom = 25.0
+grow_horizontal = 0
+grow_vertical = 2
+text = "+"
+
+[node name="BuyCoinsPanel" type="Panel" parent="ShopPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -119.0
+offset_top = -129.0
+offset_right = 114.0
+offset_bottom = -41.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="ShopPanel/BuyCoinsPanel"]
+layout_mode = 0
+offset_right = 175.0
+offset_bottom = 88.0
+text = "+1 Coin"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="ShopPanel/BuyCoinsPanel"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -57.5
+offset_top = -23.0
+offset_right = -10.5
+offset_bottom = 25.0
+grow_horizontal = 0
+grow_vertical = 2
+text = "+"
+
+[node name="DividingLine" type="ColorRect" parent="ShopPanel"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 296.5
+offset_right = 341.0
+offset_bottom = 305.5
+
+[node name="Item1" type="Panel" parent="ShopPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -119.0
+offset_top = -1.0
+offset_right = 114.0
+offset_bottom = 87.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ItemName" type="Label" parent="ShopPanel/Item1"]
+layout_mode = 1
+offset_right = 175.0
+offset_bottom = 24.0
+text = "Snake Eye"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Description" type="Label" parent="ShopPanel/Item1"]
+layout_mode = 1
+offset_top = 24.0
+offset_right = 174.0
+offset_bottom = 89.0
+theme_override_font_sizes/font_size = 12
+text = "Flipping a coin that breaks the current pattern adds +50 to next coin"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Button" type="Button" parent="ShopPanel/Item1"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -57.5
+offset_top = -23.0
+offset_right = -10.5
+offset_bottom = 25.0
+grow_horizontal = 0
+grow_vertical = 2
+text = "+"
+
+[node name="Item2" type="Panel" parent="ShopPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -119.0
+offset_top = 106.0
+offset_right = 114.0
+offset_bottom = 194.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ItemName" type="Label" parent="ShopPanel/Item2"]
+layout_mode = 1
+offset_right = 175.0
+offset_bottom = 24.0
+text = "Wet Matches"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Description" type="Label" parent="ShopPanel/Item2"]
+layout_mode = 1
+offset_top = 24.0
+offset_right = 174.0
+offset_bottom = 89.0
+theme_override_font_sizes/font_size = 12
+text = "Consecutive Tails give +0.5x 
+per coin"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Button" type="Button" parent="ShopPanel/Item2"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -57.5
+offset_top = -23.0
+offset_right = -10.5
+offset_bottom = 25.0
+grow_horizontal = 0
+grow_vertical = 2
+text = "+"
+
+[node name="Item3" type="Panel" parent="ShopPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -119.0
+offset_top = 213.0
+offset_right = 114.0
+offset_bottom = 301.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ItemName" type="Label" parent="ShopPanel/Item3"]
+layout_mode = 1
+offset_right = 175.0
+offset_bottom = 24.0
+text = "Spatula Head"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Description" type="Label" parent="ShopPanel/Item3"]
+layout_mode = 1
+offset_top = 24.0
+offset_right = 174.0
+offset_bottom = 89.0
+theme_override_font_sizes/font_size = 12
+text = "Once per round, flip a coin
+to the opposite value"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Button" type="Button" parent="ShopPanel/Item3"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -57.5
+offset_top = -23.0
+offset_right = -10.5
+offset_bottom = 25.0
+grow_horizontal = 0
+grow_vertical = 2
+text = "+"
+
 [connection signal="button_up" from="NextCoinButton" to="." method="_on_next_coin_button_button_up"]
 [connection signal="button_up" from="ReDoCoinButton" to="." method="_on_re_do_coin_button_button_up"]
