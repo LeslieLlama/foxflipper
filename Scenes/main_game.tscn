@@ -1,0 +1,128 @@
+[gd_scene load_steps=3 format=3 uid="uid://bn0o5gyjoo4un"]
+
+[ext_resource type="Texture2D" uid="uid://b251l5ytmfywh" path="res://Sprites/FoxCoinConcepts.png" id="1_ch256"]
+[ext_resource type="Script" path="res://Scripts/main_game.gd" id="1_k015l"]
+
+[node name="MainGame" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_k015l")
+
+[node name="BackgroundColour" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.862745, 0.862745, 0.8, 1)
+
+[node name="DealerSprite" type="Sprite2D" parent="."]
+position = Vector2(594, 150.75)
+scale = Vector2(0.537356, 0.51692)
+texture = ExtResource("1_ch256")
+region_enabled = true
+region_rect = Rect2(563.32, 119.946, 696.667, 591.631)
+
+[node name="TailsCoinSprite" type="Sprite2D" parent="."]
+position = Vector2(591.117, 458.026)
+scale = Vector2(0.34293, 0.329889)
+texture = ExtResource("1_ch256")
+region_enabled = true
+region_rect = Rect2(30.562, 34.2023, 427.722, 420.143)
+
+[node name="HeadsCoinSprite" type="Sprite2D" parent="."]
+position = Vector2(590.901, 458.42)
+scale = Vector2(0.34293, 0.329889)
+texture = ExtResource("1_ch256")
+region_enabled = true
+region_rect = Rect2(30.0001, 466, 431, 422)
+
+[node name="NextCoinButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 11.5
+offset_top = -88.2501
+offset_right = 188.5
+offset_bottom = -3.25012
+grow_horizontal = 2
+grow_vertical = 0
+text = "Flip"
+
+[node name="CoinAmmount" type="Label" parent="NextCoinButton"]
+layout_mode = 0
+offset_left = 70.5
+offset_top = 3.25012
+offset_right = 110.5
+offset_bottom = 26.2501
+text = "0/6
+"
+
+[node name="ReDoCoinButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -170.0
+offset_top = -89.2501
+offset_right = 7.0
+offset_bottom = -4.25012
+grow_horizontal = 2
+grow_vertical = 0
+text = "Re-Flip
+"
+
+[node name="ReflipAmmount" type="Label" parent="ReDoCoinButton"]
+layout_mode = 0
+offset_left = 78.0
+offset_top = 2.25012
+offset_right = 118.0
+offset_bottom = 25.2501
+text = "x3
+"
+
+[node name="CoinFlipHistory" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 0
+offset_left = 437.0
+offset_top = 313.75
+offset_right = 757.0
+offset_bottom = 363.75
+
+[node name="ColorRect" type="ColorRect" parent="CoinFlipHistory"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+
+[node name="ColorRect2" type="ColorRect" parent="CoinFlipHistory"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+
+[node name="ColorRect3" type="ColorRect" parent="CoinFlipHistory"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+
+[node name="ColorRect4" type="ColorRect" parent="CoinFlipHistory"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+
+[node name="ColorRect5" type="ColorRect" parent="CoinFlipHistory"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+
+[node name="ColorRect6" type="ColorRect" parent="CoinFlipHistory"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+
+[connection signal="button_up" from="NextCoinButton" to="." method="_on_next_coin_button_button_up"]
+[connection signal="button_up" from="ReDoCoinButton" to="." method="_on_re_do_coin_button_button_up"]
