@@ -2,6 +2,7 @@ extends Control
 
 var rng = RandomNumberGenerator.new()
 var coinCount = 0
+var maxCoinCount = 0
 var reflipCount = 3
 
 var totalValue = 100
@@ -10,32 +11,36 @@ var tailsValue = 50
 var currentScore = 0
 
 var RoundNumber = 1
-var RequiredScore = [600,1200,1210,1220,1230,1240]
+var RequiredScore = [150,300,600,1200,1210,1220,1230,1240]
 
 var CoinHistory = []
 var CoinHistorySprites = []
 var scoreDisplayed : bool = false
 
+var purchases = 0
+
+@onready var CoinHistoryNode = $CoinFlipHistory
+@onready var NextCoinButton = $NextCoinButton
+@onready var ReDoCoinButton = $ReDoCoinButton
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$HeadsCoinSprite.hide()
 	$TailsCoinSprite.hide()
-	CoinHistorySprites = [$CoinFlipHistory/ColorRect, $CoinFlipHistory/ColorRect2, $CoinFlipHistory/ColorRect3, $CoinFlipHistory/ColorRect4, $CoinFlipHistory/ColorRect5, $CoinFlipHistory/ColorRect6]
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
+	for i in 3:
+		_add_coin()
+	#CoinHistorySprites = CoinHistoryNode.get_children()
+	
 
 func _on_next_coin_button_button_up() -> void:
 	if scoreDisplayed == true:
 		reset_table()
 		return
-	if coinCount == 6:
+	if coinCount == maxCoinCount:
 		display_score()
 		scoreDisplayed = true
-		$ReDoCoinButton.disabled = true	
-		$NextCoinButton.text = "Next Round"
+		ReDoCoinButton.disabled = true	
+		NextCoinButton.text = "Next Round"
 	else:
 		flip_coin(false)
 	
@@ -65,10 +70,10 @@ func flip_coin(is_reflip : bool):
 			CoinHistory.append(0)
 			coinCount += 1
 	$ReDoCoinButton/ReflipAmmount.text = str(reflipCount,"x")
-	$NextCoinButton/CoinAmmount.text = str(coinCount,"/6")
+	$NextCoinButton/CoinAmmount.text = str(coinCount,"/",maxCoinCount)
 	print(CoinHistory)
 	coin_history_display_update()
-	if coinCount == 6: $NextCoinButton.text = "Score Coins"
+	if coinCount == maxCoinCount: $NextCoinButton.text = "Score Coins"
 	if coinCount > 0:
 		$CoinBetting/AddTails.disabled = true
 		$CoinBetting/AddHeads.disabled = true
@@ -111,13 +116,27 @@ func display_score():
 	
 	
 func game_over():
+	
 	$GameOverPanel.show()
 	
 func _on_retry_button_button_up() -> void:
-	RoundNumber = 1
-	reset_table()
-	$GameOverPanel.hide()
+	reset_game()
 	
+func reset_game():
+	reset_table()
+	RoundNumber = 1
+	maxCoinCount = 0
+	CoinHistorySprites.clear()
+	for c in CoinHistoryNode.get_children():
+		c.queue_free()
+	await get_tree().create_timer(0.01).timeout #this is so dumb but if you don't stall it slightly both loops happen concurrently and it screws them up
+	for i in 3:
+		_add_coin()
+	totalValue = 100
+	$GameOverPanel.hide()
+
+
+
 func reset_table():
 	currentScore = 0
 	CoinHistory.clear()
@@ -126,14 +145,16 @@ func reset_table():
 	coinCount = 0
 	reflipCount = 3
 	scoreDisplayed = false
-	$CurrentRoundLabel.text = str("Round","\n",RoundNumber,"/6")
+	headsValue = totalValue%2
+	tailsValue = totalValue - headsValue
+	$CurrentRoundLabel.text = str("Round","\n",RoundNumber,"/12")
 	$RequiredScoreLabel.text = str(RequiredScore[RoundNumber-1])
 	$RoundScoreLabel.text = str(currentScore)
 	$ReDoCoinButton/ReflipAmmount.text = str(reflipCount,"x")
-	$NextCoinButton/CoinAmmount.text = str(coinCount,"/6")
+	$NextCoinButton/CoinAmmount.text = str(coinCount,"/",maxCoinCount)
 	$NextCoinButton.text = "Flip"
 	
-	$ReDoCoinButton.disabled = false
+	ReDoCoinButton.disabled = false
 	$CoinBetting/AddTails.disabled = false
 	$CoinBetting/AddHeads.disabled = false
 	$ShopPanel.hide()
@@ -156,3 +177,17 @@ func _on_add_heads_button_up() -> void:
 		$CoinBetting/AddHeads.disabled = true
 	else: $CoinBetting/AddHeads.disabled = false
 	$CoinBetting/SplitPoints.text = str(headsValue,"/",tailsValue)
+	
+func _add_coin():
+	maxCoinCount += 1
+	var child_node = ColorRect.new()
+	child_node.custom_minimum_size = Vector2(50,50)
+	CoinHistoryNode.add_child(child_node)
+	CoinHistorySprites = CoinHistoryNode.get_children()
+
+
+func _add_points():
+	totalValue += 50 
+
+func add_purchase():
+	purchases += 1

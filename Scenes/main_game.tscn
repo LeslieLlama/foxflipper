@@ -92,37 +92,22 @@ offset_bottom = 25.2501
 text = "x3
 "
 
-[node name="CoinFlipHistory" type="HBoxContainer" parent="."]
+[node name="CoinFlipHistory" type="GridContainer" parent="."]
+clip_contents = true
 custom_minimum_size = Vector2(100, 50)
-layout_mode = 0
-offset_left = 437.0
-offset_top = 313.75
-offset_right = 757.0
-offset_bottom = 363.75
-
-[node name="ColorRect" type="ColorRect" parent="CoinFlipHistory"]
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 2
-
-[node name="ColorRect2" type="ColorRect" parent="CoinFlipHistory"]
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 2
-
-[node name="ColorRect3" type="ColorRect" parent="CoinFlipHistory"]
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 2
-
-[node name="ColorRect4" type="ColorRect" parent="CoinFlipHistory"]
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 2
-
-[node name="ColorRect5" type="ColorRect" parent="CoinFlipHistory"]
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 2
-
-[node name="ColorRect6" type="ColorRect" parent="CoinFlipHistory"]
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 2
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -148.0
+offset_top = -35.0
+offset_right = 172.0
+offset_bottom = 177.0
+grow_horizontal = 2
+grow_vertical = 2
+columns = 6
 
 [node name="CurrentRoundLabel" type="Label" parent="."]
 modulate = Color(0.815686, 0.396078, 0.34902, 1)
@@ -562,4 +547,8 @@ text = "Try Again? "
 [connection signal="button_up" from="ReDoCoinButton" to="." method="_on_re_do_coin_button_button_up"]
 [connection signal="button_up" from="CoinBetting/AddTails" to="." method="_on_add_tails_button_up"]
 [connection signal="button_up" from="CoinBetting/AddHeads" to="." method="_on_add_heads_button_up"]
+[connection signal="button_up" from="ShopPanel/BuyPointsPanel/Button" to="." method="add_purchase"]
+[connection signal="button_up" from="ShopPanel/BuyPointsPanel/Button" to="." method="_add_points"]
+[connection signal="button_up" from="ShopPanel/BuyCoinsPanel/Button" to="." method="_add_coin"]
+[connection signal="button_up" from="ShopPanel/BuyCoinsPanel/Button" to="." method="add_purchase"]
 [connection signal="button_up" from="GameOverPanel/RetryButton" to="." method="_on_retry_button_button_up"]
