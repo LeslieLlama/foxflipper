@@ -145,7 +145,7 @@ anchor_bottom = 0.5
 offset_left = 109.0
 offset_top = 120.0
 offset_right = 380.0
-offset_bottom = 199.0
+offset_bottom = 213.0
 grow_vertical = 2
 
 [node name="Title" type="Label" parent="CoinBetting"]
@@ -188,14 +188,14 @@ grow_vertical = 2
 text = "50/50"
 
 [node name="HeadsCoinSprite" type="Sprite2D" parent="CoinBetting"]
-position = Vector2(37, 36)
+position = Vector2(29.9508, 46.6346)
 scale = Vector2(0.1065, 0.110442)
 texture = ExtResource("1_ch256")
 region_enabled = true
 region_rect = Rect2(30.0001, 466, 431, 422)
 
 [node name="HeadsCoinSprite2" type="Sprite2D" parent="CoinBetting"]
-position = Vector2(230, 37)
+position = Vector2(244.951, 45.6346)
 scale = Vector2(0.1065, 0.110442)
 texture = ExtResource("1_ch256")
 region_enabled = true
@@ -208,10 +208,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 25.5
-offset_top = -18.5
-offset_right = 61.5
-offset_bottom = 16.5
+offset_left = 44.5
+offset_top = -18.0
+offset_right = 80.5
+offset_bottom = 17.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "+"
@@ -223,10 +223,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -62.5
-offset_top = -17.5
-offset_right = -26.5
-offset_bottom = 17.5
+offset_left = -76.5
+offset_top = -17.0
+offset_right = -40.5
+offset_bottom = 18.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "+"
@@ -258,7 +258,7 @@ theme_override_font_sizes/font_size = 34
 text = "Shop"
 horizontal_alignment = 1
 
-[node name="ShopTitle2" type="Label" parent="ShopPanel"]
+[node name="PurchaseCount" type="Label" parent="ShopPanel"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -279,17 +279,22 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -120.0
-offset_top = -232.0
-offset_right = 113.0
-offset_bottom = -144.0
+offset_left = -121.0
+offset_top = -248.5
+offset_right = 112.0
+offset_bottom = -184.5
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Label" type="Label" parent="ShopPanel/BuyPointsPanel"]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -31.0
 offset_right = 175.0
-offset_bottom = 88.0
+offset_bottom = 33.0
+grow_vertical = 2
 text = "+50 points"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -316,22 +321,69 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -119.0
-offset_top = -129.0
-offset_right = 114.0
-offset_bottom = -41.0
+offset_left = -121.0
+offset_top = -175.5
+offset_right = 112.0
+offset_bottom = -112.5
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Label" type="Label" parent="ShopPanel/BuyCoinsPanel"]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -32.5
 offset_right = 175.0
-offset_bottom = 88.0
+offset_bottom = 31.5
+grow_vertical = 2
 text = "+1 Coin"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Button" type="Button" parent="ShopPanel/BuyCoinsPanel"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -57.5
+offset_top = -23.0
+offset_right = -10.5
+offset_bottom = 25.0
+grow_horizontal = 0
+grow_vertical = 2
+text = "+"
+
+[node name="BuyReflips" type="Panel" parent="ShopPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -121.0
+offset_top = -107.5
+offset_right = 112.0
+offset_bottom = -44.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="ShopPanel/BuyReflips"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -31.0
+offset_right = 175.0
+offset_bottom = 31.0
+grow_vertical = 2
+text = "+1 Re-Flip"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="ShopPanel/BuyReflips"]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -551,4 +603,6 @@ text = "Try Again? "
 [connection signal="button_up" from="ShopPanel/BuyPointsPanel/Button" to="." method="_add_points"]
 [connection signal="button_up" from="ShopPanel/BuyCoinsPanel/Button" to="." method="_add_coin"]
 [connection signal="button_up" from="ShopPanel/BuyCoinsPanel/Button" to="." method="add_purchase"]
+[connection signal="button_up" from="ShopPanel/BuyReflips/Button" to="." method="add_purchase"]
+[connection signal="button_up" from="ShopPanel/BuyReflips/Button" to="." method="_add_reflips"]
 [connection signal="button_up" from="GameOverPanel/RetryButton" to="." method="_on_retry_button_button_up"]
