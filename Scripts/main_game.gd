@@ -9,6 +9,9 @@ var headsValue = 50
 var tailsValue = 50
 var currentScore = 0
 
+var RoundNumber = 1
+var RequiredScore = [600,1200,1210,1220,1230,1240]
+
 var CoinHistory = []
 var CoinHistorySprites = []
 var scoreDisplayed : bool = false
@@ -98,8 +101,23 @@ func coin_pattern_searcher():
 		
 func display_score():
 	coin_pattern_searcher()
+	if currentScore >= RequiredScore[RoundNumber-1]:
+		RoundNumber += 1
+		$ShopPanel.show()
+	else: 
+		print("Game Over!")
+		game_over()
 	$RoundScoreLabel.text = str(currentScore)
-	$ShopPanel.show()
+	
+	
+func game_over():
+	$GameOverPanel.show()
+	
+func _on_retry_button_button_up() -> void:
+	RoundNumber = 1
+	reset_table()
+	$GameOverPanel.hide()
+	
 func reset_table():
 	currentScore = 0
 	CoinHistory.clear()
@@ -108,16 +126,18 @@ func reset_table():
 	coinCount = 0
 	reflipCount = 3
 	scoreDisplayed = false
+	$CurrentRoundLabel.text = str("Round","\n",RoundNumber,"/6")
+	$RequiredScoreLabel.text = str(RequiredScore[RoundNumber-1])
 	$RoundScoreLabel.text = str(currentScore)
 	$ReDoCoinButton/ReflipAmmount.text = str(reflipCount,"x")
 	$NextCoinButton/CoinAmmount.text = str(coinCount,"/6")
 	$NextCoinButton.text = "Flip"
+	
 	$ReDoCoinButton.disabled = false
 	$CoinBetting/AddTails.disabled = false
 	$CoinBetting/AddHeads.disabled = false
 	$ShopPanel.hide()
 	
-
 
 func _on_add_tails_button_up() -> void:
 	$CoinBetting/AddHeads.disabled = false

@@ -514,7 +514,52 @@ grow_horizontal = 0
 grow_vertical = 2
 text = "+"
 
+[node name="GameOverPanel" type="Panel" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -440.0
+offset_top = -282.0
+offset_right = -80.0
+offset_bottom = -173.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="GameOverPanel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -100.5
+offset_right = 100.5
+offset_bottom = 70.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 41
+text = "Game Over!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RetryButton" type="Button" parent="GameOverPanel"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 354.0
+offset_top = -119.0
+offset_right = 684.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Try Again? "
+
 [connection signal="button_up" from="NextCoinButton" to="." method="_on_next_coin_button_button_up"]
 [connection signal="button_up" from="ReDoCoinButton" to="." method="_on_re_do_coin_button_button_up"]
 [connection signal="button_up" from="CoinBetting/AddTails" to="." method="_on_add_tails_button_up"]
 [connection signal="button_up" from="CoinBetting/AddHeads" to="." method="_on_add_heads_button_up"]
+[connection signal="button_up" from="GameOverPanel/RetryButton" to="." method="_on_retry_button_button_up"]
