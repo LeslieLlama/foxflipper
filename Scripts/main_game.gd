@@ -4,6 +4,7 @@ var rng = RandomNumberGenerator.new()
 var coinCount = 0
 var reflipCount = 3
 
+var totalValue = 100
 var headsValue = 50
 var tailsValue = 50
 var currentScore = 0
@@ -65,7 +66,9 @@ func flip_coin(is_reflip : bool):
 	print(CoinHistory)
 	coin_history_display_update()
 	if coinCount == 6: $NextCoinButton.text = "Score Coins"
-	
+	if coinCount > 0:
+		$CoinBetting/AddTails.disabled = true
+		$CoinBetting/AddHeads.disabled = true
 
 func coin_history_display_update():
 	for c in CoinHistory:
@@ -105,8 +108,31 @@ func reset_table():
 	coinCount = 0
 	reflipCount = 3
 	scoreDisplayed = false
+	$RoundScoreLabel.text = str(currentScore)
 	$ReDoCoinButton/ReflipAmmount.text = str(reflipCount,"x")
 	$NextCoinButton/CoinAmmount.text = str(coinCount,"/6")
 	$NextCoinButton.text = "Flip"
 	$ReDoCoinButton.disabled = false
+	$CoinBetting/AddTails.disabled = false
+	$CoinBetting/AddHeads.disabled = false
 	$ShopPanel.hide()
+	
+
+
+func _on_add_tails_button_up() -> void:
+	$CoinBetting/AddHeads.disabled = false
+	tailsValue += 10
+	headsValue -= 10
+	if tailsValue >= totalValue:
+		$CoinBetting/AddTails.disabled = true
+	else: $CoinBetting/AddTails.disabled = false
+	$CoinBetting/SplitPoints.text = str(headsValue,"/",tailsValue)
+
+func _on_add_heads_button_up() -> void:
+	$CoinBetting/AddTails.disabled = false
+	tailsValue -= 10
+	headsValue += 10
+	if headsValue >= totalValue:
+		$CoinBetting/AddHeads.disabled = true
+	else: $CoinBetting/AddHeads.disabled = false
+	$CoinBetting/SplitPoints.text = str(headsValue,"/",tailsValue)
