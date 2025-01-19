@@ -23,6 +23,8 @@ var maxPurchases = 2
 enum GameState {MENU,BETTING,SCORING,SHOP,GAME_OVER}
 var CurrentGameState = GameState.BETTING
 
+var tween
+
 @onready var CoinHistoryNode = $CoinFlipHistory
 @onready var NextCoinButton = $NextCoinButton
 @onready var ReDoCoinButton = $ReDoCoinButton
@@ -34,7 +36,12 @@ func _ready() -> void:
 	for i in 3:
 		_add_coin()
 	#CoinHistorySprites = CoinHistoryNode.get_children()
-	
+
+func _process(delta: float) -> void:
+	if Input.is_key_pressed(KEY_UP):
+		_coin_flip_animation(true)
+	if Input.is_key_pressed(KEY_DOWN):
+		_coin_flip_animation(false)
 
 func _on_next_coin_button_button_up() -> void:
 	if CurrentGameState == GameState.SHOP:
@@ -53,7 +60,20 @@ func _on_next_coin_button_button_up() -> void:
 		CurrentGameState = GameState.SHOP
 		NextCoinButton.text = "Next Round"
 		
-		
+func _coin_flip_animation(heads : bool):
+	if tween:
+		tween.kill()
+	tween = get_tree().create_tween().bind_node(self)
+	tween.tween_property($CoinTailsSide, "scale", Vector2(1,0), 0.1).set_trans(Tween.TRANS_QUINT)
+	tween.tween_property($CoinHeadsSide, "scale", Vector2(1,1), 0.1).set_trans(Tween.TRANS_QUINT)
+	tween.tween_property($CoinHeadsSide, "scale", Vector2(1,0), 0.1).set_trans(Tween.TRANS_QUINT)
+	tween.tween_property($CoinTailsSide, "scale", Vector2(1,1), 0.1).set_trans(Tween.TRANS_QUINT)
+	if heads == true:
+		tween.tween_property($CoinTailsSide, "scale", Vector2(1,0), 0.2).set_trans(Tween.TRANS_QUINT)
+		tween.tween_property($CoinHeadsSide, "scale", Vector2(1,1), 0.2).set_trans(Tween.TRANS_QUINT)
+	else: 
+		tween.tween_property($CoinHeadsSide, "scale", Vector2(1,0), 0.2).set_trans(Tween.TRANS_QUINT)
+		tween.tween_property($CoinTailsSide, "scale", Vector2(1,1), 0.2).set_trans(Tween.TRANS_QUINT)
 	
 func _on_re_do_coin_button_button_up() -> void:
 	if reflipCount >= 1:

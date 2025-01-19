@@ -1,7 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://bn0o5gyjoo4un"]
+[gd_scene load_steps=8 format=3 uid="uid://bn0o5gyjoo4un"]
 
 [ext_resource type="Texture2D" uid="uid://b251l5ytmfywh" path="res://Sprites/FoxCoinConcepts.png" id="1_ch256"]
 [ext_resource type="Script" path="res://Scripts/main_game.gd" id="1_k015l"]
+[ext_resource type="Texture2D" uid="uid://dl66pahmplk71" path="res://Sprites/FoxCoin_Dealer.png" id="2_uijv0"]
+[ext_resource type="Texture2D" uid="uid://ckhk7e4lj27yr" path="res://Sprites/FoxCoinConcepts_Heads.png" id="3_u33ss"]
+[ext_resource type="Texture2D" uid="uid://dyayargx7nk40" path="res://Sprites/FoxCoinConcepts_Tails.png" id="4_edq3u"]
+[ext_resource type="Texture2D" uid="uid://cfsfmhokr0lvf" path="res://Sprites/FoxCoins_headsSmall.png" id="4_xmn38"]
+[ext_resource type="Texture2D" uid="uid://rbhka5f6qjh5" path="res://Sprites/FoxCoins_tailsSmall.png" id="5_xrxib"]
 
 [node name="MainGame" type="Control"]
 layout_mode = 3
@@ -22,12 +27,47 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.862745, 0.862745, 0.8, 1)
 
-[node name="DealerSprite" type="Sprite2D" parent="."]
-position = Vector2(594, 150.75)
-scale = Vector2(0.537356, 0.51692)
-texture = ExtResource("1_ch256")
-region_enabled = true
-region_rect = Rect2(563.32, 119.946, 696.667, 591.631)
+[node name="Dealer" type="TextureRect" parent="."]
+offset_left = 357.0
+offset_top = 12.0
+offset_right = 847.0
+offset_bottom = 297.0
+texture = ExtResource("2_uijv0")
+expand_mode = 1
+
+[node name="CoinHeadsSide" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -506.0
+offset_top = -274.0
+offset_right = -286.0
+offset_bottom = -54.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(110, 110)
+texture = ExtResource("3_u33ss")
+expand_mode = 1
+
+[node name="CoinTailsSide" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -501.5
+offset_top = -271.5
+offset_right = -290.5
+offset_bottom = -56.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(105, 105)
+texture = ExtResource("4_edq3u")
+expand_mode = 1
 
 [node name="TailsCoinSprite" type="Sprite2D" parent="."]
 position = Vector2(591.117, 458.026)
@@ -102,9 +142,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -148.0
-offset_top = -35.0
+offset_top = -22.0
 offset_right = 172.0
-offset_bottom = 177.0
+offset_bottom = 190.0
 grow_horizontal = 2
 grow_vertical = 2
 columns = 6
@@ -187,19 +227,23 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "50/50"
 
-[node name="HeadsCoinSprite" type="Sprite2D" parent="CoinBetting"]
-position = Vector2(29.9508, 46.6346)
+[node name="HeadsCoinSprite" type="TextureRect" parent="CoinBetting"]
+layout_mode = 0
+offset_left = 13.9999
+offset_top = 27.0
+offset_right = 390.0
+offset_bottom = 389.0
 scale = Vector2(0.1065, 0.110442)
-texture = ExtResource("1_ch256")
-region_enabled = true
-region_rect = Rect2(30.0001, 466, 431, 422)
+texture = ExtResource("4_xmn38")
 
-[node name="HeadsCoinSprite2" type="Sprite2D" parent="CoinBetting"]
-position = Vector2(244.951, 45.6346)
+[node name="TailsCoinSprite" type="TextureRect" parent="CoinBetting"]
+layout_mode = 0
+offset_left = 228.0
+offset_top = 25.0
+offset_right = 594.0
+offset_bottom = 393.0
 scale = Vector2(0.1065, 0.110442)
-texture = ExtResource("1_ch256")
-region_enabled = true
-region_rect = Rect2(23.8801, 25.8944, 430.489, 428.718)
+texture = ExtResource("5_xrxib")
 
 [node name="AddTails" type="Button" parent="CoinBetting"]
 layout_mode = 1
