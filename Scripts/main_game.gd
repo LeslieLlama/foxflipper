@@ -12,7 +12,7 @@ var tailsValue = 50
 var currentScore = 0
 
 var RoundNumber = 1
-var RequiredScore = [150,300,600,1200,1210,1220,1230,1240,28000]
+var RequiredScore = [150,300,600,1200,2400,4800,9600,12000,14000,19200,28000]
 
 var CoinHistory = []
 var CoinHistorySprites = []
@@ -29,13 +29,15 @@ var tween
 @onready var NextCoinButton = $NextCoinButton
 @onready var ReDoCoinButton = $ReDoCoinButton
 
+@export var emptyCoinSprite : Texture2D
+@export var headsCoinSprite : Texture2D
+@export var tailsCoinSprite : Texture2D
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	$HeadsCoinSprite.hide()
-	$TailsCoinSprite.hide()
 	for i in 3:
 		_add_coin()
-	#CoinHistorySprites = CoinHistoryNode.get_children()
+	$RequiredScoreLabel.text = str(RequiredScore[0])
 
 func _process(delta: float) -> void:
 	if Input.is_key_pressed(KEY_UP):
@@ -74,6 +76,7 @@ func _coin_flip_animation(heads : bool):
 	else: 
 		tween.tween_property($CoinHeadsSide, "scale", Vector2(1,0), 0.2).set_trans(Tween.TRANS_QUINT)
 		tween.tween_property($CoinTailsSide, "scale", Vector2(1,1), 0.2).set_trans(Tween.TRANS_QUINT)
+	tween.tween_callback(coin_history_display_update)
 	
 func _on_re_do_coin_button_button_up() -> void:
 	if reflipCount >= 1:
@@ -81,33 +84,28 @@ func _on_re_do_coin_button_button_up() -> void:
 		
 	
 func flip_coin(is_reflip : bool):
+	if is_reflip == true && reflipCount > 0:
+		CoinHistory.pop_back()
+		reflipCount -= 1
+		coinCount -= 1
+	
 	var flip_value = rng.randi_range(0, 1)
 	if flip_value == 1:
-		$HeadsCoinSprite.show()
-		$TailsCoinSprite.hide()
-		if is_reflip == true && reflipCount > 0:
-			CoinHistory.pop_back()
-			CoinHistory.append(1)
-			reflipCount -= 1
-		else:
-			CoinHistory.append(1)
-			coinCount += 1
+		_coin_flip_animation(true)
+		CoinHistory.append(1)
+		coinCount += 1
 	else: 
-		$HeadsCoinSprite.hide()
-		$TailsCoinSprite.show()
-		if is_reflip == true && reflipCount > 0:
-			CoinHistory.pop_back()
-			CoinHistory.append(0)
-			reflipCount -= 1
-		else:
-			CoinHistory.append(0)
-			coinCount += 1
+		_coin_flip_animation(false)
+		CoinHistory.append(0)
+		coinCount += 1
 	if reflipCount == 0:
 		ReDoCoinButton.disabled = true
+	if coinCount == 1:
+		ReDoCoinButton.disabled = false
+	#update the UI
 	$ReDoCoinButton/ReflipAmmount.text = str(reflipCount,"x")
 	$NextCoinButton/CoinAmmount.text = str(coinCount,"/",maxCoinCount)
 	print(CoinHistory)
-	coin_history_display_update()
 	if coinCount == maxCoinCount: $NextCoinButton.text = "Score Coins"
 	if coinCount > 0:
 		$CoinBetting/AddTails.disabled = true
@@ -116,9 +114,9 @@ func flip_coin(is_reflip : bool):
 func coin_history_display_update():
 	for c in CoinHistory:
 		if c == 1:
-			CoinHistorySprites[coinCount-1].color = Color("D06559")
+			CoinHistorySprites[coinCount-1].texture = headsCoinSprite
 		else:
-			CoinHistorySprites[coinCount-1].color = Color("65A7C1")
+			CoinHistorySprites[coinCount-1].texture = tailsCoinSprite
 			
 func coin_pattern_searcher():
 	var runCount = 1
@@ -147,7 +145,7 @@ func display_score():
 	else: 
 		print("Game Over!")
 		game_over()
-	$RoundScoreLabel.text = str(currentScore)
+	$RoundScoreLabel.text = str(currentScore,"/")
 	
 	
 func game_over():
@@ -158,7 +156,7 @@ func _on_retry_button_button_up() -> void:
 	reset_game()
 	
 func reset_game():
-	reset_table()
+	
 	RoundNumber = 1
 	maxReflipCount = 3
 	maxCoinCount = 0
@@ -174,21 +172,22 @@ func reset_game():
 	headsValue = 50
 	tailsValue = 50
 	totalValue = 100
-
+	reset_table()
+	
 func reset_table():
 	currentScore = 0
 	CoinHistory.clear()
 	for c in CoinHistorySprites:
-		c.color = Color.WHITE
+		c.texture = emptyCoinSprite
 	coinCount = 0
 	reflipCount = maxReflipCount
 	$CurrentRoundLabel.text = str("Round","\n",RoundNumber,"/12")
 	$RequiredScoreLabel.text = str(RequiredScore[RoundNumber-1])
-	$RoundScoreLabel.text = str(currentScore)
+	$RoundScoreLabel.text = str(currentScore,"/")
 	$ReDoCoinButton/ReflipAmmount.text = str(reflipCount,"x")
+	ReDoCoinButton.disabled = true
 	$NextCoinButton/CoinAmmount.text = str(coinCount,"/",maxCoinCount)
 	$NextCoinButton.text = "Flip"
-	ReDoCoinButton.disabled = false
 	$CoinBetting/AddTails.disabled = false
 	$CoinBetting/AddHeads.disabled = false
 	$ShopPanel.hide()
@@ -217,13 +216,20 @@ func _on_add_heads_button_up() -> void:
 	
 func _add_coin():
 	maxCoinCount += 1
-	var child_node = ColorRect.new()
+	#var child_node = ColorRect.new()
+	var child_node = TextureRect.new()
+	child_node.texture = emptyCoinSprite
 	child_node.custom_minimum_size = Vector2(50,50)
+	child_node.expand_mode = TextureRect.EXPAND_FIT_WIDTH
+	child_node.stretch_mode = TextureRect.STRETCH_SCALE
 	CoinHistoryNode.add_child(child_node)
 	CoinHistorySprites = CoinHistoryNode.get_children()
+	
+	
 
 func _add_reflips():
 	maxReflipCount += 1
+	$ReDoCoinButton/ReflipAmmount.text = str("x",maxReflipCount)
 func _add_points():
 	totalValue += 50 
 	if headsValue > tailsValue:

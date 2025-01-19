@@ -1,12 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://bn0o5gyjoo4un"]
+[gd_scene load_steps=9 format=3 uid="uid://bn0o5gyjoo4un"]
 
-[ext_resource type="Texture2D" uid="uid://b251l5ytmfywh" path="res://Sprites/FoxCoinConcepts.png" id="1_ch256"]
 [ext_resource type="Script" path="res://Scripts/main_game.gd" id="1_k015l"]
+[ext_resource type="Texture2D" uid="uid://po8fo44gcqw0" path="res://Sprites/FoxCoins_empty.png" id="2_6225m"]
 [ext_resource type="Texture2D" uid="uid://dl66pahmplk71" path="res://Sprites/FoxCoin_Dealer.png" id="2_uijv0"]
 [ext_resource type="Texture2D" uid="uid://ckhk7e4lj27yr" path="res://Sprites/FoxCoinConcepts_Heads.png" id="3_u33ss"]
 [ext_resource type="Texture2D" uid="uid://dyayargx7nk40" path="res://Sprites/FoxCoinConcepts_Tails.png" id="4_edq3u"]
 [ext_resource type="Texture2D" uid="uid://cfsfmhokr0lvf" path="res://Sprites/FoxCoins_headsSmall.png" id="4_xmn38"]
 [ext_resource type="Texture2D" uid="uid://rbhka5f6qjh5" path="res://Sprites/FoxCoins_tailsSmall.png" id="5_xrxib"]
+[ext_resource type="Texture2D" uid="uid://c1dqycrxriler" path="res://icon.svg" id="7_v46qd"]
 
 [node name="MainGame" type="Control"]
 layout_mode = 3
@@ -16,6 +17,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_k015l")
+emptyCoinSprite = ExtResource("2_6225m")
+headsCoinSprite = ExtResource("4_xmn38")
+tailsCoinSprite = ExtResource("5_xrxib")
 
 [node name="BackgroundColour" type="ColorRect" parent="."]
 custom_minimum_size = Vector2(50, 50)
@@ -28,10 +32,19 @@ grow_vertical = 2
 color = Color(0.862745, 0.862745, 0.8, 1)
 
 [node name="Dealer" type="TextureRect" parent="."]
-offset_left = 357.0
-offset_top = 12.0
-offset_right = 847.0
-offset_bottom = 297.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -234.0
+offset_top = -299.0
+offset_right = 256.0
+offset_bottom = -14.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(245, 142.5)
 texture = ExtResource("2_uijv0")
 expand_mode = 1
 
@@ -42,10 +55,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -506.0
-offset_top = -274.0
-offset_right = -286.0
-offset_bottom = -54.0
+offset_left = -100.0
+offset_top = 17.0
+offset_right = 120.0
+offset_bottom = 237.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(110, 110)
@@ -59,29 +72,16 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -501.5
-offset_top = -271.5
-offset_right = -290.5
-offset_bottom = -56.5
+offset_left = -95.5
+offset_top = 19.5
+offset_right = 115.5
+offset_bottom = 234.5
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(1, 1e-05)
 pivot_offset = Vector2(105, 105)
 texture = ExtResource("4_edq3u")
 expand_mode = 1
-
-[node name="TailsCoinSprite" type="Sprite2D" parent="."]
-position = Vector2(591.117, 458.026)
-scale = Vector2(0.34293, 0.329889)
-texture = ExtResource("1_ch256")
-region_enabled = true
-region_rect = Rect2(30.562, 34.2023, 427.722, 420.143)
-
-[node name="HeadsCoinSprite" type="Sprite2D" parent="."]
-position = Vector2(590.901, 458.42)
-scale = Vector2(0.34293, 0.329889)
-texture = ExtResource("1_ch256")
-region_enabled = true
-region_rect = Rect2(30.0001, 466, 431, 422)
 
 [node name="NextCoinButton" type="Button" parent="."]
 layout_mode = 1
@@ -134,19 +134,12 @@ text = "x3
 
 [node name="CoinFlipHistory" type="GridContainer" parent="."]
 clip_contents = true
-custom_minimum_size = Vector2(100, 50)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -148.0
-offset_top = -22.0
-offset_right = 172.0
-offset_bottom = 190.0
-grow_horizontal = 2
-grow_vertical = 2
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 0
+offset_left = 32.0
+offset_top = 411.0
+offset_right = 298.0
+offset_bottom = 619.0
 columns = 6
 
 [node name="CurrentRoundLabel" type="Label" parent="."]
@@ -157,35 +150,38 @@ offset_top = 98.0
 offset_right = 501.0
 offset_bottom = 161.0
 text = "Round 
-1/6"
+1/12"
 
 [node name="RoundScoreLabel" type="Label" parent="."]
 modulate = Color(0.815686, 0.396078, 0.34902, 1)
 layout_mode = 0
-offset_left = 792.0
-offset_top = 313.0
-offset_right = 902.0
-offset_bottom = 376.0
-text = "000000/"
+offset_left = 455.0
+offset_top = 299.0
+offset_right = 569.0
+offset_bottom = 362.0
+theme_override_font_sizes/font_size = 30
+text = "0/"
+horizontal_alignment = 2
 
 [node name="RequiredScoreLabel" type="Label" parent="."]
 modulate = Color(0.396078, 0.654902, 0.756863, 1)
 layout_mode = 0
-offset_left = 820.0
-offset_top = 331.0
-offset_right = 930.0
-offset_bottom = 394.0
-text = "000600"
+offset_left = 569.0
+offset_top = 299.0
+offset_right = 679.0
+offset_bottom = 362.0
+theme_override_font_sizes/font_size = 30
+text = "0"
 
 [node name="CoinBetting" type="Panel" parent="."]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_left = 109.0
-offset_top = 120.0
-offset_right = 380.0
-offset_bottom = 213.0
+offset_left = 28.0
+offset_top = -17.0
+offset_right = 299.0
+offset_bottom = 76.0
 grow_vertical = 2
 
 [node name="Title" type="Label" parent="CoinBetting"]
@@ -638,6 +634,100 @@ offset_bottom = 2.0
 grow_horizontal = 2
 grow_vertical = 0
 text = "Try Again? "
+
+[node name="Item1" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 19.0
+offset_top = 7.0
+offset_right = 296.0
+offset_bottom = 146.0
+
+[node name="TextureRect" type="TextureRect" parent="Item1"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -32.5
+offset_right = 67.0
+offset_bottom = 32.5
+grow_vertical = 2
+texture = ExtResource("7_v46qd")
+expand_mode = 1
+
+[node name="Item Title" type="Label" parent="Item1"]
+modulate = Color(0.356863, 0.0784314, 0.109804, 1)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -191.0
+offset_bottom = 38.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 25
+text = "Sunny Side Up"
+vertical_alignment = 1
+
+[node name="Item Description" type="Label" parent="Item1"]
+modulate = Color(0.356863, 0.0784314, 0.109804, 1)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -191.0
+offset_top = -90.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Heads coins give +50 points for every tails flipped"
+autowrap_mode = 3
+
+[node name="Item2" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 16.0
+offset_top = 138.0
+offset_right = 293.0
+offset_bottom = 277.0
+
+[node name="TextureRect" type="TextureRect" parent="Item2"]
+visible = false
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -32.5
+offset_right = 67.0
+offset_bottom = 32.5
+grow_vertical = 2
+texture = ExtResource("7_v46qd")
+expand_mode = 1
+
+[node name="Item Title" type="Label" parent="Item2"]
+modulate = Color(0.356863, 0.0784314, 0.109804, 1)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -191.0
+offset_bottom = 38.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 25
+text = "Empty"
+vertical_alignment = 1
+
+[node name="Item Description" type="Label" parent="Item2"]
+modulate = Color(0.356863, 0.0784314, 0.109804, 1)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -191.0
+offset_top = -90.0
+grow_horizontal = 0
+grow_vertical = 0
+autowrap_mode = 3
 
 [connection signal="button_up" from="NextCoinButton" to="." method="_on_next_coin_button_button_up"]
 [connection signal="button_up" from="ReDoCoinButton" to="." method="_on_re_do_coin_button_button_up"]
