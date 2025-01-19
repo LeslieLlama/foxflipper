@@ -126,46 +126,52 @@ func coin_history_display_update():
 		else:
 			CoinHistorySprites[coinCount-1].texture = tailsCoinSprite
 			
+
 func coin_pattern_searcher():
-	var runCount = 1
+	var runCount = 0
 	var previousCoinValue = -1
 	var highestRunCount = 1
 	var runArray = []
 	for c in CoinHistory.size():
-		if CoinHistory[c] == previousCoinValue:
+		#if c==0: previousCoinValue = CoinHistory[0] #set previous coin value to the current coin value SO that a run break doesnt instantly trigger 
+		
+		if CoinHistory[c] == previousCoinValue || c==0:
 			runCount += 1
 			runArray.append(CoinHistory[c])
 		else: 
 			#run is broken
-			if CoinHistory[c] == 0: #tails
+			if CoinHistory[c-1] == 0: #tails
 				pattern_payoff(runCount, runArray,c, tailsValue, colorBlue)
 			else: #heads
 				pattern_payoff(runCount, runArray,c, headsValue, colorRed)
 			runCount = 1
 			runArray.clear()
-			
-		if c == CoinHistory.size():
-			print("final coins were a run")
-			if CoinHistory[c] == 0: #tails
-				pattern_payoff(runCount, runArray,c, tailsValue, colorBlue)
-			else: #heads
-				pattern_payoff(runCount, runArray,c, headsValue, colorRed)
-			runCount = 1
-			runArray.clear()
+			runArray.append(CoinHistory[c])
 		previousCoinValue = CoinHistory[c]
-		#if runCount >= 3:
-			#highestRunCount = runCount
-	#currentScore *= highestRunCount
+		if c+1 == CoinHistory.size():
+			print("last coin")
+			if CoinHistory[c] == 0: #tails
+				pattern_payoff(runCount, runArray,c, tailsValue, colorBlue)
+			else: #heads
+				pattern_payoff(runCount, runArray,c, headsValue, colorRed)
+			runCount = 1
+			runArray.clear()
+			return
 	
 func pattern_payoff(runCount : int, runArray, c : int, coinValue : int, colorToUse : Color):
 	if runCount < 3:
+		print(str("runcount > 2 : ",runCount))
+		print(str("runarray = ",runArray))
 		for i in runCount:
 			currentScore += coinValue
-			pop_up_message(str("+",coinValue,"!"), CoinHistorySprites[c].global_position, colorToUse)
+			pop_up_message(str("+",coinValue,"!"), CoinHistorySprites[(c+i)].global_position, colorToUse)
 	else: 
-		currentScore += runArray.size() * coinValue
-		var middleOfArray = runArray.size()%2
-		pop_up_message(str("+",runArray.size() * coinValue,"!"), CoinHistorySprites[middleOfArray].global_position, colorToUse)
+		print(str("runcount > 2 : ",runCount))
+		print(str("runarray = ",runArray))
+		var scoreToAdd = ((runCount) * coinValue) * (runCount)
+		currentScore += scoreToAdd
+		var middleOfArray = runArray.size()/2
+		pop_up_message(str("Run! +",scoreToAdd,"!"), CoinHistorySprites[middleOfArray].global_position, colorToUse)
 	
 func pop_up_message(textToSay : String, pos : Vector2, textColour : Color):
 	var message = Label.new()
@@ -298,3 +304,4 @@ func disable_buy_buttons(disable_value : bool):
 	$ShopPanel/BuyPointsPanel/Button.disabled = disable_value
 	$ShopPanel/BuyCoinsPanel/Button.disabled = disable_value
 	$ShopPanel/BuyReflips/Button.disabled = disable_value
+	

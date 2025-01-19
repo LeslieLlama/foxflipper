@@ -446,6 +446,7 @@ offset_right = 341.0
 offset_bottom = 305.5
 
 [node name="Item1" type="Panel" parent="ShopPanel"]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -494,6 +495,7 @@ grow_vertical = 2
 text = "+"
 
 [node name="Item2" type="Panel" parent="ShopPanel"]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -543,6 +545,7 @@ grow_vertical = 2
 text = "+"
 
 [node name="Item3" type="Panel" parent="ShopPanel"]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -636,6 +639,7 @@ grow_vertical = 0
 text = "Try Again? "
 
 [node name="Item1" type="Control" parent="."]
+visible = false
 anchors_preset = 0
 offset_left = 19.0
 offset_top = 7.0
@@ -683,6 +687,7 @@ text = "Heads coins give +50 points for every tails flipped"
 autowrap_mode = 3
 
 [node name="Item2" type="Control" parent="."]
+visible = false
 anchors_preset = 0
 offset_left = 16.0
 offset_top = 138.0
@@ -733,10 +738,10 @@ autowrap_mode = 3
 [connection signal="button_up" from="ReDoCoinButton" to="." method="_on_re_do_coin_button_button_up"]
 [connection signal="button_up" from="CoinBetting/AddTails" to="." method="_on_add_tails_button_up"]
 [connection signal="button_up" from="CoinBetting/AddHeads" to="." method="_on_add_heads_button_up"]
-[connection signal="button_up" from="ShopPanel/BuyPointsPanel/Button" to="." method="add_purchase"]
 [connection signal="button_up" from="ShopPanel/BuyPointsPanel/Button" to="." method="_add_points"]
+[connection signal="button_up" from="ShopPanel/BuyPointsPanel/Button" to="." method="add_purchase"]
 [connection signal="button_up" from="ShopPanel/BuyCoinsPanel/Button" to="." method="_add_coin"]
 [connection signal="button_up" from="ShopPanel/BuyCoinsPanel/Button" to="." method="add_purchase"]
-[connection signal="button_up" from="ShopPanel/BuyReflips/Button" to="." method="add_purchase"]
 [connection signal="button_up" from="ShopPanel/BuyReflips/Button" to="." method="_add_reflips"]
+[connection signal="button_up" from="ShopPanel/BuyReflips/Button" to="." method="add_purchase"]
 [connection signal="button_up" from="GameOverPanel/RetryButton" to="." method="_on_retry_button_button_up"]
