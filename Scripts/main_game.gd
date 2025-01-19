@@ -23,7 +23,10 @@ var maxPurchases = 2
 enum GameState {MENU,BETTING,SCORING,SHOP,GAME_OVER}
 var CurrentGameState = GameState.BETTING
 
-var tween
+var coinTween
+
+var colorRed = Color("D0665A")
+var colorBlue = Color("65A7C1")
 
 @onready var CoinHistoryNode = $CoinFlipHistory
 @onready var NextCoinButton = $NextCoinButton
@@ -38,12 +41,17 @@ func _ready() -> void:
 	for i in 3:
 		_add_coin()
 	$RequiredScoreLabel.text = str(RequiredScore[0])
+	
+	#var dealerPosition = $Dealer.position
+	#var tween = create_tween().set_loops(-1)
+	#tween.tween_property($Dealer,"position:y", dealerPosition.y-2, 1).set_trans(Tween.TRANS_CIRC)
+	#tween.tween_property($Dealer,"position:y", dealerPosition.y, 1).set_trans(Tween.TRANS_CIRC)
 
 func _process(delta: float) -> void:
 	if Input.is_key_pressed(KEY_UP):
-		_coin_flip_animation(true)
+		pop_up_message("test message",Vector2(592,310), colorBlue)
 	if Input.is_key_pressed(KEY_DOWN):
-		_coin_flip_animation(false)
+		pop_up_message("Aura Farming",Vector2(592,310), colorRed)
 
 func _on_next_coin_button_button_up() -> void:
 	if CurrentGameState == GameState.SHOP:
@@ -63,20 +71,20 @@ func _on_next_coin_button_button_up() -> void:
 		NextCoinButton.text = "Next Round"
 		
 func _coin_flip_animation(heads : bool):
-	if tween:
-		tween.kill()
-	tween = get_tree().create_tween().bind_node(self)
-	tween.tween_property($CoinTailsSide, "scale", Vector2(1,0), 0.1).set_trans(Tween.TRANS_QUINT)
-	tween.tween_property($CoinHeadsSide, "scale", Vector2(1,1), 0.1).set_trans(Tween.TRANS_QUINT)
-	tween.tween_property($CoinHeadsSide, "scale", Vector2(1,0), 0.1).set_trans(Tween.TRANS_QUINT)
-	tween.tween_property($CoinTailsSide, "scale", Vector2(1,1), 0.1).set_trans(Tween.TRANS_QUINT)
+	if coinTween:
+		coinTween.kill()
+	coinTween = get_tree().create_tween().bind_node(self)
+	coinTween.tween_property($CoinTailsSide, "scale", Vector2(1,0), 0.1).set_trans(Tween.TRANS_QUINT)
+	coinTween.tween_property($CoinHeadsSide, "scale", Vector2(1,1), 0.1).set_trans(Tween.TRANS_QUINT)
+	coinTween.tween_property($CoinHeadsSide, "scale", Vector2(1,0), 0.1).set_trans(Tween.TRANS_QUINT)
+	coinTween.tween_property($CoinTailsSide, "scale", Vector2(1,1), 0.1).set_trans(Tween.TRANS_QUINT)
 	if heads == true:
-		tween.tween_property($CoinTailsSide, "scale", Vector2(1,0), 0.2).set_trans(Tween.TRANS_QUINT)
-		tween.tween_property($CoinHeadsSide, "scale", Vector2(1,1), 0.2).set_trans(Tween.TRANS_QUINT)
+		coinTween.tween_property($CoinTailsSide, "scale", Vector2(1,0), 0.2).set_trans(Tween.TRANS_QUINT)
+		coinTween.tween_property($CoinHeadsSide, "scale", Vector2(1,1), 0.2).set_trans(Tween.TRANS_QUINT)
 	else: 
-		tween.tween_property($CoinHeadsSide, "scale", Vector2(1,0), 0.2).set_trans(Tween.TRANS_QUINT)
-		tween.tween_property($CoinTailsSide, "scale", Vector2(1,1), 0.2).set_trans(Tween.TRANS_QUINT)
-	tween.tween_callback(coin_history_display_update)
+		coinTween.tween_property($CoinHeadsSide, "scale", Vector2(1,0), 0.2).set_trans(Tween.TRANS_QUINT)
+		coinTween.tween_property($CoinTailsSide, "scale", Vector2(1,1), 0.2).set_trans(Tween.TRANS_QUINT)
+	coinTween.tween_callback(coin_history_display_update)
 	
 func _on_re_do_coin_button_button_up() -> void:
 	if reflipCount >= 1:
@@ -122,24 +130,58 @@ func coin_pattern_searcher():
 	var runCount = 1
 	var previousCoinValue = -1
 	var highestRunCount = 1
-	for c in CoinHistory:
-		if c == 0:
-			currentScore += tailsValue
-		else: 
-			currentScore += headsValue
-		if c == previousCoinValue:
+	var runArray = []
+	for c in CoinHistory.size():
+		if CoinHistory[c] == previousCoinValue:
 			runCount += 1
+			runArray.append(CoinHistory[c])
 		else: 
+			#run is broken
+			if CoinHistory[c] == 0: #tails
+				pattern_payoff(runCount, runArray,c, tailsValue, colorBlue)
+			else: #heads
+				pattern_payoff(runCount, runArray,c, headsValue, colorRed)
 			runCount = 1
-		previousCoinValue = c
-		if runCount >= 3:
-			highestRunCount = runCount
-	currentScore *= highestRunCount
+			runArray.clear()
+			
+		if c == CoinHistory.size():
+			print("final coins were a run")
+			if CoinHistory[c] == 0: #tails
+				pattern_payoff(runCount, runArray,c, tailsValue, colorBlue)
+			else: #heads
+				pattern_payoff(runCount, runArray,c, headsValue, colorRed)
+			runCount = 1
+			runArray.clear()
+		previousCoinValue = CoinHistory[c]
+		#if runCount >= 3:
+			#highestRunCount = runCount
+	#currentScore *= highestRunCount
 	
-		
+func pattern_payoff(runCount : int, runArray, c : int, coinValue : int, colorToUse : Color):
+	if runCount < 3:
+		for i in runCount:
+			currentScore += coinValue
+			pop_up_message(str("+",coinValue,"!"), CoinHistorySprites[c].global_position, colorToUse)
+	else: 
+		currentScore += runArray.size() * coinValue
+		var middleOfArray = runArray.size()%2
+		pop_up_message(str("+",runArray.size() * coinValue,"!"), CoinHistorySprites[middleOfArray].global_position, colorToUse)
+	
+func pop_up_message(textToSay : String, pos : Vector2, textColour : Color):
+	var message = Label.new()
+	message.text = textToSay
+	message.position = Vector2(pos.x,pos.y-10)
+	message.modulate = textColour
+	add_child(message)
+	var tween = get_tree().create_tween().bind_node(self)
+	tween.tween_property(message, "position", Vector2(pos.x,pos.y-20), 1).set_trans(tween.TRANS_QUAD)
+	tween.tween_callback(message.queue_free)
+	
+
 func display_score():
 	CurrentGameState = GameState.SCORING
 	coin_pattern_searcher()
+	await get_tree().create_timer(0.1).timeout
 	if currentScore >= RequiredScore[RoundNumber-1]:
 		RoundNumber += 1
 	else: 
