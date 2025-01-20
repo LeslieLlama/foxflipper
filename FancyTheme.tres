@@ -1,0 +1,46 @@
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://dsk5olnx1e77u"]
+
+[ext_resource type="FontFile" uid="uid://c3obv6undlrdy" path="res://Fonts/CaviarDreams_Bold.ttf" id="1_660fd"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_njusy"]
+bg_color = Color(0.952941, 0.462745, 0.407843, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b7wyi"]
+bg_color = Color(0.815686, 0.396078, 0.34902, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cuhia"]
+bg_color = Color(0.870588, 0.666667, 0.54902, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ja3rh"]
+bg_color = Color(0.862745, 0.862745, 0.8, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.666667, 0.156863, 0.121569, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[resource]
+default_font = ExtResource("1_660fd")
+default_font_size = 22
+Button/colors/font_color = Color(0.862745, 0.862745, 0.8, 1)
+Button/styles/hover = SubResource("StyleBoxFlat_njusy")
+Button/styles/normal = SubResource("StyleBoxFlat_b7wyi")
+Button/styles/pressed = SubResource("StyleBoxFlat_cuhia")
+Label/colors/font_color = Color(0.815686, 0.396078, 0.34902, 1)
+Panel/styles/panel = SubResource("StyleBoxFlat_ja3rh")

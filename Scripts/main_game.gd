@@ -21,12 +21,15 @@ var purchases = 0
 var maxPurchases = 2
 
 enum GameState {MENU,BETTING,SCORING,SHOP,GAME_OVER}
-var CurrentGameState = GameState.BETTING
+var CurrentGameState = GameState.MENU
 
 var coinTween
 
 var colorRed = Color("D0665A")
 var colorBlue = Color("65A7C1")
+var title_position : Vector2
+
+var highest_score : int
 
 @onready var CoinHistoryNode = $CoinFlipHistory
 @onready var NextCoinButton = $NextCoinButton
@@ -41,7 +44,10 @@ func _ready() -> void:
 	for i in 3:
 		_add_coin()
 	$RequiredScoreLabel.text = str(RequiredScore[0])
-	
+	title_position = $Title.position
+	$Title.position = Vector2(title_position.x,title_position.y-160)
+	$ReDoCoinButton.disabled = true
+	_title_animation(true)
 	#var dealerPosition = $Dealer.position
 	#var tween = create_tween().set_loops(-1)
 	#tween.tween_property($Dealer,"position:y", dealerPosition.y-2, 1).set_trans(Tween.TRANS_CIRC)
@@ -49,11 +55,15 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	if Input.is_key_pressed(KEY_UP):
-		pop_up_message("test message",Vector2(592,310), colorBlue)
+		_title_animation(false)
 	if Input.is_key_pressed(KEY_DOWN):
-		pop_up_message("Aura Farming",Vector2(592,310), colorRed)
+		_title_animation(true)
 
 func _on_next_coin_button_button_up() -> void:
+	print(CurrentGameState)
+	if CurrentGameState == GameState.MENU:
+		_title_animation(false)
+		CurrentGameState = GameState.BETTING
 	if CurrentGameState == GameState.SHOP:
 		reset_table()
 		CurrentGameState = GameState.BETTING
@@ -69,19 +79,37 @@ func _on_next_coin_button_button_up() -> void:
 		$ShopPanel.show()
 		CurrentGameState = GameState.SHOP
 		NextCoinButton.text = "Next Round"
+	if CurrentGameState == GameState.GAME_OVER:
+		reset_game()
+		_title_animation(true)
+		
+func _title_animation(show : bool):
+	if show == false: #hide
+		var tween = get_tree().create_tween().bind_node(self)
+		tween.tween_property($Title, "position", Vector2(title_position.x,title_position.y-160), 1).set_trans(Tween.TRANS_QUINT)
+		$Credits.hide()
+	else: 
+		var tween = get_tree().create_tween().bind_node(self)
+		tween.tween_property($Title, "position", Vector2(title_position.x,title_position.y), 1).set_trans(Tween.TRANS_QUINT)
+		$Credits.show()
 		
 func _coin_flip_animation(heads : bool):
 	if coinTween:
+		coin_history_display_update() #if the player mashes the flip button, update the history vissually. and kill/restart the tween. 
 		coinTween.kill()
 	coinTween = get_tree().create_tween().bind_node(self)
-	coinTween.tween_property($CoinTailsSide, "scale", Vector2(1,0), 0.1).set_trans(Tween.TRANS_QUINT)
-	coinTween.tween_property($CoinHeadsSide, "scale", Vector2(1,1), 0.1).set_trans(Tween.TRANS_QUINT)
-	coinTween.tween_property($CoinHeadsSide, "scale", Vector2(1,0), 0.1).set_trans(Tween.TRANS_QUINT)
-	coinTween.tween_property($CoinTailsSide, "scale", Vector2(1,1), 0.1).set_trans(Tween.TRANS_QUINT)
 	if heads == true:
+		coinTween.tween_property($CoinTailsSide, "scale", Vector2(1,0), 0.1).set_trans(Tween.TRANS_QUINT)
+		coinTween.tween_property($CoinHeadsSide, "scale", Vector2(1,1), 0.1).set_trans(Tween.TRANS_QUINT)
+		coinTween.tween_property($CoinHeadsSide, "scale", Vector2(1,0), 0.1).set_trans(Tween.TRANS_QUINT)
+		coinTween.tween_property($CoinTailsSide, "scale", Vector2(1,1), 0.1).set_trans(Tween.TRANS_QUINT)
 		coinTween.tween_property($CoinTailsSide, "scale", Vector2(1,0), 0.2).set_trans(Tween.TRANS_QUINT)
 		coinTween.tween_property($CoinHeadsSide, "scale", Vector2(1,1), 0.2).set_trans(Tween.TRANS_QUINT)
 	else: 
+		coinTween.tween_property($CoinTailsSide, "scale", Vector2(1,0), 0.1).set_trans(Tween.TRANS_QUINT)
+		coinTween.tween_property($CoinHeadsSide, "scale", Vector2(1,1), 0.1).set_trans(Tween.TRANS_QUINT)
+		coinTween.tween_property($CoinHeadsSide, "scale", Vector2(1,0), 0.1).set_trans(Tween.TRANS_QUINT)
+		coinTween.tween_property($CoinTailsSide, "scale", Vector2(1,1), 0.1).set_trans(Tween.TRANS_QUINT)
 		coinTween.tween_property($CoinHeadsSide, "scale", Vector2(1,0), 0.2).set_trans(Tween.TRANS_QUINT)
 		coinTween.tween_property($CoinTailsSide, "scale", Vector2(1,1), 0.2).set_trans(Tween.TRANS_QUINT)
 	coinTween.tween_callback(coin_history_display_update)
@@ -90,7 +118,6 @@ func _on_re_do_coin_button_button_up() -> void:
 	if reflipCount >= 1:
 		flip_coin(true)
 		
-	
 func flip_coin(is_reflip : bool):
 	if is_reflip == true && reflipCount > 0:
 		CoinHistory.pop_back()
@@ -164,7 +191,7 @@ func pattern_payoff(runCount : int, runArray, c : int, coinValue : int, colorToU
 		print(str("runarray = ",runArray))
 		for i in runCount:
 			currentScore += coinValue
-			pop_up_message(str("+",coinValue,"!"), CoinHistorySprites[(c+i)].global_position, colorToUse)
+			pop_up_message(str("+",coinValue,"!"), CoinHistorySprites[(c-i)].global_position, colorToUse)
 	else: 
 		print(str("runcount > 2 : ",runCount))
 		print(str("runarray = ",runArray))
@@ -190,21 +217,33 @@ func display_score():
 	await get_tree().create_timer(0.1).timeout
 	if currentScore >= RequiredScore[RoundNumber-1]:
 		RoundNumber += 1
+		pop_up_message(str("Round Cleared!"),Vector2(660,120) , colorRed)
+		pop_up_message(str("Well Done"),Vector2(660,140) , colorBlue)
 	else: 
 		print("Game Over!")
 		game_over()
+	if currentScore >= highest_score : highest_score = currentScore
 	$RoundScoreLabel.text = str(currentScore,"/")
+	if CurrentGameState != GameState.GAME_OVER && RoundNumber == 7:
+		game_won()
+	
 	
 	
 func game_over():
-	
 	$GameOverPanel.show()
+	CurrentGameState = GameState.GAME_OVER
+	NextCoinButton.text = "Play Again?"
+	
+func game_won():
+	$GameWonPanel.show()
+	CurrentGameState = GameState.GAME_OVER
+	$GameWonPanel/RetryButton.text = str("Thank You for Playing\nHighest Score : ",highest_score)
+	NextCoinButton.text = "Menu"
 	
 func _on_retry_button_button_up() -> void:
 	reset_game()
 	
 func reset_game():
-	
 	RoundNumber = 1
 	maxReflipCount = 3
 	maxCoinCount = 0
@@ -216,10 +255,11 @@ func reset_game():
 		_add_coin()
 	totalValue = 100
 	$GameOverPanel.hide()
-	
+	$GameWonPanel.hide()
 	headsValue = 50
 	tailsValue = 50
 	totalValue = 100
+	highest_score = 0
 	reset_table()
 	
 func reset_table():
@@ -229,7 +269,7 @@ func reset_table():
 		c.texture = emptyCoinSprite
 	coinCount = 0
 	reflipCount = maxReflipCount
-	$CurrentRoundLabel.text = str("Round","\n",RoundNumber,"/12")
+	$CurrentRoundLabel.text = str("Round","\n",RoundNumber,"/6")
 	$RequiredScoreLabel.text = str(RequiredScore[RoundNumber-1])
 	$RoundScoreLabel.text = str(currentScore,"/")
 	$ReDoCoinButton/ReflipAmmount.text = str(reflipCount,"x")
@@ -240,8 +280,10 @@ func reset_table():
 	$CoinBetting/AddHeads.disabled = false
 	$ShopPanel.hide()
 	purchases = 0
+	$ShopPanel/PurchaseCount.text = str("Purchases: ",purchases,"/",maxPurchases)
 	disable_buy_buttons(false)
-	CurrentGameState = GameState.BETTING
+	update_coin_betting_ui()
+	CurrentGameState = GameState.MENU
 	
 
 func _on_add_tails_button_up() -> void:
@@ -305,3 +347,12 @@ func disable_buy_buttons(disable_value : bool):
 	$ShopPanel/BuyCoinsPanel/Button.disabled = disable_value
 	$ShopPanel/BuyReflips/Button.disabled = disable_value
 	
+func _on_HelpButton_toggled(toggled_on: bool) -> void:
+	if toggled_on == true: #show
+		var tween = get_tree().create_tween().bind_node(self)
+		tween.tween_property($ExplanationPanel, "position", Vector2(0,29), 1).set_trans(Tween.TRANS_QUINT)
+		$ExplanationPanel/Button.text = "<"
+	else: #hide
+		var tween = get_tree().create_tween().bind_node(self)
+		tween.tween_property($ExplanationPanel, "position", Vector2(-303,29), 1).set_trans(Tween.TRANS_QUINT)
+		$ExplanationPanel/Button.text = "?"
