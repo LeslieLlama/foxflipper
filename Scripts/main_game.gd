@@ -160,8 +160,6 @@ func coin_pattern_searcher():
 	var highestRunCount = 1
 	var runArray = []
 	for c in CoinHistory.size():
-		#if c==0: previousCoinValue = CoinHistory[0] #set previous coin value to the current coin value SO that a run break doesnt instantly trigger 
-		
 		if CoinHistory[c] == previousCoinValue || c==0:
 			runCount += 1
 			runArray.append(CoinHistory[c])
@@ -178,29 +176,31 @@ func coin_pattern_searcher():
 		if c+1 == CoinHistory.size():
 			print("last coin")
 			if CoinHistory[c] == 0: #tails
-				pattern_payoff(runCount, runArray,c, tailsValue, colorBlue)
+				pattern_payoff(runCount, runArray,c+1, tailsValue, colorBlue)
 			else: #heads
-				pattern_payoff(runCount, runArray,c, headsValue, colorRed)
+				pattern_payoff(runCount, runArray,c+1, headsValue, colorRed)
 			runCount = 1
 			runArray.clear()
 			return
 	
 func pattern_payoff(runCount : int, runArray, c : int, coinValue : int, colorToUse : Color):
 	if runCount < 3:
-		print(str("runcount > 2 : ",runCount))
-		print(str("runarray = ",runArray))
+		#print(str("runcount > 2 : ",runCount))
+		#print(str("runarray = ",runArray))
 		for i in runCount:
 			currentScore += coinValue
-			pop_up_message(str("+",coinValue,"!"), CoinHistorySprites[(c-i)].global_position, colorToUse)
+			#print(str("i == ",i,"coin == ",c))
+			pop_up_message(str("+",coinValue,"!"), CoinHistorySprites[(c-1)].global_position, colorToUse)
 	else: 
-		print(str("runcount > 2 : ",runCount))
-		print(str("runarray = ",runArray))
+		#print(str("runcount > 2 : ",runCount))
+		#print(str("runarray = ",runArray))
 		var scoreToAdd = ((runCount) * coinValue) * (runCount)
 		currentScore += scoreToAdd
-		var middleOfArray = runArray.size()/2
+		var middleOfArray = c - (runArray.size()/2)
 		pop_up_message(str("Run! +",scoreToAdd,"!"), CoinHistorySprites[middleOfArray].global_position, colorToUse)
 	
 func pop_up_message(textToSay : String, pos : Vector2, textColour : Color):
+	print(str("pop up message at", pos))
 	var message = Label.new()
 	message.text = textToSay
 	message.position = Vector2(pos.x,pos.y-10)
@@ -314,12 +314,11 @@ func _add_coin():
 	child_node.stretch_mode = TextureRect.STRETCH_SCALE
 	CoinHistoryNode.add_child(child_node)
 	CoinHistorySprites = CoinHistoryNode.get_children()
-	
-	
 
 func _add_reflips():
 	maxReflipCount += 1
 	$ReDoCoinButton/ReflipAmmount.text = str("x",maxReflipCount)
+	
 func _add_points():
 	totalValue += 50 
 	if headsValue > tailsValue:
