@@ -48,10 +48,6 @@ func _ready() -> void:
 	$Title.position = Vector2(title_position.x,title_position.y-160)
 	$ReDoCoinButton.disabled = true
 	_title_animation(true)
-	#var dealerPosition = $Dealer.position
-	#var tween = create_tween().set_loops(-1)
-	#tween.tween_property($Dealer,"position:y", dealerPosition.y-2, 1).set_trans(Tween.TRANS_CIRC)
-	#tween.tween_property($Dealer,"position:y", dealerPosition.y, 1).set_trans(Tween.TRANS_CIRC)
 
 func _process(delta: float) -> void:
 	if Input.is_key_pressed(KEY_UP):
@@ -70,7 +66,8 @@ func _on_next_coin_button_button_up() -> void:
 		return
 	if CurrentGameState == GameState.BETTING:
 		if coinCount == maxCoinCount:
-			display_score()
+			CurrentGameState = GameState.SCORING
+			coin_pattern_searcher()
 			ReDoCoinButton.disabled = true
 			NextCoinButton.text = "Shop"
 			return
@@ -95,8 +92,10 @@ func _title_animation(show : bool):
 		
 func _coin_flip_animation(heads : bool):
 	if coinTween:
-		coin_history_display_update() #if the player mashes the flip button, update the history vissually. and kill/restart the tween. 
+		if coinTween.is_running() == true:
+			coin_history_display_update()
 		coinTween.kill()
+		 #if the player mashes the flip button, update the history vissually. and kill/restart the tween. 
 	coinTween = get_tree().create_tween().bind_node(self)
 	if heads == true:
 		coinTween.tween_property($CoinTailsSide, "scale", Vector2(1,0), 0.1).set_trans(Tween.TRANS_QUINT)
@@ -152,14 +151,21 @@ func coin_history_display_update():
 			CoinHistorySprites[coinCount-1].texture = headsCoinSprite
 		else:
 			CoinHistorySprites[coinCount-1].texture = tailsCoinSprite
-			
+	mini_coin_trigger_animation(coinCount-1)
+
+func mini_coin_trigger_animation(c : int):
+	var tween = get_tree().create_tween().bind_node(self)
+	tween.tween_property(CoinHistorySprites[c], "scale", Vector2(1.1,1.1), 0.1).set_trans(Tween.TRANS_BOUNCE)
+	tween.tween_property(CoinHistorySprites[c], "scale", Vector2(1,1), 0.1).set_trans(Tween.TRANS_BOUNCE)
 
 func coin_pattern_searcher():
 	var runCount = 0
 	var previousCoinValue = -1
 	var highestRunCount = 1
 	var runArray = []
+	
 	for c in CoinHistory.size():
+		await get_tree().create_timer(0.1).timeout
 		if CoinHistory[c] == previousCoinValue || c==0:
 			runCount += 1
 			runArray.append(CoinHistory[c])
@@ -181,9 +187,11 @@ func coin_pattern_searcher():
 				pattern_payoff(runCount, runArray,c+1, headsValue, colorRed)
 			runCount = 1
 			runArray.clear()
-			return
+	check_round_won()
 	
 func pattern_payoff(runCount : int, runArray, c : int, coinValue : int, colorToUse : Color):
+	for a in runArray:
+		mini_coin_trigger_animation(c-1)
 	if runCount < 3:
 		#print(str("runcount > 2 : ",runCount))
 		#print(str("runarray = ",runArray))
@@ -198,6 +206,7 @@ func pattern_payoff(runCount : int, runArray, c : int, coinValue : int, colorToU
 		currentScore += scoreToAdd
 		var middleOfArray = c - (runArray.size()/2)
 		pop_up_message(str("Run! +",scoreToAdd,"!"), CoinHistorySprites[middleOfArray].global_position, colorToUse)
+		
 	
 func pop_up_message(textToSay : String, pos : Vector2, textColour : Color):
 	print(str("pop up message at", pos))
@@ -210,11 +219,8 @@ func pop_up_message(textToSay : String, pos : Vector2, textColour : Color):
 	tween.tween_property(message, "position", Vector2(pos.x,pos.y-20), 1).set_trans(tween.TRANS_QUAD)
 	tween.tween_callback(message.queue_free)
 	
-
-func display_score():
-	CurrentGameState = GameState.SCORING
-	coin_pattern_searcher()
-	await get_tree().create_timer(0.1).timeout
+	
+func check_round_won():
 	if currentScore >= RequiredScore[RoundNumber-1]:
 		RoundNumber += 1
 		pop_up_message(str("Round Cleared!"),Vector2(660,120) , colorRed)
@@ -226,8 +232,6 @@ func display_score():
 	$RoundScoreLabel.text = str(currentScore,"/")
 	if CurrentGameState != GameState.GAME_OVER && RoundNumber == 7:
 		game_won()
-	
-	
 	
 func game_over():
 	$GameOverPanel.show()
@@ -285,7 +289,6 @@ func reset_table():
 	update_coin_betting_ui()
 	CurrentGameState = GameState.MENU
 	
-
 func _on_add_tails_button_up() -> void:
 	$CoinBetting/AddHeads.disabled = false
 	tailsValue += 10
