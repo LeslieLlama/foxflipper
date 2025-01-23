@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bn0o5gyjoo4un"]
+[gd_scene load_steps=16 format=3 uid="uid://bn0o5gyjoo4un"]
 
 [ext_resource type="Script" path="res://Scripts/main_game.gd" id="1_k015l"]
 [ext_resource type="Texture2D" uid="uid://po8fo44gcqw0" path="res://Sprites/FoxCoins_empty.png" id="2_6225m"]
@@ -9,6 +9,7 @@
 [ext_resource type="Theme" uid="uid://dsk5olnx1e77u" path="res://FancyTheme.tres" id="5_cxspc"]
 [ext_resource type="Texture2D" uid="uid://rbhka5f6qjh5" path="res://Sprites/FoxCoins_tailsSmall.png" id="5_xrxib"]
 [ext_resource type="Texture2D" uid="uid://c1dqycrxriler" path="res://icon.svg" id="7_v46qd"]
+[ext_resource type="PackedScene" uid="uid://g7r0abvn0dli" path="res://Scenes/coin_betting.tscn" id="9_rbtme"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dbx8f"]
 bg_color = Color(0.470588, 0.741176, 0.847059, 1)
@@ -269,113 +270,16 @@ theme_override_colors/font_color = Color(0.396078, 0.654902, 0.756863, 1)
 theme_override_font_sizes/font_size = 30
 text = "0"
 
-[node name="CoinBetting" type="Panel" parent="."]
+[node name="CoinBetting" parent="." instance=ExtResource("9_rbtme")]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_left = 28.0
-offset_top = -17.0
-offset_right = 299.0
-offset_bottom = 76.0
+offset_left = 23.0
+offset_top = -18.0
+offset_right = 294.0
+offset_bottom = 75.0
 grow_vertical = 2
-theme = ExtResource("5_cxspc")
-
-[node name="Title" type="Label" parent="CoinBetting"]
-modulate = Color(0.815686, 0.396078, 0.34902, 1)
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -67.5
-offset_top = -47.0
-offset_right = 57.5
-offset_bottom = -1.0
-grow_horizontal = 2
-theme = ExtResource("5_cxspc")
-theme_override_font_sizes/font_size = 33
-text = "Wager"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="TotalPoints" type="Label" parent="CoinBetting"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -89.5
-offset_top = 8.0
-offset_right = 88.5
-offset_bottom = 37.0
-grow_horizontal = 2
-theme = ExtResource("5_cxspc")
-text = "Total Points: 100"
-
-[node name="SplitPoints" type="Label" parent="CoinBetting"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -36.4999
-offset_top = -2.5
-offset_right = 28.5001
-offset_bottom = 26.5
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("5_cxspc")
-text = "50/50"
-
-[node name="HeadsCoinSprite" type="TextureRect" parent="CoinBetting"]
-layout_mode = 0
-offset_left = 10.0
-offset_top = 39.0
-offset_right = 386.0
-offset_bottom = 401.0
-scale = Vector2(0.1065, 0.110442)
-texture = ExtResource("4_xmn38")
-
-[node name="TailsCoinSprite" type="TextureRect" parent="CoinBetting"]
-layout_mode = 0
-offset_left = 224.0
-offset_top = 37.0
-offset_right = 590.0
-offset_bottom = 405.0
-scale = Vector2(0.1065, 0.110442)
-texture = ExtResource("5_xrxib")
-
-[node name="AddTails" type="Button" parent="CoinBetting"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 40.5001
-offset_top = -6.0
-offset_right = 76.5001
-offset_bottom = 29.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("5_cxspc")
-text = "+"
-
-[node name="AddHeads" type="Button" parent="CoinBetting"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -80.4999
-offset_top = -5.0
-offset_right = -44.4999
-offset_bottom = 30.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("5_cxspc")
-text = "+"
 
 [node name="ShopPanel" type="Panel" parent="."]
 visible = false
@@ -953,8 +857,6 @@ text = "FLIPPER"
 [connection signal="button_up" from="NextCoinButton" to="." method="_on_next_coin_button_button_up"]
 [connection signal="button_up" from="ReDoCoinButton" to="." method="_on_re_do_coin_button_button_up"]
 [connection signal="toggled" from="ExplanationPanel/Button" to="." method="_on_HelpButton_toggled"]
-[connection signal="button_up" from="CoinBetting/AddTails" to="." method="_on_add_tails_button_up"]
-[connection signal="button_up" from="CoinBetting/AddHeads" to="." method="_on_add_heads_button_up"]
 [connection signal="button_up" from="ShopPanel/BuyPointsPanel/Button" to="." method="_add_points"]
 [connection signal="button_up" from="ShopPanel/BuyPointsPanel/Button" to="." method="add_purchase"]
 [connection signal="button_up" from="ShopPanel/BuyCoinsPanel/Button" to="." method="_add_coin"]

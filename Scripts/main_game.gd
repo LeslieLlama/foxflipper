@@ -6,9 +6,7 @@ var maxCoinCount = 0
 var reflipCount = 3
 var maxReflipCount = 3
 
-var totalValue = 100
-var headsValue = 50
-var tailsValue = 50
+
 var currentScore = 0
 
 var RoundNumber = 1
@@ -141,9 +139,7 @@ func flip_coin(is_reflip : bool):
 	$NextCoinButton/CoinAmmount.text = str(coinCount,"/",maxCoinCount)
 	print(CoinHistory)
 	if coinCount == maxCoinCount: $NextCoinButton.text = "Score Coins"
-	if coinCount > 0:
-		$CoinBetting/AddTails.disabled = true
-		$CoinBetting/AddHeads.disabled = true
+	Signals.emit_signal("FlipCoin", coinCount)
 
 func coin_history_display_update():
 	for c in CoinHistory:
@@ -172,9 +168,9 @@ func coin_pattern_searcher():
 		else: 
 			#run is broken
 			if CoinHistory[c-1] == 0: #tails
-				pattern_payoff(runCount, runArray,c, tailsValue, colorBlue)
+				pattern_payoff(runCount, runArray,c, Globals.tailsValue, colorBlue)
 			else: #heads
-				pattern_payoff(runCount, runArray,c, headsValue, colorRed)
+				pattern_payoff(runCount, runArray,c, Globals.headsValue, colorRed)
 			runCount = 1
 			runArray.clear()
 			runArray.append(CoinHistory[c])
@@ -182,9 +178,9 @@ func coin_pattern_searcher():
 		if c+1 == CoinHistory.size():
 			print("last coin")
 			if CoinHistory[c] == 0: #tails
-				pattern_payoff(runCount, runArray,c+1, tailsValue, colorBlue)
+				pattern_payoff(runCount, runArray,c+1, Globals.tailsValue, colorBlue)
 			else: #heads
-				pattern_payoff(runCount, runArray,c+1, headsValue, colorRed)
+				pattern_payoff(runCount, runArray,c+1, Globals.headsValue, colorRed)
 			runCount = 1
 			runArray.clear()
 	check_round_won()
@@ -257,16 +253,17 @@ func reset_game():
 	await get_tree().create_timer(0.01).timeout #this is so dumb but if you don't stall it slightly both loops happen concurrently and it screws them up
 	for i in 3:
 		_add_coin()
-	totalValue = 100
+	Globals.totalValue = 100
 	$GameOverPanel.hide()
 	$GameWonPanel.hide()
-	headsValue = 50
-	tailsValue = 50
-	totalValue = 100
+	Globals.headsValue = 50
+	Globals.tailsValue = 50
+	Globals.totalValue = 100
 	highest_score = 0
 	reset_table()
 	
 func reset_table():
+	Signals.emit_signal("ResetTable")
 	currentScore = 0
 	CoinHistory.clear()
 	for c in CoinHistorySprites:
@@ -280,32 +277,11 @@ func reset_table():
 	ReDoCoinButton.disabled = true
 	$NextCoinButton/CoinAmmount.text = str(coinCount,"/",maxCoinCount)
 	$NextCoinButton.text = "Flip"
-	$CoinBetting/AddTails.disabled = false
-	$CoinBetting/AddHeads.disabled = false
 	$ShopPanel.hide()
 	purchases = 0
 	$ShopPanel/PurchaseCount.text = str("Purchases: ",purchases,"/",maxPurchases)
 	disable_buy_buttons(false)
-	update_coin_betting_ui()
 	CurrentGameState = GameState.MENU
-	
-func _on_add_tails_button_up() -> void:
-	$CoinBetting/AddHeads.disabled = false
-	tailsValue += 10
-	headsValue -= 10
-	if tailsValue >= totalValue:
-		$CoinBetting/AddTails.disabled = true
-	else: $CoinBetting/AddTails.disabled = false
-	update_coin_betting_ui()
-
-func _on_add_heads_button_up() -> void:
-	$CoinBetting/AddTails.disabled = false
-	tailsValue -= 10
-	headsValue += 10
-	if headsValue >= totalValue:
-		$CoinBetting/AddHeads.disabled = true
-	else: $CoinBetting/AddHeads.disabled = false
-	update_coin_betting_ui()
 	
 func _add_coin():
 	maxCoinCount += 1
@@ -323,21 +299,7 @@ func _add_reflips():
 	$ReDoCoinButton/ReflipAmmount.text = str("x",maxReflipCount)
 	
 func _add_points():
-	totalValue += 50 
-	if headsValue > tailsValue:
-		headsValue += 40
-		tailsValue += 10
-	elif headsValue == tailsValue:
-		headsValue += 30
-		tailsValue += 20
-	else:
-		headsValue += 10
-		tailsValue += 40
-	update_coin_betting_ui()
-
-func update_coin_betting_ui():
-	$CoinBetting/TotalPoints.text = str("Total Points: ",totalValue)
-	$CoinBetting/SplitPoints.text = str(headsValue,"/",tailsValue)
+	Signals.emit_signal("PurchasePoints")
 
 func add_purchase():
 	purchases += 1
