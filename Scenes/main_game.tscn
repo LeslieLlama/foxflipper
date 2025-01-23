@@ -1,13 +1,11 @@
-[gd_scene load_steps=16 format=3 uid="uid://bn0o5gyjoo4un"]
+[gd_scene load_steps=14 format=3 uid="uid://bn0o5gyjoo4un"]
 
 [ext_resource type="Script" path="res://Scripts/main_game.gd" id="1_k015l"]
-[ext_resource type="Texture2D" uid="uid://po8fo44gcqw0" path="res://Sprites/FoxCoins_empty.png" id="2_6225m"]
 [ext_resource type="Texture2D" uid="uid://dl66pahmplk71" path="res://Sprites/FoxCoin_Dealer.png" id="2_uijv0"]
 [ext_resource type="Texture2D" uid="uid://ckhk7e4lj27yr" path="res://Sprites/FoxCoinConcepts_Heads.png" id="3_u33ss"]
 [ext_resource type="Texture2D" uid="uid://dyayargx7nk40" path="res://Sprites/FoxCoinConcepts_Tails.png" id="4_edq3u"]
-[ext_resource type="Texture2D" uid="uid://cfsfmhokr0lvf" path="res://Sprites/FoxCoins_headsSmall.png" id="4_xmn38"]
 [ext_resource type="Theme" uid="uid://dsk5olnx1e77u" path="res://FancyTheme.tres" id="5_cxspc"]
-[ext_resource type="Texture2D" uid="uid://rbhka5f6qjh5" path="res://Sprites/FoxCoins_tailsSmall.png" id="5_xrxib"]
+[ext_resource type="PackedScene" uid="uid://t6mev4v78cwu" path="res://Scenes/coin_flip_history.tscn" id="6_yecaa"]
 [ext_resource type="Texture2D" uid="uid://c1dqycrxriler" path="res://icon.svg" id="7_v46qd"]
 [ext_resource type="PackedScene" uid="uid://g7r0abvn0dli" path="res://Scenes/coin_betting.tscn" id="9_rbtme"]
 
@@ -46,9 +44,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_k015l")
-emptyCoinSprite = ExtResource("2_6225m")
-headsCoinSprite = ExtResource("4_xmn38")
-tailsCoinSprite = ExtResource("5_xrxib")
 
 [node name="BackgroundColour" type="ColorRect" parent="."]
 custom_minimum_size = Vector2(50, 50)
@@ -175,16 +170,16 @@ theme_override_colors/font_color = Color(0.396078, 0.654902, 0.756863, 1)
 text = "x3
 "
 
-[node name="CoinFlipHistory" type="GridContainer" parent="."]
-clip_contents = true
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 0
-offset_left = 32.0
-offset_top = 411.0
-offset_right = 298.0
-offset_bottom = 619.0
-theme = ExtResource("5_cxspc")
-columns = 6
+[node name="CoinFlipHistory" parent="." instance=ExtResource("6_yecaa")]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 27.0
+offset_top = -235.0
+offset_right = 293.0
+offset_bottom = -27.0
+grow_vertical = 0
 
 [node name="ExplanationPanel" type="Panel" parent="."]
 layout_mode = 0

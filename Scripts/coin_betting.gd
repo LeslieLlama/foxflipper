@@ -1,6 +1,8 @@
 extends Panel
 
 
+var CoinHistorySprites = []
+
 func _ready() -> void:
 	Signals.ResetTable.connect(_reset_table)
 	Signals.FlipCoin.connect(_flip_coin)

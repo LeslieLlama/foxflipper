@@ -1,19 +1,14 @@
 extends Control
 
 var rng = RandomNumberGenerator.new()
-var coinCount = 0
-var maxCoinCount = 0
+
 var reflipCount = 3
 var maxReflipCount = 3
-
 
 var currentScore = 0
 
 var RoundNumber = 1
 var RequiredScore = [150,300,600,1200,2400,4800,9600,12000,14000,19200,28000]
-
-var CoinHistory = []
-var CoinHistorySprites = []
 
 var purchases = 0
 var maxPurchases = 2
@@ -32,10 +27,6 @@ var highest_score : int
 @onready var CoinHistoryNode = $CoinFlipHistory
 @onready var NextCoinButton = $NextCoinButton
 @onready var ReDoCoinButton = $ReDoCoinButton
-
-@export var emptyCoinSprite : Texture2D
-@export var headsCoinSprite : Texture2D
-@export var tailsCoinSprite : Texture2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -63,7 +54,7 @@ func _on_next_coin_button_button_up() -> void:
 		CurrentGameState = GameState.BETTING
 		return
 	if CurrentGameState == GameState.BETTING:
-		if coinCount == maxCoinCount:
+		if Globals.coinCount == Globals.maxCoinCount:
 			CurrentGameState = GameState.SCORING
 			coin_pattern_searcher()
 			ReDoCoinButton.disabled = true
@@ -91,7 +82,7 @@ func _title_animation(show : bool):
 func _coin_flip_animation(heads : bool):
 	if coinTween:
 		if coinTween.is_running() == true:
-			coin_history_display_update()
+			Signals.emit_signal("CoinHistoryDisplayUpdate")
 		coinTween.kill()
 		 #if the player mashes the flip button, update the history vissually. and kill/restart the tween. 
 	coinTween = get_tree().create_tween().bind_node(self)
@@ -109,7 +100,7 @@ func _coin_flip_animation(heads : bool):
 		coinTween.tween_property($CoinTailsSide, "scale", Vector2(1,1), 0.1).set_trans(Tween.TRANS_QUINT)
 		coinTween.tween_property($CoinHeadsSide, "scale", Vector2(1,0), 0.2).set_trans(Tween.TRANS_QUINT)
 		coinTween.tween_property($CoinTailsSide, "scale", Vector2(1,1), 0.2).set_trans(Tween.TRANS_QUINT)
-	coinTween.tween_callback(coin_history_display_update)
+	Signals.emit_signal("CoinHistoryDisplayUpdate")
 	
 func _on_re_do_coin_button_button_up() -> void:
 	if reflipCount >= 1:
@@ -117,42 +108,31 @@ func _on_re_do_coin_button_button_up() -> void:
 		
 func flip_coin(is_reflip : bool):
 	if is_reflip == true && reflipCount > 0:
-		CoinHistory.pop_back()
+		Globals.CoinHistory.pop_back()
 		reflipCount -= 1
-		coinCount -= 1
+		Globals.coinCount -= 1
 	
 	var flip_value = rng.randi_range(0, 1)
 	if flip_value == 1:
 		_coin_flip_animation(true)
-		CoinHistory.append(1)
-		coinCount += 1
+		Globals.CoinHistory.append(1)
+		Globals.coinCount += 1
 	else: 
 		_coin_flip_animation(false)
-		CoinHistory.append(0)
-		coinCount += 1
+		Globals.CoinHistory.append(0)
+		Globals.coinCount += 1
 	if reflipCount == 0:
 		ReDoCoinButton.disabled = true
-	if coinCount == 1:
+	if Globals.coinCount == 1:
 		ReDoCoinButton.disabled = false
 	#update the UI
 	$ReDoCoinButton/ReflipAmmount.text = str(reflipCount,"x")
-	$NextCoinButton/CoinAmmount.text = str(coinCount,"/",maxCoinCount)
-	print(CoinHistory)
-	if coinCount == maxCoinCount: $NextCoinButton.text = "Score Coins"
-	Signals.emit_signal("FlipCoin", coinCount)
+	$NextCoinButton/CoinAmmount.text = str(Globals.coinCount,"/",Globals.maxCoinCount)
+	print(Globals.CoinHistory)
+	if Globals.coinCount == Globals.maxCoinCount: $NextCoinButton.text = "Score Coins"
+	Signals.emit_signal("FlipCoin", Globals.coinCount)
 
-func coin_history_display_update():
-	for c in CoinHistory:
-		if c == 1:
-			CoinHistorySprites[coinCount-1].texture = headsCoinSprite
-		else:
-			CoinHistorySprites[coinCount-1].texture = tailsCoinSprite
-	mini_coin_trigger_animation(coinCount-1)
-
-func mini_coin_trigger_animation(c : int):
-	var tween = get_tree().create_tween().bind_node(self)
-	tween.tween_property(CoinHistorySprites[c], "scale", Vector2(1.1,1.1), 0.1).set_trans(Tween.TRANS_BOUNCE)
-	tween.tween_property(CoinHistorySprites[c], "scale", Vector2(1,1), 0.1).set_trans(Tween.TRANS_BOUNCE)
+#COIN HISTORY UPDATE WENT HERE
 
 func coin_pattern_searcher():
 	var runCount = 0
@@ -160,24 +140,24 @@ func coin_pattern_searcher():
 	var highestRunCount = 1
 	var runArray = []
 	
-	for c in CoinHistory.size():
+	for c in Globals.CoinHistory.size():
 		await get_tree().create_timer(0.1).timeout
-		if CoinHistory[c] == previousCoinValue || c==0:
+		if Globals.CoinHistory[c] == previousCoinValue || c==0:
 			runCount += 1
-			runArray.append(CoinHistory[c])
+			runArray.append(Globals.CoinHistory[c])
 		else: 
 			#run is broken
-			if CoinHistory[c-1] == 0: #tails
+			if Globals.CoinHistory[c-1] == 0: #tails
 				pattern_payoff(runCount, runArray,c, Globals.tailsValue, colorBlue)
 			else: #heads
 				pattern_payoff(runCount, runArray,c, Globals.headsValue, colorRed)
 			runCount = 1
 			runArray.clear()
-			runArray.append(CoinHistory[c])
-		previousCoinValue = CoinHistory[c]
-		if c+1 == CoinHistory.size():
+			runArray.append(Globals.CoinHistory[c])
+		previousCoinValue = Globals.CoinHistory[c]
+		if c+1 == Globals.CoinHistory.size():
 			print("last coin")
-			if CoinHistory[c] == 0: #tails
+			if Globals.CoinHistory[c] == 0: #tails
 				pattern_payoff(runCount, runArray,c+1, Globals.tailsValue, colorBlue)
 			else: #heads
 				pattern_payoff(runCount, runArray,c+1, Globals.headsValue, colorRed)
@@ -187,21 +167,21 @@ func coin_pattern_searcher():
 	
 func pattern_payoff(runCount : int, runArray, c : int, coinValue : int, colorToUse : Color):
 	for a in runArray:
-		mini_coin_trigger_animation(c-1)
+		Signals.emit_signal("MiniCoinTriggerAnimation",(c-1))
 	if runCount < 3:
 		#print(str("runcount > 2 : ",runCount))
 		#print(str("runarray = ",runArray))
 		for i in runCount:
 			currentScore += coinValue
 			#print(str("i == ",i,"coin == ",c))
-			pop_up_message(str("+",coinValue,"!"), CoinHistorySprites[(c-1)].global_position, colorToUse)
+			#pop_up_message(str("+",coinValue,"!"), CoinHistorySprites[(c-1)].global_position, colorToUse)
 	else: 
 		#print(str("runcount > 2 : ",runCount))
 		#print(str("runarray = ",runArray))
 		var scoreToAdd = ((runCount) * coinValue) * (runCount)
 		currentScore += scoreToAdd
 		var middleOfArray = c - (runArray.size()/2)
-		pop_up_message(str("Run! +",scoreToAdd,"!"), CoinHistorySprites[middleOfArray].global_position, colorToUse)
+		#pop_up_message(str("Run! +",scoreToAdd,"!"), CoinHistorySprites[middleOfArray].global_position, colorToUse)
 		
 	
 func pop_up_message(textToSay : String, pos : Vector2, textColour : Color):
@@ -244,10 +224,10 @@ func _on_retry_button_button_up() -> void:
 	reset_game()
 	
 func reset_game():
+	Signals.emit_signal("ResetGame")
 	RoundNumber = 1
 	maxReflipCount = 3
-	maxCoinCount = 0
-	CoinHistorySprites.clear()
+	Globals.maxCoinCount = 0
 	for c in CoinHistoryNode.get_children():
 		c.queue_free()
 	await get_tree().create_timer(0.01).timeout #this is so dumb but if you don't stall it slightly both loops happen concurrently and it screws them up
@@ -265,17 +245,15 @@ func reset_game():
 func reset_table():
 	Signals.emit_signal("ResetTable")
 	currentScore = 0
-	CoinHistory.clear()
-	for c in CoinHistorySprites:
-		c.texture = emptyCoinSprite
-	coinCount = 0
+	Globals.CoinHistory.clear()
+	Globals.coinCount = 0
 	reflipCount = maxReflipCount
 	$CurrentRoundLabel.text = str("Round","\n",RoundNumber,"/6")
 	$RequiredScoreLabel.text = str(RequiredScore[RoundNumber-1])
 	$RoundScoreLabel.text = str(currentScore,"/")
 	$ReDoCoinButton/ReflipAmmount.text = str(reflipCount,"x")
 	ReDoCoinButton.disabled = true
-	$NextCoinButton/CoinAmmount.text = str(coinCount,"/",maxCoinCount)
+	$NextCoinButton/CoinAmmount.text = str(Globals.coinCount,"/",Globals.maxCoinCount)
 	$NextCoinButton.text = "Flip"
 	$ShopPanel.hide()
 	purchases = 0
@@ -284,15 +262,7 @@ func reset_table():
 	CurrentGameState = GameState.MENU
 	
 func _add_coin():
-	maxCoinCount += 1
-	#var child_node = ColorRect.new()
-	var child_node = TextureRect.new()
-	child_node.texture = emptyCoinSprite
-	child_node.custom_minimum_size = Vector2(50,50)
-	child_node.expand_mode = TextureRect.EXPAND_FIT_WIDTH
-	child_node.stretch_mode = TextureRect.STRETCH_SCALE
-	CoinHistoryNode.add_child(child_node)
-	CoinHistorySprites = CoinHistoryNode.get_children()
+	Signals.emit_signal("PurchaseCoin")
 
 func _add_reflips():
 	maxReflipCount += 1
