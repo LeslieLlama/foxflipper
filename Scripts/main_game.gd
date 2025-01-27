@@ -30,6 +30,7 @@ var highest_score : int
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	Signals.PopupMessage.connect(pop_up_message)
 	for i in 3:
 		_add_coin()
 	$RequiredScoreLabel.text = str(RequiredScore[0])
@@ -82,7 +83,7 @@ func _title_animation(show : bool):
 func _coin_flip_animation(heads : bool):
 	if coinTween:
 		if coinTween.is_running() == true:
-			Signals.emit_signal("CoinHistoryDisplayUpdate")
+			_update_coin_history()
 		coinTween.kill()
 		 #if the player mashes the flip button, update the history vissually. and kill/restart the tween. 
 	coinTween = get_tree().create_tween().bind_node(self)
@@ -93,6 +94,7 @@ func _coin_flip_animation(heads : bool):
 		coinTween.tween_property($CoinTailsSide, "scale", Vector2(1,1), 0.1).set_trans(Tween.TRANS_QUINT)
 		coinTween.tween_property($CoinTailsSide, "scale", Vector2(1,0), 0.2).set_trans(Tween.TRANS_QUINT)
 		coinTween.tween_property($CoinHeadsSide, "scale", Vector2(1,1), 0.2).set_trans(Tween.TRANS_QUINT)
+		coinTween.tween_callback(_update_coin_history)
 	else: 
 		coinTween.tween_property($CoinTailsSide, "scale", Vector2(1,0), 0.1).set_trans(Tween.TRANS_QUINT)
 		coinTween.tween_property($CoinHeadsSide, "scale", Vector2(1,1), 0.1).set_trans(Tween.TRANS_QUINT)
@@ -100,8 +102,12 @@ func _coin_flip_animation(heads : bool):
 		coinTween.tween_property($CoinTailsSide, "scale", Vector2(1,1), 0.1).set_trans(Tween.TRANS_QUINT)
 		coinTween.tween_property($CoinHeadsSide, "scale", Vector2(1,0), 0.2).set_trans(Tween.TRANS_QUINT)
 		coinTween.tween_property($CoinTailsSide, "scale", Vector2(1,1), 0.2).set_trans(Tween.TRANS_QUINT)
-	Signals.emit_signal("CoinHistoryDisplayUpdate")
+		coinTween.tween_callback(_update_coin_history)
+		
 	
+	
+func _update_coin_history():
+	Signals.emit_signal("CoinHistoryDisplayUpdate")
 func _on_re_do_coin_button_button_up() -> void:
 	if reflipCount >= 1:
 		flip_coin(true)
@@ -167,7 +173,7 @@ func coin_pattern_searcher():
 	
 func pattern_payoff(runCount : int, runArray, c : int, coinValue : int, colorToUse : Color):
 	for a in runArray:
-		Signals.emit_signal("MiniCoinTriggerAnimation",(c-1))
+		pass
 	if runCount < 3:
 		#print(str("runcount > 2 : ",runCount))
 		#print(str("runarray = ",runArray))
@@ -175,6 +181,7 @@ func pattern_payoff(runCount : int, runArray, c : int, coinValue : int, colorToU
 			currentScore += coinValue
 			#print(str("i == ",i,"coin == ",c))
 			#pop_up_message(str("+",coinValue,"!"), CoinHistorySprites[(c-1)].global_position, colorToUse)
+			Signals.emit_signal("MiniCoinTriggerAnimation",(c-1))
 	else: 
 		#print(str("runcount > 2 : ",runCount))
 		#print(str("runarray = ",runArray))

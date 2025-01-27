@@ -12,3 +12,5 @@ signal PurchaseCoin()
 
 signal CoinHistoryDisplayUpdate()
 signal MiniCoinTriggerAnimation(coinToHit : int)
+
+signal PopupMessage(textToSay : String, pos : Vector2, textColour : Color)
