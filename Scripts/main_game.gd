@@ -56,13 +56,19 @@ func _on_next_coin_button_button_up() -> void:
 			return
 		flip_coin(false)
 	if CurrentGameState == GameState.SCORING:
-		$ShopPanel.show()
+		_shop_animation(true)
 		CurrentGameState = GameState.SHOP
 		NextCoinButton.text = "Next Round"
 	if CurrentGameState == GameState.GAME_OVER:
 		reset_game()
 		_title_animation(true)
 		
+func _shop_animation(show : bool):
+	var tween = get_tree().create_tween().bind_node(self)
+	if show == true:
+		tween.tween_property($ShopPanel, "position", Vector2(794,0), 1).set_trans(Tween.TRANS_QUINT)
+	else:
+		tween.tween_property($ShopPanel, "position", Vector2(1153,0), 1).set_trans(Tween.TRANS_QUINT)
 func _title_animation(show : bool):
 	if show == false: #hide
 		var tween = get_tree().create_tween().bind_node(self)
@@ -131,8 +137,6 @@ func flip_coin(is_reflip : bool):
 
 
 
-
-	
 func pop_up_message(textToSay : String, pos : Vector2, textColour : Color):
 	print(str("pop up message at", pos))
 	var message = Label.new()
@@ -204,7 +208,7 @@ func reset_table():
 	ReDoCoinButton.disabled = true
 	$NextCoinButton/CoinAmmount.text = str(Globals.coinCount,"/",Globals.maxCoinCount)
 	$NextCoinButton.text = "Flip"
-	$ShopPanel.hide()
+	_shop_animation(false)
 	purchases = 0
 	$ShopPanel/PurchaseCount.text = str("Purchases: ",purchases,"/",maxPurchases)
 	disable_buy_buttons(false)
