@@ -5,8 +5,6 @@ var rng = RandomNumberGenerator.new()
 var reflipCount = 3
 var maxReflipCount = 3
 
-var currentScore = 0
-
 var RoundNumber = 1
 var RequiredScore = [150,300,600,1200,2400,4800,9600,12000,14000,19200,28000]
 
@@ -31,6 +29,7 @@ var highest_score : int
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Signals.PopupMessage.connect(pop_up_message)
+	Signals.CoinsScored.connect(check_round_won)
 	for i in 3:
 		_add_coin()
 	$RequiredScoreLabel.text = str(RequiredScore[0])
@@ -38,12 +37,6 @@ func _ready() -> void:
 	$Title.position = Vector2(title_position.x,title_position.y-160)
 	$ReDoCoinButton.disabled = true
 	_title_animation(true)
-
-func _process(delta: float) -> void:
-	if Input.is_key_pressed(KEY_UP):
-		_title_animation(false)
-	if Input.is_key_pressed(KEY_DOWN):
-		_title_animation(true)
 
 func _on_next_coin_button_button_up() -> void:
 	print(CurrentGameState)
@@ -57,7 +50,7 @@ func _on_next_coin_button_button_up() -> void:
 	if CurrentGameState == GameState.BETTING:
 		if Globals.coinCount == Globals.maxCoinCount:
 			CurrentGameState = GameState.SCORING
-			coin_pattern_searcher()
+			Signals.emit_signal("ScoreCoins")
 			ReDoCoinButton.disabled = true
 			NextCoinButton.text = "Shop"
 			return
@@ -82,10 +75,9 @@ func _title_animation(show : bool):
 		
 func _coin_flip_animation(heads : bool):
 	if coinTween:
-		if coinTween.is_running() == true:
+		if coinTween.is_running() == true: #if the player mashes the flip button, update the history vissually. and kill/restart the tween. 
 			_update_coin_history()
 		coinTween.kill()
-		 #if the player mashes the flip button, update the history vissually. and kill/restart the tween. 
 	coinTween = get_tree().create_tween().bind_node(self)
 	if heads == true:
 		coinTween.tween_property($CoinTailsSide, "scale", Vector2(1,0), 0.1).set_trans(Tween.TRANS_QUINT)
@@ -104,10 +96,9 @@ func _coin_flip_animation(heads : bool):
 		coinTween.tween_property($CoinTailsSide, "scale", Vector2(1,1), 0.2).set_trans(Tween.TRANS_QUINT)
 		coinTween.tween_callback(_update_coin_history)
 		
-	
-	
 func _update_coin_history():
 	Signals.emit_signal("CoinHistoryDisplayUpdate")
+	
 func _on_re_do_coin_button_button_up() -> void:
 	if reflipCount >= 1:
 		flip_coin(true)
@@ -138,58 +129,9 @@ func flip_coin(is_reflip : bool):
 	if Globals.coinCount == Globals.maxCoinCount: $NextCoinButton.text = "Score Coins"
 	Signals.emit_signal("FlipCoin", Globals.coinCount)
 
-#COIN HISTORY UPDATE WENT HERE
 
-func coin_pattern_searcher():
-	var runCount = 0
-	var previousCoinValue = -1
-	var highestRunCount = 1
-	var runArray = []
-	
-	for c in Globals.CoinHistory.size():
-		await get_tree().create_timer(0.1).timeout
-		if Globals.CoinHistory[c] == previousCoinValue || c==0:
-			runCount += 1
-			runArray.append(Globals.CoinHistory[c])
-		else: 
-			#run is broken
-			if Globals.CoinHistory[c-1] == 0: #tails
-				pattern_payoff(runCount, runArray,c, Globals.tailsValue, colorBlue)
-			else: #heads
-				pattern_payoff(runCount, runArray,c, Globals.headsValue, colorRed)
-			runCount = 1
-			runArray.clear()
-			runArray.append(Globals.CoinHistory[c])
-		previousCoinValue = Globals.CoinHistory[c]
-		if c+1 == Globals.CoinHistory.size():
-			print("last coin")
-			if Globals.CoinHistory[c] == 0: #tails
-				pattern_payoff(runCount, runArray,c+1, Globals.tailsValue, colorBlue)
-			else: #heads
-				pattern_payoff(runCount, runArray,c+1, Globals.headsValue, colorRed)
-			runCount = 1
-			runArray.clear()
-	check_round_won()
-	
-func pattern_payoff(runCount : int, runArray, c : int, coinValue : int, colorToUse : Color):
-	for a in runArray:
-		pass
-	if runCount < 3:
-		#print(str("runcount > 2 : ",runCount))
-		#print(str("runarray = ",runArray))
-		for i in runCount:
-			currentScore += coinValue
-			#print(str("i == ",i,"coin == ",c))
-			#pop_up_message(str("+",coinValue,"!"), CoinHistorySprites[(c-1)].global_position, colorToUse)
-			Signals.emit_signal("MiniCoinTriggerAnimation",(c-1))
-	else: 
-		#print(str("runcount > 2 : ",runCount))
-		#print(str("runarray = ",runArray))
-		var scoreToAdd = ((runCount) * coinValue) * (runCount)
-		currentScore += scoreToAdd
-		var middleOfArray = c - (runArray.size()/2)
-		#pop_up_message(str("Run! +",scoreToAdd,"!"), CoinHistorySprites[middleOfArray].global_position, colorToUse)
-		
+
+
 	
 func pop_up_message(textToSay : String, pos : Vector2, textColour : Color):
 	print(str("pop up message at", pos))
@@ -204,15 +146,15 @@ func pop_up_message(textToSay : String, pos : Vector2, textColour : Color):
 	
 	
 func check_round_won():
-	if currentScore >= RequiredScore[RoundNumber-1]:
+	if Globals.currentScore >= RequiredScore[RoundNumber-1]:
 		RoundNumber += 1
 		pop_up_message(str("Round Cleared!"),Vector2(660,120) , colorRed)
 		pop_up_message(str("Well Done"),Vector2(660,140) , colorBlue)
 	else: 
 		print("Game Over!")
 		game_over()
-	if currentScore >= highest_score : highest_score = currentScore
-	$RoundScoreLabel.text = str(currentScore,"/")
+	if Globals.currentScore >= highest_score : highest_score = Globals.currentScore
+	$RoundScoreLabel.text = str(Globals.currentScore,"/")
 	if CurrentGameState != GameState.GAME_OVER && RoundNumber == 7:
 		game_won()
 	
@@ -251,13 +193,13 @@ func reset_game():
 	
 func reset_table():
 	Signals.emit_signal("ResetTable")
-	currentScore = 0
+	Globals.currentScore = 0
 	Globals.CoinHistory.clear()
 	Globals.coinCount = 0
 	reflipCount = maxReflipCount
 	$CurrentRoundLabel.text = str("Round","\n",RoundNumber,"/6")
 	$RequiredScoreLabel.text = str(RequiredScore[RoundNumber-1])
-	$RoundScoreLabel.text = str(currentScore,"/")
+	$RoundScoreLabel.text = str(Globals.currentScore,"/")
 	$ReDoCoinButton/ReflipAmmount.text = str(reflipCount,"x")
 	ReDoCoinButton.disabled = true
 	$NextCoinButton/CoinAmmount.text = str(Globals.coinCount,"/",Globals.maxCoinCount)

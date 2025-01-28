@@ -176,9 +176,9 @@ anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = 27.0
-offset_top = -235.0
+offset_top = -212.0
 offset_right = 293.0
-offset_bottom = -27.0
+offset_bottom = -4.0
 grow_vertical = 0
 
 [node name="ExplanationPanel" type="Panel" parent="."]
@@ -270,10 +270,10 @@ layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_left = 23.0
-offset_top = -18.0
-offset_right = 294.0
-offset_bottom = 75.0
+offset_left = 21.0
+offset_top = -43.0
+offset_right = 292.0
+offset_bottom = 83.0
 grow_vertical = 2
 
 [node name="ShopPanel" type="Panel" parent="."]
@@ -852,10 +852,10 @@ text = "FLIPPER"
 [connection signal="button_up" from="NextCoinButton" to="." method="_on_next_coin_button_button_up"]
 [connection signal="button_up" from="ReDoCoinButton" to="." method="_on_re_do_coin_button_button_up"]
 [connection signal="toggled" from="ExplanationPanel/Button" to="." method="_on_HelpButton_toggled"]
-[connection signal="button_up" from="ShopPanel/BuyPointsPanel/Button" to="." method="add_purchase"]
 [connection signal="button_up" from="ShopPanel/BuyPointsPanel/Button" to="." method="_add_points"]
+[connection signal="button_up" from="ShopPanel/BuyPointsPanel/Button" to="." method="add_purchase"]
 [connection signal="button_up" from="ShopPanel/BuyCoinsPanel/Button" to="." method="_add_coin"]
 [connection signal="button_up" from="ShopPanel/BuyCoinsPanel/Button" to="." method="add_purchase"]
-[connection signal="button_up" from="ShopPanel/BuyReflips/Button" to="." method="add_purchase"]
 [connection signal="button_up" from="ShopPanel/BuyReflips/Button" to="." method="_add_reflips"]
+[connection signal="button_up" from="ShopPanel/BuyReflips/Button" to="." method="add_purchase"]
 [connection signal="button_up" from="GameOverPanel/RetryButton" to="." method="_on_retry_button_button_up"]

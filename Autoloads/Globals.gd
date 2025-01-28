@@ -3,6 +3,7 @@ extends Node
 var coinCount = 0
 var maxCoinCount = 0
 
+var currentScore = 0
 var CoinHistory = []
 
 var totalValue = 100

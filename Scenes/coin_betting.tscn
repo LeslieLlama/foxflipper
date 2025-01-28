@@ -7,7 +7,7 @@
 
 [node name="CoinBetting" type="Panel"]
 offset_right = 271.0
-offset_bottom = 93.0
+offset_bottom = 124.0
 theme = ExtResource("1_yei7e")
 script = ExtResource("2_2hpvi")
 
@@ -58,52 +58,60 @@ theme = ExtResource("1_yei7e")
 text = "50/50"
 
 [node name="HeadsCoinSprite" type="TextureRect" parent="."]
-layout_mode = 0
-offset_left = 10.0
-offset_top = 39.0
-offset_right = 386.0
-offset_bottom = 401.0
-scale = Vector2(0.1065, 0.110442)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 9.0
+offset_top = -21.0
+offset_right = 45.0
+offset_bottom = 14.0
+grow_vertical = 2
 texture = ExtResource("3_ousco")
+expand_mode = 1
 
-[node name="TailsCoinSprite" type="TextureRect" parent="."]
-layout_mode = 0
-offset_left = 224.0
-offset_top = 37.0
-offset_right = 590.0
-offset_bottom = 405.0
-scale = Vector2(0.1065, 0.110442)
+[node name="HeadsCoinSprite2" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -45.0
+offset_top = -20.0
+offset_right = -9.0
+offset_bottom = 15.0
+grow_horizontal = 0
+grow_vertical = 2
 texture = ExtResource("4_7k6rv")
+expand_mode = 1
 
 [node name="AddTails" type="Button" parent="."]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 40.5001
-offset_top = -6.0
-offset_right = 76.5001
-offset_bottom = 29.0
-grow_horizontal = 2
-grow_vertical = 2
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -45.0
+offset_top = -44.0
+offset_right = -9.0
+offset_bottom = -9.0
+grow_horizontal = 0
+grow_vertical = 0
 theme = ExtResource("1_yei7e")
 text = "+"
 
 [node name="AddHeads" type="Button" parent="."]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -80.4999
-offset_top = -5.0
-offset_right = -44.4999
-offset_bottom = 30.0
-grow_horizontal = 2
-grow_vertical = 2
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 9.0
+offset_top = -45.0
+offset_right = 45.0
+offset_bottom = -10.0
+grow_vertical = 0
 theme = ExtResource("1_yei7e")
 text = "+"
 
