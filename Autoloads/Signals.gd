@@ -16,4 +16,6 @@ signal ScoreCoins()
 signal CoinScored()
 signal AllCoinsScored()
 
+signal NextRound()
+
 signal PopupMessage(textToSay : String, pos : Vector2, textColour : Color)

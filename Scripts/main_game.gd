@@ -45,6 +45,7 @@ func _on_next_coin_button_button_up() -> void:
 		CurrentGameState = GameState.BETTING
 	if CurrentGameState == GameState.SHOP:
 		reset_table()
+		Signals.emit_signal("NextRound")
 		CurrentGameState = GameState.BETTING
 		return
 	if CurrentGameState == GameState.BETTING:

@@ -1,10 +1,20 @@
-[gd_scene load_steps=3 format=3 uid="uid://cvxdjuqp6ax2d"]
+[gd_scene load_steps=5 format=3 uid="uid://cvxdjuqp6ax2d"]
 
 [ext_resource type="AudioStream" uid="uid://mvaoira7v6jm" path="res://Audio/276152__littlerobotsoundfactory__coins_single_08.wav" id="1_a6d24"]
 [ext_resource type="Script" path="res://Scripts/AudioManagement.gd" id="1_rc30o"]
+[ext_resource type="AudioStream" uid="uid://u7iauir1hroy" path="res://Audio/213982__fenrirfangs__coin-clatter-8.wav" id="3_b0667"]
+[ext_resource type="AudioStream" uid="uid://m8aamv1o4lgp" path="res://Audio/648987__erokia__ub-e-42-drums-piano-synths-100-bpm.mp3" id="4_cvcc4"]
 
-[node name="Audio" type="Node"]
+[node name="AudioManagement" type="Node"]
 script = ExtResource("1_rc30o")
 
-[node name="CoinSound" type="AudioStreamPlayer" parent="."]
+[node name="CoinScoringSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("1_a6d24")
+
+[node name="CoinLandingSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_b0667")
+volume_db = -10.0
+
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_cvcc4")
+volume_db = -7.191
