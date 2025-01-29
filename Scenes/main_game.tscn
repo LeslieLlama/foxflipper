@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bn0o5gyjoo4un"]
+[gd_scene load_steps=15 format=3 uid="uid://bn0o5gyjoo4un"]
 
 [ext_resource type="Script" path="res://Scripts/main_game.gd" id="1_k015l"]
 [ext_resource type="Texture2D" uid="uid://dl66pahmplk71" path="res://Sprites/FoxCoin_Dealer.png" id="2_uijv0"]
@@ -7,6 +7,7 @@
 [ext_resource type="Theme" uid="uid://dsk5olnx1e77u" path="res://FancyTheme.tres" id="5_cxspc"]
 [ext_resource type="PackedScene" uid="uid://t6mev4v78cwu" path="res://Scenes/coin_flip_history.tscn" id="6_yecaa"]
 [ext_resource type="Texture2D" uid="uid://c1dqycrxriler" path="res://icon.svg" id="7_v46qd"]
+[ext_resource type="PackedScene" uid="uid://cvxdjuqp6ax2d" path="res://Scenes/audio.tscn" id="9_2ujpw"]
 [ext_resource type="PackedScene" uid="uid://g7r0abvn0dli" path="res://Scenes/coin_betting.tscn" id="9_rbtme"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dbx8f"]
@@ -849,6 +850,8 @@ theme_override_colors/font_color = Color(0.396078, 0.654902, 0.756863, 1)
 theme_override_font_sizes/font_size = 140
 text = "FLIPPER"
 
+[node name="Audio" parent="." instance=ExtResource("9_2ujpw")]
+
 [connection signal="button_up" from="NextCoinButton" to="." method="_on_next_coin_button_button_up"]
 [connection signal="button_up" from="ReDoCoinButton" to="." method="_on_re_do_coin_button_button_up"]
 [connection signal="toggled" from="ExplanationPanel/Button" to="." method="_on_HelpButton_toggled"]
@@ -856,6 +859,6 @@ text = "FLIPPER"
 [connection signal="button_up" from="ShopPanel/BuyPointsPanel/Button" to="." method="add_purchase"]
 [connection signal="button_up" from="ShopPanel/BuyCoinsPanel/Button" to="." method="_add_coin"]
 [connection signal="button_up" from="ShopPanel/BuyCoinsPanel/Button" to="." method="add_purchase"]
-[connection signal="button_up" from="ShopPanel/BuyReflips/Button" to="." method="_add_reflips"]
 [connection signal="button_up" from="ShopPanel/BuyReflips/Button" to="." method="add_purchase"]
+[connection signal="button_up" from="ShopPanel/BuyReflips/Button" to="." method="_add_reflips"]
 [connection signal="button_up" from="GameOverPanel/RetryButton" to="." method="_on_retry_button_button_up"]

@@ -29,7 +29,7 @@ var highest_score : int
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Signals.PopupMessage.connect(pop_up_message)
-	Signals.CoinsScored.connect(check_round_won)
+	Signals.AllCoinsScored.connect(check_round_won)
 	for i in 3:
 		_add_coin()
 	$RequiredScoreLabel.text = str(RequiredScore[0])

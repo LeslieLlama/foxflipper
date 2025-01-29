@@ -13,6 +13,7 @@ signal PurchaseCoin()
 signal CoinHistoryDisplayUpdate()
 
 signal ScoreCoins()
-signal CoinsScored()
+signal CoinScored()
+signal AllCoinsScored()
 
 signal PopupMessage(textToSay : String, pos : Vector2, textColour : Color)

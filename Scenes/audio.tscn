@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://cvxdjuqp6ax2d"]
+
+[ext_resource type="AudioStream" uid="uid://mvaoira7v6jm" path="res://Audio/276152__littlerobotsoundfactory__coins_single_08.wav" id="1_a6d24"]
+[ext_resource type="Script" path="res://Scripts/AudioManagement.gd" id="1_rc30o"]
+
+[node name="Audio" type="Node"]
+script = ExtResource("1_rc30o")
+
+[node name="CoinSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_a6d24")

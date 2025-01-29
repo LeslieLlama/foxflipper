@@ -60,7 +60,7 @@ func coin_pattern_searcher():
 				pattern_payoff(runCount, runArray,c+1, Globals.headsValue, colorRed)
 			runCount = 1
 			runArray.clear()
-	Signals.emit_signal("CoinsScored")
+	Signals.emit_signal("AllCoinsScored")
 	
 func pattern_payoff(runCount : int, runArray, c : int, coinValue : int, colorToUse : Color):
 	for a in runArray:
@@ -69,6 +69,7 @@ func pattern_payoff(runCount : int, runArray, c : int, coinValue : int, colorToU
 		for i in runCount:
 			Globals.currentScore += coinValue
 			mini_coin_trigger_animation((c-1)-i)
+			Signals.emit_signal("CoinScored")
 			Signals.emit_signal("PopupMessage", str("+",coinValue,"!"),CoinHistorySprites[(c-1-i)].global_position,colorToUse)
 	else: 
 		for i in runCount:
