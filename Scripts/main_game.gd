@@ -18,7 +18,6 @@ var coinTween
 
 var colorRed = Color("D0665A")
 var colorBlue = Color("65A7C1")
-var title_position : Vector2
 
 var highest_score : int
 
@@ -26,17 +25,24 @@ var highest_score : int
 @onready var NextCoinButton = $NextCoinButton
 @onready var ReDoCoinButton = $ReDoCoinButton
 
+var CurrentRoundLabel
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Signals.PopupMessage.connect(pop_up_message)
 	Signals.AllCoinsScored.connect(check_round_won)
 	for i in 3:
 		_add_coin()
+	CurrentRoundLabel = $Dealer/CurrentRoundLabel
 	$RequiredScoreLabel.text = str(RequiredScore[0])
-	title_position = $Title.position
-	$Title.position = Vector2(title_position.x,title_position.y-160)
+	_reset_node_positions()
 	$ReDoCoinButton.disabled = true
 	_title_animation(true)
+	
+func _reset_node_positions():
+	var title_position = $TitleAnchor.position
+	$Title.position = Vector2(title_position.x,title_position.y-160)
+	$ShopPanel.position.x += $ShopPanel.size.x
 
 func _on_next_coin_button_button_up() -> void:
 	print(CurrentGameState)
@@ -65,20 +71,30 @@ func _on_next_coin_button_button_up() -> void:
 		_title_animation(true)
 		
 func _shop_animation(show : bool):
-	var tween = get_tree().create_tween().bind_node(self)
 	if show == true:
-		tween.tween_property($ShopPanel, "position", Vector2(794,0), 1).set_trans(Tween.TRANS_QUINT)
+		_generic_move_tween($ShopPanel,$ShopAnchor.position)
 	else:
-		tween.tween_property($ShopPanel, "position", Vector2(1153,0), 1).set_trans(Tween.TRANS_QUINT)
+		_generic_move_tween($ShopPanel,Vector2($ShopAnchor.position.x+$ShopPanel.size.x,0))
+		
 func _title_animation(show : bool):
 	if show == false: #hide
-		var tween = get_tree().create_tween().bind_node(self)
-		tween.tween_property($Title, "position", Vector2(title_position.x,title_position.y-160), 1).set_trans(Tween.TRANS_QUINT)
+		_generic_move_tween($Title,Vector2($TitleAnchor.global_position.x,$TitleAnchor.global_position.y-160))
 		$Credits.hide()
 	else: 
-		var tween = get_tree().create_tween().bind_node(self)
-		tween.tween_property($Title, "position", Vector2(title_position.x,title_position.y), 1).set_trans(Tween.TRANS_QUINT)
+		_generic_move_tween($Title,$TitleAnchor.global_position)
 		$Credits.show()
+		
+func _on_HelpButton_toggled(toggled_on: bool) -> void:
+	if toggled_on == true: #show
+		_generic_move_tween($ExplanationPanel,Vector2(0,29))
+		$ExplanationPanel/Button.text = "<"
+	else: #hide
+		_generic_move_tween($ExplanationPanel,Vector2(-303,29))
+		$ExplanationPanel/Button.text = "?"
+		
+func _generic_move_tween(nodeToMove : Control, whereToMove : Vector2):
+	var tween = get_tree().create_tween().bind_node(self)
+	tween.tween_property(nodeToMove, "position", whereToMove, 1).set_trans(Tween.TRANS_QUINT)
 		
 func _coin_flip_animation(heads : bool):
 	if coinTween:
@@ -202,7 +218,7 @@ func reset_table():
 	Globals.CoinHistory.clear()
 	Globals.coinCount = 0
 	reflipCount = maxReflipCount
-	$CurrentRoundLabel.text = str("Round","\n",RoundNumber,"/6")
+	CurrentRoundLabel.text = str("Round","\n",RoundNumber,"/6")
 	$RequiredScoreLabel.text = str(RequiredScore[RoundNumber-1])
 	$RoundScoreLabel.text = str(Globals.currentScore,"/")
 	$ReDoCoinButton/ReflipAmmount.text = str(reflipCount,"x")
@@ -235,12 +251,3 @@ func disable_buy_buttons(disable_value : bool):
 	$ShopPanel/BuyCoinsPanel/Button.disabled = disable_value
 	$ShopPanel/BuyReflips/Button.disabled = disable_value
 	
-func _on_HelpButton_toggled(toggled_on: bool) -> void:
-	if toggled_on == true: #show
-		var tween = get_tree().create_tween().bind_node(self)
-		tween.tween_property($ExplanationPanel, "position", Vector2(0,29), 1).set_trans(Tween.TRANS_QUINT)
-		$ExplanationPanel/Button.text = "<"
-	else: #hide
-		var tween = get_tree().create_tween().bind_node(self)
-		tween.tween_property($ExplanationPanel, "position", Vector2(-303,29), 1).set_trans(Tween.TRANS_QUINT)
-		$ExplanationPanel/Button.text = "?"

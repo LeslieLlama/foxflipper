@@ -5,7 +5,9 @@ var rng = RandomNumberGenerator.new()
 func _ready() -> void:
 	Signals.CoinScored.connect(PlayCoinTriggerSound)
 	Signals.CoinHistoryDisplayUpdate.connect(PlayCoinFlipSound)
-	Signals.NextRound.connect(AdjustBackgroundMusicPitch)
+	Signals.NextRound.connect(AddBackgroundMusicPitch)
+	Signals.AllCoinsScored.connect(MinusBackgroundMusicPitch)
+	AddBackgroundMusicPitch()
 	$BackgroundMusic.play()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -20,5 +22,7 @@ func PlayCoinFlipSound():
 	var pitchRandomisation = rng.randf_range(1, 2)
 	$CoinLandingSound.pitch_scale = pitchRandomisation
 	$CoinLandingSound.play()
-func AdjustBackgroundMusicPitch():
+func AddBackgroundMusicPitch():
 	$BackgroundMusic.pitch_scale += 0.05
+func MinusBackgroundMusicPitch():
+	$BackgroundMusic.pitch_scale -= 0.05
