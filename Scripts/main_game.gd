@@ -28,25 +28,28 @@ var highest_score : int
 @export var ReflipAmmount : Label
 @export var CoinTailsSide : TextureRect
 @export var CoinHeadsSide : TextureRect
-
-var CurrentRoundLabel
+@export var Title : Control
+@export var TitleAnchor : Control
+@export var CurrentRoundLabel : Label
 @export var ShopPanel : Panel 
+@export var RoundScoreLabel : Label
+@export var RequiredScoreLabel : Label
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Signals.PopupMessage.connect(pop_up_message)
 	Signals.AllCoinsScored.connect(check_round_won)
 	for i in 3:
 		_add_coin()
-	CurrentRoundLabel = $Dealer/CurrentRoundLabel
-	$RequiredScoreLabel.text = str(RequiredScore[0])
+	RequiredScoreLabel.text = str(RequiredScore[0])
 	_reset_node_positions()
 	ReDoCoinButton.disabled = true
 	_title_animation(true)
 	get_tree().get_root().size_changed.connect(resize)
 	
 func _reset_node_positions():
-	var title_position = $Dealer/TitleAnchor.position
-	$Dealer/Title.position = Vector2(title_position.x,title_position.y-160)
+	var title_position = TitleAnchor.position
+	Title.position = Vector2(title_position.x,title_position.y-160)
 	#bandaid solution to hide shop at start of game
 	_shop_animation(false)
 	await get_tree().create_timer(1).timeout
@@ -56,8 +59,10 @@ func resize():
 	var size = get_viewport_rect().size
 	if size.x > size.y:
 		$LayoutBox.vertical = false
+		$LayoutBox/Left/HistoryZone.vertical = true
 	else: 
 		$LayoutBox.vertical = true
+		$LayoutBox/Left/HistoryZone.vertical = false
 
 func _on_next_coin_button_button_up() -> void:
 	print(CurrentGameState)
@@ -93,10 +98,10 @@ func _shop_animation(show : bool):
 		
 func _title_animation(show : bool):
 	if show == false: #hide
-		_generic_move_tween($Dealer/Title,Vector2($Dealer/TitleAnchor.position.x,$Dealer/TitleAnchor.position.y-160))
+		_generic_move_tween(Title,Vector2(TitleAnchor.position.x,TitleAnchor.position.y-160))
 		$Credits.hide()
 	else: 
-		_generic_move_tween($Dealer/Title,$Dealer/TitleAnchor.position)
+		_generic_move_tween(Title,TitleAnchor.position)
 		$Credits.show()
 		
 func _on_HelpButton_toggled(toggled_on: bool) -> void:
@@ -189,7 +194,7 @@ func check_round_won():
 		print("Game Over!")
 		game_over()
 	if Globals.currentScore >= highest_score : highest_score = Globals.currentScore
-	$RoundScoreLabel.text = str(Globals.currentScore,"/")
+	RoundScoreLabel.text = str(Globals.currentScore,"/")
 	if CurrentGameState != GameState.GAME_OVER && RoundNumber == 7:
 		game_won()
 	
@@ -233,8 +238,8 @@ func reset_table():
 	Globals.coinCount = 0
 	reflipCount = maxReflipCount
 	CurrentRoundLabel.text = str("Round","\n",RoundNumber,"/6")
-	$RequiredScoreLabel.text = str(RequiredScore[RoundNumber-1])
-	$RoundScoreLabel.text = str(Globals.currentScore,"/")
+	RequiredScoreLabel.text = str(RequiredScore[RoundNumber-1])
+	RoundScoreLabel.text = str(Globals.currentScore,"/")
 	ReflipAmmount.text = str(reflipCount,"x")
 	ReDoCoinButton.disabled = true
 	CoinAmmount.text = str(Globals.coinCount,"/",Globals.maxCoinCount)
@@ -261,7 +266,7 @@ func add_purchase():
 	if purchases == maxPurchases:
 		disable_buy_buttons(true)
 func disable_buy_buttons(disable_value : bool):
-	$LayoutBox/Right/ShopPanel/BuyPointsPanel/Button.disabled = disable_value
-	$LayoutBox/Right/ShopPanel/BuyCoinsPanel/Button.disabled = disable_value
-	$LayoutBox/Right/ShopPanel/BuyReflips/Button.disabled = disable_value
+	$LayoutBox/Right/ShopPanel/VBoxContainer/BuyPointsPanel/Button.disabled = disable_value
+	$LayoutBox/Right/ShopPanel/VBoxContainer/BuyCoinsPanel/Button.disabled = disable_value
+	$LayoutBox/Right/ShopPanel/VBoxContainer/BuyReflips/Button.disabled = disable_value
 	
