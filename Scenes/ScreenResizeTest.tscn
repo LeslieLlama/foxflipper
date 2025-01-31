@@ -1,0 +1,187 @@
+[gd_scene load_steps=2 format=3 uid="uid://sy71a1bflj22"]
+
+[ext_resource type="Script" path="res://Scenes/screen_resize_test.gd" id="1_ihiqj"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ihiqj")
+
+[node name="LayoutBox" type="BoxContainer" parent="."]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Left" type="VBoxContainer" parent="LayoutBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ItemZone" type="Control" parent="LayoutBox/Left"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ColorRect4" type="ColorRect" parent="LayoutBox/Left/ItemZone"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(0.207843, 0.0901961, 0.0823529, 1)
+
+[node name="Label" type="Label" parent="LayoutBox/Left/ItemZone/ColorRect4"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -113.0
+offset_top = -48.5
+offset_right = 113.0
+offset_bottom = 48.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 71
+text = "Items"
+
+[node name="HistoryZone" type="Control" parent="LayoutBox/Left"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ColorRect4" type="ColorRect" parent="LayoutBox/Left/HistoryZone"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(0.337255, 0.164706, 0.152941, 1)
+
+[node name="Label" type="Label" parent="LayoutBox/Left/HistoryZone/ColorRect4"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -98.5
+offset_bottom = 98.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 71
+text = "CoinHistory"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Center" type="VBoxContainer" parent="LayoutBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="DealerZone" type="Control" parent="LayoutBox/Center"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ColorRect4" type="ColorRect" parent="LayoutBox/Center/DealerZone"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(0.205211, 0.156423, 0.477167, 1)
+
+[node name="Label" type="Label" parent="LayoutBox/Center/DealerZone/ColorRect4"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -113.0
+offset_top = -48.5
+offset_right = 113.0
+offset_bottom = 48.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 71
+text = "Dealer"
+
+[node name="LargeCoinZone" type="Control" parent="LayoutBox/Center"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ColorRect4" type="ColorRect" parent="LayoutBox/Center/LargeCoinZone"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(0.192157, 0.243137, 0.117647, 1)
+
+[node name="Label" type="Label" parent="LayoutBox/Center/LargeCoinZone/ColorRect4"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -113.0
+offset_top = -48.5
+offset_right = 113.0
+offset_bottom = 48.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 71
+text = "Coins/Buttons"
+
+[node name="Right" type="VBoxContainer" parent="LayoutBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ColorRect4" type="ColorRect" parent="LayoutBox/Right"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(0.141176, 0.243137, 0.247059, 1)
+
+[node name="Label" type="Label" parent="LayoutBox/Right/ColorRect4"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -113.0
+offset_top = -48.5
+offset_right = 113.0
+offset_bottom = 48.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 71
+text = "Shop
+"

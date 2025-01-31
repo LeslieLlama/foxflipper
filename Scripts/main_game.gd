@@ -21,12 +21,16 @@ var colorBlue = Color("65A7C1")
 
 var highest_score : int
 
-@onready var CoinHistoryNode = $CoinFlipHistory
-@onready var NextCoinButton = $NextCoinButton
-@onready var ReDoCoinButton = $ReDoCoinButton
+@export var CoinHistoryNode : GridContainer
+@export var NextCoinButton : Button
+@export var ReDoCoinButton : Button
+@export var CoinAmmount : Label
+@export var ReflipAmmount : Label
+@export var CoinTailsSide : TextureRect
+@export var CoinHeadsSide : TextureRect
 
 var CurrentRoundLabel
-
+@export var ShopPanel : Panel 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Signals.PopupMessage.connect(pop_up_message)
@@ -36,13 +40,24 @@ func _ready() -> void:
 	CurrentRoundLabel = $Dealer/CurrentRoundLabel
 	$RequiredScoreLabel.text = str(RequiredScore[0])
 	_reset_node_positions()
-	$ReDoCoinButton.disabled = true
+	ReDoCoinButton.disabled = true
 	_title_animation(true)
+	get_tree().get_root().size_changed.connect(resize)
 	
 func _reset_node_positions():
-	var title_position = $TitleAnchor.position
-	$Title.position = Vector2(title_position.x,title_position.y-160)
-	$ShopPanel.position.x += $ShopPanel.size.x
+	var title_position = $Dealer/TitleAnchor.position
+	$Dealer/Title.position = Vector2(title_position.x,title_position.y-160)
+	#bandaid solution to hide shop at start of game
+	_shop_animation(false)
+	await get_tree().create_timer(1).timeout
+	_shop_animation(false)
+
+func resize():
+	var size = get_viewport_rect().size
+	if size.x > size.y:
+		$LayoutBox.vertical = false
+	else: 
+		$LayoutBox.vertical = true
 
 func _on_next_coin_button_button_up() -> void:
 	print(CurrentGameState)
@@ -72,16 +87,16 @@ func _on_next_coin_button_button_up() -> void:
 		
 func _shop_animation(show : bool):
 	if show == true:
-		_generic_move_tween($ShopPanel,$ShopAnchor.position)
+		_generic_move_tween(ShopPanel,$LayoutBox/Right/ShopAnchor.position)
 	else:
-		_generic_move_tween($ShopPanel,Vector2($ShopAnchor.position.x+$ShopPanel.size.x,0))
+		_generic_move_tween(ShopPanel,Vector2($LayoutBox/Right/ShopAnchor.position.x+ShopPanel.size.x,0))
 		
 func _title_animation(show : bool):
 	if show == false: #hide
-		_generic_move_tween($Title,Vector2($TitleAnchor.global_position.x,$TitleAnchor.global_position.y-160))
+		_generic_move_tween($Dealer/Title,Vector2($Dealer/TitleAnchor.position.x,$Dealer/TitleAnchor.position.y-160))
 		$Credits.hide()
 	else: 
-		_generic_move_tween($Title,$TitleAnchor.global_position)
+		_generic_move_tween($Dealer/Title,$Dealer/TitleAnchor.position)
 		$Credits.show()
 		
 func _on_HelpButton_toggled(toggled_on: bool) -> void:
@@ -103,20 +118,20 @@ func _coin_flip_animation(heads : bool):
 		coinTween.kill()
 	coinTween = get_tree().create_tween().bind_node(self)
 	if heads == true:
-		coinTween.tween_property($CoinTailsSide, "scale", Vector2(1,0), 0.1).set_trans(Tween.TRANS_QUINT)
-		coinTween.tween_property($CoinHeadsSide, "scale", Vector2(1,1), 0.1).set_trans(Tween.TRANS_QUINT)
-		coinTween.tween_property($CoinHeadsSide, "scale", Vector2(1,0), 0.1).set_trans(Tween.TRANS_QUINT)
-		coinTween.tween_property($CoinTailsSide, "scale", Vector2(1,1), 0.1).set_trans(Tween.TRANS_QUINT)
-		coinTween.tween_property($CoinTailsSide, "scale", Vector2(1,0), 0.2).set_trans(Tween.TRANS_QUINT)
-		coinTween.tween_property($CoinHeadsSide, "scale", Vector2(1,1), 0.2).set_trans(Tween.TRANS_QUINT)
+		coinTween.tween_property(CoinTailsSide, "scale", Vector2(1,0), 0.1).set_trans(Tween.TRANS_QUINT)
+		coinTween.tween_property(CoinHeadsSide, "scale", Vector2(1,1), 0.1).set_trans(Tween.TRANS_QUINT)
+		coinTween.tween_property(CoinHeadsSide, "scale", Vector2(1,0), 0.1).set_trans(Tween.TRANS_QUINT)
+		coinTween.tween_property(CoinTailsSide, "scale", Vector2(1,1), 0.1).set_trans(Tween.TRANS_QUINT)
+		coinTween.tween_property(CoinTailsSide, "scale", Vector2(1,0), 0.2).set_trans(Tween.TRANS_QUINT)
+		coinTween.tween_property(CoinHeadsSide, "scale", Vector2(1,1), 0.2).set_trans(Tween.TRANS_QUINT)
 		coinTween.tween_callback(_update_coin_history)
 	else: 
-		coinTween.tween_property($CoinTailsSide, "scale", Vector2(1,0), 0.1).set_trans(Tween.TRANS_QUINT)
-		coinTween.tween_property($CoinHeadsSide, "scale", Vector2(1,1), 0.1).set_trans(Tween.TRANS_QUINT)
-		coinTween.tween_property($CoinHeadsSide, "scale", Vector2(1,0), 0.1).set_trans(Tween.TRANS_QUINT)
-		coinTween.tween_property($CoinTailsSide, "scale", Vector2(1,1), 0.1).set_trans(Tween.TRANS_QUINT)
-		coinTween.tween_property($CoinHeadsSide, "scale", Vector2(1,0), 0.2).set_trans(Tween.TRANS_QUINT)
-		coinTween.tween_property($CoinTailsSide, "scale", Vector2(1,1), 0.2).set_trans(Tween.TRANS_QUINT)
+		coinTween.tween_property(CoinTailsSide, "scale", Vector2(1,0), 0.1).set_trans(Tween.TRANS_QUINT)
+		coinTween.tween_property(CoinHeadsSide, "scale", Vector2(1,1), 0.1).set_trans(Tween.TRANS_QUINT)
+		coinTween.tween_property(CoinHeadsSide, "scale", Vector2(1,0), 0.1).set_trans(Tween.TRANS_QUINT)
+		coinTween.tween_property(CoinTailsSide, "scale", Vector2(1,1), 0.1).set_trans(Tween.TRANS_QUINT)
+		coinTween.tween_property(CoinHeadsSide, "scale", Vector2(1,0), 0.2).set_trans(Tween.TRANS_QUINT)
+		coinTween.tween_property(CoinTailsSide, "scale", Vector2(1,1), 0.2).set_trans(Tween.TRANS_QUINT)
 		coinTween.tween_callback(_update_coin_history)
 		
 func _update_coin_history():
@@ -146,12 +161,11 @@ func flip_coin(is_reflip : bool):
 	if Globals.coinCount == 1:
 		ReDoCoinButton.disabled = false
 	#update the UI
-	$ReDoCoinButton/ReflipAmmount.text = str(reflipCount,"x")
-	$NextCoinButton/CoinAmmount.text = str(Globals.coinCount,"/",Globals.maxCoinCount)
+	ReflipAmmount.text = str(reflipCount,"x")
+	CoinAmmount.text = str(Globals.coinCount,"/",Globals.maxCoinCount)
 	print(Globals.CoinHistory)
-	if Globals.coinCount == Globals.maxCoinCount: $NextCoinButton.text = "Score Coins"
+	if Globals.coinCount == Globals.maxCoinCount: NextCoinButton.text = "Score Coins"
 	Signals.emit_signal("FlipCoin", Globals.coinCount)
-
 
 
 func pop_up_message(textToSay : String, pos : Vector2, textColour : Color):
@@ -221,13 +235,13 @@ func reset_table():
 	CurrentRoundLabel.text = str("Round","\n",RoundNumber,"/6")
 	$RequiredScoreLabel.text = str(RequiredScore[RoundNumber-1])
 	$RoundScoreLabel.text = str(Globals.currentScore,"/")
-	$ReDoCoinButton/ReflipAmmount.text = str(reflipCount,"x")
+	ReflipAmmount.text = str(reflipCount,"x")
 	ReDoCoinButton.disabled = true
-	$NextCoinButton/CoinAmmount.text = str(Globals.coinCount,"/",Globals.maxCoinCount)
-	$NextCoinButton.text = "Flip"
+	CoinAmmount.text = str(Globals.coinCount,"/",Globals.maxCoinCount)
+	NextCoinButton.text = "Flip"
 	_shop_animation(false)
 	purchases = 0
-	$ShopPanel/PurchaseCount.text = str("Purchases: ",purchases,"/",maxPurchases)
+	$LayoutBox/Right/ShopPanel/PurchaseCount.text = str("Purchases: ",purchases,"/",maxPurchases)
 	disable_buy_buttons(false)
 	CurrentGameState = GameState.MENU
 	
@@ -236,18 +250,18 @@ func _add_coin():
 
 func _add_reflips():
 	maxReflipCount += 1
-	$ReDoCoinButton/ReflipAmmount.text = str("x",maxReflipCount)
+	ReflipAmmount.text = str("x",maxReflipCount)
 	
 func _add_points():
 	Signals.emit_signal("PurchasePoints")
 
 func add_purchase():
 	purchases += 1
-	$ShopPanel/PurchaseCount.text = str("Purchases: ",purchases,"/",maxPurchases)
+	$LayoutBox/Right/ShopPanel/PurchaseCount.text = str("Purchases: ",purchases,"/",maxPurchases)
 	if purchases == maxPurchases:
 		disable_buy_buttons(true)
 func disable_buy_buttons(disable_value : bool):
-	$ShopPanel/BuyPointsPanel/Button.disabled = disable_value
-	$ShopPanel/BuyCoinsPanel/Button.disabled = disable_value
-	$ShopPanel/BuyReflips/Button.disabled = disable_value
+	$LayoutBox/Right/ShopPanel/BuyPointsPanel/Button.disabled = disable_value
+	$LayoutBox/Right/ShopPanel/BuyCoinsPanel/Button.disabled = disable_value
+	$LayoutBox/Right/ShopPanel/BuyReflips/Button.disabled = disable_value
 	
