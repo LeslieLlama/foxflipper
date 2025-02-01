@@ -63,6 +63,8 @@ func resize():
 	else: 
 		$LayoutBox.vertical = true
 		$LayoutBox/Left/HistoryZone.vertical = false
+	if CurrentGameState != GameState.SHOP:
+		ShopPanel.position = Vector2($LayoutBox/Right/ShopAnchor.position.x+ShopPanel.size.x,0)
 
 func _on_next_coin_button_button_up() -> void:
 	print(CurrentGameState)
@@ -92,13 +94,22 @@ func _on_next_coin_button_button_up() -> void:
 		
 func _shop_animation(show : bool):
 	if show == true:
+		_set_shop_visible(true)
 		_generic_move_tween(ShopPanel,$LayoutBox/Right/ShopAnchor.position)
 	else:
-		_generic_move_tween(ShopPanel,Vector2($LayoutBox/Right/ShopAnchor.position.x+ShopPanel.size.x,0))
+		var tween = get_tree().create_tween().bind_node(self)
+		tween.tween_property(ShopPanel, "position", Vector2($LayoutBox/Right/ShopAnchor.position.x+ShopPanel.size.x,0), 1).set_trans(Tween.TRANS_QUINT)
+		tween.tween_callback(_set_shop_visible.bind(false))
 		
+func _set_shop_visible(is_visible : bool): 
+	if is_visible : ShopPanel.visible = true
+	else: ShopPanel.visible = false
+	
 func _title_animation(show : bool):
 	if show == false: #hide
-		_generic_move_tween(Title,Vector2(TitleAnchor.position.x,TitleAnchor.position.y-160))
+		var size = get_viewport_rect().size
+		var top = size.y + TitleAnchor.position.y
+		_generic_move_tween(Title,Vector2(TitleAnchor.position.x,-top))
 		$Credits.hide()
 	else: 
 		_generic_move_tween(Title,TitleAnchor.position)
