@@ -32,6 +32,7 @@ var highest_score : int
 @export var TitleAnchor : Control
 @export var CurrentRoundLabel : Label
 @export var ShopPanel : Panel 
+@export var ShopAnchor : Control
 @export var RoundScoreLabel : Label
 @export var RequiredScoreLabel : Label
 
@@ -60,11 +61,13 @@ func resize():
 	if size.x > size.y:
 		$LayoutBox.vertical = false
 		$LayoutBox/Left/HistoryZone.vertical = true
+		#$LayoutBox/Right/ShopStuffs/ShopPanel/VBoxContainer.vertical = true
 	else: 
 		$LayoutBox.vertical = true
 		$LayoutBox/Left/HistoryZone.vertical = false
+		#$LayoutBox/Right/ShopStuffs/ShopPanel/VBoxContainer.vertical = false
 	if CurrentGameState != GameState.SHOP:
-		ShopPanel.position = Vector2($LayoutBox/Right/ShopAnchor.position.x+ShopPanel.size.x,0)
+		ShopPanel.position = Vector2(ShopAnchor.position.x+ShopPanel.size.x,0)
 
 func _on_next_coin_button_button_up() -> void:
 	print(CurrentGameState)
@@ -95,10 +98,10 @@ func _on_next_coin_button_button_up() -> void:
 func _shop_animation(show : bool):
 	if show == true:
 		_set_shop_visible(true)
-		_generic_move_tween(ShopPanel,$LayoutBox/Right/ShopAnchor.position)
+		_generic_move_tween(ShopPanel,ShopAnchor.position)
 	else:
 		var tween = get_tree().create_tween().bind_node(self)
-		tween.tween_property(ShopPanel, "position", Vector2($LayoutBox/Right/ShopAnchor.position.x+ShopPanel.size.x,0), 1).set_trans(Tween.TRANS_QUINT)
+		tween.tween_property(ShopPanel, "position", Vector2(ShopAnchor.position.x+ShopPanel.size.x,0), 1).set_trans(Tween.TRANS_QUINT)
 		tween.tween_callback(_set_shop_visible.bind(false))
 		
 func _set_shop_visible(is_visible : bool): 
@@ -257,7 +260,7 @@ func reset_table():
 	NextCoinButton.text = "Flip"
 	_shop_animation(false)
 	purchases = 0
-	$LayoutBox/Right/ShopPanel/PurchaseCount.text = str("Purchases: ",purchases,"/",maxPurchases)
+	$LayoutBox/Right/ShopStuffs/ShopPanel/PurchaseCount.text = str("Purchases: ",purchases,"/",maxPurchases)
 	disable_buy_buttons(false)
 	CurrentGameState = GameState.MENU
 	
@@ -273,11 +276,11 @@ func _add_points():
 
 func add_purchase():
 	purchases += 1
-	$LayoutBox/Right/ShopPanel/PurchaseCount.text = str("Purchases: ",purchases,"/",maxPurchases)
+	$LayoutBox/Right/ShopStuffs/ShopPanel/PurchaseCount.text = str("Purchases: ",purchases,"/",maxPurchases)
 	if purchases == maxPurchases:
 		disable_buy_buttons(true)
 func disable_buy_buttons(disable_value : bool):
-	$LayoutBox/Right/ShopPanel/VBoxContainer/BuyPointsPanel/Button.disabled = disable_value
-	$LayoutBox/Right/ShopPanel/VBoxContainer/BuyCoinsPanel/Button.disabled = disable_value
-	$LayoutBox/Right/ShopPanel/VBoxContainer/BuyReflips/Button.disabled = disable_value
+	$LayoutBox/Right/ShopStuffs/ShopPanel/VBoxContainer/BuyPointsPanel/Button.disabled = disable_value
+	$LayoutBox/Right/ShopStuffs/ShopPanel/VBoxContainer/BuyCoinsPanel/Button.disabled = disable_value
+	$LayoutBox/Right/ShopStuffs/ShopPanel/VBoxContainer/BuyReflips/Button.disabled = disable_value
 	

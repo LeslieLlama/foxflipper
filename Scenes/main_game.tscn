@@ -1,10 +1,11 @@
-[gd_scene load_steps=15 format=3 uid="uid://bn0o5gyjoo4un"]
+[gd_scene load_steps=16 format=3 uid="uid://bn0o5gyjoo4un"]
 
 [ext_resource type="Script" path="res://Scripts/main_game.gd" id="1_k015l"]
 [ext_resource type="Texture2D" uid="uid://dl66pahmplk71" path="res://Sprites/FoxCoin_Dealer.png" id="2_uijv0"]
 [ext_resource type="Texture2D" uid="uid://ckhk7e4lj27yr" path="res://Sprites/FoxCoinConcepts_Heads.png" id="3_u33ss"]
 [ext_resource type="Texture2D" uid="uid://dyayargx7nk40" path="res://Sprites/FoxCoinConcepts_Tails.png" id="4_edq3u"]
 [ext_resource type="Theme" uid="uid://dsk5olnx1e77u" path="res://FancyTheme.tres" id="5_cxspc"]
+[ext_resource type="Texture2D" uid="uid://b2sm2i7ll25ar" path="res://Sprites/Speechbubble.png" id="6_vewqb"]
 [ext_resource type="PackedScene" uid="uid://t6mev4v78cwu" path="res://Scenes/coin_flip_history.tscn" id="6_yecaa"]
 [ext_resource type="Texture2D" uid="uid://c1dqycrxriler" path="res://icon.svg" id="7_v46qd"]
 [ext_resource type="PackedScene" uid="uid://cvxdjuqp6ax2d" path="res://Scenes/audio.tscn" id="9_2ujpw"]
@@ -37,7 +38,7 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
-[node name="MainGame" type="Control" node_paths=PackedStringArray("CoinHistoryNode", "NextCoinButton", "ReDoCoinButton", "CoinAmmount", "ReflipAmmount", "CoinTailsSide", "CoinHeadsSide", "Title", "TitleAnchor", "CurrentRoundLabel", "ShopPanel", "RoundScoreLabel", "RequiredScoreLabel")]
+[node name="MainGame" type="Control" node_paths=PackedStringArray("CoinHistoryNode", "NextCoinButton", "ReDoCoinButton", "CoinAmmount", "ReflipAmmount", "CoinTailsSide", "CoinHeadsSide", "Title", "TitleAnchor", "CurrentRoundLabel", "ShopPanel", "ShopAnchor", "RoundScoreLabel", "RequiredScoreLabel")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -55,7 +56,8 @@ CoinHeadsSide = NodePath("LayoutBox/Center/LargeCoinZone/FlippingCoin/CoinHeadsS
 Title = NodePath("LayoutBox/Center/DealerZone/Dealer/Title")
 TitleAnchor = NodePath("LayoutBox/Center/DealerZone/Dealer/TitleAnchor")
 CurrentRoundLabel = NodePath("LayoutBox/Center/DealerZone/Dealer/CurrentRoundLabel")
-ShopPanel = NodePath("LayoutBox/Right/ShopPanel")
+ShopPanel = NodePath("LayoutBox/Right/ShopStuffs/ShopPanel")
+ShopAnchor = NodePath("LayoutBox/Right/ShopStuffs/ShopAnchor")
 RoundScoreLabel = NodePath("LayoutBox/Center/DealerZone/Dealer/RoundScoreLabel")
 RequiredScoreLabel = NodePath("LayoutBox/Center/DealerZone/Dealer/RequiredScoreLabel")
 
@@ -217,6 +219,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Label" type="Label" parent="LayoutBox/Center/DealerZone/Dealer/TitleAnchor"]
+visible = false
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 29.0
@@ -279,6 +282,22 @@ theme = ExtResource("5_cxspc")
 theme_override_font_sizes/font_size = 50
 text = "Round 
 1/6"
+
+[node name="TextureRect" type="TextureRect" parent="LayoutBox/Center/DealerZone/Dealer"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -616.5
+offset_top = -298.0
+offset_right = -144.5
+offset_bottom = -29.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_vewqb")
+expand_mode = 1
 
 [node name="LargeCoinZone" type="Control" parent="LayoutBox/Center"]
 layout_mode = 2
@@ -406,17 +425,29 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="ShopAnchor" type="Control" parent="LayoutBox/Right"]
+[node name="ShopStuffs" type="Control" parent="LayoutBox/Right"]
 layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ShopAnchor" type="Control" parent="LayoutBox/Right/ShopStuffs"]
+layout_mode = 2
+anchors_preset = 0
+offset_top = -4.0
+offset_bottom = -4.0
 size_flags_horizontal = 0
 
-[node name="ShopPanel" type="Panel" parent="LayoutBox/Right"]
-layout_mode = 2
+[node name="ShopPanel" type="Panel" parent="LayoutBox/Right/ShopStuffs"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_vertical = 3
 theme = ExtResource("5_cxspc")
 theme_override_styles/panel = SubResource("StyleBoxFlat_geymj")
 
-[node name="ShopTitle" type="Label" parent="LayoutBox/Right/ShopPanel"]
+[node name="ShopTitle" type="Label" parent="LayoutBox/Right/ShopStuffs/ShopPanel"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -430,7 +461,7 @@ theme_override_font_sizes/font_size = 34
 text = "Shop"
 horizontal_alignment = 1
 
-[node name="PurchaseCount" type="Label" parent="LayoutBox/Right/ShopPanel"]
+[node name="PurchaseCount" type="Label" parent="LayoutBox/Right/ShopStuffs/ShopPanel"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -445,23 +476,23 @@ theme_override_font_sizes/font_size = 22
 text = "Purchases: 0/2"
 horizontal_alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="LayoutBox/Right/ShopPanel"]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 24.0
-offset_top = -93.5
-offset_right = 254.0
-offset_bottom = 93.5
-grow_vertical = 2
-
-[node name="BuyPointsPanel" type="Panel" parent="LayoutBox/Right/ShopPanel/VBoxContainer"]
+[node name="VBoxContainer" type="BoxContainer" parent="LayoutBox/Right/ShopStuffs/ShopPanel"]
 layout_mode = 2
+anchor_left = 0.0502092
+anchor_top = 0.0814815
+anchor_right = 0.966527
+anchor_bottom = 0.55463
+grow_vertical = 2
+vertical = true
+metadata/_edit_use_anchors_ = true
+
+[node name="BuyPointsPanel" type="Panel" parent="LayoutBox/Right/ShopStuffs/ShopPanel/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("5_cxspc")
 
-[node name="Label" type="Label" parent="LayoutBox/Right/ShopPanel/VBoxContainer/BuyPointsPanel"]
+[node name="Label" type="Label" parent="LayoutBox/Right/ShopStuffs/ShopPanel/VBoxContainer/BuyPointsPanel"]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -475,7 +506,7 @@ text = "+50 points"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Button" type="Button" parent="LayoutBox/Right/ShopPanel/VBoxContainer/BuyPointsPanel"]
+[node name="Button" type="Button" parent="LayoutBox/Right/ShopStuffs/ShopPanel/VBoxContainer/BuyPointsPanel"]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -491,12 +522,13 @@ grow_vertical = 2
 theme = ExtResource("5_cxspc")
 text = "+"
 
-[node name="BuyCoinsPanel" type="Panel" parent="LayoutBox/Right/ShopPanel/VBoxContainer"]
+[node name="BuyCoinsPanel" type="Panel" parent="LayoutBox/Right/ShopStuffs/ShopPanel/VBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("5_cxspc")
 
-[node name="Label" type="Label" parent="LayoutBox/Right/ShopPanel/VBoxContainer/BuyCoinsPanel"]
+[node name="Label" type="Label" parent="LayoutBox/Right/ShopStuffs/ShopPanel/VBoxContainer/BuyCoinsPanel"]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -510,7 +542,7 @@ text = "+1 Coin"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Button" type="Button" parent="LayoutBox/Right/ShopPanel/VBoxContainer/BuyCoinsPanel"]
+[node name="Button" type="Button" parent="LayoutBox/Right/ShopStuffs/ShopPanel/VBoxContainer/BuyCoinsPanel"]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -526,12 +558,13 @@ grow_vertical = 2
 theme = ExtResource("5_cxspc")
 text = "+"
 
-[node name="BuyReflips" type="Panel" parent="LayoutBox/Right/ShopPanel/VBoxContainer"]
+[node name="BuyReflips" type="Panel" parent="LayoutBox/Right/ShopStuffs/ShopPanel/VBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("5_cxspc")
 
-[node name="Label" type="Label" parent="LayoutBox/Right/ShopPanel/VBoxContainer/BuyReflips"]
+[node name="Label" type="Label" parent="LayoutBox/Right/ShopStuffs/ShopPanel/VBoxContainer/BuyReflips"]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -545,7 +578,7 @@ text = "+1 Re-Flip"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Button" type="Button" parent="LayoutBox/Right/ShopPanel/VBoxContainer/BuyReflips"]
+[node name="Button" type="Button" parent="LayoutBox/Right/ShopStuffs/ShopPanel/VBoxContainer/BuyReflips"]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -561,7 +594,7 @@ grow_vertical = 2
 theme = ExtResource("5_cxspc")
 text = "+"
 
-[node name="DividingLine" type="ColorRect" parent="LayoutBox/Right/ShopPanel"]
+[node name="DividingLine" type="ColorRect" parent="LayoutBox/Right/ShopStuffs/ShopPanel"]
 visible = false
 layout_mode = 0
 offset_left = 16.0
@@ -570,7 +603,7 @@ offset_right = 341.0
 offset_bottom = 305.5
 theme = ExtResource("5_cxspc")
 
-[node name="Item1" type="Panel" parent="LayoutBox/Right/ShopPanel"]
+[node name="Item1" type="Panel" parent="LayoutBox/Right/ShopStuffs/ShopPanel"]
 visible = false
 layout_mode = 1
 anchors_preset = 8
@@ -586,7 +619,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("5_cxspc")
 
-[node name="ItemName" type="Label" parent="LayoutBox/Right/ShopPanel/Item1"]
+[node name="ItemName" type="Label" parent="LayoutBox/Right/ShopStuffs/ShopPanel/Item1"]
 layout_mode = 1
 offset_right = 175.0
 offset_bottom = 24.0
@@ -594,7 +627,7 @@ text = "Snake Eye"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Description" type="Label" parent="LayoutBox/Right/ShopPanel/Item1"]
+[node name="Description" type="Label" parent="LayoutBox/Right/ShopStuffs/ShopPanel/Item1"]
 layout_mode = 1
 offset_top = 24.0
 offset_right = 174.0
@@ -605,7 +638,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="Button" type="Button" parent="LayoutBox/Right/ShopPanel/Item1"]
+[node name="Button" type="Button" parent="LayoutBox/Right/ShopStuffs/ShopPanel/Item1"]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -620,7 +653,7 @@ grow_horizontal = 0
 grow_vertical = 2
 text = "+"
 
-[node name="Item2" type="Panel" parent="LayoutBox/Right/ShopPanel"]
+[node name="Item2" type="Panel" parent="LayoutBox/Right/ShopStuffs/ShopPanel"]
 visible = false
 layout_mode = 1
 anchors_preset = 8
@@ -636,7 +669,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("5_cxspc")
 
-[node name="ItemName" type="Label" parent="LayoutBox/Right/ShopPanel/Item2"]
+[node name="ItemName" type="Label" parent="LayoutBox/Right/ShopStuffs/ShopPanel/Item2"]
 layout_mode = 1
 offset_right = 175.0
 offset_bottom = 24.0
@@ -644,7 +677,7 @@ text = "Wet Matches"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Description" type="Label" parent="LayoutBox/Right/ShopPanel/Item2"]
+[node name="Description" type="Label" parent="LayoutBox/Right/ShopStuffs/ShopPanel/Item2"]
 layout_mode = 1
 offset_top = 24.0
 offset_right = 174.0
@@ -656,7 +689,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="Button" type="Button" parent="LayoutBox/Right/ShopPanel/Item2"]
+[node name="Button" type="Button" parent="LayoutBox/Right/ShopStuffs/ShopPanel/Item2"]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -671,7 +704,7 @@ grow_horizontal = 0
 grow_vertical = 2
 text = "+"
 
-[node name="Item3" type="Panel" parent="LayoutBox/Right/ShopPanel"]
+[node name="Item3" type="Panel" parent="LayoutBox/Right/ShopStuffs/ShopPanel"]
 visible = false
 layout_mode = 1
 anchors_preset = 8
@@ -687,7 +720,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("5_cxspc")
 
-[node name="ItemName" type="Label" parent="LayoutBox/Right/ShopPanel/Item3"]
+[node name="ItemName" type="Label" parent="LayoutBox/Right/ShopStuffs/ShopPanel/Item3"]
 layout_mode = 1
 offset_right = 175.0
 offset_bottom = 24.0
@@ -695,7 +728,7 @@ text = "Spatula Head"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Description" type="Label" parent="LayoutBox/Right/ShopPanel/Item3"]
+[node name="Description" type="Label" parent="LayoutBox/Right/ShopStuffs/ShopPanel/Item3"]
 layout_mode = 1
 offset_top = 24.0
 offset_right = 174.0
@@ -707,7 +740,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="Button" type="Button" parent="LayoutBox/Right/ShopPanel/Item3"]
+[node name="Button" type="Button" parent="LayoutBox/Right/ShopStuffs/ShopPanel/Item3"]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -780,10 +813,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -440.0
-offset_top = -282.0
-offset_right = -80.0
-offset_bottom = -173.0
+offset_left = -467.0
+offset_top = -484.0
+offset_right = -107.0
+offset_bottom = -375.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("5_cxspc")
@@ -809,9 +842,9 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = 354.0
+offset_left = 375.0
 offset_top = -119.0
-offset_right = 684.0
+offset_right = 705.0
 offset_bottom = 2.0
 grow_horizontal = 2
 grow_vertical = 0
@@ -825,10 +858,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -440.0
-offset_top = -282.0
-offset_right = -80.0
-offset_bottom = -173.0
+offset_left = -475.0
+offset_top = -457.0
+offset_right = -115.0
+offset_bottom = -348.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("5_cxspc")
@@ -858,9 +891,9 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = 354.0
+offset_left = 387.0
 offset_top = -119.0
-offset_right = 684.0
+offset_right = 717.0
 offset_bottom = 2.0
 grow_horizontal = 2
 grow_vertical = 0
@@ -985,11 +1018,11 @@ autowrap_mode = 3
 
 [connection signal="button_up" from="LayoutBox/Center/LargeCoinZone/NextCoinButton" to="." method="_on_next_coin_button_button_up"]
 [connection signal="button_up" from="LayoutBox/Center/LargeCoinZone/ReDoCoinButton" to="." method="_on_re_do_coin_button_button_up"]
-[connection signal="button_up" from="LayoutBox/Right/ShopPanel/VBoxContainer/BuyPointsPanel/Button" to="." method="_add_points"]
-[connection signal="button_up" from="LayoutBox/Right/ShopPanel/VBoxContainer/BuyPointsPanel/Button" to="." method="add_purchase"]
-[connection signal="button_up" from="LayoutBox/Right/ShopPanel/VBoxContainer/BuyCoinsPanel/Button" to="." method="_add_coin"]
-[connection signal="button_up" from="LayoutBox/Right/ShopPanel/VBoxContainer/BuyCoinsPanel/Button" to="." method="add_purchase"]
-[connection signal="button_up" from="LayoutBox/Right/ShopPanel/VBoxContainer/BuyReflips/Button" to="." method="_add_reflips"]
-[connection signal="button_up" from="LayoutBox/Right/ShopPanel/VBoxContainer/BuyReflips/Button" to="." method="add_purchase"]
+[connection signal="button_up" from="LayoutBox/Right/ShopStuffs/ShopPanel/VBoxContainer/BuyPointsPanel/Button" to="." method="add_purchase"]
+[connection signal="button_up" from="LayoutBox/Right/ShopStuffs/ShopPanel/VBoxContainer/BuyPointsPanel/Button" to="." method="_add_points"]
+[connection signal="button_up" from="LayoutBox/Right/ShopStuffs/ShopPanel/VBoxContainer/BuyCoinsPanel/Button" to="." method="_add_coin"]
+[connection signal="button_up" from="LayoutBox/Right/ShopStuffs/ShopPanel/VBoxContainer/BuyCoinsPanel/Button" to="." method="add_purchase"]
+[connection signal="button_up" from="LayoutBox/Right/ShopStuffs/ShopPanel/VBoxContainer/BuyReflips/Button" to="." method="add_purchase"]
+[connection signal="button_up" from="LayoutBox/Right/ShopStuffs/ShopPanel/VBoxContainer/BuyReflips/Button" to="." method="_add_reflips"]
 [connection signal="toggled" from="ExplanationPanel/Button" to="." method="_on_HelpButton_toggled"]
 [connection signal="button_up" from="GameOverPanel/RetryButton" to="." method="_on_retry_button_button_up"]

@@ -1,5 +1,9 @@
 extends Panel
 
+@export var AddTails : Button
+@export var AddHeads : Button
+@export var TotalPoints : Label
+@export var SplitPoints : Label
 
 var CoinHistorySprites = []
 
@@ -10,35 +14,35 @@ func _ready() -> void:
 
 func _reset_table():
 	update_coin_betting_ui()
-	$AddTails.disabled = false
-	$AddHeads.disabled = false
+	AddTails.disabled = false
+	AddHeads.disabled = false
 	
 	
 func _flip_coin(coinCount : int):
 	if coinCount > 0:
-		$AddTails.disabled = true
-		$AddHeads.disabled = true
+		AddTails.disabled = true
+		AddHeads.disabled = true
 		
 func update_coin_betting_ui():
-	$TotalPoints.text = str("Total Points: ",Globals.totalValue)
-	$SplitPoints.text = str(Globals.headsValue,"/",Globals.tailsValue)
+	TotalPoints.text = str("Total Points: ",Globals.totalValue)
+	SplitPoints.text = str(Globals.headsValue,"/",Globals.tailsValue)
 		
 func _on_add_tails_button_up() -> void:
-	$AddHeads.disabled = false
+	AddHeads.disabled = false
 	Globals.tailsValue += 10
 	Globals.headsValue -= 10
 	if Globals.tailsValue >= Globals.totalValue:
-		$AddTails.disabled = true
-	else: $AddTails.disabled = false
+		AddTails.disabled = true
+	else: AddTails.disabled = false
 	update_coin_betting_ui()
 
 func _on_add_heads_button_up() -> void:
-	$AddTails.disabled = false
+	AddTails.disabled = false
 	Globals.tailsValue -= 10
 	Globals.headsValue += 10
 	if Globals.headsValue >= Globals.totalValue:
-		$AddHeads.disabled = true
-	else: $AddHeads.disabled = false
+		AddHeads.disabled = true
+	else: AddHeads.disabled = false
 	update_coin_betting_ui()
 	
 func _add_points():
