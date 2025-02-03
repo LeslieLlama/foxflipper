@@ -7,6 +7,7 @@ func _ready() -> void:
 	Signals.CoinHistoryDisplayUpdate.connect(PlayCoinFlipSound)
 	Signals.NextRound.connect(AddBackgroundMusicPitch)
 	Signals.AllCoinsScored.connect(MinusBackgroundMusicPitch)
+	Signals.ComboScored.connect(PlayCoinComboSound)
 	AddBackgroundMusicPitch()
 	$BackgroundMusic.play()
 
@@ -18,6 +19,10 @@ func PlayCoinTriggerSound():
 	var pitchRandomisation = rng.randf_range(1, 1.5)
 	$CoinScoringSound.pitch_scale = pitchRandomisation
 	$CoinScoringSound.play()
+func PlayCoinComboSound():
+	var pitchRandomisation = rng.randf_range(1, 1.5)
+	$CoinComboSound.pitch_scale = pitchRandomisation
+	$CoinComboSound.play()
 func PlayCoinFlipSound():
 	var pitchRandomisation = rng.randf_range(1, 2)
 	$CoinLandingSound.pitch_scale = pitchRandomisation

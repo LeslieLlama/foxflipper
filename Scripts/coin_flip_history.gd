@@ -77,6 +77,7 @@ func pattern_payoff(runCount : int, runArray, c : int, coinValue : int, colorToU
 		var scoreToAdd = ((runCount) * coinValue) * (runCount)
 		Globals.currentScore += scoreToAdd
 		var middleOfArray = c - (runArray.size()-(runArray.size()/2))
+		Signals.emit_signal("ComboScored")
 		Signals.emit_signal("PopupMessage",(str("Run! +",scoreToAdd,"!")), CoinHistorySprites[middleOfArray].global_position, colorToUse)
 	
 func _reset_game():
@@ -91,7 +92,7 @@ func _add_coin():
 	#var child_node = ColorRect.new()
 	var child_node = TextureRect.new()
 	child_node.texture = emptyCoinSprite
-	child_node.custom_minimum_size = Vector2(50,50)
+	child_node.custom_minimum_size = Vector2(75,75)
 	child_node.expand_mode = TextureRect.EXPAND_FIT_WIDTH
 	child_node.stretch_mode = TextureRect.STRETCH_SCALE
 	self.add_child(child_node)

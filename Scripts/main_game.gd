@@ -35,6 +35,7 @@ var highest_score : int
 @export var ShopAnchor : Control
 @export var RoundScoreLabel : Label
 @export var RequiredScoreLabel : Label
+@export var SpeechBubble : TextureRect
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -45,8 +46,18 @@ func _ready() -> void:
 	RequiredScoreLabel.text = str(RequiredScore[0])
 	_reset_node_positions()
 	ReDoCoinButton.disabled = true
-	_title_animation(true)
 	get_tree().get_root().size_changed.connect(resize)
+	
+	var size = get_viewport_rect().size
+	var top = size.y + TitleAnchor.position.y
+	Title.position = Vector2(TitleAnchor.position.x,-top)
+	await get_tree().create_timer(0.1).timeout
+	_title_animation(true)
+	
+	
+func _process(delta: float) -> void:
+	if Input.is_key_pressed(KEY_SPACE):
+		game_won()
 	
 func _reset_node_positions():
 	var title_position = TitleAnchor.position
@@ -58,7 +69,7 @@ func _reset_node_positions():
 
 func resize():
 	var size = get_viewport_rect().size
-	if size.x > size.y:
+	if size.x > (size.y-400):
 		$LayoutBox.vertical = false
 		$LayoutBox/Left/HistoryZone.vertical = true
 		#$LayoutBox/Right/ShopStuffs/ShopPanel/VBoxContainer.vertical = true
@@ -70,7 +81,7 @@ func resize():
 		ShopPanel.position = Vector2(ShopAnchor.position.x+ShopPanel.size.x,0)
 
 func _on_next_coin_button_button_up() -> void:
-	print(CurrentGameState)
+	SpeechBubble.hide()
 	if CurrentGameState == GameState.MENU:
 		_title_animation(false)
 		CurrentGameState = GameState.BETTING
@@ -113,10 +124,10 @@ func _title_animation(show : bool):
 		var size = get_viewport_rect().size
 		var top = size.y + TitleAnchor.position.y
 		_generic_move_tween(Title,Vector2(TitleAnchor.position.x,-top))
-		$Credits.hide()
+		$LayoutBox/Right/Credits.hide()
 	else: 
 		_generic_move_tween(Title,TitleAnchor.position)
-		$Credits.show()
+		$LayoutBox/Right/Credits.show()
 		
 func _on_HelpButton_toggled(toggled_on: bool) -> void:
 	if toggled_on == true: #show
@@ -137,20 +148,20 @@ func _coin_flip_animation(heads : bool):
 		coinTween.kill()
 	coinTween = get_tree().create_tween().bind_node(self)
 	if heads == true:
-		coinTween.tween_property(CoinTailsSide, "scale", Vector2(1,0), 0.1).set_trans(Tween.TRANS_QUINT)
-		coinTween.tween_property(CoinHeadsSide, "scale", Vector2(1,1), 0.1).set_trans(Tween.TRANS_QUINT)
-		coinTween.tween_property(CoinHeadsSide, "scale", Vector2(1,0), 0.1).set_trans(Tween.TRANS_QUINT)
-		coinTween.tween_property(CoinTailsSide, "scale", Vector2(1,1), 0.1).set_trans(Tween.TRANS_QUINT)
-		coinTween.tween_property(CoinTailsSide, "scale", Vector2(1,0), 0.2).set_trans(Tween.TRANS_QUINT)
-		coinTween.tween_property(CoinHeadsSide, "scale", Vector2(1,1), 0.2).set_trans(Tween.TRANS_QUINT)
+		coinTween.tween_property(CoinTailsSide, "scale", Vector2(0.8,0), 0.1).set_trans(Tween.TRANS_QUINT)
+		coinTween.tween_property(CoinHeadsSide, "scale", Vector2(0.8,0.8), 0.1).set_trans(Tween.TRANS_QUINT)
+		coinTween.tween_property(CoinHeadsSide, "scale", Vector2(0.8,0), 0.1).set_trans(Tween.TRANS_QUINT)
+		coinTween.tween_property(CoinTailsSide, "scale", Vector2(0.8,0.8), 0.1).set_trans(Tween.TRANS_QUINT)
+		coinTween.tween_property(CoinTailsSide, "scale", Vector2(0.8,0), 0.2).set_trans(Tween.TRANS_QUINT)
+		coinTween.tween_property(CoinHeadsSide, "scale", Vector2(0.8,0.8), 0.2).set_trans(Tween.TRANS_QUINT)
 		coinTween.tween_callback(_update_coin_history)
 	else: 
-		coinTween.tween_property(CoinTailsSide, "scale", Vector2(1,0), 0.1).set_trans(Tween.TRANS_QUINT)
-		coinTween.tween_property(CoinHeadsSide, "scale", Vector2(1,1), 0.1).set_trans(Tween.TRANS_QUINT)
-		coinTween.tween_property(CoinHeadsSide, "scale", Vector2(1,0), 0.1).set_trans(Tween.TRANS_QUINT)
-		coinTween.tween_property(CoinTailsSide, "scale", Vector2(1,1), 0.1).set_trans(Tween.TRANS_QUINT)
-		coinTween.tween_property(CoinHeadsSide, "scale", Vector2(1,0), 0.2).set_trans(Tween.TRANS_QUINT)
-		coinTween.tween_property(CoinTailsSide, "scale", Vector2(1,1), 0.2).set_trans(Tween.TRANS_QUINT)
+		coinTween.tween_property(CoinTailsSide, "scale", Vector2(0.8,0), 0.1).set_trans(Tween.TRANS_QUINT)
+		coinTween.tween_property(CoinHeadsSide, "scale", Vector2(0.8,0.8), 0.1).set_trans(Tween.TRANS_QUINT)
+		coinTween.tween_property(CoinHeadsSide, "scale", Vector2(0.8,0), 0.1).set_trans(Tween.TRANS_QUINT)
+		coinTween.tween_property(CoinTailsSide, "scale", Vector2(0.8,0.8), 0.1).set_trans(Tween.TRANS_QUINT)
+		coinTween.tween_property(CoinHeadsSide, "scale", Vector2(0.8,0), 0.2).set_trans(Tween.TRANS_QUINT)
+		coinTween.tween_property(CoinTailsSide, "scale", Vector2(0.8,0.8), 0.2).set_trans(Tween.TRANS_QUINT)
 		coinTween.tween_callback(_update_coin_history)
 		
 func _update_coin_history():
@@ -191,19 +202,26 @@ func pop_up_message(textToSay : String, pos : Vector2, textColour : Color):
 	print(str("pop up message at", pos))
 	var message = Label.new()
 	message.text = textToSay
-	message.position = Vector2(pos.x,pos.y-10)
+	message.position = Vector2(pos.x,pos.y-20)
 	message.modulate = textColour
+	message.add_theme_font_size_override("font_size", 34)
 	add_child(message)
 	var tween = get_tree().create_tween().bind_node(self)
-	tween.tween_property(message, "position", Vector2(pos.x,pos.y-20), 1).set_trans(tween.TRANS_QUAD)
+	tween.tween_property(message, "position", Vector2(pos.x,pos.y-40), 1).set_trans(tween.TRANS_QUAD)
 	tween.tween_callback(message.queue_free)
+	
+func _create_speech_bubble(textToSay : String):
+	SpeechBubble.show()
+	var txt = SpeechBubble.get_child(0)
+	txt.text = textToSay
 	
 	
 func check_round_won():
 	if Globals.currentScore >= RequiredScore[RoundNumber-1]:
 		RoundNumber += 1
-		pop_up_message(str("Round Cleared!"),Vector2(660,120) , colorRed)
-		pop_up_message(str("Well Done"),Vector2(660,140) , colorBlue)
+		#pop_up_message(str("Round Cleared!"),Vector2(660,120) , colorRed)
+		#pop_up_message(str("Well Done"),Vector2(660,140) , colorBlue)
+		_create_speech_bubble("Round Cleared!\nWell Done")
 	else: 
 		print("Game Over!")
 		game_over()
@@ -213,14 +231,16 @@ func check_round_won():
 		game_won()
 	
 func game_over():
-	$GameOverPanel.show()
+	#$GameOverPanel.show()
+	_create_speech_bubble("Game Over!~")
 	CurrentGameState = GameState.GAME_OVER
 	NextCoinButton.text = "Play Again?"
 	
 func game_won():
 	$GameWonPanel.show()
+	_create_speech_bubble("You Win!!")
 	CurrentGameState = GameState.GAME_OVER
-	$GameWonPanel/RetryButton.text = str("Thank You for Playing\nHighest Score : ",highest_score)
+	$GameWonPanel/Title.text = str("Thank You for Playing\nHighest Score : ",highest_score)
 	NextCoinButton.text = "Menu"
 	
 func _on_retry_button_button_up() -> void:

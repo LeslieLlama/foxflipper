@@ -14,6 +14,7 @@ signal CoinHistoryDisplayUpdate()
 
 signal ScoreCoins()
 signal CoinScored()
+signal ComboScored()
 signal AllCoinsScored()
 
 signal NextRound()

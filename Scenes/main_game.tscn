@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bn0o5gyjoo4un"]
+[gd_scene load_steps=17 format=3 uid="uid://bn0o5gyjoo4un"]
 
 [ext_resource type="Script" path="res://Scripts/main_game.gd" id="1_k015l"]
 [ext_resource type="Texture2D" uid="uid://dl66pahmplk71" path="res://Sprites/FoxCoin_Dealer.png" id="2_uijv0"]
@@ -38,7 +38,10 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
-[node name="MainGame" type="Control" node_paths=PackedStringArray("CoinHistoryNode", "NextCoinButton", "ReDoCoinButton", "CoinAmmount", "ReflipAmmount", "CoinTailsSide", "CoinHeadsSide", "Title", "TitleAnchor", "CurrentRoundLabel", "ShopPanel", "ShopAnchor", "RoundScoreLabel", "RequiredScoreLabel")]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q0t8k"]
+bg_color = Color(0.815686, 0.396078, 0.34902, 1)
+
+[node name="MainGame" type="Control" node_paths=PackedStringArray("CoinHistoryNode", "NextCoinButton", "ReDoCoinButton", "CoinAmmount", "ReflipAmmount", "CoinTailsSide", "CoinHeadsSide", "Title", "TitleAnchor", "CurrentRoundLabel", "ShopPanel", "ShopAnchor", "RoundScoreLabel", "RequiredScoreLabel", "SpeechBubble")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -46,7 +49,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_k015l")
-CoinHistoryNode = NodePath("LayoutBox/Left/HistoryZone/CoinFlipHistory")
+CoinHistoryNode = NodePath("LayoutBox/Center/CoinFlipHistory")
 NextCoinButton = NodePath("LayoutBox/Center/LargeCoinZone/NextCoinButton")
 ReDoCoinButton = NodePath("LayoutBox/Center/LargeCoinZone/ReDoCoinButton")
 CoinAmmount = NodePath("LayoutBox/Center/LargeCoinZone/NextCoinButton/CoinAmmount")
@@ -60,6 +63,7 @@ ShopPanel = NodePath("LayoutBox/Right/ShopStuffs/ShopPanel")
 ShopAnchor = NodePath("LayoutBox/Right/ShopStuffs/ShopAnchor")
 RoundScoreLabel = NodePath("LayoutBox/Center/DealerZone/Dealer/RoundScoreLabel")
 RequiredScoreLabel = NodePath("LayoutBox/Center/DealerZone/Dealer/RequiredScoreLabel")
+SpeechBubble = NodePath("LayoutBox/Center/DealerZone/Dealer/SpeechBubble")
 
 [node name="BackgroundColour" type="ColorRect" parent="."]
 custom_minimum_size = Vector2(50, 50)
@@ -130,12 +134,52 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="CoinFlipHistory" parent="LayoutBox/Left/HistoryZone" instance=ExtResource("6_yecaa")]
-clip_contents = false
-custom_minimum_size = Vector2(100, 100)
+[node name="Title" type="Label" parent="LayoutBox/Left/HistoryZone"]
+modulate = Color(0.815686, 0.396078, 0.34902, 1)
+layout_mode = 2
+theme = ExtResource("5_cxspc")
+theme_override_colors/font_color = Color(0, 0, 0, 0)
+theme_override_font_sizes/font_size = 33
+text = "Help/settings
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HelpPanel" type="Panel" parent="LayoutBox/Left/HistoryZone"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme = ExtResource("5_cxspc")
+
+[node name="Title" type="Label" parent="LayoutBox/Left/HistoryZone/HelpPanel"]
+modulate = Color(0.815686, 0.396078, 0.34902, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -67.5
+offset_top = -47.0
+offset_right = 57.5
+offset_bottom = -1.0
+grow_horizontal = 2
+theme = ExtResource("5_cxspc")
+theme_override_font_sizes/font_size = 33
+text = "Help/settings"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="LayoutBox/Left/HistoryZone/HelpPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.870588, 0.666667, 0.54902, 1)
+text = "Function 
+Coming Soon"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Center" type="VBoxContainer" parent="LayoutBox"]
 layout_mode = 2
@@ -283,7 +327,8 @@ theme_override_font_sizes/font_size = 50
 text = "Round 
 1/6"
 
-[node name="TextureRect" type="TextureRect" parent="LayoutBox/Center/DealerZone/Dealer"]
+[node name="SpeechBubble" type="TextureRect" parent="LayoutBox/Center/DealerZone/Dealer"]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -291,13 +336,37 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -616.5
-offset_top = -298.0
+offset_top = -242.5
 offset_right = -144.5
-offset_bottom = -29.0
+offset_bottom = 26.5
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("6_vewqb")
 expand_mode = 1
+
+[node name="Label" type="Label" parent="LayoutBox/Center/DealerZone/Dealer/SpeechBubble"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0402542
+anchor_top = 0.063197
+anchor_right = 0.92161
+anchor_bottom = 0.810409
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("5_cxspc")
+theme_override_font_sizes/font_size = 56
+text = "Game Over!~"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="CoinFlipHistory" parent="LayoutBox/Center" instance=ExtResource("6_yecaa")]
+clip_contents = false
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.4
+columns = 8
 
 [node name="LargeCoinZone" type="Control" parent="LayoutBox/Center"]
 layout_mode = 2
@@ -306,14 +375,15 @@ size_flags_vertical = 3
 
 [node name="FlippingCoin" type="Control" parent="LayoutBox/Center/LargeCoinZone"]
 layout_mode = 1
-anchors_preset = 5
+anchors_preset = 8
 anchor_left = 0.5
+anchor_top = 0.5
 anchor_right = 0.5
-offset_left = -135.5
-offset_top = 59.0
-offset_right = 135.5
-offset_bottom = 330.0
+anchor_bottom = 0.5
+offset_top = -52.0
+offset_bottom = -52.0
 grow_horizontal = 2
+grow_vertical = 2
 
 [node name="CoinHeadsSide" type="TextureRect" parent="LayoutBox/Center/LargeCoinZone/FlippingCoin"]
 layout_mode = 1
@@ -322,10 +392,11 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-pivot_offset = Vector2(110, 110)
+scale = Vector2(0.8, 0.8)
 theme = ExtResource("5_cxspc")
 texture = ExtResource("3_u33ss")
-expand_mode = 1
+expand_mode = 3
+stretch_mode = 3
 
 [node name="CoinTailsSide" type="TextureRect" parent="LayoutBox/Center/LargeCoinZone/FlippingCoin"]
 layout_mode = 1
@@ -334,16 +405,15 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(1, 1e-05)
-pivot_offset = Vector2(105, 105)
+scale = Vector2(0.8, 1e-05)
 theme = ExtResource("5_cxspc")
 texture = ExtResource("4_edq3u")
-expand_mode = 1
+expand_mode = 3
+stretch_mode = 3
 
 [node name="ColorRect4" type="ColorRect" parent="LayoutBox/Center/LargeCoinZone"]
 visible = false
-layout_mode = 1
-anchors_preset = 15
+layout_mode = 2
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
@@ -370,37 +440,40 @@ text = "Coins/Buttons"
 
 [node name="NextCoinButton" type="Button" parent="LayoutBox/Center/LargeCoinZone"]
 layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
+anchors_preset = -1
+anchor_left = 0.598319
+anchor_top = 0.77881
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -254.0
-offset_top = -122.0
 grow_horizontal = 0
 grow_vertical = 0
 theme = ExtResource("5_cxspc")
 theme_override_font_sizes/font_size = 30
 text = "Flip"
+metadata/_edit_use_anchors_ = true
 
 [node name="CoinAmmount" type="Label" parent="LayoutBox/Center/LargeCoinZone/NextCoinButton"]
-layout_mode = 0
-offset_left = 66.5
-offset_top = -28.7499
-offset_right = 106.5
-offset_bottom = 0.25012
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -25.2908
+offset_top = -35.0
+offset_right = 44.7092
+offset_bottom = 4.0
+grow_horizontal = 2
 theme = ExtResource("5_cxspc")
 theme_override_colors/font_color = Color(0.815686, 0.396078, 0.34902, 1)
+theme_override_font_sizes/font_size = 30
 text = "0/6
 "
 
 [node name="ReDoCoinButton" type="Button" parent="LayoutBox/Center/LargeCoinZone"]
 layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
+anchors_preset = -1
+anchor_top = 0.77881
+anchor_right = 0.401681
 anchor_bottom = 1.0
-offset_top = -122.0
-offset_right = 254.0
 grow_vertical = 0
 theme = ExtResource("5_cxspc")
 theme_override_font_sizes/font_size = 30
@@ -408,15 +481,21 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_dbx8f")
 theme_override_styles/normal = SubResource("StyleBoxFlat_6i8jf")
 text = "Re-Flip
 "
+metadata/_edit_use_anchors_ = true
 
 [node name="ReflipAmmount" type="Label" parent="LayoutBox/Center/LargeCoinZone/ReDoCoinButton"]
-layout_mode = 0
-offset_left = 72.0
-offset_top = -28.7499
-offset_right = 112.0
-offset_bottom = 0.25012
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.2908
+offset_top = -36.0
+offset_right = 28.7092
+offset_bottom = 3.0
+grow_horizontal = 2
 theme = ExtResource("5_cxspc")
 theme_override_colors/font_color = Color(0.396078, 0.654902, 0.756863, 1)
+theme_override_font_sizes/font_size = 30
 text = "x3
 "
 
@@ -437,6 +516,7 @@ offset_bottom = -4.0
 size_flags_horizontal = 0
 
 [node name="ShopPanel" type="Panel" parent="LayoutBox/Right/ShopStuffs"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -454,7 +534,7 @@ anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -98.0
 offset_right = 99.0
-offset_bottom = 43.0
+offset_bottom = 44.0
 grow_horizontal = 2
 theme = ExtResource("5_cxspc")
 theme_override_font_sizes/font_size = 34
@@ -494,33 +574,35 @@ theme = ExtResource("5_cxspc")
 
 [node name="Label" type="Label" parent="LayoutBox/Right/ShopStuffs/ShopPanel/VBoxContainer/BuyPointsPanel"]
 layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_top = -31.0
-offset_right = 175.0
-offset_bottom = 33.0
+anchors_preset = -1
+anchor_left = 0.017
+anchor_right = 0.677
+anchor_bottom = 1.0
+offset_left = 0.0559998
+offset_right = -0.0640106
+grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("5_cxspc")
+theme_override_font_sizes/font_size = 30
 text = "+50 points"
-horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Button" type="Button" parent="LayoutBox/Right/ShopStuffs/ShopPanel/VBoxContainer/BuyPointsPanel"]
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
+layout_mode = 2
+anchor_left = 0.715517
+anchor_top = 0.025
 anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -57.5
-offset_top = -23.0
-offset_right = -10.5
-offset_bottom = 25.0
+anchor_bottom = 0.974522
+offset_top = 0.075
+offset_right = -5.0
 grow_horizontal = 0
 grow_vertical = 2
+size_flags_horizontal = 3
 theme = ExtResource("5_cxspc")
+theme_override_font_sizes/font_size = 40
 text = "+"
+autowrap_mode = 3
+metadata/_edit_use_anchors_ = true
 
 [node name="BuyCoinsPanel" type="Panel" parent="LayoutBox/Right/ShopStuffs/ShopPanel/VBoxContainer"]
 layout_mode = 2
@@ -530,33 +612,33 @@ theme = ExtResource("5_cxspc")
 
 [node name="Label" type="Label" parent="LayoutBox/Right/ShopStuffs/ShopPanel/VBoxContainer/BuyCoinsPanel"]
 layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_top = -32.5
-offset_right = 175.0
-offset_bottom = 31.5
+anchors_preset = -1
+anchor_left = 0.0215517
+anchor_top = 0.0318471
+anchor_right = 0.711207
+anchor_bottom = 0.968153
 grow_vertical = 2
 theme = ExtResource("5_cxspc")
+theme_override_font_sizes/font_size = 30
 text = "+1 Coin"
-horizontal_alignment = 1
 vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="Button" type="Button" parent="LayoutBox/Right/ShopStuffs/ShopPanel/VBoxContainer/BuyCoinsPanel"]
 layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
+anchors_preset = -1
+anchor_left = 0.719828
+anchor_top = 0.025
 anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -57.5
-offset_top = -23.0
-offset_right = -10.5
-offset_bottom = 25.0
+anchor_bottom = 0.968153
+offset_top = 0.075
+offset_right = -4.0
 grow_horizontal = 0
 grow_vertical = 2
 theme = ExtResource("5_cxspc")
+theme_override_font_sizes/font_size = 40
 text = "+"
+metadata/_edit_use_anchors_ = true
 
 [node name="BuyReflips" type="Panel" parent="LayoutBox/Right/ShopStuffs/ShopPanel/VBoxContainer"]
 layout_mode = 2
@@ -566,33 +648,33 @@ theme = ExtResource("5_cxspc")
 
 [node name="Label" type="Label" parent="LayoutBox/Right/ShopStuffs/ShopPanel/VBoxContainer/BuyReflips"]
 layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_top = -31.0
-offset_right = 175.0
-offset_bottom = 31.0
+anchors_preset = -1
+anchor_left = 0.0258621
+anchor_right = 0.724138
+anchor_bottom = 1.0
+grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("5_cxspc")
+theme_override_font_sizes/font_size = 30
 text = "+1 Re-Flip"
-horizontal_alignment = 1
 vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="Button" type="Button" parent="LayoutBox/Right/ShopStuffs/ShopPanel/VBoxContainer/BuyReflips"]
 layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
+anchors_preset = -1
+anchor_left = 0.715517
+anchor_top = 0.032
 anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -57.5
-offset_top = -23.0
-offset_right = -10.5
-offset_bottom = 25.0
+anchor_bottom = 0.974684
+offset_top = -0.0560002
+offset_right = -5.0
 grow_horizontal = 0
 grow_vertical = 2
 theme = ExtResource("5_cxspc")
+theme_override_font_sizes/font_size = 40
 text = "+"
+metadata/_edit_use_anchors_ = true
 
 [node name="DividingLine" type="ColorRect" parent="LayoutBox/Right/ShopStuffs/ShopPanel"]
 visible = false
@@ -755,7 +837,14 @@ grow_horizontal = 0
 grow_vertical = 2
 text = "+"
 
+[node name="Credits" type="Label" parent="LayoutBox/Right"]
+layout_mode = 2
+theme = ExtResource("5_cxspc")
+text = "A Game by Leslie Llama
+Made for Minijam 176"
+
 [node name="ExplanationPanel" type="Panel" parent="."]
+visible = false
 layout_mode = 0
 offset_left = -303.0
 offset_top = 29.0
@@ -858,13 +947,14 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -475.0
+offset_left = 98.0
 offset_top = -457.0
-offset_right = -115.0
+offset_right = 458.0
 offset_bottom = -348.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("5_cxspc")
+theme_override_styles/panel = SubResource("StyleBoxFlat_q0t8k")
 
 [node name="Title" type="Label" parent="GameWonPanel"]
 layout_mode = 1
@@ -879,41 +969,12 @@ offset_right = 100.5
 offset_bottom = 35.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 52
-text = "You Win!!"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="RetryButton" type="Button" parent="GameWonPanel"]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = 387.0
-offset_top = -119.0
-offset_right = 717.0
-offset_bottom = 2.0
-grow_horizontal = 2
-grow_vertical = 0
+theme_override_colors/font_color = Color(0.862745, 0.862745, 0.8, 1)
+theme_override_font_sizes/font_size = 28
 text = "Thank You for Playing
 Highest Score : 30000"
-
-[node name="Credits" type="Label" parent="."]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -254.0
-offset_top = -61.0
-grow_horizontal = 0
-grow_vertical = 0
-theme = ExtResource("5_cxspc")
-text = "A Game by Leslie Llama
-Made for Minijam 176"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Item1" type="Control" parent="."]
 visible = false
@@ -1018,11 +1079,11 @@ autowrap_mode = 3
 
 [connection signal="button_up" from="LayoutBox/Center/LargeCoinZone/NextCoinButton" to="." method="_on_next_coin_button_button_up"]
 [connection signal="button_up" from="LayoutBox/Center/LargeCoinZone/ReDoCoinButton" to="." method="_on_re_do_coin_button_button_up"]
-[connection signal="button_up" from="LayoutBox/Right/ShopStuffs/ShopPanel/VBoxContainer/BuyPointsPanel/Button" to="." method="add_purchase"]
 [connection signal="button_up" from="LayoutBox/Right/ShopStuffs/ShopPanel/VBoxContainer/BuyPointsPanel/Button" to="." method="_add_points"]
+[connection signal="button_up" from="LayoutBox/Right/ShopStuffs/ShopPanel/VBoxContainer/BuyPointsPanel/Button" to="." method="add_purchase"]
 [connection signal="button_up" from="LayoutBox/Right/ShopStuffs/ShopPanel/VBoxContainer/BuyCoinsPanel/Button" to="." method="_add_coin"]
 [connection signal="button_up" from="LayoutBox/Right/ShopStuffs/ShopPanel/VBoxContainer/BuyCoinsPanel/Button" to="." method="add_purchase"]
-[connection signal="button_up" from="LayoutBox/Right/ShopStuffs/ShopPanel/VBoxContainer/BuyReflips/Button" to="." method="add_purchase"]
 [connection signal="button_up" from="LayoutBox/Right/ShopStuffs/ShopPanel/VBoxContainer/BuyReflips/Button" to="." method="_add_reflips"]
+[connection signal="button_up" from="LayoutBox/Right/ShopStuffs/ShopPanel/VBoxContainer/BuyReflips/Button" to="." method="add_purchase"]
 [connection signal="toggled" from="ExplanationPanel/Button" to="." method="_on_HelpButton_toggled"]
 [connection signal="button_up" from="GameOverPanel/RetryButton" to="." method="_on_retry_button_button_up"]

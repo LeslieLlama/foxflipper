@@ -3,14 +3,18 @@ extends Panel
 @export var AddTails : Button
 @export var AddHeads : Button
 @export var TotalPoints : Label
-@export var SplitPoints : Label
+@export var SplitPoints : RichTextLabel
 
 var CoinHistorySprites = []
+
+var colorRed = Color("D0665A")
+var colorBlue = Color("65A7C1")
 
 func _ready() -> void:
 	Signals.ResetTable.connect(_reset_table)
 	Signals.FlipCoin.connect(_flip_coin)
 	Signals.PurchasePoints.connect(_add_points)
+	update_coin_betting_ui()
 
 func _reset_table():
 	update_coin_betting_ui()
@@ -25,7 +29,7 @@ func _flip_coin(coinCount : int):
 		
 func update_coin_betting_ui():
 	TotalPoints.text = str("Total Points: ",Globals.totalValue)
-	SplitPoints.text = str(Globals.headsValue,"/",Globals.tailsValue)
+	SplitPoints.text = str("[center]",Globals.headsValue,"/[color=#65A7C1]",Globals.tailsValue,"[/color][/center]")
 		
 func _on_add_tails_button_up() -> void:
 	AddHeads.disabled = false
