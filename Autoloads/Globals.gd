@@ -1,5 +1,6 @@
 extends Node
 
+var coinsToThrow = 0
 var coinCount = 0
 var maxCoinCount = 0
 

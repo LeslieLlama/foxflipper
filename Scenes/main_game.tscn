@@ -453,6 +453,7 @@ text = "Flip"
 metadata/_edit_use_anchors_ = true
 
 [node name="CoinAmmount" type="Label" parent="LayoutBox/Center/LargeCoinZone/NextCoinButton"]
+visible = false
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -467,6 +468,22 @@ theme_override_colors/font_color = Color(0.815686, 0.396078, 0.34902, 1)
 theme_override_font_sizes/font_size = 30
 text = "0/6
 "
+
+[node name="CoinCount" type="Label" parent="LayoutBox/Center/LargeCoinZone"]
+layout_mode = 0
+anchor_left = 0.400685
+anchor_top = 0.778524
+anchor_right = 0.599315
+anchor_bottom = 1.00224
+offset_bottom = 3.05176e-05
+theme = ExtResource("5_cxspc")
+theme_override_colors/font_color = Color(0.870588, 0.666667, 0.54902, 1)
+theme_override_font_sizes/font_size = 30
+text = "Coins:
+x4"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="ReDoCoinButton" type="Button" parent="LayoutBox/Center/LargeCoinZone"]
 layout_mode = 1
@@ -484,6 +501,7 @@ text = "Re-Flip
 metadata/_edit_use_anchors_ = true
 
 [node name="ReflipAmmount" type="Label" parent="LayoutBox/Center/LargeCoinZone/ReDoCoinButton"]
+visible = false
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -641,6 +659,7 @@ text = "+"
 metadata/_edit_use_anchors_ = true
 
 [node name="BuyReflips" type="Panel" parent="LayoutBox/Right/ShopStuffs/ShopPanel/VBoxContainer"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3

@@ -41,7 +41,7 @@ var highest_score : int
 func _ready() -> void:
 	Signals.PopupMessage.connect(pop_up_message)
 	Signals.AllCoinsScored.connect(check_round_won)
-	for i in 3:
+	for i in 4:
 		_add_coin()
 	RequiredScoreLabel.text = str(RequiredScore[0])
 	_reset_node_positions()
@@ -91,7 +91,8 @@ func _on_next_coin_button_button_up() -> void:
 		CurrentGameState = GameState.BETTING
 		return
 	if CurrentGameState == GameState.BETTING:
-		if Globals.coinCount == Globals.maxCoinCount:
+		#if Globals.coinCount == Globals.maxCoinCount:
+		if Globals.coinsToThrow <= 0:
 			CurrentGameState = GameState.SCORING
 			Signals.emit_signal("ScoreCoins")
 			ReDoCoinButton.disabled = true
@@ -168,11 +169,15 @@ func _update_coin_history():
 	Signals.emit_signal("CoinHistoryDisplayUpdate")
 	
 func _on_re_do_coin_button_button_up() -> void:
-	if reflipCount >= 1:
-		flip_coin(true)
+	flip_coin(true)
+	#if reflipCount >= 1:
+		#flip_coin(true)
 		
 func flip_coin(is_reflip : bool):
-	if is_reflip == true && reflipCount > 0:
+	Globals.coinsToThrow -= 1
+	$LayoutBox/Center/LargeCoinZone/CoinCount.text = str("Coins:\nx",Globals.coinsToThrow)
+	#if is_reflip == true && reflipCount > 0:
+	if is_reflip == true:
 		Globals.CoinHistory.pop_back()
 		reflipCount -= 1
 		Globals.coinCount -= 1
@@ -186,15 +191,18 @@ func flip_coin(is_reflip : bool):
 		_coin_flip_animation(false)
 		Globals.CoinHistory.append(0)
 		Globals.coinCount += 1
-	if reflipCount == 0:
-		ReDoCoinButton.disabled = true
+	#if reflipCount == 0:
+		#ReDoCoinButton.disabled = true
 	if Globals.coinCount == 1:
 		ReDoCoinButton.disabled = false
 	#update the UI
 	ReflipAmmount.text = str(reflipCount,"x")
 	CoinAmmount.text = str(Globals.coinCount,"/",Globals.maxCoinCount)
 	print(Globals.CoinHistory)
-	if Globals.coinCount == Globals.maxCoinCount: NextCoinButton.text = "Score Coins"
+	#if Globals.coinCount == Globals.maxCoinCount: NextCoinButton.text = "Score Coins"
+	if Globals.coinsToThrow <= 0:
+		NextCoinButton.text = "Score Coins"
+		ReDoCoinButton.disabled = true
 	Signals.emit_signal("FlipCoin", Globals.coinCount)
 
 
@@ -251,10 +259,11 @@ func reset_game():
 	RoundNumber = 1
 	maxReflipCount = 3
 	Globals.maxCoinCount = 0
+	Globals.coinsToThrow = 0
 	for c in CoinHistoryNode.get_children():
 		c.queue_free()
 	await get_tree().create_timer(0.01).timeout #this is so dumb but if you don't stall it slightly both loops happen concurrently and it screws them up
-	for i in 3:
+	for i in 4:
 		_add_coin()
 	Globals.totalValue = 100
 	$GameOverPanel.hide()
@@ -270,6 +279,7 @@ func reset_table():
 	Globals.currentScore = 0
 	Globals.CoinHistory.clear()
 	Globals.coinCount = 0
+	Globals.coinsToThrow = Globals.maxCoinCount
 	reflipCount = maxReflipCount
 	CurrentRoundLabel.text = str("Round","\n",RoundNumber,"/6")
 	RequiredScoreLabel.text = str(RequiredScore[RoundNumber-1])

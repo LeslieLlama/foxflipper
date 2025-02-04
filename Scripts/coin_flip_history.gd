@@ -1,6 +1,7 @@
 extends GridContainer
 
 @export var emptyCoinSprite : Texture2D
+@export var canceledCoinSprite : Texture2D
 @export var headsCoinSprite : Texture2D
 @export var tailsCoinSprite : Texture2D
 
@@ -18,11 +19,16 @@ func _ready() -> void:
 
 
 func coin_history_display_update():
+	#print(str("maxcoincount = ",Globals.maxCoinCount,"\nCoinsToThrow =",(Globals.coinsToThrow + Globals.coinCount)))
+	
 	for c in Globals.CoinHistory:
 		if c == 1:
 			CoinHistorySprites[Globals.coinCount-1].texture = headsCoinSprite
 		else:
 			CoinHistorySprites[Globals.coinCount-1].texture = tailsCoinSprite
+		
+		if Globals.coinsToThrow + Globals.coinCount != Globals.maxCoinCount:
+			CoinHistorySprites[Globals.coinsToThrow + Globals.coinCount].texture = canceledCoinSprite
 	mini_coin_trigger_animation(Globals.coinCount-1)
 
 func mini_coin_trigger_animation(c : int):
@@ -89,6 +95,7 @@ func _reset_table():
 		
 func _add_coin():
 	Globals.maxCoinCount += 1
+	Globals.coinsToThrow += 1
 	#var child_node = ColorRect.new()
 	var child_node = TextureRect.new()
 	child_node.texture = emptyCoinSprite
