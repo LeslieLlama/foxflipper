@@ -9,6 +9,7 @@ signal FlipCoin(coin_count : int)
 
 signal PurchasePoints()
 signal PurchaseCoin()
+signal PurchaseWeight()
 
 signal CoinHistoryDisplayUpdate()
 

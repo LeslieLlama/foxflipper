@@ -29,7 +29,7 @@ func _flip_coin(coinCount : int):
 		
 func update_coin_betting_ui():
 	TotalPoints.text = str("Total Points: ",Globals.totalValue)
-	SplitPoints.text = str("[center]",Globals.headsValue,"/[color=#65A7C1]",Globals.tailsValue,"[/color][/center]")
+	SplitPoints.text = str("[center][color=#65A7C1]",Globals.tailsValue,"[/color]/",Globals.headsValue,"[/center]")
 		
 func _on_add_tails_button_up() -> void:
 	AddHeads.disabled = false

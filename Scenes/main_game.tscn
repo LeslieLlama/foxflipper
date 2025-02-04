@@ -1,8 +1,9 @@
-[gd_scene load_steps=17 format=3 uid="uid://bn0o5gyjoo4un"]
+[gd_scene load_steps=18 format=3 uid="uid://bn0o5gyjoo4un"]
 
 [ext_resource type="Script" path="res://Scripts/main_game.gd" id="1_k015l"]
 [ext_resource type="Texture2D" uid="uid://dl66pahmplk71" path="res://Sprites/FoxCoin_Dealer.png" id="2_uijv0"]
 [ext_resource type="Texture2D" uid="uid://ckhk7e4lj27yr" path="res://Sprites/FoxCoinConcepts_Heads.png" id="3_u33ss"]
+[ext_resource type="PackedScene" uid="uid://bbcrabknbbhrs" path="res://Scenes/coin_weight.tscn" id="4_cyt0w"]
 [ext_resource type="Texture2D" uid="uid://dyayargx7nk40" path="res://Sprites/FoxCoinConcepts_Tails.png" id="4_edq3u"]
 [ext_resource type="Theme" uid="uid://dsk5olnx1e77u" path="res://FancyTheme.tres" id="5_cxspc"]
 [ext_resource type="Texture2D" uid="uid://b2sm2i7ll25ar" path="res://Sprites/Speechbubble.png" id="6_vewqb"]
@@ -145,41 +146,8 @@ text = "Help/settings
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HelpPanel" type="Panel" parent="LayoutBox/Left/HistoryZone"]
+[node name="TiltPanel" parent="LayoutBox/Left/HistoryZone" instance=ExtResource("4_cyt0w")]
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme = ExtResource("5_cxspc")
-
-[node name="Title" type="Label" parent="LayoutBox/Left/HistoryZone/HelpPanel"]
-modulate = Color(0.815686, 0.396078, 0.34902, 1)
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -67.5
-offset_top = -47.0
-offset_right = 57.5
-offset_bottom = -1.0
-grow_horizontal = 2
-theme = ExtResource("5_cxspc")
-theme_override_font_sizes/font_size = 33
-text = "Help/settings"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Label" type="Label" parent="LayoutBox/Left/HistoryZone/HelpPanel"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(0.870588, 0.666667, 0.54902, 1)
-text = "Function 
-Coming Soon"
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="Center" type="VBoxContainer" parent="LayoutBox"]
 layout_mode = 2
@@ -658,14 +626,13 @@ theme_override_font_sizes/font_size = 40
 text = "+"
 metadata/_edit_use_anchors_ = true
 
-[node name="BuyReflips" type="Panel" parent="LayoutBox/Right/ShopStuffs/ShopPanel/VBoxContainer"]
-visible = false
+[node name="BuyWeight" type="Panel" parent="LayoutBox/Right/ShopStuffs/ShopPanel/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("5_cxspc")
 
-[node name="Label" type="Label" parent="LayoutBox/Right/ShopStuffs/ShopPanel/VBoxContainer/BuyReflips"]
+[node name="Label" type="Label" parent="LayoutBox/Right/ShopStuffs/ShopPanel/VBoxContainer/BuyWeight"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.0258621
@@ -675,11 +642,11 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("5_cxspc")
 theme_override_font_sizes/font_size = 30
-text = "+1 Re-Flip"
+text = "+5% Weight"
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="Button" type="Button" parent="LayoutBox/Right/ShopStuffs/ShopPanel/VBoxContainer/BuyReflips"]
+[node name="Button" type="Button" parent="LayoutBox/Right/ShopStuffs/ShopPanel/VBoxContainer/BuyWeight"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.715517
@@ -1098,11 +1065,11 @@ autowrap_mode = 3
 
 [connection signal="button_up" from="LayoutBox/Center/LargeCoinZone/NextCoinButton" to="." method="_on_next_coin_button_button_up"]
 [connection signal="button_up" from="LayoutBox/Center/LargeCoinZone/ReDoCoinButton" to="." method="_on_re_do_coin_button_button_up"]
-[connection signal="button_up" from="LayoutBox/Right/ShopStuffs/ShopPanel/VBoxContainer/BuyPointsPanel/Button" to="." method="_add_points"]
 [connection signal="button_up" from="LayoutBox/Right/ShopStuffs/ShopPanel/VBoxContainer/BuyPointsPanel/Button" to="." method="add_purchase"]
+[connection signal="button_up" from="LayoutBox/Right/ShopStuffs/ShopPanel/VBoxContainer/BuyPointsPanel/Button" to="." method="_add_points"]
 [connection signal="button_up" from="LayoutBox/Right/ShopStuffs/ShopPanel/VBoxContainer/BuyCoinsPanel/Button" to="." method="_add_coin"]
 [connection signal="button_up" from="LayoutBox/Right/ShopStuffs/ShopPanel/VBoxContainer/BuyCoinsPanel/Button" to="." method="add_purchase"]
-[connection signal="button_up" from="LayoutBox/Right/ShopStuffs/ShopPanel/VBoxContainer/BuyReflips/Button" to="." method="_add_reflips"]
-[connection signal="button_up" from="LayoutBox/Right/ShopStuffs/ShopPanel/VBoxContainer/BuyReflips/Button" to="." method="add_purchase"]
+[connection signal="button_up" from="LayoutBox/Right/ShopStuffs/ShopPanel/VBoxContainer/BuyWeight/Button" to="." method="_add_weight"]
+[connection signal="button_up" from="LayoutBox/Right/ShopStuffs/ShopPanel/VBoxContainer/BuyWeight/Button" to="." method="add_purchase"]
 [connection signal="toggled" from="ExplanationPanel/Button" to="." method="_on_HelpButton_toggled"]
 [connection signal="button_up" from="GameOverPanel/RetryButton" to="." method="_on_retry_button_button_up"]

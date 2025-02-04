@@ -10,3 +10,6 @@ var CoinHistory = []
 var totalValue = 100
 var headsValue = 50
 var tailsValue = 50
+
+var headsThreshhold : float = 0.5
+var totalWeight = 0.05

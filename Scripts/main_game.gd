@@ -16,6 +16,7 @@ var CurrentGameState = GameState.MENU
 
 var coinTween
 
+
 var colorRed = Color("D0665A")
 var colorBlue = Color("65A7C1")
 
@@ -182,14 +183,15 @@ func flip_coin(is_reflip : bool):
 		reflipCount -= 1
 		Globals.coinCount -= 1
 	
-	var flip_value = rng.randi_range(0, 1)
-	if flip_value == 1:
-		_coin_flip_animation(true)
-		Globals.CoinHistory.append(1)
-		Globals.coinCount += 1
-	else: 
+	var flip_value = rng.randf_range(0, 1)
+	print(str("flip value : ",flip_value))
+	if flip_value <= Globals.headsThreshhold:
 		_coin_flip_animation(false)
 		Globals.CoinHistory.append(0)
+		Globals.coinCount += 1
+	else: 
+		_coin_flip_animation(true)
+		Globals.CoinHistory.append(1)
 		Globals.coinCount += 1
 	#if reflipCount == 0:
 		#ReDoCoinButton.disabled = true
@@ -258,6 +260,7 @@ func reset_game():
 	Signals.emit_signal("ResetGame")
 	RoundNumber = 1
 	maxReflipCount = 3
+	Globals.headsThreshhold = 0.5
 	Globals.maxCoinCount = 0
 	Globals.coinsToThrow = 0
 	for c in CoinHistoryNode.get_children():
@@ -301,6 +304,9 @@ func _add_reflips():
 	maxReflipCount += 1
 	ReflipAmmount.text = str("x",maxReflipCount)
 	
+func _add_weight():
+	Signals.emit_signal("PurchaseWeight")
+	
 func _add_points():
 	Signals.emit_signal("PurchasePoints")
 
@@ -312,5 +318,5 @@ func add_purchase():
 func disable_buy_buttons(disable_value : bool):
 	$LayoutBox/Right/ShopStuffs/ShopPanel/VBoxContainer/BuyPointsPanel/Button.disabled = disable_value
 	$LayoutBox/Right/ShopStuffs/ShopPanel/VBoxContainer/BuyCoinsPanel/Button.disabled = disable_value
-	$LayoutBox/Right/ShopStuffs/ShopPanel/VBoxContainer/BuyReflips/Button.disabled = disable_value
+	$LayoutBox/Right/ShopStuffs/ShopPanel/VBoxContainer/BuyWeight/Button.disabled = disable_value
 	

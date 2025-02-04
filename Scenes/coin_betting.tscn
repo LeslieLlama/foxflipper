@@ -68,18 +68,15 @@ metadata/_edit_use_anchors_ = true
 [node name="AddTails" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.509
-anchor_top = 0.645
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 1.061
-offset_top = 0.0199966
-offset_right = -9.0
-offset_bottom = -9.0
+anchor_left = 0.0295203
+anchor_top = 0.645076
+anchor_right = 0.483395
+anchor_bottom = 0.965909
 grow_horizontal = 0
 grow_vertical = 0
 theme = ExtResource("1_yei7e")
 text = "+Tails"
+metadata/_edit_use_anchors_ = true
 
 [node name="HeadsCoinSprite2" type="TextureRect" parent="AddTails"]
 visible = false
@@ -101,16 +98,14 @@ expand_mode = 1
 [node name="AddHeads" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_top = 0.644
-anchor_right = 0.498
-anchor_bottom = 1.0
-offset_left = 9.0
-offset_top = -0.0160217
-offset_right = 0.0419922
-offset_bottom = -10.0
+anchor_left = 0.501845
+anchor_top = 0.643939
+anchor_right = 0.96679
+anchor_bottom = 0.962121
 grow_vertical = 0
 theme = ExtResource("1_yei7e")
 text = "+Heads"
+metadata/_edit_use_anchors_ = true
 
 [node name="HeadsCoinSprite" type="TextureRect" parent="AddHeads"]
 visible = false

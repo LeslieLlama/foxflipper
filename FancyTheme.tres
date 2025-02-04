@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=6 format=3 uid="uid://dsk5olnx1e77u"]
+[gd_resource type="Theme" load_steps=9 format=3 uid="uid://dsk5olnx1e77u"]
 
 [ext_resource type="FontFile" uid="uid://c3obv6undlrdy" path="res://Fonts/CaviarDreams_Bold.ttf" id="1_660fd"]
 
@@ -23,6 +23,27 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kwj43"]
+content_margin_left = 1.0
+content_margin_top = 1.0
+content_margin_right = 1.0
+content_margin_bottom = 1.0
+bg_color = Color(0.396078, 0.654902, 0.756863, 1)
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_578pu"]
+content_margin_left = 0.0
+content_margin_top = 20.0
+content_margin_right = 0.0
+content_margin_bottom = 20.0
+color = Color(0.472608, 0.725099, 0.826189, 1)
+thickness = 40
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_6rkq7"]
+content_margin_top = 20.0
+content_margin_bottom = 20.0
+color = Color(0.815686, 0.4, 0.352941, 1)
+thickness = 40
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ja3rh"]
 bg_color = Color(0.862745, 0.862745, 0.8, 1)
 border_width_left = 5
@@ -42,5 +63,8 @@ Button/colors/font_color = Color(0.862745, 0.862745, 0.8, 1)
 Button/styles/hover = SubResource("StyleBoxFlat_njusy")
 Button/styles/normal = SubResource("StyleBoxFlat_b7wyi")
 Button/styles/pressed = SubResource("StyleBoxFlat_cuhia")
+HSlider/styles/grabber_area = SubResource("StyleBoxFlat_kwj43")
+HSlider/styles/grabber_area_highlight = SubResource("StyleBoxLine_578pu")
+HSlider/styles/slider = SubResource("StyleBoxLine_6rkq7")
 Label/colors/font_color = Color(0.815686, 0.396078, 0.34902, 1)
 Panel/styles/panel = SubResource("StyleBoxFlat_ja3rh")
