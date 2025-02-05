@@ -250,6 +250,7 @@ func game_won():
 	$GameWonPanel.show()
 	_create_speech_bubble("You Win!!")
 	CurrentGameState = GameState.GAME_OVER
+	Signals.emit_signal("GameWon")
 	$GameWonPanel/Title.text = str("Thank You for Playing\nHighest Score : ",highest_score)
 	NextCoinButton.text = "Menu"
 	

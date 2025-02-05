@@ -19,5 +19,6 @@ signal ComboScored()
 signal AllCoinsScored()
 
 signal NextRound()
+signal GameWon()
 
 signal PopupMessage(textToSay : String, pos : Vector2, textColour : Color)

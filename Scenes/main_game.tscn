@@ -1,8 +1,9 @@
-[gd_scene load_steps=18 format=3 uid="uid://bn0o5gyjoo4un"]
+[gd_scene load_steps=19 format=3 uid="uid://bn0o5gyjoo4un"]
 
 [ext_resource type="Script" path="res://Scripts/main_game.gd" id="1_k015l"]
 [ext_resource type="Texture2D" uid="uid://dl66pahmplk71" path="res://Sprites/FoxCoin_Dealer.png" id="2_uijv0"]
 [ext_resource type="Texture2D" uid="uid://ckhk7e4lj27yr" path="res://Sprites/FoxCoinConcepts_Heads.png" id="3_u33ss"]
+[ext_resource type="PackedScene" uid="uid://cpai247vjxym3" path="res://Scenes/confetti.tscn" id="3_uvxce"]
 [ext_resource type="PackedScene" uid="uid://bbcrabknbbhrs" path="res://Scenes/coin_weight.tscn" id="4_cyt0w"]
 [ext_resource type="Texture2D" uid="uid://dyayargx7nk40" path="res://Sprites/FoxCoinConcepts_Tails.png" id="4_edq3u"]
 [ext_resource type="Theme" uid="uid://dsk5olnx1e77u" path="res://FancyTheme.tres" id="5_cxspc"]
@@ -178,6 +179,44 @@ theme = ExtResource("5_cxspc")
 texture = ExtResource("2_uijv0")
 expand_mode = 3
 stretch_mode = 3
+
+[node name="ConfettiPosition1" type="Control" parent="LayoutBox/Center/DealerZone/Dealer"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -263.25
+offset_top = 230.0
+offset_right = -245.25
+offset_bottom = 251.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Confetti" parent="LayoutBox/Center/DealerZone/Dealer/ConfettiPosition1" instance=ExtResource("3_uvxce")]
+position = Vector2(0, 6.10352e-05)
+scale = Vector2(7.5, 7.5)
+
+[node name="ConfettiPosition2" type="Control" parent="LayoutBox/Center/DealerZone/Dealer"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 238.0
+offset_top = 230.0
+offset_right = 256.0
+offset_bottom = 251.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Confetti" parent="LayoutBox/Center/DealerZone/Dealer/ConfettiPosition2" instance=ExtResource("3_uvxce")]
+position = Vector2(0, 6.10352e-05)
+scale = Vector2(7.5, 7.5)
 
 [node name="RoundScoreLabel" type="Label" parent="LayoutBox/Center/DealerZone/Dealer"]
 layout_mode = 1
@@ -1065,8 +1104,8 @@ autowrap_mode = 3
 
 [connection signal="button_up" from="LayoutBox/Center/LargeCoinZone/NextCoinButton" to="." method="_on_next_coin_button_button_up"]
 [connection signal="button_up" from="LayoutBox/Center/LargeCoinZone/ReDoCoinButton" to="." method="_on_re_do_coin_button_button_up"]
-[connection signal="button_up" from="LayoutBox/Right/ShopStuffs/ShopPanel/VBoxContainer/BuyPointsPanel/Button" to="." method="add_purchase"]
 [connection signal="button_up" from="LayoutBox/Right/ShopStuffs/ShopPanel/VBoxContainer/BuyPointsPanel/Button" to="." method="_add_points"]
+[connection signal="button_up" from="LayoutBox/Right/ShopStuffs/ShopPanel/VBoxContainer/BuyPointsPanel/Button" to="." method="add_purchase"]
 [connection signal="button_up" from="LayoutBox/Right/ShopStuffs/ShopPanel/VBoxContainer/BuyCoinsPanel/Button" to="." method="_add_coin"]
 [connection signal="button_up" from="LayoutBox/Right/ShopStuffs/ShopPanel/VBoxContainer/BuyCoinsPanel/Button" to="." method="add_purchase"]
 [connection signal="button_up" from="LayoutBox/Right/ShopStuffs/ShopPanel/VBoxContainer/BuyWeight/Button" to="." method="_add_weight"]
