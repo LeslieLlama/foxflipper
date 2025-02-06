@@ -1,17 +1,22 @@
-[gd_scene load_steps=19 format=3 uid="uid://bn0o5gyjoo4un"]
+[gd_scene load_steps=23 format=3 uid="uid://bn0o5gyjoo4un"]
 
 [ext_resource type="Script" path="res://Scripts/main_game.gd" id="1_k015l"]
 [ext_resource type="Texture2D" uid="uid://dl66pahmplk71" path="res://Sprites/FoxCoin_Dealer.png" id="2_uijv0"]
+[ext_resource type="Script" path="res://Scenes/item_zone.gd" id="3_k5nkx"]
 [ext_resource type="Texture2D" uid="uid://ckhk7e4lj27yr" path="res://Sprites/FoxCoinConcepts_Heads.png" id="3_u33ss"]
 [ext_resource type="PackedScene" uid="uid://cpai247vjxym3" path="res://Scenes/confetti.tscn" id="3_uvxce"]
+[ext_resource type="Texture2D" uid="uid://cfsfmhokr0lvf" path="res://Sprites/FoxCoins_headsSmall.png" id="4_aefad"]
 [ext_resource type="PackedScene" uid="uid://bbcrabknbbhrs" path="res://Scenes/coin_weight.tscn" id="4_cyt0w"]
 [ext_resource type="Texture2D" uid="uid://dyayargx7nk40" path="res://Sprites/FoxCoinConcepts_Tails.png" id="4_edq3u"]
 [ext_resource type="Theme" uid="uid://dsk5olnx1e77u" path="res://FancyTheme.tres" id="5_cxspc"]
+[ext_resource type="Texture2D" uid="uid://rbhka5f6qjh5" path="res://Sprites/FoxCoins_tailsSmall.png" id="5_f1ywo"]
 [ext_resource type="Texture2D" uid="uid://b2sm2i7ll25ar" path="res://Sprites/Speechbubble.png" id="6_vewqb"]
 [ext_resource type="PackedScene" uid="uid://t6mev4v78cwu" path="res://Scenes/coin_flip_history.tscn" id="6_yecaa"]
 [ext_resource type="Texture2D" uid="uid://c1dqycrxriler" path="res://icon.svg" id="7_v46qd"]
 [ext_resource type="PackedScene" uid="uid://cvxdjuqp6ax2d" path="res://Scenes/audio.tscn" id="9_2ujpw"]
 [ext_resource type="PackedScene" uid="uid://g7r0abvn0dli" path="res://Scenes/coin_betting.tscn" id="9_rbtme"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ibjkx"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dbx8f"]
 bg_color = Color(0.470588, 0.741176, 0.847059, 1)
@@ -86,59 +91,18 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("5_cxspc")
 
 [node name="Left" type="VBoxContainer" parent="LayoutBox"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="ItemZone" type="Control" parent="LayoutBox/Left"]
+[node name="SpacerPanel" type="Panel" parent="LayoutBox/Left"]
 layout_mode = 2
-size_flags_horizontal = 3
 size_flags_vertical = 3
-theme = ExtResource("5_cxspc")
-
-[node name="VBoxContainer" type="BoxContainer" parent="LayoutBox/Left/ItemZone"]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("5_cxspc")
-vertical = true
-
-[node name="Panel" type="Panel" parent="LayoutBox/Left/ItemZone/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme = ExtResource("5_cxspc")
-
-[node name="Label" type="Label" parent="LayoutBox/Left/ItemZone/VBoxContainer/Panel"]
-layout_mode = 0
-anchor_left = 0.0214592
-anchor_top = 0.00929368
-anchor_right = 0.978541
-anchor_bottom = 0.213755
-text = "Item 1"
-metadata/_edit_use_anchors_ = true
-
-[node name="Panel2" type="Panel" parent="LayoutBox/Left/ItemZone/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme = ExtResource("5_cxspc")
-
-[node name="Label" type="Label" parent="LayoutBox/Left/ItemZone/VBoxContainer/Panel2"]
-layout_mode = 0
-anchor_left = 0.0214592
-anchor_top = 0.00929368
-anchor_right = 0.978541
-anchor_bottom = 0.213755
-text = "Item 2
-"
-metadata/_edit_use_anchors_ = true
+size_flags_stretch_ratio = 0.7
+theme_override_styles/panel = SubResource("StyleBoxEmpty_ibjkx")
 
 [node name="HistoryZone" type="BoxContainer" parent="LayoutBox/Left"]
 layout_mode = 2
@@ -146,21 +110,116 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 vertical = true
 
+[node name="ItemZone" type="Control" parent="LayoutBox/Left/HistoryZone" node_paths=PackedStringArray("Item1Description", "Item2Description")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.65
+theme = ExtResource("5_cxspc")
+script = ExtResource("3_k5nkx")
+Item1Description = NodePath("Item1/ItemDescription")
+Item2Description = NodePath("Item2/ItemDescription")
+
+[node name="Item1" type="TextureRect" parent="LayoutBox/Left/HistoryZone/ItemZone"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -96.5
+offset_top = -50.5
+offset_right = -11.5
+offset_bottom = 34.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("5_cxspc")
+texture = ExtResource("4_aefad")
+expand_mode = 1
+
+[node name="ItemDescription" type="PanelContainer" parent="LayoutBox/Left/HistoryZone/ItemZone/Item1"]
+visible = false
+z_index = 1
+layout_mode = 1
+offset_left = 1.0
+offset_top = 88.0
+offset_right = 407.0
+offset_bottom = 283.0
+theme = ExtResource("5_cxspc")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="LayoutBox/Left/HistoryZone/ItemZone/Item1/ItemDescription"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="LayoutBox/Left/HistoryZone/ItemZone/Item1/ItemDescription/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(0.396078, 0.654902, 0.756863, 1)
+theme_override_font_sizes/font_size = 42
+text = "Item Name"
+metadata/_edit_use_anchors_ = true
+
+[node name="Label2" type="Label" parent="LayoutBox/Left/HistoryZone/ItemZone/Item1/ItemDescription/VBoxContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(0.396078, 0.654902, 0.756863, 1)
+theme_override_font_sizes/font_size = 30
+text = "Item Description hfjdsklahjfk;ldjskal;fjdksla;fjdksl;ajfkds;lajfkdlsa;"
+autowrap_mode = 3
+metadata/_edit_use_anchors_ = true
+
+[node name="Item2" type="TextureRect" parent="LayoutBox/Left/HistoryZone/ItemZone"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 16.5
+offset_top = -50.5
+offset_right = 101.5
+offset_bottom = 34.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("5_cxspc")
+texture = ExtResource("5_f1ywo")
+expand_mode = 1
+
+[node name="ItemDescription" type="PanelContainer" parent="LayoutBox/Left/HistoryZone/ItemZone/Item2"]
+visible = false
+z_index = 1
+layout_mode = 1
+offset_left = 2.0
+offset_top = 86.0
+offset_right = 408.0
+offset_bottom = 225.0
+theme = ExtResource("5_cxspc")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="LayoutBox/Left/HistoryZone/ItemZone/Item2/ItemDescription"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="LayoutBox/Left/HistoryZone/ItemZone/Item2/ItemDescription/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(0.396078, 0.654902, 0.756863, 1)
+theme_override_font_sizes/font_size = 42
+text = "Item Name"
+metadata/_edit_use_anchors_ = true
+
+[node name="Label2" type="Label" parent="LayoutBox/Left/HistoryZone/ItemZone/Item2/ItemDescription/VBoxContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(0.396078, 0.654902, 0.756863, 1)
+theme_override_font_sizes/font_size = 30
+text = "Item Description hfjdsklahjfk;ldjskal;fjdksla;fjdksl;ajfkds;lajfkdlsa;"
+autowrap_mode = 3
+metadata/_edit_use_anchors_ = true
+
 [node name="CoinBetting" parent="LayoutBox/Left/HistoryZone" instance=ExtResource("9_rbtme")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-
-[node name="Title" type="Label" parent="LayoutBox/Left/HistoryZone"]
-modulate = Color(0.815686, 0.396078, 0.34902, 1)
-layout_mode = 2
-theme = ExtResource("5_cxspc")
-theme_override_colors/font_color = Color(0, 0, 0, 0)
-theme_override_font_sizes/font_size = 33
-text = "Help/settings
-"
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="TiltPanel" parent="LayoutBox/Left/HistoryZone" instance=ExtResource("4_cyt0w")]
 layout_mode = 2
@@ -1117,10 +1176,14 @@ autowrap_mode = 3
 
 [node name="Audio" parent="." instance=ExtResource("9_2ujpw")]
 
+[connection signal="mouse_entered" from="LayoutBox/Left/HistoryZone/ItemZone/Item1" to="LayoutBox/Left/HistoryZone/ItemZone" method="_on_item_1_mouse_entered"]
+[connection signal="mouse_exited" from="LayoutBox/Left/HistoryZone/ItemZone/Item1" to="LayoutBox/Left/HistoryZone/ItemZone" method="_on_item_1_mouse_exited"]
+[connection signal="mouse_entered" from="LayoutBox/Left/HistoryZone/ItemZone/Item2" to="LayoutBox/Left/HistoryZone/ItemZone" method="_on_item_2_mouse_entered"]
+[connection signal="mouse_exited" from="LayoutBox/Left/HistoryZone/ItemZone/Item2" to="LayoutBox/Left/HistoryZone/ItemZone" method="_on_item_2_mouse_exited"]
 [connection signal="button_up" from="LayoutBox/Center/LargeCoinZone/NextCoinButton" to="." method="_on_next_coin_button_button_up"]
 [connection signal="button_up" from="LayoutBox/Center/LargeCoinZone/ReDoCoinButton" to="." method="_on_re_do_coin_button_button_up"]
-[connection signal="button_up" from="LayoutBox/Right/ShopStuffs/ShopPanel/VBoxContainer/BuyPointsPanel/Button" to="." method="_add_points"]
 [connection signal="button_up" from="LayoutBox/Right/ShopStuffs/ShopPanel/VBoxContainer/BuyPointsPanel/Button" to="." method="add_purchase"]
+[connection signal="button_up" from="LayoutBox/Right/ShopStuffs/ShopPanel/VBoxContainer/BuyPointsPanel/Button" to="." method="_add_points"]
 [connection signal="button_up" from="LayoutBox/Right/ShopStuffs/ShopPanel/VBoxContainer/BuyCoinsPanel/Button" to="." method="_add_coin"]
 [connection signal="button_up" from="LayoutBox/Right/ShopStuffs/ShopPanel/VBoxContainer/BuyCoinsPanel/Button" to="." method="add_purchase"]
 [connection signal="button_up" from="LayoutBox/Right/ShopStuffs/ShopPanel/VBoxContainer/BuyWeight/Button" to="." method="_add_weight"]

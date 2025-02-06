@@ -70,14 +70,19 @@ func _reset_node_positions():
 
 func resize():
 	var size = get_viewport_rect().size
-	if size.x > (size.y-400):
+	if size.x > (size.y-400): #horizontal 
 		$LayoutBox.vertical = false
 		$LayoutBox/Left/HistoryZone.vertical = true
-		#$LayoutBox/Right/ShopStuffs/ShopPanel/VBoxContainer.vertical = true
-	else: 
-		$LayoutBox.vertical = true
+		$LayoutBox/Left/SpacerPanel.show()
+		$LayoutBox/Left.size_flags_stretch_ratio = 1
+		$LayoutBox/Left/HistoryZone.move_child($LayoutBox/Left/HistoryZone/ItemZone, 0)
+	else: #Vertical
+		$LayoutBox.vertical = true 
 		$LayoutBox/Left/HistoryZone.vertical = false
-		#$LayoutBox/Right/ShopStuffs/ShopPanel/VBoxContainer.vertical = false
+		$LayoutBox/Left/SpacerPanel.hide()
+		$LayoutBox/Left.size_flags_stretch_ratio = 0.6
+		$LayoutBox/Left/HistoryZone.move_child($LayoutBox/Left/HistoryZone/ItemZone, 1)
+
 	if CurrentGameState != GameState.SHOP:
 		ShopPanel.position = Vector2(ShopAnchor.position.x+ShopPanel.size.x,0)
 

@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=12 format=3 uid="uid://dsk5olnx1e77u"]
+[gd_resource type="Theme" load_steps=13 format=3 uid="uid://dsk5olnx1e77u"]
 
 [ext_resource type="FontFile" uid="uid://c3obv6undlrdy" path="res://Fonts/CaviarDreams_Bold.ttf" id="1_660fd"]
 [ext_resource type="Texture2D" uid="uid://b488lm0xnf3hk" path="res://Sprites/Scrollbar.png" id="1_xl40i"]
@@ -59,6 +59,18 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mkaf8"]
+bg_color = Color(0.862745, 0.862745, 0.8, 1)
+border_width_left = 7
+border_width_top = 7
+border_width_right = 7
+border_width_bottom = 7
+border_color = Color(0.396078, 0.654902, 0.756863, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
 [resource]
 default_font = ExtResource("1_660fd")
 default_font_size = 22
@@ -74,3 +86,4 @@ HSlider/styles/grabber_area_highlight = SubResource("StyleBoxLine_578pu")
 HSlider/styles/slider = SubResource("StyleBoxLine_6rkq7")
 Label/colors/font_color = Color(0.815686, 0.396078, 0.34902, 1)
 Panel/styles/panel = SubResource("StyleBoxFlat_ja3rh")
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_mkaf8")

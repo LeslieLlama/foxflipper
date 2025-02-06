@@ -8,7 +8,7 @@
 
 [node name="CoinBetting" type="Panel" node_paths=PackedStringArray("AddTails", "AddHeads", "TotalPoints", "SplitPoints")]
 offset_right = 271.0
-offset_bottom = 264.0
+offset_bottom = 181.0
 theme = ExtResource("1_yei7e")
 script = ExtResource("2_2hpvi")
 AddTails = NodePath("AddTails")
