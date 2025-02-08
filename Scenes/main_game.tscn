@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/main_game.gd" id="1_k015l"]
 [ext_resource type="Texture2D" uid="uid://dl66pahmplk71" path="res://Sprites/FoxCoin_Dealer.png" id="2_uijv0"]
-[ext_resource type="Script" path="res://Scenes/item_zone.gd" id="3_k5nkx"]
+[ext_resource type="Script" path="res://Scripts/item_zone.gd" id="3_k5nkx"]
 [ext_resource type="Texture2D" uid="uid://ckhk7e4lj27yr" path="res://Sprites/FoxCoinConcepts_Heads.png" id="3_u33ss"]
 [ext_resource type="PackedScene" uid="uid://cpai247vjxym3" path="res://Scenes/confetti.tscn" id="3_uvxce"]
 [ext_resource type="Texture2D" uid="uid://cfsfmhokr0lvf" path="res://Sprites/FoxCoins_headsSmall.png" id="4_aefad"]
@@ -212,7 +212,7 @@ layout_mode = 2
 size_flags_vertical = 8
 theme_override_colors/font_color = Color(0.396078, 0.654902, 0.756863, 1)
 theme_override_font_sizes/font_size = 30
-text = "Item Description hfjdsklahjfk;ldjskal;fjdksla;fjdksl;ajfkds;lajfkdlsa;"
+text = "Item Description hfjdsklahjfk;ldjskal;fjdksla;fjdksl;ajfkds;lajfkdlsa;fgdsagfdsagdsagfdsagfdsagfdagfda"
 autowrap_mode = 3
 metadata/_edit_use_anchors_ = true
 

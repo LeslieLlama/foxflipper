@@ -160,14 +160,16 @@ func _coin_flip_animation(heads : bool):
 		coinTween.tween_property(CoinHeadsSide, "scale", Vector2(0.8,0), 0.1).set_trans(Tween.TRANS_QUINT)
 		coinTween.tween_property(CoinTailsSide, "scale", Vector2(0.8,0.8), 0.1).set_trans(Tween.TRANS_QUINT)
 		coinTween.tween_property(CoinTailsSide, "scale", Vector2(0.8,0), 0.2).set_trans(Tween.TRANS_QUINT)
+		coinTween.tween_property(CoinHeadsSide, "scale", Vector2(0.9,0.9), 0.1).set_trans(Tween.TRANS_QUINT)
 		coinTween.tween_property(CoinHeadsSide, "scale", Vector2(0.8,0.8), 0.2).set_trans(Tween.TRANS_QUINT)
 		coinTween.tween_callback(_update_coin_history)
 	else: 
-		coinTween.tween_property(CoinTailsSide, "scale", Vector2(0.8,0), 0.1).set_trans(Tween.TRANS_QUINT)
-		coinTween.tween_property(CoinHeadsSide, "scale", Vector2(0.8,0.8), 0.1).set_trans(Tween.TRANS_QUINT)
 		coinTween.tween_property(CoinHeadsSide, "scale", Vector2(0.8,0), 0.1).set_trans(Tween.TRANS_QUINT)
 		coinTween.tween_property(CoinTailsSide, "scale", Vector2(0.8,0.8), 0.1).set_trans(Tween.TRANS_QUINT)
+		coinTween.tween_property(CoinTailsSide, "scale", Vector2(0.8,0), 0.1).set_trans(Tween.TRANS_QUINT)
+		coinTween.tween_property(CoinHeadsSide, "scale", Vector2(0.8,0.8), 0.1).set_trans(Tween.TRANS_QUINT)
 		coinTween.tween_property(CoinHeadsSide, "scale", Vector2(0.8,0), 0.2).set_trans(Tween.TRANS_QUINT)
+		coinTween.tween_property(CoinTailsSide, "scale", Vector2(0.9,0.9), 0.1).set_trans(Tween.TRANS_QUINT)
 		coinTween.tween_property(CoinTailsSide, "scale", Vector2(0.8,0.8), 0.2).set_trans(Tween.TRANS_QUINT)
 		coinTween.tween_callback(_update_coin_history)
 		

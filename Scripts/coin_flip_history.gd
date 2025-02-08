@@ -20,7 +20,6 @@ func _ready() -> void:
 
 func coin_history_display_update():
 	#print(str("maxcoincount = ",Globals.maxCoinCount,"\nCoinsToThrow =",(Globals.coinsToThrow + Globals.coinCount)))
-	
 	for c in Globals.CoinHistory:
 		if c == 1:
 			CoinHistorySprites[Globals.coinCount-1].texture = headsCoinSprite

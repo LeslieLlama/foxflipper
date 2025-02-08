@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://cpai247vjxym3"]
 
-[ext_resource type="Script" path="res://Scenes/confetti.gd" id="1_2cxod"]
+[ext_resource type="Script" path="res://Scripts/confetti.gd" id="1_2cxod"]
 
 [sub_resource type="Curve" id="Curve_6scsg"]
 _data = [Vector2(0, 0.405582), 0.0, 0.0, 0, 0, Vector2(1, 0.691211), 0.0, 0.0, 0, 0]
@@ -17,6 +17,7 @@ script = ExtResource("1_2cxod")
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
 emitting = false
 amount = 30
+lifetime = 3.0
 one_shot = true
 explosiveness = 0.6
 randomness = 0.2

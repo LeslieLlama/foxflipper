@@ -13,3 +13,5 @@ var tailsValue = 50
 
 var headsThreshhold : float = 0.5
 var totalWeight = 0.05
+
+var LuckyCharms = []

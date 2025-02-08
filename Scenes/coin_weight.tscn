@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bbcrabknbbhrs"]
 
 [ext_resource type="Theme" uid="uid://dsk5olnx1e77u" path="res://FancyTheme.tres" id="1_bgwn0"]
-[ext_resource type="Script" path="res://Scenes/coin_weight.gd" id="2_igi78"]
+[ext_resource type="Script" path="res://Scripts/coin_weight.gd" id="2_igi78"]
 
 [node name="CoinWeight" type="Panel" node_paths=PackedStringArray("WeightSlider", "AvailableWeightLabel")]
 anchors_preset = -1
