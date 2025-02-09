@@ -5,10 +5,12 @@ extends GridContainer
 @export var headsCoinSprite : Texture2D
 @export var tailsCoinSprite : Texture2D
 
+@export var item1 : LuckyCharm
+@export var item2 : LuckyCharm
+
 var colorRed = Color("D0665A")
 var colorBlue = Color("65A7C1")
 
-var CoinHistorySprites = []
 var CoinValues = []
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -16,33 +18,39 @@ func _ready() -> void:
 	Signals.PurchaseCoin.connect(_add_coin)
 	Signals.ResetGame.connect(_reset_game)
 	Signals.ResetTable.connect(_reset_table)
-	Signals.ScoreCoins.connect(add_wager_to_coins)
-
-
+	Signals.ScoreCoins.connect(scoring_sequence)
+	
 func coin_history_display_update():
-	#print(str("maxcoincount = ",Globals.maxCoinCount,"\nCoinsToThrow =",(Globals.coinsToThrow + Globals.coinCount)))
 	for c in Globals.CoinHistory:
 		if c == 1:
-			CoinHistorySprites[Globals.coinCount-1].texture = headsCoinSprite
+			Globals.CoinHistorySprites[Globals.coinCount-1].texture = headsCoinSprite
 		else:
-			CoinHistorySprites[Globals.coinCount-1].texture = tailsCoinSprite
+			Globals.CoinHistorySprites[Globals.coinCount-1].texture = tailsCoinSprite
 		
 		if Globals.coinsToThrow + Globals.coinCount != Globals.maxCoinCount:
-			CoinHistorySprites[Globals.coinsToThrow + Globals.coinCount].texture = canceledCoinSprite
+			Globals.CoinHistorySprites[Globals.coinsToThrow + Globals.coinCount].texture = canceledCoinSprite
 	mini_coin_trigger_animation(Globals.coinCount-1)
 
 func mini_coin_trigger_animation(c : int):
 	var tween = get_tree().create_tween().bind_node(self)
-	tween.tween_property(CoinHistorySprites[c], "scale", Vector2(1.1,1.1), 0.1).set_trans(Tween.TRANS_BOUNCE)
-	tween.tween_property(CoinHistorySprites[c], "scale", Vector2(1,1), 0.1).set_trans(Tween.TRANS_BOUNCE)
+	tween.tween_property(Globals.CoinHistorySprites[c], "scale", Vector2(1.1,1.1), 0.1).set_trans(Tween.TRANS_BOUNCE)
+	tween.tween_property(Globals.CoinHistorySprites[c], "scale", Vector2(1,1), 0.1).set_trans(Tween.TRANS_BOUNCE)
 	
+	
+func scoring_sequence():
+	CoinValues = await add_wager_to_coins()
+	if item1 != null:
+		CoinValues = await item1.AddToScore(CoinValues)
+	if item2 != null:
+		CoinValues = await item2.AddToScore(CoinValues)
+	coin_pattern_searcher()
 	
 func add_wager_to_coins():
 	CoinValues.clear()
 	for c in Globals.CoinHistory.size():
 		await get_tree().create_timer(0.1).timeout
 		var negative_c = (Globals.CoinHistory.size()-1) - c
-		var pos : Vector2 = Vector2(CoinHistorySprites[(negative_c)].global_position.x,CoinHistorySprites[(negative_c)].global_position.y+40)
+		var pos : Vector2 = Vector2(Globals.CoinHistorySprites[(negative_c)].global_position.x,Globals.CoinHistorySprites[(negative_c)].global_position.y+40)
 		var new_pos : Vector2 = Vector2(pos.x, pos.y+50)
 		if Globals.CoinHistory[negative_c] == 0: #tails
 			CoinValues.append(Globals.tailsValue)
@@ -53,7 +61,8 @@ func add_wager_to_coins():
 		mini_coin_trigger_animation(negative_c)
 		Signals.emit_signal("AddPointsToCoin")
 	await get_tree().create_timer(0.3).timeout
-	coin_pattern_searcher()
+	return CoinValues
+
 
 func coin_pattern_searcher():
 	var runCount = 0
@@ -93,7 +102,7 @@ func pattern_payoff(runCount : int, runArray, c : int, colorToUse : Color):
 		pass
 	if runCount < 3:
 		for i in runCount:
-			var pos : Vector2 = Vector2(CoinHistorySprites[(c-1-i)].global_position.x,CoinHistorySprites[(c-1-i)].global_position.y-10)
+			var pos : Vector2 = Vector2(Globals.CoinHistorySprites[(c-1-i)].global_position.x,Globals.CoinHistorySprites[(c-1-i)].global_position.y-10)
 			var new_pos : Vector2 = Vector2(pos.x, pos.y-30)
 			Globals.currentScore += CoinValues[c-1-i]
 			mini_coin_trigger_animation((c-1)-i)
@@ -110,15 +119,15 @@ func pattern_payoff(runCount : int, runArray, c : int, colorToUse : Color):
 		Globals.currentScore += scoreToAdd
 		var middleOfArray = c - (runArray.size()-(runArray.size()/2))
 		Signals.emit_signal("ComboScored")
-		var pos : Vector2 = Vector2(CoinHistorySprites[middleOfArray].global_position.x,CoinHistorySprites[middleOfArray].global_position.y-10)
+		var pos : Vector2 = Vector2(Globals.CoinHistorySprites[middleOfArray].global_position.x,Globals.CoinHistorySprites[middleOfArray].global_position.y-10)
 		var new_pos : Vector2 = Vector2(pos.x, pos.y-30)
 		Signals.emit_signal("PopupMessage",(str("Run! +",scoreToAdd,"!")), pos,new_pos, colorToUse)
 	
 func _reset_game():
-	CoinHistorySprites.clear()
+	Globals.CoinHistorySprites.clear()
 	
 func _reset_table():
-	for c in CoinHistorySprites:
+	for c in Globals.CoinHistorySprites:
 		c.texture = emptyCoinSprite
 		
 func _add_coin():
@@ -131,6 +140,6 @@ func _add_coin():
 	child_node.expand_mode = TextureRect.EXPAND_FIT_WIDTH
 	child_node.stretch_mode = TextureRect.STRETCH_SCALE
 	self.add_child(child_node)
-	CoinHistorySprites = self.get_children()
+	Globals.CoinHistorySprites = self.get_children()
 	mini_coin_trigger_animation(Globals.maxCoinCount-1)
 	

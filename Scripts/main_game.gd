@@ -38,6 +38,9 @@ var highest_score : int
 @export var RequiredScoreLabel : Label
 @export var SpeechBubble : TextureRect
 
+@export var item_1: LuckyCharm
+@export var item_2: LuckyCharm
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Signals.PopupMessage.connect(pop_up_message)
@@ -54,6 +57,8 @@ func _ready() -> void:
 	Title.position = Vector2(TitleAnchor.position.x,-top)
 	await get_tree().create_timer(0.1).timeout
 	_title_animation(true)
+	$LayoutBox/Center/CoinFlipHistory.item1 = item_1
+	$LayoutBox/Center/CoinFlipHistory.item2 = item_2
 	
 	
 func _process(delta: float) -> void:
@@ -191,7 +196,6 @@ func flip_coin(is_reflip : bool):
 		Globals.coinCount -= 1
 	
 	var flip_value = rng.randf_range(0, 1)
-	print(str("flip value : ",flip_value))
 	if flip_value <= Globals.headsThreshhold:
 		_coin_flip_animation(false)
 		Globals.CoinHistory.append(0)
@@ -216,7 +220,6 @@ func flip_coin(is_reflip : bool):
 
 
 func pop_up_message(textToSay : String, pos : Vector2, move_to : Vector2, textColour : Color):
-	print(str("pop up message at", pos))
 	var message = Label.new()
 	message.text = textToSay
 	message.position = Vector2(pos.x,pos.y)

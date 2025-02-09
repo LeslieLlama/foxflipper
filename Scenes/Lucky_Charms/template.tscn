@@ -1,0 +1,71 @@
+[gd_scene load_steps=5 format=3 uid="uid://c5gtsyminudgp"]
+
+[ext_resource type="Theme" uid="uid://dsk5olnx1e77u" path="res://FancyTheme.tres" id="1_ir6qt"]
+[ext_resource type="Script" path="res://Scripts/lucky_charm.gd" id="2_jx5r1"]
+[ext_resource type="Texture2D" uid="uid://bbf1wkp30uhnt" path="res://Sprites/Items_Bottlecap.png" id="3_ovg5c"]
+[ext_resource type="Texture2D" uid="uid://by67wheekph8h" path="res://Sprites/item_umbrella.png" id="4_366qi"]
+
+[node name="Template" type="Control" node_paths=PackedStringArray("DescriptionPanel")]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -115.5
+offset_top = -86.5
+offset_right = 23.5
+offset_bottom = 52.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_ir6qt")
+script = ExtResource("2_jx5r1")
+Name = "Bottlecap"
+Icon = ExtResource("3_ovg5c")
+Description = "If last coin flipped is heads, gain +1000 value"
+DescriptionPanel = NodePath("ItemDescription")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(70, 70)
+texture = ExtResource("4_366qi")
+expand_mode = 1
+
+[node name="ItemDescription" type="PanelContainer" parent="."]
+visible = false
+z_index = 1
+layout_mode = 0
+offset_left = 2.0
+offset_top = 86.0
+offset_right = 408.0
+offset_bottom = 225.0
+theme = ExtResource("1_ir6qt")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ItemDescription"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ItemDescription/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(0.396078, 0.654902, 0.756863, 1)
+theme_override_font_sizes/font_size = 42
+text = "Item Name"
+metadata/_edit_use_anchors_ = true
+
+[node name="Label2" type="Label" parent="ItemDescription/VBoxContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(0.396078, 0.654902, 0.756863, 1)
+theme_override_font_sizes/font_size = 30
+text = "Item Description hfjdsklahjfk;ldjskal;fjdksla;fjdksl;ajfkds;lajfkdlsa;fgdsagfdsagdsagfdsagfdsagfdagfda"
+autowrap_mode = 3
+metadata/_edit_use_anchors_ = true
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
