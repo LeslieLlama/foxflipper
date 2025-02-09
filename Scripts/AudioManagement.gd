@@ -8,6 +8,7 @@ func _ready() -> void:
 	Signals.NextRound.connect(AddBackgroundMusicPitch)
 	Signals.AllCoinsScored.connect(MinusBackgroundMusicPitch)
 	Signals.ComboScored.connect(PlayCoinComboSound)
+	Signals.AddPointsToCoin.connect(PlayAddPointsSound)
 	AddBackgroundMusicPitch()
 	$BackgroundMusic.play()
 
@@ -27,6 +28,10 @@ func PlayCoinFlipSound():
 	var pitchRandomisation = rng.randf_range(1, 2)
 	$CoinLandingSound.pitch_scale = pitchRandomisation
 	$CoinLandingSound.play()
+func PlayAddPointsSound():
+	var pitchRandomisation = rng.randf_range(1, 2)
+	$CoinAddPointsSound.pitch_scale = pitchRandomisation
+	$CoinAddPointsSound.play()
 func AddBackgroundMusicPitch():
 	$BackgroundMusic.pitch_scale += 0.05
 func MinusBackgroundMusicPitch():

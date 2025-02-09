@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://cvxdjuqp6ax2d"]
+[gd_scene load_steps=7 format=3 uid="uid://cvxdjuqp6ax2d"]
 
 [ext_resource type="AudioStream" uid="uid://mvaoira7v6jm" path="res://Audio/276152__littlerobotsoundfactory__coins_single_08.wav" id="1_a6d24"]
 [ext_resource type="Script" path="res://Scripts/AudioManagement.gd" id="1_rc30o"]
 [ext_resource type="AudioStream" uid="uid://bno5x6g1jhhuy" path="res://Audio/495642__robbeman__coin-2.wav" id="3_5tqjv"]
+[ext_resource type="AudioStream" uid="uid://djupfq3q42sd7" path="res://Audio/MiniTick.wav" id="3_ae535"]
 [ext_resource type="AudioStream" uid="uid://u7iauir1hroy" path="res://Audio/213982__fenrirfangs__coin-clatter-8.wav" id="3_b0667"]
 [ext_resource type="AudioStream" uid="uid://m8aamv1o4lgp" path="res://Audio/648987__erokia__ub-e-42-drums-piano-synths-100-bpm.mp3" id="4_cvcc4"]
 
@@ -11,6 +12,9 @@ script = ExtResource("1_rc30o")
 
 [node name="CoinScoringSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("1_a6d24")
+
+[node name="CoinAddPointsSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_ae535")
 
 [node name="CoinComboSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_5tqjv")

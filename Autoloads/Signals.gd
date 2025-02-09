@@ -17,6 +17,7 @@ signal ScoreCoins()
 signal CoinScored()
 signal ComboScored()
 signal AllCoinsScored()
+signal AddPointsToCoin()
 
 signal NextRound()
 signal GameWon()
