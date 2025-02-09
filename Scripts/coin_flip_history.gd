@@ -9,13 +9,14 @@ var colorRed = Color("D0665A")
 var colorBlue = Color("65A7C1")
 
 var CoinHistorySprites = []
+var CoinValues = []
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Signals.CoinHistoryDisplayUpdate.connect(coin_history_display_update)
 	Signals.PurchaseCoin.connect(_add_coin)
 	Signals.ResetGame.connect(_reset_game)
 	Signals.ResetTable.connect(_reset_table)
-	Signals.ScoreCoins.connect(coin_pattern_searcher)
+	Signals.ScoreCoins.connect(add_wager_to_coins)
 
 
 func coin_history_display_update():
@@ -35,6 +36,23 @@ func mini_coin_trigger_animation(c : int):
 	tween.tween_property(CoinHistorySprites[c], "scale", Vector2(1.1,1.1), 0.1).set_trans(Tween.TRANS_BOUNCE)
 	tween.tween_property(CoinHistorySprites[c], "scale", Vector2(1,1), 0.1).set_trans(Tween.TRANS_BOUNCE)
 	
+	
+func add_wager_to_coins():
+	CoinValues.clear()
+	for c in Globals.CoinHistory.size():
+		if Globals.CoinHistory[c] == 0: #tails
+			CoinValues.append(Globals.tailsValue)
+			Signals.emit_signal("PopupMessage", str(CoinValues[c]),CoinHistorySprites[(c)].global_position,colorBlue)
+		else: #heads
+			CoinValues.append(Globals.headsValue)
+			Signals.emit_signal("PopupMessage", str(CoinValues[c]),CoinHistorySprites[(c)].global_position,colorRed)
+		#if c+1 == Globals.CoinHistory.size(): #simulationg a lucky charm here
+			#CoinValues.pop_back()
+			#CoinValues.append(1000)
+			#mini_coin_trigger_animation((c-1))
+			#pop_up_message_downwards(str(CoinValues[c-1]),CoinHistorySprites[(c-1)].position,Color.CHARTREUSE)
+	coin_pattern_searcher()
+
 func coin_pattern_searcher():
 	var runCount = 0
 	var previousCoinValue = -1
@@ -49,9 +67,9 @@ func coin_pattern_searcher():
 		else: 
 			#run is broken
 			if Globals.CoinHistory[c-1] == 0: #tails
-				pattern_payoff(runCount, runArray,c, Globals.tailsValue, colorBlue)
+				pattern_payoff(runCount, runArray,c,colorBlue)
 			else: #heads
-				pattern_payoff(runCount, runArray,c, Globals.headsValue, colorRed)
+				pattern_payoff(runCount, runArray,c,colorRed)
 			runCount = 1
 			runArray.clear()
 			runArray.append(Globals.CoinHistory[c])
@@ -60,26 +78,30 @@ func coin_pattern_searcher():
 			await get_tree().create_timer(0.1).timeout
 			print("last coin")
 			if Globals.CoinHistory[c] == 0: #tails
-				pattern_payoff(runCount, runArray,c+1, Globals.tailsValue, colorBlue)
+				pattern_payoff(runCount, runArray,c+1, colorBlue)
 			else: #heads
-				pattern_payoff(runCount, runArray,c+1, Globals.headsValue, colorRed)
+				pattern_payoff(runCount, runArray,c+1,colorRed)
 			runCount = 1
 			runArray.clear()
 	Signals.emit_signal("AllCoinsScored")
+	print(str("Coin Values : ",CoinValues))
 	
-func pattern_payoff(runCount : int, runArray, c : int, coinValue : int, colorToUse : Color):
+func pattern_payoff(runCount : int, runArray, c : int, colorToUse : Color):
 	for a in runArray:
 		pass
 	if runCount < 3:
 		for i in runCount:
-			Globals.currentScore += coinValue
+			Globals.currentScore += CoinValues[c-1-i]
 			mini_coin_trigger_animation((c-1)-i)
 			Signals.emit_signal("CoinScored")
-			Signals.emit_signal("PopupMessage", str("+",coinValue,"!"),CoinHistorySprites[(c-1-i)].global_position,colorToUse)
+			Signals.emit_signal("PopupMessage", str("+",CoinValues[c-1-i],"!"),CoinHistorySprites[(c-1-i)].global_position,colorToUse)
 	else: 
+		var collective = 0
 		for i in runCount:
 			mini_coin_trigger_animation((c-1)-i)
-		var scoreToAdd = ((runCount) * coinValue) * (runCount)
+			collective += CoinValues[c-1-i]
+		#var scoreToAdd = ((runCount) * coinValue) * (runCount)
+		var scoreToAdd = runCount * collective
 		Globals.currentScore += scoreToAdd
 		var middleOfArray = c - (runArray.size()-(runArray.size()/2))
 		Signals.emit_signal("ComboScored")
@@ -104,3 +126,4 @@ func _add_coin():
 	self.add_child(child_node)
 	CoinHistorySprites = self.get_children()
 	mini_coin_trigger_animation(Globals.maxCoinCount-1)
+	

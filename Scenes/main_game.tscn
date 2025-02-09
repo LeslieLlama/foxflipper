@@ -5,11 +5,11 @@
 [ext_resource type="Script" path="res://Scripts/item_zone.gd" id="3_k5nkx"]
 [ext_resource type="Texture2D" uid="uid://ckhk7e4lj27yr" path="res://Sprites/FoxCoinConcepts_Heads.png" id="3_u33ss"]
 [ext_resource type="PackedScene" uid="uid://cpai247vjxym3" path="res://Scenes/confetti.tscn" id="3_uvxce"]
-[ext_resource type="Texture2D" uid="uid://cfsfmhokr0lvf" path="res://Sprites/FoxCoins_headsSmall.png" id="4_aefad"]
+[ext_resource type="Texture2D" uid="uid://bbf1wkp30uhnt" path="res://Sprites/Items_Bottlecap.png" id="4_11iwk"]
 [ext_resource type="PackedScene" uid="uid://bbcrabknbbhrs" path="res://Scenes/coin_weight.tscn" id="4_cyt0w"]
 [ext_resource type="Texture2D" uid="uid://dyayargx7nk40" path="res://Sprites/FoxCoinConcepts_Tails.png" id="4_edq3u"]
 [ext_resource type="Theme" uid="uid://dsk5olnx1e77u" path="res://FancyTheme.tres" id="5_cxspc"]
-[ext_resource type="Texture2D" uid="uid://rbhka5f6qjh5" path="res://Sprites/FoxCoins_tailsSmall.png" id="5_f1ywo"]
+[ext_resource type="Texture2D" uid="uid://by67wheekph8h" path="res://Sprites/item_umbrella.png" id="5_qirhe"]
 [ext_resource type="Texture2D" uid="uid://b2sm2i7ll25ar" path="res://Sprites/Speechbubble.png" id="6_vewqb"]
 [ext_resource type="PackedScene" uid="uid://t6mev4v78cwu" path="res://Scenes/coin_flip_history.tscn" id="6_yecaa"]
 [ext_resource type="Texture2D" uid="uid://c1dqycrxriler" path="res://icon.svg" id="7_v46qd"]
@@ -127,14 +127,14 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -96.5
-offset_top = -50.5
-offset_right = -11.5
-offset_bottom = 34.5
+offset_left = -116.5
+offset_top = -74.5
+offset_right = 10.5
+offset_bottom = 54.5
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("5_cxspc")
-texture = ExtResource("4_aefad")
+texture = ExtResource("4_11iwk")
 expand_mode = 1
 
 [node name="ItemDescription" type="PanelContainer" parent="LayoutBox/Left/HistoryZone/ItemZone/Item1"]
@@ -175,14 +175,14 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 16.5
-offset_top = -50.5
-offset_right = 101.5
-offset_bottom = 34.5
+offset_left = -7.5
+offset_top = -86.5
+offset_right = 131.5
+offset_bottom = 52.5
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("5_cxspc")
-texture = ExtResource("5_f1ywo")
+texture = ExtResource("5_qirhe")
 expand_mode = 1
 
 [node name="ItemDescription" type="PanelContainer" parent="LayoutBox/Left/HistoryZone/ItemZone/Item2"]
@@ -1184,9 +1184,9 @@ autowrap_mode = 3
 [connection signal="button_up" from="LayoutBox/Center/LargeCoinZone/ReDoCoinButton" to="." method="_on_re_do_coin_button_button_up"]
 [connection signal="button_up" from="LayoutBox/Right/ShopStuffs/ShopPanel/VBoxContainer/BuyPointsPanel/Button" to="." method="add_purchase"]
 [connection signal="button_up" from="LayoutBox/Right/ShopStuffs/ShopPanel/VBoxContainer/BuyPointsPanel/Button" to="." method="_add_points"]
-[connection signal="button_up" from="LayoutBox/Right/ShopStuffs/ShopPanel/VBoxContainer/BuyCoinsPanel/Button" to="." method="_add_coin"]
 [connection signal="button_up" from="LayoutBox/Right/ShopStuffs/ShopPanel/VBoxContainer/BuyCoinsPanel/Button" to="." method="add_purchase"]
-[connection signal="button_up" from="LayoutBox/Right/ShopStuffs/ShopPanel/VBoxContainer/BuyWeight/Button" to="." method="_add_weight"]
+[connection signal="button_up" from="LayoutBox/Right/ShopStuffs/ShopPanel/VBoxContainer/BuyCoinsPanel/Button" to="." method="_add_coin"]
 [connection signal="button_up" from="LayoutBox/Right/ShopStuffs/ShopPanel/VBoxContainer/BuyWeight/Button" to="." method="add_purchase"]
+[connection signal="button_up" from="LayoutBox/Right/ShopStuffs/ShopPanel/VBoxContainer/BuyWeight/Button" to="." method="_add_weight"]
 [connection signal="toggled" from="ExplanationPanel/Button" to="." method="_on_HelpButton_toggled"]
 [connection signal="button_up" from="GameOverPanel/RetryButton" to="." method="_on_retry_button_button_up"]

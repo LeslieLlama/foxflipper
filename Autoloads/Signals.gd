@@ -21,4 +21,4 @@ signal AllCoinsScored()
 signal NextRound()
 signal GameWon()
 
-signal PopupMessage(textToSay : String, pos : Vector2, textColour : Color)
+signal PopupMessage(textToSay : String, pos : Vector2, move_to : Vector2, textColour : Color)

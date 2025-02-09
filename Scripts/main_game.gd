@@ -215,16 +215,16 @@ func flip_coin(is_reflip : bool):
 	Signals.emit_signal("FlipCoin", Globals.coinCount)
 
 
-func pop_up_message(textToSay : String, pos : Vector2, textColour : Color):
+func pop_up_message(textToSay : String, pos : Vector2, move_to : Vector2, textColour : Color):
 	print(str("pop up message at", pos))
 	var message = Label.new()
 	message.text = textToSay
-	message.position = Vector2(pos.x,pos.y-20)
+	message.position = Vector2(pos.x,pos.y)
 	message.modulate = textColour
 	message.add_theme_font_size_override("font_size", 34)
 	add_child(message)
 	var tween = get_tree().create_tween().bind_node(self)
-	tween.tween_property(message, "position", Vector2(pos.x,pos.y-40), 1).set_trans(tween.TRANS_QUAD)
+	tween.tween_property(message, "position", Vector2(move_to.x,move_to.y), 1).set_trans(tween.TRANS_QUAD)
 	tween.tween_callback(message.queue_free)
 	
 func _create_speech_bubble(textToSay : String):
