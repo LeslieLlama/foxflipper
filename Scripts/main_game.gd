@@ -8,9 +8,6 @@ var maxReflipCount = 3
 var RoundNumber = 1
 var RequiredScore = [150,300,600,1200,2400,4800,9600,12000,14000,19200,28000]
 
-var purchases = 0
-var maxPurchases = 2
-
 enum GameState {MENU,BETTING,SCORING,SHOP,GAME_OVER}
 var CurrentGameState = GameState.MENU
 
@@ -46,7 +43,7 @@ func _ready() -> void:
 	Signals.PopupMessage.connect(pop_up_message)
 	Signals.AllCoinsScored.connect(check_round_won)
 	for i in 4:
-		_add_coin()
+		Signals.emit_signal("PurchaseCoin")
 	RequiredScoreLabel.text = str(RequiredScore[0])
 	_reset_node_positions()
 	ReDoCoinButton.disabled = true
@@ -59,7 +56,6 @@ func _ready() -> void:
 	_title_animation(true)
 	$LayoutBox/Center/CoinFlipHistory.item1 = item_1
 	$LayoutBox/Center/CoinFlipHistory.item2 = item_2
-	
 	
 func _process(delta: float) -> void:
 	if Input.is_key_pressed(KEY_SPACE):
@@ -278,7 +274,7 @@ func reset_game():
 		c.queue_free()
 	await get_tree().create_timer(0.01).timeout #this is so dumb but if you don't stall it slightly both loops happen concurrently and it screws them up
 	for i in 4:
-		_add_coin()
+		Signals.emit_signal("PurchaseCoin")
 	Globals.totalValue = 100
 	$GameOverPanel.hide()
 	$GameWonPanel.hide()
@@ -303,31 +299,9 @@ func reset_table():
 	CoinAmmount.text = str(Globals.coinCount,"/",Globals.maxCoinCount)
 	NextCoinButton.text = "Flip"
 	_shop_animation(false)
-	purchases = 0
-	$LayoutBox/Right/ShopStuffs/ShopPanel/PurchaseCount.text = str("Purchases: ",purchases,"/",maxPurchases)
-	disable_buy_buttons(false)
+	
+	
 	CurrentGameState = GameState.MENU
 	
-func _add_coin():
-	Signals.emit_signal("PurchaseCoin")
 
-func _add_reflips():
-	maxReflipCount += 1
-	ReflipAmmount.text = str("x",maxReflipCount)
-	
-func _add_weight():
-	Signals.emit_signal("PurchaseWeight")
-	
-func _add_points():
-	Signals.emit_signal("PurchasePoints")
-
-func add_purchase():
-	purchases += 1
-	$LayoutBox/Right/ShopStuffs/ShopPanel/PurchaseCount.text = str("Purchases: ",purchases,"/",maxPurchases)
-	if purchases == maxPurchases:
-		disable_buy_buttons(true)
-func disable_buy_buttons(disable_value : bool):
-	$LayoutBox/Right/ShopStuffs/ShopPanel/VBoxContainer/BuyPointsPanel/Button.disabled = disable_value
-	$LayoutBox/Right/ShopStuffs/ShopPanel/VBoxContainer/BuyCoinsPanel/Button.disabled = disable_value
-	$LayoutBox/Right/ShopStuffs/ShopPanel/VBoxContainer/BuyWeight/Button.disabled = disable_value
 	

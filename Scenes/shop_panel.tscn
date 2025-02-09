@@ -1,0 +1,335 @@
+[gd_scene load_steps=4 format=3 uid="uid://bil8em6cgriyo"]
+
+[ext_resource type="Theme" uid="uid://dsk5olnx1e77u" path="res://FancyTheme.tres" id="1_28apw"]
+[ext_resource type="Script" path="res://Scripts/shop_panel.gd" id="2_w6x2w"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_geymj"]
+bg_color = Color(0.870588, 0.666667, 0.54902, 1)
+
+[node name="ShopPanel" type="Panel"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+theme = ExtResource("1_28apw")
+theme_override_styles/panel = SubResource("StyleBoxFlat_geymj")
+script = ExtResource("2_w6x2w")
+
+[node name="ShopTitle" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -98.0
+offset_right = 99.0
+offset_bottom = 44.0
+grow_horizontal = 2
+theme = ExtResource("1_28apw")
+theme_override_font_sizes/font_size = 34
+text = "Shop"
+horizontal_alignment = 1
+
+[node name="PurchaseCount" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -112.0
+offset_top = 37.5
+offset_right = 126.0
+offset_bottom = 84.5
+grow_horizontal = 2
+theme = ExtResource("1_28apw")
+theme_override_font_sizes/font_size = 22
+text = "Purchases: 0/2"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="BoxContainer" parent="."]
+layout_mode = 2
+anchor_left = 0.0502092
+anchor_top = 0.0814815
+anchor_right = 0.966527
+anchor_bottom = 0.55463
+grow_vertical = 2
+vertical = true
+metadata/_edit_use_anchors_ = true
+
+[node name="BuyPointsPanel" type="Panel" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("1_28apw")
+
+[node name="Label" type="Label" parent="VBoxContainer/BuyPointsPanel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.017
+anchor_right = 0.677
+anchor_bottom = 1.0
+offset_left = 0.0559998
+offset_right = -0.0640106
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_28apw")
+theme_override_font_sizes/font_size = 30
+text = "+50 points"
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="VBoxContainer/BuyPointsPanel"]
+layout_mode = 2
+anchor_left = 0.715517
+anchor_top = 0.025
+anchor_right = 1.0
+anchor_bottom = 0.974522
+offset_top = 0.075
+offset_right = -5.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_28apw")
+theme_override_font_sizes/font_size = 40
+text = "+"
+autowrap_mode = 3
+metadata/_edit_use_anchors_ = true
+
+[node name="BuyCoinsPanel" type="Panel" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("1_28apw")
+
+[node name="Label" type="Label" parent="VBoxContainer/BuyCoinsPanel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0215517
+anchor_top = 0.0318471
+anchor_right = 0.711207
+anchor_bottom = 0.968153
+grow_vertical = 2
+theme = ExtResource("1_28apw")
+theme_override_font_sizes/font_size = 30
+text = "+1 Coin"
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Button" type="Button" parent="VBoxContainer/BuyCoinsPanel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.719828
+anchor_top = 0.025
+anchor_right = 1.0
+anchor_bottom = 0.968153
+offset_top = 0.075
+offset_right = -4.0
+grow_horizontal = 0
+grow_vertical = 2
+theme = ExtResource("1_28apw")
+theme_override_font_sizes/font_size = 40
+text = "+"
+metadata/_edit_use_anchors_ = true
+
+[node name="BuyWeight" type="Panel" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("1_28apw")
+
+[node name="Label" type="Label" parent="VBoxContainer/BuyWeight"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0258621
+anchor_right = 0.724138
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_28apw")
+theme_override_font_sizes/font_size = 30
+text = "+5% Weight"
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Button" type="Button" parent="VBoxContainer/BuyWeight"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.715517
+anchor_top = 0.032
+anchor_right = 1.0
+anchor_bottom = 0.974684
+offset_top = -0.0560002
+offset_right = -5.0
+grow_horizontal = 0
+grow_vertical = 2
+theme = ExtResource("1_28apw")
+theme_override_font_sizes/font_size = 40
+text = "+"
+metadata/_edit_use_anchors_ = true
+
+[node name="DividingLine" type="ColorRect" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 16.0
+offset_top = 296.5
+offset_right = 341.0
+offset_bottom = 305.5
+theme = ExtResource("1_28apw")
+
+[node name="Item1" type="Panel" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -119.0
+offset_top = -1.0
+offset_right = 114.0
+offset_bottom = 87.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_28apw")
+
+[node name="ItemName" type="Label" parent="Item1"]
+layout_mode = 1
+offset_right = 175.0
+offset_bottom = 24.0
+text = "Snake Eye"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Description" type="Label" parent="Item1"]
+layout_mode = 1
+offset_top = 24.0
+offset_right = 174.0
+offset_bottom = 89.0
+theme_override_font_sizes/font_size = 12
+text = "Flipping a coin that breaks the current pattern adds +50 to next coin"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Button" type="Button" parent="Item1"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -57.5
+offset_top = -23.0
+offset_right = -10.5
+offset_bottom = 25.0
+grow_horizontal = 0
+grow_vertical = 2
+text = "+"
+
+[node name="Item2" type="Panel" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -119.0
+offset_top = 106.0
+offset_right = 114.0
+offset_bottom = 194.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_28apw")
+
+[node name="ItemName" type="Label" parent="Item2"]
+layout_mode = 1
+offset_right = 175.0
+offset_bottom = 24.0
+text = "Wet Matches"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Description" type="Label" parent="Item2"]
+layout_mode = 1
+offset_top = 24.0
+offset_right = 174.0
+offset_bottom = 89.0
+theme_override_font_sizes/font_size = 12
+text = "Consecutive Tails give +0.5x 
+per coin"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Button" type="Button" parent="Item2"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -57.5
+offset_top = -23.0
+offset_right = -10.5
+offset_bottom = 25.0
+grow_horizontal = 0
+grow_vertical = 2
+text = "+"
+
+[node name="Item3" type="Panel" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -119.0
+offset_top = 213.0
+offset_right = 114.0
+offset_bottom = 301.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_28apw")
+
+[node name="ItemName" type="Label" parent="Item3"]
+layout_mode = 1
+offset_right = 175.0
+offset_bottom = 24.0
+text = "Spatula Head"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Description" type="Label" parent="Item3"]
+layout_mode = 1
+offset_top = 24.0
+offset_right = 174.0
+offset_bottom = 89.0
+theme_override_font_sizes/font_size = 12
+text = "Once per round, flip a coin
+to the opposite value"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Button" type="Button" parent="Item3"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -57.5
+offset_top = -23.0
+offset_right = -10.5
+offset_bottom = 25.0
+grow_horizontal = 0
+grow_vertical = 2
+text = "+"
+
+[connection signal="button_up" from="VBoxContainer/BuyPointsPanel/Button" to="." method="add_purchase"]
+[connection signal="button_up" from="VBoxContainer/BuyPointsPanel/Button" to="." method="_add_points"]
+[connection signal="button_up" from="VBoxContainer/BuyCoinsPanel/Button" to="." method="add_purchase"]
+[connection signal="button_up" from="VBoxContainer/BuyCoinsPanel/Button" to="." method="_add_coin"]
+[connection signal="button_up" from="VBoxContainer/BuyWeight/Button" to="." method="add_purchase"]
+[connection signal="button_up" from="VBoxContainer/BuyWeight/Button" to="." method="_add_weight"]

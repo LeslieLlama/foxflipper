@@ -7,6 +7,7 @@ func AddToScore(coinValues = []):
 	for c in Globals.CoinHistory.size():
 		if Globals.CoinHistory[c] == 1:
 			heads_count += 1
+	if heads_count == 0: return coinValues
 	for c in Globals.CoinHistory.size():
 		if Globals.CoinHistory[c] == 0:
 			await get_tree().create_timer(0.2).timeout

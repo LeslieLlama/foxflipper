@@ -16,3 +16,6 @@ var headsThreshhold : float = 0.5
 var totalWeight = 0.05
 
 var LuckyCharms = []
+
+var purchases = 0
+var maxPurchases = 2
