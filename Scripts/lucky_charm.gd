@@ -16,7 +16,7 @@ func _ready() -> void:
 	$TextureRect.texture = Icon
 func AddToScore(coinValues = []):
 	print("coin values accepted!")
-	_activation_animation()
+	#_activation_animation()
 	return coinValues
 	
 func _on_mouse_entered() -> void:

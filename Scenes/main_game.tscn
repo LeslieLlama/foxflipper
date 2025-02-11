@@ -1,11 +1,10 @@
-[gd_scene load_steps=21 format=3 uid="uid://bn0o5gyjoo4un"]
+[gd_scene load_steps=20 format=3 uid="uid://bn0o5gyjoo4un"]
 
 [ext_resource type="Script" path="res://Scripts/main_game.gd" id="1_k015l"]
 [ext_resource type="Texture2D" uid="uid://dl66pahmplk71" path="res://Sprites/FoxCoin_Dealer.png" id="2_uijv0"]
-[ext_resource type="PackedScene" uid="uid://5pyiidp58syb" path="res://Scenes/Lucky_Charms/cocktail_umbrella.tscn" id="3_h8mpm"]
+[ext_resource type="PackedScene" uid="uid://c5gtsyminudgp" path="res://Scenes/Lucky_Charms/template.tscn" id="3_rylaf"]
 [ext_resource type="Texture2D" uid="uid://ckhk7e4lj27yr" path="res://Sprites/FoxCoinConcepts_Heads.png" id="3_u33ss"]
 [ext_resource type="PackedScene" uid="uid://cpai247vjxym3" path="res://Scenes/confetti.tscn" id="3_uvxce"]
-[ext_resource type="PackedScene" uid="uid://b8q55jh7fky56" path="res://Scenes/Lucky_Charms/bottlecap.tscn" id="4_4hc74"]
 [ext_resource type="PackedScene" uid="uid://bbcrabknbbhrs" path="res://Scenes/coin_weight.tscn" id="4_cyt0w"]
 [ext_resource type="Texture2D" uid="uid://dyayargx7nk40" path="res://Sprites/FoxCoinConcepts_Tails.png" id="4_edq3u"]
 [ext_resource type="Theme" uid="uid://dsk5olnx1e77u" path="res://FancyTheme.tres" id="5_cxspc"]
@@ -67,8 +66,8 @@ ShopAnchor = NodePath("LayoutBox/Right/ShopStuffs/ShopAnchor")
 RoundScoreLabel = NodePath("LayoutBox/Center/DealerZone/Dealer/RoundScoreLabel")
 RequiredScoreLabel = NodePath("LayoutBox/Center/DealerZone/Dealer/RequiredScoreLabel")
 SpeechBubble = NodePath("LayoutBox/Center/DealerZone/Dealer/SpeechBubble")
-item_1 = NodePath("LayoutBox/Left/HistoryZone/ItemZone/CocktailUmbrella")
-item_2 = NodePath("LayoutBox/Left/HistoryZone/ItemZone/bottlecap")
+item_1 = NodePath("LayoutBox/Left/HistoryZone/ItemZone/Template")
+item_2 = NodePath("LayoutBox/Left/HistoryZone/ItemZone/Template2")
 
 [node name="BackgroundColour" type="ColorRect" parent="."]
 custom_minimum_size = Vector2(50, 50)
@@ -108,20 +107,20 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 vertical = true
 
-[node name="ItemZone" type="Control" parent="LayoutBox/Left/HistoryZone"]
+[node name="ItemZone" type="HBoxContainer" parent="LayoutBox/Left/HistoryZone"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.65
 theme = ExtResource("5_cxspc")
 
-[node name="CocktailUmbrella" parent="LayoutBox/Left/HistoryZone/ItemZone" instance=ExtResource("3_h8mpm")]
-layout_mode = 1
+[node name="Template" parent="LayoutBox/Left/HistoryZone/ItemZone" instance=ExtResource("3_rylaf")]
+layout_mode = 2
+size_flags_horizontal = 3
 
-[node name="bottlecap" parent="LayoutBox/Left/HistoryZone/ItemZone" instance=ExtResource("4_4hc74")]
-layout_mode = 1
-offset_left = -4.5
-offset_right = 134.5
+[node name="Template2" parent="LayoutBox/Left/HistoryZone/ItemZone" instance=ExtResource("3_rylaf")]
+layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="CoinBetting" parent="LayoutBox/Left/HistoryZone" instance=ExtResource("9_rbtme")]
 layout_mode = 2
@@ -435,14 +434,14 @@ text = "Coins/Buttons"
 [node name="NextCoinButton" type="Button" parent="LayoutBox/Center/LargeCoinZone"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.598319
-anchor_top = 0.77881
+anchor_left = 0.597603
+anchor_top = 0.735981
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 0
 grow_vertical = 0
 theme = ExtResource("5_cxspc")
-theme_override_font_sizes/font_size = 30
+theme_override_font_sizes/font_size = 40
 text = "Flip"
 metadata/_edit_use_anchors_ = true
 
@@ -482,12 +481,12 @@ metadata/_edit_use_anchors_ = true
 [node name="ReDoCoinButton" type="Button" parent="LayoutBox/Center/LargeCoinZone"]
 layout_mode = 1
 anchors_preset = -1
-anchor_top = 0.77881
-anchor_right = 0.401681
+anchor_top = 0.738318
+anchor_right = 0.402397
 anchor_bottom = 1.0
 grow_vertical = 0
 theme = ExtResource("5_cxspc")
-theme_override_font_sizes/font_size = 30
+theme_override_font_sizes/font_size = 40
 theme_override_styles/hover = SubResource("StyleBoxFlat_dbx8f")
 theme_override_styles/normal = SubResource("StyleBoxFlat_6i8jf")
 text = "Re-Flip

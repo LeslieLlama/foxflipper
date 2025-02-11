@@ -1,9 +1,13 @@
 extends Panel
 
-
+var itemPool = [] 
+@export var itemContainers: Array[ItemContainer] = []
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	itemPool = $ItemPool.get_children()
+	print(itemPool)
 	Signals.ResetTable.connect(reset_table)
+	RefreshItems()
 
 func _add_coin():
 	Signals.emit_signal("PurchaseCoin")
@@ -29,3 +33,13 @@ func reset_table():
 	disable_buy_buttons(false)
 	Globals.purchases = 0
 	$PurchaseCount.text = str("Purchases: ",Globals.purchases,"/",Globals.maxPurchases)
+	RefreshItems()
+	
+func RefreshItems():
+	var rng = RandomNumberGenerator.new()
+	for i in itemContainers:
+		var newItem = itemPool[rng.randi_range(0, itemPool.size()-1)]
+		SetItem(i,newItem)
+	
+func SetItem(container : ItemContainer, item : LuckyCharm):
+	container.NewItem(item)
