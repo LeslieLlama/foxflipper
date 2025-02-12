@@ -18,6 +18,7 @@ signal CoinScored()
 signal ComboScored()
 signal AllCoinsScored()
 signal AddPointsToCoin()
+signal MiniCoinAnimation(c : int)
 
 signal NextRound()
 signal GameWon()

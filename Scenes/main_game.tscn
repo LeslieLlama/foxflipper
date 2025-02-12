@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://bn0o5gyjoo4un"]
+[gd_scene load_steps=21 format=3 uid="uid://bn0o5gyjoo4un"]
 
 [ext_resource type="Script" path="res://Scripts/main_game.gd" id="1_k015l"]
 [ext_resource type="Texture2D" uid="uid://dl66pahmplk71" path="res://Sprites/FoxCoin_Dealer.png" id="2_uijv0"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://cvxdjuqp6ax2d" path="res://Scenes/audio.tscn" id="9_2ujpw"]
 [ext_resource type="PackedScene" uid="uid://g7r0abvn0dli" path="res://Scenes/coin_betting.tscn" id="9_rbtme"]
 [ext_resource type="PackedScene" uid="uid://bil8em6cgriyo" path="res://Scenes/shop_panel.tscn" id="13_765k4"]
+[ext_resource type="PackedScene" uid="uid://cv5owtbs3alpe" path="res://Scenes/score_calculation.tscn" id="14_ffnfp"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ibjkx"]
 
@@ -43,7 +44,7 @@ corner_radius_bottom_left = 5
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q0t8k"]
 bg_color = Color(0.815686, 0.396078, 0.34902, 1)
 
-[node name="MainGame" type="Control" node_paths=PackedStringArray("CoinHistoryNode", "NextCoinButton", "ReDoCoinButton", "CoinAmmount", "ReflipAmmount", "CoinTailsSide", "CoinHeadsSide", "Title", "TitleAnchor", "CurrentRoundLabel", "ShopPanel", "ShopAnchor", "RoundScoreLabel", "RequiredScoreLabel", "SpeechBubble", "item_1", "item_2")]
+[node name="MainGame" type="Control" node_paths=PackedStringArray("NextCoinButton", "ReDoCoinButton", "CoinAmmount", "ReflipAmmount", "CoinTailsSide", "CoinHeadsSide", "Title", "TitleAnchor", "CurrentRoundLabel", "ShopPanel", "ShopAnchor", "RoundScoreLabel", "RequiredScoreLabel", "SpeechBubble", "item_1", "item_2")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -51,7 +52,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_k015l")
-CoinHistoryNode = NodePath("LayoutBox/Center/CoinFlipHistory")
 NextCoinButton = NodePath("LayoutBox/Center/LargeCoinZone/NextCoinButton")
 ReDoCoinButton = NodePath("LayoutBox/Center/LargeCoinZone/ReDoCoinButton")
 CoinAmmount = NodePath("LayoutBox/Center/LargeCoinZone/NextCoinButton/CoinAmmount")
@@ -670,6 +670,8 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Audio" parent="." instance=ExtResource("9_2ujpw")]
+
+[node name="ScoreCalculation" parent="." instance=ExtResource("14_ffnfp")]
 
 [connection signal="button_up" from="LayoutBox/Center/LargeCoinZone/NextCoinButton" to="." method="_on_next_coin_button_button_up"]
 [connection signal="button_up" from="LayoutBox/Center/LargeCoinZone/ReDoCoinButton" to="." method="_on_re_do_coin_button_button_up"]

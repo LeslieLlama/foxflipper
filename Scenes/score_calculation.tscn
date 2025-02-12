@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://cv5owtbs3alpe"]
+
+[ext_resource type="Script" path="res://Scripts/score_calculation.gd" id="1_26op4"]
+
+[node name="ScoreCalculation" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_26op4")
