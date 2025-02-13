@@ -6,6 +6,9 @@
 
 [node name="bottlecap" instance=ExtResource("1_kvbcn")]
 script = ExtResource("2_svfw7")
+Name = "Bottlecap"
+Icon = ExtResource("3_c5hjj")
+Description = "+1000 points to the final coin if it lands heads."
 
 [node name="TextureRect" parent="." index="0"]
 texture = ExtResource("3_c5hjj")

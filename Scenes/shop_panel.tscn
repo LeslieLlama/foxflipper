@@ -1,11 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://bil8em6cgriyo"]
+[gd_scene load_steps=8 format=3 uid="uid://bil8em6cgriyo"]
 
 [ext_resource type="Theme" uid="uid://dsk5olnx1e77u" path="res://FancyTheme.tres" id="1_28apw"]
 [ext_resource type="Script" path="res://Scripts/shop_panel.gd" id="2_w6x2w"]
 [ext_resource type="Script" path="res://Scenes/item_container.gd" id="3_00x7n"]
-[ext_resource type="Texture2D" uid="uid://by67wheekph8h" path="res://Sprites/item_umbrella.png" id="3_giucx"]
+[ext_resource type="PackedScene" uid="uid://c5gtsyminudgp" path="res://Scenes/Lucky_Charms/template.tscn" id="4_wksgb"]
 [ext_resource type="PackedScene" uid="uid://b8q55jh7fky56" path="res://Scenes/Lucky_Charms/bottlecap.tscn" id="5_225ia"]
-[ext_resource type="Texture2D" uid="uid://bbf1wkp30uhnt" path="res://Sprites/Items_Bottlecap.png" id="6_7p3sk"]
 [ext_resource type="PackedScene" uid="uid://5pyiidp58syb" path="res://Scenes/Lucky_Charms/cocktail_umbrella.tscn" id="6_owq85"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_geymj"]
@@ -181,11 +180,12 @@ anchor_right = 0.962963
 anchor_bottom = 0.97037
 metadata/_edit_use_anchors_ = true
 
-[node name="Item1" type="Panel" parent="VBoxContainer2"]
+[node name="Item1" type="Panel" parent="VBoxContainer2" node_paths=PackedStringArray("item")]
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("1_28apw")
 script = ExtResource("3_00x7n")
+item = NodePath("HBoxContainer/Template")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer2/Item1"]
 layout_mode = 1
@@ -195,41 +195,22 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Control" type="VBoxContainer" parent="VBoxContainer2/Item1/HBoxContainer"]
+[node name="Template" parent="VBoxContainer2/Item1/HBoxContainer" instance=ExtResource("4_wksgb")]
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.75
-
-[node name="ItemName" type="Label" parent="VBoxContainer2/Item1/HBoxContainer/Control"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 30
-text = "Item Name"
-horizontal_alignment = 1
-vertical_alignment = 1
-metadata/_edit_use_anchors_ = true
-
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer2/Item1/HBoxContainer/Control"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-texture = ExtResource("3_giucx")
-expand_mode = 1
-stretch_mode = 5
-metadata/_edit_use_anchors_ = true
 
 [node name="Button" type="Button" parent="VBoxContainer2/Item1/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.25
 theme_override_font_sizes/font_size = 60
 text = "+"
 metadata/_edit_use_anchors_ = true
 
-[node name="Item2" type="Panel" parent="VBoxContainer2"]
+[node name="Item2" type="Panel" parent="VBoxContainer2" node_paths=PackedStringArray("item")]
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("1_28apw")
 script = ExtResource("3_00x7n")
+item = NodePath("HBoxContainer/Template")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer2/Item2"]
 layout_mode = 1
@@ -239,32 +220,12 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Control" type="VBoxContainer" parent="VBoxContainer2/Item2/HBoxContainer"]
+[node name="Template" parent="VBoxContainer2/Item2/HBoxContainer" instance=ExtResource("4_wksgb")]
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.75
-
-[node name="ItemName" type="Label" parent="VBoxContainer2/Item2/HBoxContainer/Control"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 30
-text = "Item Name"
-horizontal_alignment = 1
-vertical_alignment = 1
-metadata/_edit_use_anchors_ = true
-
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer2/Item2/HBoxContainer/Control"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-texture = ExtResource("3_giucx")
-expand_mode = 1
-stretch_mode = 5
-metadata/_edit_use_anchors_ = true
 
 [node name="Button" type="Button" parent="VBoxContainer2/Item2/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.25
 theme_override_font_sizes/font_size = 60
 text = "+"
 metadata/_edit_use_anchors_ = true
@@ -277,17 +238,18 @@ offset_bottom = 40.0
 [node name="bottlecap" parent="ItemPool" instance=ExtResource("5_225ia")]
 visible = false
 layout_mode = 1
-Name = "Bottlecap"
-Icon = ExtResource("6_7p3sk")
-Description = "If last coin flipped is heads, gain +1000 value"
 
 [node name="CocktailUmbrella" parent="ItemPool" instance=ExtResource("6_owq85")]
 visible = false
 layout_mode = 1
 
-[connection signal="button_up" from="VBoxContainer/BuyPointsPanel/Button" to="." method="_add_points"]
 [connection signal="button_up" from="VBoxContainer/BuyPointsPanel/Button" to="." method="add_purchase"]
+[connection signal="button_up" from="VBoxContainer/BuyPointsPanel/Button" to="." method="_add_points"]
 [connection signal="button_up" from="VBoxContainer/BuyCoinsPanel/Button" to="." method="add_purchase"]
 [connection signal="button_up" from="VBoxContainer/BuyCoinsPanel/Button" to="." method="_add_coin"]
 [connection signal="button_up" from="VBoxContainer/BuyWeight/Button" to="." method="_add_weight"]
 [connection signal="button_up" from="VBoxContainer/BuyWeight/Button" to="." method="add_purchase"]
+[connection signal="button_up" from="VBoxContainer2/Item1/HBoxContainer/Button" to="." method="add_purchase"]
+[connection signal="button_up" from="VBoxContainer2/Item1/HBoxContainer/Button" to="VBoxContainer2/Item1" method="_add_item"]
+[connection signal="button_up" from="VBoxContainer2/Item2/HBoxContainer/Button" to="." method="add_purchase"]
+[connection signal="button_up" from="VBoxContainer2/Item2/HBoxContainer/Button" to="VBoxContainer2/Item2" method="_add_item"]

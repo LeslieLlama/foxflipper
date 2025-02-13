@@ -1,22 +1,41 @@
 extends Control
 
-@export var item1 : LuckyCharm
-@export var item2 : LuckyCharm
+@export var items : Array[LuckyCharm] = []
 
 var colorRed = Color("D0665A")
 var colorBlue = Color("65A7C1")
 
 var CoinValues = []
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Signals.ScoreCoins.connect(scoring_sequence)
+	Signals.PurchaseItem.connect(add_item)
+	Signals.RemoveItem.connect(_remove_item)
+	Signals.ResetGame.connect(_reset_game)
+
+func _reset_game():
+	for i in items:
+		i.queue_free()
+	items.clear()
+
+func add_item(new_item : Control):
+	if items.size() >= 2:
+		Signals.emit_signal("PopupMessage", "Inventory Full!", position, position, colorRed)
+	else:
+		var child_node = new_item.duplicate()
+		self.add_child(child_node)
+		items.append(child_node)
+		child_node.show()
+
+func _remove_item(_item : Control):
+	items.erase(_item)
 
 func scoring_sequence():
 	CoinValues = await add_wager_to_coins()
-	if item1 != null:
-		CoinValues = await item1.AddToScore(CoinValues)
-	if item2 != null:
-		CoinValues = await item2.AddToScore(CoinValues)
+	for i in items:
+		if i != null:
+			CoinValues = await i.AddToScore(CoinValues)
 	coin_pattern_searcher()
 	
 func add_wager_to_coins():

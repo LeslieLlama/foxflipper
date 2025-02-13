@@ -8,7 +8,8 @@
 script = ExtResource("2_n3f3h")
 Name = "Cocktail Umbrella"
 Icon = ExtResource("3_0qqsj")
-Description = "Tails coins gain +150 value for every heads coin flipped"
+Description = "Tails coins gain heads value multiplied by heads coins flipped."
 
 [node name="TextureRect" parent="." index="0"]
+texture = ExtResource("3_0qqsj")
 stretch_mode = 5

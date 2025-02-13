@@ -4,26 +4,29 @@ class_name LuckyCharm
 
 @export var Name : String
 @export var Icon : Texture2D
-@export var Description : String
-@export var DescriptionPanel : PanelContainer
+@export_multiline var Description : String
+@export var ToolTipPanel : PanelContainer
 var tween
 var colorRed = Color("D0665A")
 var colorBlue = Color("65A7C1")
 
 func _ready() -> void:
-	$ItemDescription/VBoxContainer/Label.text = Name
-	$ItemDescription/VBoxContainer/Label2.text = Description
-	$TextureRect.texture = Icon
+	_assign_tooltips()
+
 func AddToScore(coinValues = []):
 	print("coin values accepted!")
 	#_activation_animation()
 	return coinValues
 	
 func _on_mouse_entered() -> void:
-	DescriptionPanel.show()
+	ToolTipPanel.show()
 
 func _on_mouse_exited() -> void:
-	DescriptionPanel.hide()
+	ToolTipPanel.hide()
+	
+func _assign_tooltips():
+	$Tooltip/VBoxContainer/itemName.text = Name
+	$Tooltip/VBoxContainer/itemDescription.text = Description
 	
 func _activation_animation():
 	if tween:
@@ -33,3 +36,10 @@ func _activation_animation():
 	tween.tween_property($TextureRect, "scale", Vector2(1.3,1.3), 0.1).set_trans(Tween.TRANS_SINE)
 	tween.chain().tween_property($TextureRect, "rotation_degrees", 0, 0.1).set_trans(Tween.TRANS_SPRING)
 	tween.tween_property($TextureRect, "scale", Vector2(1,1), 0.1).set_trans(Tween.TRANS_SINE)
+
+
+func _on_gui_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton and event.pressed:
+		if event.button_index == MOUSE_BUTTON_LEFT :
+			Signals.emit_signal("RemoveItem", self)
+			queue_free()

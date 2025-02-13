@@ -18,6 +18,7 @@ func _add_weight():
 func _add_points():
 	Signals.emit_signal("PurchasePoints")
 
+
 func add_purchase():
 	Globals.purchases += 1
 	$PurchaseCount.text = str("Purchases: ",Globals.purchases,"/",Globals.maxPurchases)
