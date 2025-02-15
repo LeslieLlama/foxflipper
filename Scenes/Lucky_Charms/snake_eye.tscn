@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://6bup4gcsv3ab"]
+
+[ext_resource type="PackedScene" uid="uid://c5gtsyminudgp" path="res://Scenes/Lucky_Charms/template.tscn" id="1_nmtv8"]
+[ext_resource type="Script" path="res://Scripts/LuckyCharms/snake_eye.gd" id="2_t7r6h"]
+
+[node name="snake_eye" instance=ExtResource("1_nmtv8")]
+script = ExtResource("2_t7r6h")
+Name = "Snake Eye"
+Description = "Breaking a combo adds +200 to the breaking coin"
