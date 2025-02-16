@@ -2,11 +2,6 @@ extends LuckyCharm
 
 
 func AddToScore(coinValues = []):
-	print("SnakeEyeTrigger!")
-	pattern_finder()
-	return coinValues
-	
-func pattern_finder():
 	var runCount = 0
 	var previousCoinValue = -1
 	var highestRunCount = 1
@@ -19,18 +14,20 @@ func pattern_finder():
 			runArray.append(Globals.CoinHistory[c])
 		else: 
 			#run is broken
-			if Globals.CoinHistory[c-1] == 0: #tails
-				pattern_payoff(runCount, runArray,c,colorBlue)
-			else: #heads
-				pattern_payoff(runCount, runArray,c,colorRed)
+			if runCount >= 3:
+				await get_tree().create_timer(0.2).timeout
+				_activation_animation()
+				Signals.emit_signal("AddPointsToCoin")
+				coinValues[c] += 200
+				var pos : Vector2 = Vector2(Globals.CoinHistorySprites[(c)].global_position.x,Globals.CoinHistorySprites[(c)].global_position.y+40)
+				var new_pos : Vector2 = Vector2(pos.x, pos.y+50)
+				var newCol : Color
+				if Globals.CoinHistory[c] == 1 : newCol = colorRed 
+				else: newCol = colorBlue
+				Signals.emit_signal("PopupMessage", str(coinValues[c]),pos,new_pos,newCol)
+				print("SnakeEyeTrigger!")
 			runCount = 1
 			runArray.clear()
 			runArray.append(Globals.CoinHistory[c])
 		previousCoinValue = Globals.CoinHistory[c]
-		
-func pattern_payoff(runCount : int, runArray, c : int, colorToUse : Color):
-	if runCount == 1:
-		await get_tree().create_timer(0.2).timeout
-		_activation_animation()
-		print("runcount of 1")
-		
+	return coinValues

@@ -2,10 +2,14 @@ extends Panel
 
 @export var WeightSlider : HSlider
 @export var AvailableWeightLabel : Label
+@export var startingMax : float = 0.55;
+@export var startingMin : float = 0.45;
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Signals.PurchaseWeight.connect(_add_total_weight)
 	Signals.ResetGame.connect(_reset_game)
+	WeightSlider.max_value = startingMax;
+	WeightSlider.min_value = startingMin;
 	#$OddsLabel.text = str("[center]",((1-Globals.headsThreshhold)*100),"/[color=#65A7C1]",Globals.headsThreshhold*100,"[/color][/center]")
 	_update_weight_ui()
 
@@ -27,6 +31,6 @@ func _on_h_slider_value_changed(value: float) -> void:
 func _reset_game():
 	Globals.totalWeight = 0.05;
 	WeightSlider.value = 0.50;
-	WeightSlider.max_value = 0.55;
-	WeightSlider.min_value = 0.45;
+	WeightSlider.max_value = startingMax;
+	WeightSlider.min_value = startingMin;
 	_update_weight_ui()
