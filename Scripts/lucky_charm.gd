@@ -10,23 +10,18 @@ var tween
 var colorRed = Color("D0665A")
 var colorBlue = Color("65A7C1")
 
-func _ready() -> void:
-	_assign_tooltips()
-
 func AddToScore(coinValues = []):
 	print("coin values accepted!")
 	#_activation_animation()
 	return coinValues
 	
 func _on_mouse_entered() -> void:
-	ToolTipPanel.show()
+	Signals.emit_signal("Mouse_Over", Name, Description)
 
 func _on_mouse_exited() -> void:
-	ToolTipPanel.hide()
+	if not Rect2(Vector2(), self.size).has_point(get_viewport().get_mouse_position()):
+		Signals.emit_signal("Mouse_End")
 	
-func _assign_tooltips():
-	$Tooltip/VBoxContainer/itemName.text = Name
-	$Tooltip/VBoxContainer/itemDescription.text = Description
 	
 func _activation_animation():
 	if tween:

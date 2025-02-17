@@ -19,6 +19,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 3
+mouse_filter = 1
 theme = ExtResource("1_28apw")
 theme_override_styles/panel = SubResource("StyleBoxFlat_geymj")
 script = ExtResource("2_w6x2w")
@@ -210,6 +211,7 @@ metadata/_edit_use_anchors_ = true
 [node name="Item2" type="Panel" parent="VBoxContainer2" node_paths=PackedStringArray("item")]
 layout_mode = 2
 size_flags_vertical = 3
+mouse_filter = 1
 theme = ExtResource("1_28apw")
 script = ExtResource("3_00x7n")
 item = NodePath("HBoxContainer/Template")
@@ -219,6 +221,10 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = -4.0
+offset_bottom = -5.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -264,10 +270,10 @@ offset_bottom = 40.0
 visible = false
 layout_mode = 1
 
-[connection signal="button_up" from="VBoxContainer/BuyPointsPanel/Button" to="." method="_add_points"]
 [connection signal="button_up" from="VBoxContainer/BuyPointsPanel/Button" to="." method="add_purchase"]
-[connection signal="button_up" from="VBoxContainer/BuyCoinsPanel/Button" to="." method="_add_coin"]
+[connection signal="button_up" from="VBoxContainer/BuyPointsPanel/Button" to="." method="_add_points"]
 [connection signal="button_up" from="VBoxContainer/BuyCoinsPanel/Button" to="." method="add_purchase"]
+[connection signal="button_up" from="VBoxContainer/BuyCoinsPanel/Button" to="." method="_add_coin"]
 [connection signal="button_up" from="VBoxContainer/BuyWeight/Button" to="." method="_add_weight"]
 [connection signal="button_up" from="VBoxContainer/BuyWeight/Button" to="." method="add_purchase"]
 [connection signal="button_up" from="VBoxContainer2/Item1/HBoxContainer/Button" to="." method="add_purchase"]

@@ -15,6 +15,9 @@ signal RemoveItem(item : Control)
 
 signal CoinHistoryDisplayUpdate()
 
+signal Mouse_Over(title : String, desc : String)
+signal Mouse_End()
+
 signal ScoreCoins()
 signal CoinScored()
 signal ComboScored()

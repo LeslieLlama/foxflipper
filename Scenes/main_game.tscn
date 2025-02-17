@@ -50,6 +50,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 script = ExtResource("1_k015l")
 NextCoinButton = NodePath("LayoutBox/Center/LargeCoinZone/NextCoinButton")
 ReDoCoinButton = NodePath("LayoutBox/Center/LargeCoinZone/ReDoCoinButton")
@@ -662,6 +663,37 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Audio" parent="." instance=ExtResource("9_2ujpw")]
+
+[node name="Tooltip" type="PanelContainer" parent="."]
+visible = false
+z_index = 1
+layout_mode = 0
+offset_left = 2.0
+offset_top = 86.0
+offset_right = 408.0
+offset_bottom = 225.0
+mouse_filter = 1
+theme = ExtResource("5_cxspc")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Tooltip"]
+layout_mode = 2
+
+[node name="itemName" type="Label" parent="Tooltip/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(0.396078, 0.654902, 0.756863, 1)
+theme_override_font_sizes/font_size = 42
+text = "Item Name"
+metadata/_edit_use_anchors_ = true
+
+[node name="itemDescription" type="Label" parent="Tooltip/VBoxContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(0.396078, 0.654902, 0.756863, 1)
+theme_override_font_sizes/font_size = 30
+autowrap_mode = 3
+metadata/_edit_use_anchors_ = true
 
 [connection signal="button_up" from="LayoutBox/Center/LargeCoinZone/NextCoinButton" to="." method="_on_next_coin_button_button_up"]
 [connection signal="button_up" from="LayoutBox/Center/LargeCoinZone/ReDoCoinButton" to="." method="_on_re_do_coin_button_button_up"]

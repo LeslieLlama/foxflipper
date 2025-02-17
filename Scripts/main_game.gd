@@ -38,6 +38,8 @@ var highest_score : int
 func _ready() -> void:
 	Signals.PopupMessage.connect(pop_up_message)
 	Signals.AllCoinsScored.connect(check_round_won)
+	Signals.Mouse_Over.connect(_tool_tip_on)
+	Signals.Mouse_End.connect(_tool_tip_off)
 	for i in 4:
 		Signals.emit_signal("PurchaseCoin")
 	RequiredScoreLabel.text = str(RequiredScore[0])
@@ -53,7 +55,26 @@ func _ready() -> void:
 	
 func _process(delta: float) -> void:
 	if Input.is_key_pressed(KEY_SPACE):
-		game_won()
+		pass #testing function
+	#$Tooltip.position = get_viewport().get_mouse_position()
+	
+func _tool_tip_on(iname, desc):
+	$Tooltip.position = _tool_tip_position()
+	$Tooltip.show()
+	$Tooltip/VBoxContainer/itemName.text = iname
+	$Tooltip/VBoxContainer/itemDescription.text = desc
+	
+func _tool_tip_off():
+	$Tooltip.hide()
+	
+func _tool_tip_position():
+	var cursor_pos = get_viewport().get_mouse_position()
+	var screensize = get_viewport_rect().size
+	var rect_size = $Tooltip.size
+	var adj_pos : Vector2
+	adj_pos.x = clamp(cursor_pos.x, 0, screensize.x - rect_size.x - 4)
+	adj_pos.y = clamp(cursor_pos.y, 0 , screensize.y - rect_size.y - 4)
+	return adj_pos
 	
 func _reset_node_positions():
 	var title_position = TitleAnchor.position

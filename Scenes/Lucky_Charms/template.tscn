@@ -24,7 +24,7 @@ script = ExtResource("2_jx5r1")
 Name = "Empty"
 Icon = ExtResource("4_rg78n")
 Description = "Items can be purchased from the store"
-ToolTipPanel = NodePath("Tooltip")
+ToolTipPanel = NodePath("")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 1
@@ -35,38 +35,8 @@ grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(70, 70)
 texture = ExtResource("4_rg78n")
-expand_mode = 1
-
-[node name="Tooltip" type="PanelContainer" parent="."]
-visible = false
-z_index = 1
-layout_mode = 0
-offset_left = 2.0
-offset_top = 86.0
-offset_right = 408.0
-offset_bottom = 225.0
-theme = ExtResource("1_ir6qt")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Tooltip"]
-layout_mode = 2
-
-[node name="itemName" type="Label" parent="Tooltip/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 0
-theme_override_colors/font_color = Color(0.396078, 0.654902, 0.756863, 1)
-theme_override_font_sizes/font_size = 42
-text = "Item Name"
-metadata/_edit_use_anchors_ = true
-
-[node name="itemDescription" type="Label" parent="Tooltip/VBoxContainer"]
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 2
-size_flags_vertical = 8
-theme_override_colors/font_color = Color(0.396078, 0.654902, 0.756863, 1)
-theme_override_font_sizes/font_size = 30
-text = "Item Description hfjdsklahjfk;ldjskal;fjdksla;fjdksl;ajfkds;lajfkdlsa;fgdsagfdsagdsagfdsagfdsagfdagfda"
-autowrap_mode = 3
-metadata/_edit_use_anchors_ = true
+expand_mode = 3
+stretch_mode = 5
 
 [connection signal="gui_input" from="." to="." method="_on_gui_input"]
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]

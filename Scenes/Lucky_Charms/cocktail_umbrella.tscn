@@ -12,4 +12,3 @@ Description = "Tails coins gain heads value multiplied by heads coins flipped."
 
 [node name="TextureRect" parent="." index="0"]
 texture = ExtResource("3_0qqsj")
-stretch_mode = 5
