@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://t6mev4v78cwu"]
+[gd_scene load_steps=8 format=3 uid="uid://t6mev4v78cwu"]
 
 [ext_resource type="Theme" uid="uid://dsk5olnx1e77u" path="res://FancyTheme.tres" id="1_l74si"]
 [ext_resource type="Script" path="res://Scripts/coin_flip_history.gd" id="2_8wdab"]
 [ext_resource type="Texture2D" uid="uid://po8fo44gcqw0" path="res://Sprites/FoxCoins_empty.png" id="3_1ghoy"]
+[ext_resource type="PackedScene" uid="uid://nqgsdso58vfx" path="res://Scenes/coin_marker.tscn" id="3_x6x7w"]
 [ext_resource type="Texture2D" uid="uid://cfsfmhokr0lvf" path="res://Sprites/FoxCoins_headsSmall.png" id="4_2x3xn"]
 [ext_resource type="Texture2D" uid="uid://qrwcd5pa1llb" path="res://Sprites/FoxCoins_Canceled.png" id="4_v5j3w"]
 [ext_resource type="Texture2D" uid="uid://rbhka5f6qjh5" path="res://Sprites/FoxCoins_tailsSmall.png" id="5_uimut"]
@@ -15,6 +16,7 @@ offset_bottom = 208.0
 theme = ExtResource("1_l74si")
 columns = 5
 script = ExtResource("2_8wdab")
+coin_marker = ExtResource("3_x6x7w")
 emptyCoinSprite = ExtResource("3_1ghoy")
 canceledCoinSprite = ExtResource("4_v5j3w")
 headsCoinSprite = ExtResource("4_2x3xn")

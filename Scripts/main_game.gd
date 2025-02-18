@@ -47,13 +47,13 @@ func _ready() -> void:
 	ReDoCoinButton.disabled = true
 	get_tree().get_root().size_changed.connect(resize)
 	
-	var size = get_viewport_rect().size
-	var top = size.y + TitleAnchor.position.y
+	var ensize = get_viewport_rect().size
+	var top = ensize.y + TitleAnchor.position.y
 	Title.position = Vector2(TitleAnchor.position.x,-top)
 	await get_tree().create_timer(0.1).timeout
 	_title_animation(true)
 	
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if Input.is_key_pressed(KEY_SPACE):
 		pass #testing function
 	#$Tooltip.position = get_viewport().get_mouse_position()
@@ -85,8 +85,8 @@ func _reset_node_positions():
 	_shop_animation(false)
 
 func resize():
-	var size = get_viewport_rect().size
-	if size.x > (size.y-400): #horizontal 
+	var ensize = get_viewport_rect().size
+	if ensize.x > (size.y-400): #horizontal 
 		$LayoutBox.vertical = false
 		$LayoutBox/Left/HistoryZone.vertical = true
 		$LayoutBox/Left/SpacerPanel.show()
@@ -129,8 +129,8 @@ func _on_next_coin_button_button_up() -> void:
 		reset_game()
 		_title_animation(true)
 		
-func _shop_animation(show : bool):
-	if show == true:
+func _shop_animation(slide_in : bool):
+	if slide_in == true:
 		_set_shop_visible(true)
 		_generic_move_tween(ShopPanel,ShopAnchor.position)
 	else:
@@ -138,14 +138,14 @@ func _shop_animation(show : bool):
 		tween.tween_property(ShopPanel, "position", Vector2(ShopAnchor.position.x+ShopPanel.size.x,0), 1).set_trans(Tween.TRANS_QUINT)
 		tween.tween_callback(_set_shop_visible.bind(false))
 		
-func _set_shop_visible(is_visible : bool): 
-	if is_visible : ShopPanel.visible = true
+func _set_shop_visible(envisible : bool): 
+	if envisible : ShopPanel.visible = true
 	else: ShopPanel.visible = false
 	
-func _title_animation(show : bool):
-	if show == false: #hide
-		var size = get_viewport_rect().size
-		var top = size.y + TitleAnchor.position.y
+func _title_animation(is_show : bool):
+	if is_show == false: #hide
+		var ensize = get_viewport_rect().size
+		var top = ensize.y + TitleAnchor.position.y
 		_generic_move_tween(Title,Vector2(TitleAnchor.position.x,-top))
 		$LayoutBox/Right/Credits.hide()
 	else: 

@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://Scripts/lucky_charm.gd" id="2_jx5r1"]
 [ext_resource type="Texture2D" uid="uid://tgc6c4jx84gg" path="res://Sprites/Items_null.png" id="4_rg78n"]
 
-[node name="Template" type="Control" node_paths=PackedStringArray("ToolTipPanel")]
+[node name="Template" type="Control"]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -24,7 +24,6 @@ script = ExtResource("2_jx5r1")
 Name = "Empty"
 Icon = ExtResource("4_rg78n")
 Description = "Items can be purchased from the store"
-ToolTipPanel = NodePath("")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 1

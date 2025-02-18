@@ -5,8 +5,6 @@ extends Control
 var colorRed = Color("D0665A")
 var colorBlue = Color("65A7C1")
 
-var CoinValues = []
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Signals.ScoreCoins.connect(scoring_sequence)
@@ -32,34 +30,33 @@ func _remove_item(_item : Control):
 	items.erase(_item)
 
 func scoring_sequence():
-	CoinValues = await add_wager_to_coins()
+	Globals.CoinValues = await add_wager_to_coins()
 	for i in items:
 		if i != null:
-			CoinValues = await i.AddToScore(CoinValues)
+			Globals.CoinValues = await i.AddToScore(Globals.CoinValues)
 	coin_pattern_searcher()
 	
 func add_wager_to_coins():
-	CoinValues.clear()
+	Globals.CoinValues.clear()
 	for c in Globals.CoinHistory.size():
 		await get_tree().create_timer(0.1).timeout
 		var negative_c = (Globals.CoinHistory.size()-1) - c
 		var pos : Vector2 = Vector2(Globals.CoinHistorySprites[(negative_c)].global_position.x,Globals.CoinHistorySprites[(negative_c)].global_position.y+40)
 		var new_pos : Vector2 = Vector2(pos.x, pos.y+50)
 		if Globals.CoinHistory[negative_c] == 0: #tails
-			CoinValues.append(Globals.tailsValue)
-			Signals.emit_signal("PopupMessage", str(CoinValues[c]),pos,new_pos,colorBlue)
+			Globals.CoinValues.append(Globals.tailsValue)
+			Signals.emit_signal("PopupMessage", str(Globals.CoinValues[c]),pos,new_pos,colorBlue)
 		else: #heads
-			CoinValues.append(Globals.headsValue)
-			Signals.emit_signal("PopupMessage", str(CoinValues[c]),pos,new_pos,colorRed)
+			Globals.CoinValues.append(Globals.headsValue)
+			Signals.emit_signal("PopupMessage", str(Globals.CoinValues[c]),pos,new_pos,colorRed)
 		Signals.emit_signal("MiniCoinAnimation",negative_c)
 		Signals.emit_signal("AddPointsToCoin")
 	await get_tree().create_timer(0.3).timeout
-	return CoinValues
+	return Globals.CoinValues
 
 func coin_pattern_searcher():
 	var runCount = 0
 	var previousCoinValue = -1
-	var highestRunCount = 1
 	var runArray = []
 	
 	for c in Globals.CoinHistory.size():
@@ -87,7 +84,7 @@ func coin_pattern_searcher():
 			runCount = 1
 			runArray.clear()
 	Signals.emit_signal("AllCoinsScored")
-	print(str("Coin Values : ",CoinValues))
+	print(str("Coin Values : ",Globals.CoinValues))
 	
 func pattern_payoff(runCount : int, runArray, c : int, colorToUse : Color):
 	for a in runArray:
@@ -96,15 +93,15 @@ func pattern_payoff(runCount : int, runArray, c : int, colorToUse : Color):
 		for i in runCount:
 			var pos : Vector2 = Vector2(Globals.CoinHistorySprites[(c-1-i)].global_position.x,Globals.CoinHistorySprites[(c-1-i)].global_position.y-10)
 			var new_pos : Vector2 = Vector2(pos.x, pos.y-30)
-			Globals.currentScore += CoinValues[c-1-i]
+			Globals.currentScore += Globals.CoinValues[c-1-i]
 			Signals.emit_signal("MiniCoinAnimation",(c-1)-i)
 			Signals.emit_signal("CoinScored")
-			Signals.emit_signal("PopupMessage", str("+",CoinValues[c-1-i],"!"),pos,new_pos,colorToUse)
+			Signals.emit_signal("PopupMessage", str("+",Globals.CoinValues[c-1-i],"!"),pos,new_pos,colorToUse)
 	else: 
 		var collective = 0
 		for i in runCount:
 			Signals.emit_signal("MiniCoinAnimation",(c-1)-i)
-			collective += CoinValues[c-1-i]
+			collective += Globals.CoinValues[c-1-i]
 			
 		var scoreToAdd = runCount * collective
 		Globals.currentScore += scoreToAdd

@@ -4,7 +4,6 @@ extends LuckyCharm
 func AddToScore(coinValues = []):
 	var runCount = 0
 	var previousCoinValue = -1
-	var highestRunCount = 1
 	var runArray = []
 	
 	for c in Globals.CoinHistory.size():

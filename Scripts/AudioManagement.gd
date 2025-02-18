@@ -12,9 +12,6 @@ func _ready() -> void:
 	AddBackgroundMusicPitch()
 	$BackgroundMusic.play()
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
 
 func PlayCoinTriggerSound():
 	var pitchRandomisation = rng.randf_range(1, 1.5)

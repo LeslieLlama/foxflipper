@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://nqgsdso58vfx"]
+
+[ext_resource type="Texture2D" uid="uid://po8fo44gcqw0" path="res://Sprites/FoxCoins_empty.png" id="1_5mx61"]
+[ext_resource type="Script" path="res://Scripts/coin_marker.gd" id="2_u3wmd"]
+
+[node name="CoinMarker" type="TextureRect"]
+custom_minimum_size = Vector2(75, 75)
+mouse_filter = 0
+texture = ExtResource("1_5mx61")
+expand_mode = 2
+script = ExtResource("2_u3wmd")
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

@@ -29,6 +29,8 @@ func disable_buy_buttons(disable_value : bool):
 	$VBoxContainer/BuyPointsPanel/Button.disabled = disable_value
 	$VBoxContainer/BuyCoinsPanel/Button.disabled = disable_value
 	$VBoxContainer/BuyWeight/Button.disabled = disable_value
+	$VBoxContainer2/Item1/HBoxContainer/Button.disabled = disable_value
+	$VBoxContainer2/Item2/HBoxContainer/Button.disabled = disable_value
 	
 func reset_table():
 	disable_buy_buttons(false)

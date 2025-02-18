@@ -6,6 +6,7 @@ var maxCoinCount = 0
 
 var currentScore = 0
 var CoinHistory = []
+var CoinValues = []
 var CoinHistorySprites = []
 
 var totalValue = 100
