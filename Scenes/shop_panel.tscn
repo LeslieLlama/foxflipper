@@ -238,29 +238,6 @@ theme_override_font_sizes/font_size = 60
 text = "+"
 metadata/_edit_use_anchors_ = true
 
-[node name="birthday_candle" parent="." instance=ExtResource("7_fn0t4")]
-visible = false
-layout_mode = 2
-anchors_preset = 0
-offset_left = -635.5
-offset_top = -606.5
-offset_right = -496.5
-offset_bottom = -467.5
-
-[node name="bottlecap" parent="." instance=ExtResource("5_225ia")]
-visible = false
-layout_mode = 2
-anchors_preset = 0
-
-[node name="CocktailUmbrella" parent="." instance=ExtResource("6_owq85")]
-visible = false
-layout_mode = 2
-anchors_preset = 0
-offset_left = -635.5
-offset_top = -606.5
-offset_right = -496.5
-offset_bottom = -467.5
-
 [node name="ItemPool" type="Control" parent="."]
 anchors_preset = 0
 offset_right = 40.0
@@ -270,13 +247,30 @@ offset_bottom = 40.0
 visible = false
 layout_mode = 1
 
+[node name="birthday_candle" parent="ItemPool" instance=ExtResource("7_fn0t4")]
+visible = false
+layout_mode = 2
+anchors_preset = 0
+
+[node name="bottlecap" parent="ItemPool" instance=ExtResource("5_225ia")]
+visible = false
+layout_mode = 2
+anchors_preset = 0
+offset_left = 404.5
+offset_top = 433.5
+offset_right = 543.5
+offset_bottom = 572.5
+
+[node name="CocktailUmbrella" parent="ItemPool" instance=ExtResource("6_owq85")]
+visible = false
+layout_mode = 2
+anchors_preset = 0
+
 [connection signal="button_up" from="VBoxContainer/BuyPointsPanel/Button" to="." method="_add_points"]
 [connection signal="button_up" from="VBoxContainer/BuyPointsPanel/Button" to="." method="add_purchase"]
-[connection signal="button_up" from="VBoxContainer/BuyCoinsPanel/Button" to="." method="add_purchase"]
 [connection signal="button_up" from="VBoxContainer/BuyCoinsPanel/Button" to="." method="_add_coin"]
+[connection signal="button_up" from="VBoxContainer/BuyCoinsPanel/Button" to="." method="add_purchase"]
 [connection signal="button_up" from="VBoxContainer/BuyWeight/Button" to="." method="add_purchase"]
 [connection signal="button_up" from="VBoxContainer/BuyWeight/Button" to="." method="_add_weight"]
-[connection signal="button_up" from="VBoxContainer2/Item1/HBoxContainer/Button" to="." method="add_purchase"]
 [connection signal="button_up" from="VBoxContainer2/Item1/HBoxContainer/Button" to="VBoxContainer2/Item1" method="_add_item"]
-[connection signal="button_up" from="VBoxContainer2/Item2/HBoxContainer/Button" to="." method="add_purchase"]
 [connection signal="button_up" from="VBoxContainer2/Item2/HBoxContainer/Button" to="VBoxContainer2/Item2" method="_add_item"]

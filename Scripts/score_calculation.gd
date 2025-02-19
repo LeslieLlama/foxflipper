@@ -16,18 +16,22 @@ func _reset_game():
 	for i in items:
 		i.queue_free()
 	items.clear()
+	Globals.itemNum = 0
 
 func add_item(new_item : Control):
-	if items.size() >= 2:
-		Signals.emit_signal("PopupMessage", "Inventory Full!", position, position, colorRed)
-	else:
+	#if items.size() >= 2:
+		#Signals.emit_signal("PopupMessage", "Inventory Full!", global_position, global_position, colorRed)
+	if items.size() < 2:
 		var child_node = new_item.duplicate()
 		self.add_child(child_node)
 		items.append(child_node)
 		child_node.show()
+		child_node.item_enabled(true)
+		Globals.itemNum += 1
 
 func _remove_item(_item : Control):
 	items.erase(_item)
+	Globals.itemNum -= 1
 
 func scoring_sequence():
 	Globals.CoinValues = await add_wager_to_coins()

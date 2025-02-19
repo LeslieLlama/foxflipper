@@ -1,7 +1,7 @@
 extends Panel
 
 class_name ItemContainer
-
+signal itemBought
 @export var item : LuckyCharm
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -18,4 +18,8 @@ func NewItem(newItem : LuckyCharm):
 	child_node.show()
 	
 func _add_item():
-	Signals.emit_signal("PurchaseItem", item)
+	if Globals.itemNum < 2:
+		Signals.emit_signal("PurchaseItem", item)
+		emit_signal("itemBought")
+	else: 
+		Signals.emit_signal("PopupMessage", "Inventory Full!", global_position, global_position, Color("D0665A"))

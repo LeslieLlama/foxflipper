@@ -7,6 +7,8 @@ func _ready() -> void:
 	itemPool = $ItemPool.get_children()
 	print(itemPool)
 	Signals.ResetTable.connect(reset_table)
+	for i in itemContainers:
+		i.itemBought.connect(add_purchase)
 	RefreshItems()
 
 func _add_coin():

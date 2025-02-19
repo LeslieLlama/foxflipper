@@ -20,3 +20,4 @@ var LuckyCharms = []
 
 var purchases = 0
 var maxPurchases = 2
+var itemNum = 0

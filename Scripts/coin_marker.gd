@@ -13,6 +13,8 @@ func _on_mouse_exited() -> void:
 func coinSide():
 	if Globals.CoinHistory.size() <= numInSequence-1:
 		return "Empty Coin Slot"
+	if Globals.CoinValues.size() < numInSequence-1:
+		return "Busted Coin"
 	if Globals.CoinHistory[numInSequence-1] == 1:
 		return "Heads"
 	else:
@@ -21,5 +23,7 @@ func coinSide():
 func coinValue():
 	if Globals.CoinValues.is_empty() == true:
 		return "Not Yet Scored"
+	elif numInSequence-1 > Globals.CoinValues.size():
+		return str("A reflip has been used, reducing the maxiumum coin count")
 	else: 
 		return str("Value : ",Globals.CoinValues[numInSequence-1])
