@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://b81qkps3wolif"]
+
+[ext_resource type="PackedScene" uid="uid://c5gtsyminudgp" path="res://Scenes/Lucky_Charms/template.tscn" id="1_prfwx"]
+[ext_resource type="Script" path="res://Scripts/LuckyCharms/switchblade_comb.gd" id="2_1q5ak"]
+[ext_resource type="Texture2D" uid="uid://b4rao7j127t54" path="res://Sprites/item_switchbladeComb.png" id="3_hshjs"]
+
+[node name="Switchblade_Comb" instance=ExtResource("1_prfwx")]
+script = ExtResource("2_1q5ak")
+Name = "Switch-Comb"
+Icon = ExtResource("3_hshjs")
+Description = "Single coins give +1000 value"
+
+[node name="TextureRect" parent="." index="0"]
+texture = ExtResource("3_hshjs")

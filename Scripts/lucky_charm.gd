@@ -5,7 +5,6 @@ class_name LuckyCharm
 @export var Name : String
 @export var Icon : Texture2D
 @export_multiline var Description : String
-@export var ToolTipPanel : PanelContainer
 var tween
 var colorRed = Color("D0665A")
 var colorBlue = Color("65A7C1")
