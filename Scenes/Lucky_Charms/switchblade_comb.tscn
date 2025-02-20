@@ -8,7 +8,7 @@
 script = ExtResource("2_1q5ak")
 Name = "Switch-Comb"
 Icon = ExtResource("3_hshjs")
-Description = "Single coins give +1000 value"
+Description = "Single coins give +200 value"
 
 [node name="TextureRect" parent="." index="0"]
 texture = ExtResource("3_hshjs")

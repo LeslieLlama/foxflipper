@@ -7,7 +7,7 @@ func AddToScore(coinValues = []):
 			await get_tree().create_timer(0.2).timeout
 			print("Switchblade Comb Trigger!")
 			_activation_animation()
-			coinValues[c] += 1000
+			coinValues[c] += 200
 			Signals.emit_signal("AddPointsToCoin")
 			var pos : Vector2 = Vector2(Globals.CoinHistorySprites[(c)].global_position.x,Globals.CoinHistorySprites[(c)].global_position.y+40)
 			var new_pos : Vector2 = Vector2(pos.x, pos.y+50)

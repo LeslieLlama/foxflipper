@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://cu4lr6p2nfxb8"]
+
+[ext_resource type="PackedScene" uid="uid://c5gtsyminudgp" path="res://Scenes/Lucky_Charms/template.tscn" id="1_2eb5b"]
+[ext_resource type="Script" path="res://Scripts/LuckyCharms/train_stub.gd" id="2_7pcr1"]
+[ext_resource type="Texture2D" uid="uid://ctkd1kyw1os4l" path="res://Sprites/items_trainTicketStub.png" id="3_38ddy"]
+
+[node name="Train_Stub" instance=ExtResource("1_2eb5b")]
+script = ExtResource("2_7pcr1")
+Name = "Train Ticket Stub"
+Icon = ExtResource("3_38ddy")
+Description = "Coin weight can be adjusted during flipping"
+
+[node name="TextureRect" parent="." index="0"]
+texture = ExtResource("3_38ddy")

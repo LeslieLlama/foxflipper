@@ -103,6 +103,7 @@ func resize():
 		ShopPanel.position = Vector2(ShopAnchor.position.x+ShopPanel.size.x,0)
 
 func _on_next_coin_button_button_up() -> void:
+	##should probably change this to a match statement
 	SpeechBubble.hide()
 	if CurrentGameState == GameState.MENU:
 		_title_animation(false)
@@ -113,7 +114,6 @@ func _on_next_coin_button_button_up() -> void:
 		CurrentGameState = GameState.BETTING
 		return
 	if CurrentGameState == GameState.BETTING:
-		#if Globals.coinCount == Globals.maxCoinCount:
 		if Globals.coinsToThrow <= 0:
 			CurrentGameState = GameState.SCORING
 			Signals.emit_signal("ScoreCoins")
