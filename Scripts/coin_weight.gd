@@ -4,7 +4,7 @@ extends Panel
 @export var AvailableWeightLabel : Label
 @export var startingMax : float = 0.55;
 @export var startingMin : float = 0.45;
-var adjustDuringPlay = false
+@export var adjustDuringPlay = false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Signals.PurchaseWeight.connect(_add_total_weight)

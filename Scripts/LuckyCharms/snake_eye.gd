@@ -7,7 +7,7 @@ func AddToScore(coinValues = []):
 	var runArray = []
 	
 	for c in Globals.CoinHistory.size():
-		await get_tree().create_timer(0.1).timeout
+		#await get_tree().create_timer(0.1).timeout
 		if Globals.CoinHistory[c] == previousCoinValue || c==0:
 			runCount += 1
 			runArray.append(Globals.CoinHistory[c])

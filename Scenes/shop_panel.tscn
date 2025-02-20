@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bil8em6cgriyo"]
+[gd_scene load_steps=13 format=3 uid="uid://bil8em6cgriyo"]
 
 [ext_resource type="Theme" uid="uid://dsk5olnx1e77u" path="res://FancyTheme.tres" id="1_28apw"]
 [ext_resource type="Script" path="res://Scripts/shop_panel.gd" id="2_w6x2w"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://6bup4gcsv3ab" path="res://Scenes/Lucky_Charms/snake_eye.tscn" id="8_7d8rk"]
 [ext_resource type="PackedScene" uid="uid://b81qkps3wolif" path="res://Scenes/Lucky_Charms/switchblade_comb.tscn" id="9_olyri"]
 [ext_resource type="PackedScene" uid="uid://cu4lr6p2nfxb8" path="res://Scenes/Lucky_Charms/train_stub.tscn" id="10_83lca"]
+[ext_resource type="PackedScene" uid="uid://c8rwlqbhcxwi2" path="res://Scenes/Lucky_Charms/emoji_bracelet.tscn" id="11_e880d"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_geymj"]
 bg_color = Color(0.870588, 0.666667, 0.54902, 1)
@@ -246,6 +247,10 @@ metadata/_edit_use_anchors_ = true
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+
+[node name="emoji_bracelet" parent="ItemPool" instance=ExtResource("11_e880d")]
+visible = false
+layout_mode = 1
 
 [node name="Train_Stub" parent="ItemPool" instance=ExtResource("10_83lca")]
 visible = false
