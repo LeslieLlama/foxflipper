@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bil8em6cgriyo"]
+[gd_scene load_steps=14 format=3 uid="uid://bil8em6cgriyo"]
 
 [ext_resource type="Theme" uid="uid://dsk5olnx1e77u" path="res://FancyTheme.tres" id="1_28apw"]
 [ext_resource type="Script" path="res://Scripts/shop_panel.gd" id="2_w6x2w"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://b81qkps3wolif" path="res://Scenes/Lucky_Charms/switchblade_comb.tscn" id="9_olyri"]
 [ext_resource type="PackedScene" uid="uid://cu4lr6p2nfxb8" path="res://Scenes/Lucky_Charms/train_stub.tscn" id="10_83lca"]
 [ext_resource type="PackedScene" uid="uid://c8rwlqbhcxwi2" path="res://Scenes/Lucky_Charms/emoji_bracelet.tscn" id="11_e880d"]
+[ext_resource type="PackedScene" uid="uid://c34llx7e7sl0n" path="res://Scenes/Lucky_Charms/ufo_charm.tscn" id="12_1wtim"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_geymj"]
 bg_color = Color(0.870588, 0.666667, 0.54902, 1)
@@ -248,6 +249,10 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
+[node name="UFOcharm" parent="ItemPool" instance=ExtResource("12_1wtim")]
+visible = false
+layout_mode = 1
+
 [node name="emoji_bracelet" parent="ItemPool" instance=ExtResource("11_e880d")]
 visible = false
 layout_mode = 1
@@ -287,7 +292,7 @@ anchors_preset = 0
 [connection signal="button_up" from="VBoxContainer/BuyPointsPanel/Button" to="." method="add_purchase"]
 [connection signal="button_up" from="VBoxContainer/BuyCoinsPanel/Button" to="." method="_add_coin"]
 [connection signal="button_up" from="VBoxContainer/BuyCoinsPanel/Button" to="." method="add_purchase"]
-[connection signal="button_up" from="VBoxContainer/BuyWeight/Button" to="." method="_add_weight"]
 [connection signal="button_up" from="VBoxContainer/BuyWeight/Button" to="." method="add_purchase"]
+[connection signal="button_up" from="VBoxContainer/BuyWeight/Button" to="." method="_add_weight"]
 [connection signal="button_up" from="VBoxContainer2/Item1/HBoxContainer/Button" to="VBoxContainer2/Item1" method="_add_item"]
 [connection signal="button_up" from="VBoxContainer2/Item2/HBoxContainer/Button" to="VBoxContainer2/Item2" method="_add_item"]
