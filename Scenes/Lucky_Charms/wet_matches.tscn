@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://dn2fgscby15kw"]
+
+[ext_resource type="PackedScene" uid="uid://c5gtsyminudgp" path="res://Scenes/Lucky_Charms/template.tscn" id="1_l12c8"]
+[ext_resource type="Script" path="res://Scripts/wet_matches.gd" id="2_7umu0"]
+[ext_resource type="Texture2D" uid="uid://c6oqqdyxxflnt" path="res://Sprites/item_wetMatches.png" id="3_hmws6"]
+[ext_resource type="Theme" uid="uid://dsk5olnx1e77u" path="res://FancyTheme.tres" id="4_hda5q"]
+
+[node name="Wet Matches" node_paths=PackedStringArray("counter") instance=ExtResource("1_l12c8")]
+script = ExtResource("2_7umu0")
+counter = NodePath("MultiplierCounter")
+Name = "Wet Matches"
+Icon = ExtResource("3_hmws6")
+Description = "Consecutive Tails add +0.5x per coin"
+
+[node name="TextureRect" parent="." index="0"]
+texture = ExtResource("3_hmws6")
+
+[node name="MultiplierCounter" type="Label" parent="." index="2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -55.0
+offset_top = -33.0
+offset_right = -1.0
+offset_bottom = 6.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("4_hda5q")
+theme_override_colors/font_color = Color(0.423529, 0.666667, 0.760784, 1)
+theme_override_font_sizes/font_size = 30
+text = "x3"
