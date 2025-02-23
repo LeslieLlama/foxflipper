@@ -194,13 +194,10 @@ func _update_coin_history():
 	
 func _on_re_do_coin_button_button_up() -> void:
 	flip_coin(true)
-	#if reflipCount >= 1:
-		#flip_coin(true)
 		
 func flip_coin(is_reflip : bool):
 	Globals.coinsToThrow -= 1
 	$LayoutBox/Center/LargeCoinZone/CoinCount.text = str("Coins:\nx",Globals.coinsToThrow)
-	#if is_reflip == true && reflipCount > 0:
 	if is_reflip == true:
 		Globals.CoinHistory.pop_back()
 		reflipCount -= 1
@@ -215,8 +212,6 @@ func flip_coin(is_reflip : bool):
 		_coin_flip_animation(true)
 		Globals.CoinHistory.append(1)
 		Globals.coinCount += 1
-	#if reflipCount == 0:
-		#ReDoCoinButton.disabled = true
 	if Globals.coinCount == 1:
 		ReDoCoinButton.disabled = false
 	#update the UI
