@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://cod0g2y8sswbm"]
+
+[ext_resource type="PackedScene" uid="uid://c5gtsyminudgp" path="res://Scenes/Lucky_Charms/template.tscn" id="1_j3obh"]
+[ext_resource type="Script" path="res://Scripts/LuckyCharms/template_active_item.gd" id="2_7n5rw"]
+
+[node name="Template_activeItem" instance=ExtResource("1_j3obh")]
+script = ExtResource("2_7n5rw")
+charges = 0
+maxCharges = 1
+Name = "Active Item"
+Description = "Click an active item to activate it's listed effect. "
+
+[node name="ChargeCounter" type="Label" parent="." index="2"]
+layout_mode = 1
+offset_right = 40.0
+offset_bottom = 31.0
+text = "🗲3"

@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bil8em6cgriyo"]
+[gd_scene load_steps=16 format=3 uid="uid://bil8em6cgriyo"]
 
 [ext_resource type="Theme" uid="uid://dsk5olnx1e77u" path="res://FancyTheme.tres" id="1_28apw"]
 [ext_resource type="Script" path="res://Scripts/shop_panel.gd" id="2_w6x2w"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://c8rwlqbhcxwi2" path="res://Scenes/Lucky_Charms/emoji_bracelet.tscn" id="11_e880d"]
 [ext_resource type="PackedScene" uid="uid://c34llx7e7sl0n" path="res://Scenes/Lucky_Charms/ufo_charm.tscn" id="12_1wtim"]
 [ext_resource type="PackedScene" uid="uid://dn2fgscby15kw" path="res://Scenes/Lucky_Charms/wet_matches.tscn" id="13_vmlhg"]
+[ext_resource type="PackedScene" uid="uid://cod0g2y8sswbm" path="res://Scenes/Lucky_Charms/template_active_item.tscn" id="14_ybu7v"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_geymj"]
 bg_color = Color(0.870588, 0.666667, 0.54902, 1)
@@ -245,58 +246,90 @@ theme_override_font_sizes/font_size = 60
 text = "+"
 metadata/_edit_use_anchors_ = true
 
+[node name="Wet Matches" parent="." instance=ExtResource("13_vmlhg")]
+visible = false
+layout_mode = 1
+offset_left = -635.5
+offset_top = -606.5
+offset_right = -496.5
+offset_bottom = -467.5
+
+[node name="UFOcharm" parent="." instance=ExtResource("12_1wtim")]
+visible = false
+layout_mode = 1
+offset_left = -635.5
+offset_top = -606.5
+offset_right = -496.5
+offset_bottom = -467.5
+
+[node name="emoji_bracelet" parent="." instance=ExtResource("11_e880d")]
+visible = false
+layout_mode = 1
+offset_left = -635.5
+offset_top = -606.5
+offset_right = -496.5
+offset_bottom = -467.5
+
+[node name="Train_Stub" parent="." instance=ExtResource("10_83lca")]
+visible = false
+layout_mode = 1
+offset_left = -635.5
+offset_top = -606.5
+offset_right = -496.5
+offset_bottom = -467.5
+
+[node name="Switchblade_Comb" parent="." instance=ExtResource("9_olyri")]
+visible = false
+layout_mode = 1
+offset_left = -635.5
+offset_top = -606.5
+offset_right = -496.5
+offset_bottom = -467.5
+
+[node name="snake_eye" parent="." instance=ExtResource("8_7d8rk")]
+visible = false
+layout_mode = 1
+offset_left = -635.5
+offset_top = -606.5
+offset_right = -496.5
+offset_bottom = -467.5
+
+[node name="birthday_candle" parent="." instance=ExtResource("7_fn0t4")]
+visible = false
+layout_mode = 2
+anchors_preset = 0
+offset_left = -635.5
+offset_top = -606.5
+offset_right = -496.5
+offset_bottom = -467.5
+
+[node name="bottlecap" parent="." instance=ExtResource("5_225ia")]
+visible = false
+layout_mode = 2
+anchors_preset = 0
+
+[node name="CocktailUmbrella" parent="." instance=ExtResource("6_owq85")]
+visible = false
+layout_mode = 2
+anchors_preset = 0
+offset_left = -635.5
+offset_top = -606.5
+offset_right = -496.5
+offset_bottom = -467.5
+
 [node name="ItemPool" type="Control" parent="."]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="Wet Matches" parent="ItemPool" instance=ExtResource("13_vmlhg")]
+[node name="Template_activeItem" parent="ItemPool" instance=ExtResource("14_ybu7v")]
 visible = false
 layout_mode = 1
-
-[node name="UFOcharm" parent="ItemPool" instance=ExtResource("12_1wtim")]
-visible = false
-layout_mode = 1
-
-[node name="emoji_bracelet" parent="ItemPool" instance=ExtResource("11_e880d")]
-visible = false
-layout_mode = 1
-
-[node name="Train_Stub" parent="ItemPool" instance=ExtResource("10_83lca")]
-visible = false
-layout_mode = 1
-
-[node name="Switchblade_Comb" parent="ItemPool" instance=ExtResource("9_olyri")]
-visible = false
-layout_mode = 1
-
-[node name="snake_eye" parent="ItemPool" instance=ExtResource("8_7d8rk")]
-visible = false
-layout_mode = 1
-
-[node name="birthday_candle" parent="ItemPool" instance=ExtResource("7_fn0t4")]
-visible = false
-layout_mode = 2
-anchors_preset = 0
-
-[node name="bottlecap" parent="ItemPool" instance=ExtResource("5_225ia")]
-visible = false
-layout_mode = 2
-anchors_preset = 0
-offset_left = 404.5
-offset_top = 433.5
-offset_right = 543.5
-offset_bottom = 572.5
-
-[node name="CocktailUmbrella" parent="ItemPool" instance=ExtResource("6_owq85")]
-visible = false
-layout_mode = 2
-anchors_preset = 0
 
 [connection signal="button_up" from="VBoxContainer/BuyPointsPanel/Button" to="." method="_add_points"]
 [connection signal="button_up" from="VBoxContainer/BuyPointsPanel/Button" to="." method="add_purchase"]
-[connection signal="button_up" from="VBoxContainer/BuyCoinsPanel/Button" to="." method="_add_coin"]
 [connection signal="button_up" from="VBoxContainer/BuyCoinsPanel/Button" to="." method="add_purchase"]
+[connection signal="button_up" from="VBoxContainer/BuyCoinsPanel/Button" to="." method="_add_coin"]
 [connection signal="button_up" from="VBoxContainer/BuyWeight/Button" to="." method="_add_weight"]
 [connection signal="button_up" from="VBoxContainer/BuyWeight/Button" to="." method="add_purchase"]
 [connection signal="button_up" from="VBoxContainer2/Item1/HBoxContainer/Button" to="VBoxContainer2/Item1" method="_add_item"]
