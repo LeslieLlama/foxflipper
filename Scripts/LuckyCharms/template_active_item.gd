@@ -1,5 +1,7 @@
 extends LuckyCharm
 
+class_name ActiveLuckyCharm
+
 @export var charges = 0
 @export var maxCharges = 0
 var is_useable : bool = false
@@ -41,7 +43,6 @@ func _on_gui_input(event: InputEvent) -> void:
 				_active_use()
 			mouseHold = false
 			
-			
 func _active_use():
 	if is_enabled == false:
 		return
@@ -51,6 +52,7 @@ func _active_use():
 	_activation_animation()
 	charges -= 1
 	_update_charge_counter()
+	
 func _ready_animation():
 	if tween:
 		tween.kill()

@@ -3,7 +3,7 @@ extends LuckyCharm
 
 func AddToScore(coinValues = []):
 	for c in Globals.CoinHistory.size():
-		if check_values(c, coinValues) == true:
+		if check_values(c) == true:
 			await get_tree().create_timer(0.2).timeout
 			print("Switchblade Comb Trigger!")
 			_activation_animation()
@@ -14,7 +14,7 @@ func AddToScore(coinValues = []):
 			Signals.emit_signal("PopupMessage", str(coinValues[c]),pos,new_pos,colorBlue)
 	return coinValues
 	
-func check_values(c,coinValues = []):
+func check_values(c):
 	if c-1 < 0 or c == Globals.CoinHistory.size()-1:
 		return false
 	if Globals.CoinHistory[c-1] == Globals.CoinHistory[c]:
