@@ -327,9 +327,9 @@ layout_mode = 1
 
 [connection signal="button_up" from="VBoxContainer/BuyPointsPanel/Button" to="." method="_add_points"]
 [connection signal="button_up" from="VBoxContainer/BuyPointsPanel/Button" to="." method="add_purchase"]
-[connection signal="button_up" from="VBoxContainer/BuyCoinsPanel/Button" to="." method="add_purchase"]
 [connection signal="button_up" from="VBoxContainer/BuyCoinsPanel/Button" to="." method="_add_coin"]
-[connection signal="button_up" from="VBoxContainer/BuyWeight/Button" to="." method="_add_weight"]
+[connection signal="button_up" from="VBoxContainer/BuyCoinsPanel/Button" to="." method="add_purchase"]
 [connection signal="button_up" from="VBoxContainer/BuyWeight/Button" to="." method="add_purchase"]
+[connection signal="button_up" from="VBoxContainer/BuyWeight/Button" to="." method="_add_weight"]
 [connection signal="button_up" from="VBoxContainer2/Item1/HBoxContainer/Button" to="VBoxContainer2/Item1" method="_add_item"]
 [connection signal="button_up" from="VBoxContainer2/Item2/HBoxContainer/Button" to="VBoxContainer2/Item2" method="_add_item"]

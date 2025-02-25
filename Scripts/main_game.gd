@@ -13,6 +13,8 @@ var CurrentGameState = GameState.MENU
 
 var coinTween
 
+var coinFullSize : Vector2 = Vector2(0.7,0.7)
+var coinFlatSize : Vector2 = Vector2(0.7,0)
 
 var colorRed = Color("D0665A")
 var colorBlue = Color("65A7C1")
@@ -33,6 +35,7 @@ var highest_score : int
 @export var RoundScoreLabel : Label
 @export var RequiredScoreLabel : Label
 @export var SpeechBubble : TextureRect
+@export var credits : Label
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -87,17 +90,17 @@ func _reset_node_positions():
 func resize():
 	var ensize = get_viewport_rect().size
 	if ensize.x > (size.y-400): #horizontal 
-		$LayoutBox.vertical = false
-		$LayoutBox/Left/HistoryZone.vertical = true
-		$LayoutBox/Left/SpacerPanel.show()
-		$LayoutBox/Left.size_flags_stretch_ratio = 1
-		$LayoutBox/Left/HistoryZone.move_child($LayoutBox/Left/HistoryZone/ItemZone, 0)
+		$Layoutbox/Bottom.vertical = false
+		$Layoutbox/Bottom/Left/HistoryZone.vertical = true
+		#$LayoutBox/Left/SpacerPanel.show()
+		$Layoutbox/Bottom/Left.size_flags_stretch_ratio = 1
+		$Layoutbox/Bottom/Left/HistoryZone.move_child($Layoutbox/Bottom/Left/HistoryZone/ItemZone, 0)
 	else: #Vertical
-		$LayoutBox.vertical = true 
-		$LayoutBox/Left/HistoryZone.vertical = false
-		$LayoutBox/Left/SpacerPanel.hide()
-		$LayoutBox/Left.size_flags_stretch_ratio = 0.6
-		$LayoutBox/Left/HistoryZone.move_child($LayoutBox/Left/HistoryZone/ItemZone, 1)
+		$Layoutbox/Bottom.vertical = true 
+		$Layoutbox/Bottom/Left/HistoryZone.vertical = false
+		#$LayoutBox/Left/SpacerPanel.hide()
+		$Layoutbox/Bottom/Left.size_flags_stretch_ratio = 0.6
+		$Layoutbox/Bottom/Left/HistoryZone.move_child($Layoutbox/Bottom/Left/HistoryZone/ItemZone, 1)
 
 	if CurrentGameState != GameState.SHOP:
 		ShopPanel.position = Vector2(ShopAnchor.position.x+ShopPanel.size.x,0)
@@ -147,10 +150,10 @@ func _title_animation(is_show : bool):
 		var ensize = get_viewport_rect().size
 		var top = ensize.y + TitleAnchor.position.y
 		_generic_move_tween(Title,Vector2(TitleAnchor.position.x,-top))
-		$LayoutBox/Right/Credits.hide()
+		credits.hide()
 	else: 
 		_generic_move_tween(Title,TitleAnchor.position)
-		$LayoutBox/Right/Credits.show()
+		credits.show()
 		
 func _on_HelpButton_toggled(toggled_on: bool) -> void:
 	if toggled_on == true: #show
@@ -171,22 +174,22 @@ func _coin_flip_animation(heads : bool):
 		coinTween.kill()
 	coinTween = get_tree().create_tween().bind_node(self)
 	if heads == true:
-		coinTween.tween_property(CoinTailsSide, "scale", Vector2(0.8,0), 0.1).set_trans(Tween.TRANS_QUINT)
+		coinTween.tween_property(CoinTailsSide, "scale", coinFlatSize, 0.1).set_trans(Tween.TRANS_QUINT)
+		coinTween.tween_property(CoinHeadsSide, "scale", coinFullSize, 0.1).set_trans(Tween.TRANS_QUINT)
+		coinTween.tween_property(CoinHeadsSide, "scale", coinFlatSize, 0.1).set_trans(Tween.TRANS_QUINT)
+		coinTween.tween_property(CoinTailsSide, "scale", coinFullSize, 0.1).set_trans(Tween.TRANS_QUINT)
+		coinTween.tween_property(CoinTailsSide, "scale", coinFlatSize, 0.2).set_trans(Tween.TRANS_QUINT)
 		coinTween.tween_property(CoinHeadsSide, "scale", Vector2(0.8,0.8), 0.1).set_trans(Tween.TRANS_QUINT)
-		coinTween.tween_property(CoinHeadsSide, "scale", Vector2(0.8,0), 0.1).set_trans(Tween.TRANS_QUINT)
-		coinTween.tween_property(CoinTailsSide, "scale", Vector2(0.8,0.8), 0.1).set_trans(Tween.TRANS_QUINT)
-		coinTween.tween_property(CoinTailsSide, "scale", Vector2(0.8,0), 0.2).set_trans(Tween.TRANS_QUINT)
-		coinTween.tween_property(CoinHeadsSide, "scale", Vector2(0.9,0.9), 0.1).set_trans(Tween.TRANS_QUINT)
-		coinTween.tween_property(CoinHeadsSide, "scale", Vector2(0.8,0.8), 0.2).set_trans(Tween.TRANS_QUINT)
+		coinTween.tween_property(CoinHeadsSide, "scale", coinFullSize, 0.2).set_trans(Tween.TRANS_QUINT)
 		coinTween.tween_callback(_update_coin_history)
 	else: 
-		coinTween.tween_property(CoinHeadsSide, "scale", Vector2(0.8,0), 0.1).set_trans(Tween.TRANS_QUINT)
+		coinTween.tween_property(CoinHeadsSide, "scale", coinFlatSize, 0.1).set_trans(Tween.TRANS_QUINT)
+		coinTween.tween_property(CoinTailsSide, "scale", coinFullSize, 0.1).set_trans(Tween.TRANS_QUINT)
+		coinTween.tween_property(CoinTailsSide, "scale", coinFlatSize, 0.1).set_trans(Tween.TRANS_QUINT)
+		coinTween.tween_property(CoinHeadsSide, "scale", coinFullSize, 0.1).set_trans(Tween.TRANS_QUINT)
+		coinTween.tween_property(CoinHeadsSide, "scale", coinFlatSize, 0.2).set_trans(Tween.TRANS_QUINT)
 		coinTween.tween_property(CoinTailsSide, "scale", Vector2(0.8,0.8), 0.1).set_trans(Tween.TRANS_QUINT)
-		coinTween.tween_property(CoinTailsSide, "scale", Vector2(0.8,0), 0.1).set_trans(Tween.TRANS_QUINT)
-		coinTween.tween_property(CoinHeadsSide, "scale", Vector2(0.8,0.8), 0.1).set_trans(Tween.TRANS_QUINT)
-		coinTween.tween_property(CoinHeadsSide, "scale", Vector2(0.8,0), 0.2).set_trans(Tween.TRANS_QUINT)
-		coinTween.tween_property(CoinTailsSide, "scale", Vector2(0.9,0.9), 0.1).set_trans(Tween.TRANS_QUINT)
-		coinTween.tween_property(CoinTailsSide, "scale", Vector2(0.8,0.8), 0.2).set_trans(Tween.TRANS_QUINT)
+		coinTween.tween_property(CoinTailsSide, "scale", coinFullSize, 0.2).set_trans(Tween.TRANS_QUINT)
 		coinTween.tween_callback(_update_coin_history)
 		
 func _update_coin_history():
@@ -197,7 +200,7 @@ func _on_re_do_coin_button_button_up() -> void:
 		
 func flip_coin(is_reflip : bool):
 	Globals.coinsToThrow -= 1
-	$LayoutBox/Center/LargeCoinZone/CoinCount.text = str("Coins:\nx",Globals.coinsToThrow)
+	$Layoutbox/Bottom/Center/LargeCoinZone/CoinCount.text = str("Coins:\nx",Globals.coinsToThrow)
 	if is_reflip == true:
 		Globals.CoinHistory.pop_back()
 		reflipCount -= 1

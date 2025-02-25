@@ -17,6 +17,7 @@ TotalPoints = NodePath("TotalPoints")
 SplitPoints = NodePath("SplitPoints")
 
 [node name="Title" type="Label" parent="."]
+visible = false
 modulate = Color(0.815686, 0.396078, 0.34902, 1)
 layout_mode = 1
 anchors_preset = 5
