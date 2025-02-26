@@ -34,11 +34,18 @@ func _remove_item(_item : Control):
 	Globals.itemNum -= 1
 
 func scoring_sequence():
+	for i in items: 
+		if i != null and i.current_type == Globals.item_type.IMMEDIATE:
+			await i.ImmediateEffect()
 	Globals.CoinValues = await add_wager_to_coins()
 	for i in items:
-		if i != null:
+		if i != null and i.current_type == Globals.item_type.ADDITION:
 			Globals.CoinValues = await i.AddToScore(Globals.CoinValues)
-	coin_pattern_searcher()
+	await coin_pattern_searcher()
+	for i in items: 
+		if i != null and i.current_type == Globals.item_type.POST_RUN:
+			await i.MultiplyScore()
+	Signals.emit_signal("AllCoinsScored")
 	
 func add_wager_to_coins():
 	Globals.CoinValues.clear()
@@ -87,7 +94,7 @@ func coin_pattern_searcher():
 				pattern_payoff(runCount, runArray,c+1,colorRed)
 			runCount = 1
 			runArray.clear()
-	Signals.emit_signal("AllCoinsScored")
+	
 	print(str("Coin Values : ",Globals.CoinValues))
 	
 func pattern_payoff(runCount : int, runArray, c : int, colorToUse : Color):

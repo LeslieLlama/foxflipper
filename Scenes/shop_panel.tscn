@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bil8em6cgriyo"]
+[gd_scene load_steps=17 format=3 uid="uid://bil8em6cgriyo"]
 
 [ext_resource type="Theme" uid="uid://dsk5olnx1e77u" path="res://FancyTheme.tres" id="1_28apw"]
 [ext_resource type="Script" path="res://Scripts/shop_panel.gd" id="2_w6x2w"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://c34llx7e7sl0n" path="res://Scenes/Lucky_Charms/ufo_charm.tscn" id="12_1wtim"]
 [ext_resource type="PackedScene" uid="uid://dn2fgscby15kw" path="res://Scenes/Lucky_Charms/wet_matches.tscn" id="13_vmlhg"]
 [ext_resource type="PackedScene" uid="uid://dpw5tk0uab5p1" path="res://Scenes/Lucky_Charms/act_spatula_head.tscn" id="14_fxn1g"]
+[ext_resource type="PackedScene" uid="uid://b8cww7l0aqu2b" path="res://Scenes/Lucky_Charms/toy_boomerang.tscn" id="15_synq4"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_geymj"]
 bg_color = Color(0.870588, 0.666667, 0.54902, 1)
@@ -246,6 +247,14 @@ theme_override_font_sizes/font_size = 60
 text = "+"
 metadata/_edit_use_anchors_ = true
 
+[node name="ACT_spatula_head" parent="." instance=ExtResource("14_fxn1g")]
+visible = false
+layout_mode = 1
+offset_left = -635.5
+offset_top = -606.5
+offset_right = -496.5
+offset_bottom = -467.5
+
 [node name="Wet Matches" parent="." instance=ExtResource("13_vmlhg")]
 visible = false
 layout_mode = 1
@@ -322,14 +331,15 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="ACT_spatula_head" parent="ItemPool" instance=ExtResource("14_fxn1g")]
+[node name="toy_boomerang" parent="ItemPool" instance=ExtResource("15_synq4")]
+visible = false
 layout_mode = 1
 
 [connection signal="button_up" from="VBoxContainer/BuyPointsPanel/Button" to="." method="_add_points"]
 [connection signal="button_up" from="VBoxContainer/BuyPointsPanel/Button" to="." method="add_purchase"]
 [connection signal="button_up" from="VBoxContainer/BuyCoinsPanel/Button" to="." method="_add_coin"]
 [connection signal="button_up" from="VBoxContainer/BuyCoinsPanel/Button" to="." method="add_purchase"]
-[connection signal="button_up" from="VBoxContainer/BuyWeight/Button" to="." method="add_purchase"]
 [connection signal="button_up" from="VBoxContainer/BuyWeight/Button" to="." method="_add_weight"]
+[connection signal="button_up" from="VBoxContainer/BuyWeight/Button" to="." method="add_purchase"]
 [connection signal="button_up" from="VBoxContainer2/Item1/HBoxContainer/Button" to="VBoxContainer2/Item1" method="_add_item"]
 [connection signal="button_up" from="VBoxContainer2/Item2/HBoxContainer/Button" to="VBoxContainer2/Item2" method="_add_item"]

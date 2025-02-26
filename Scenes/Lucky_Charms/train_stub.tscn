@@ -9,6 +9,7 @@ script = ExtResource("2_7pcr1")
 Name = "Train Ticket Stub"
 Icon = ExtResource("3_38ddy")
 Description = "Coin weight can be adjusted during flipping"
+current_type = 3
 
 [node name="TextureRect" parent="." index="0"]
 texture = ExtResource("3_38ddy")

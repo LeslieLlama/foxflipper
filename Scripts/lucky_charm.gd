@@ -5,6 +5,7 @@ class_name LuckyCharm
 @export var Name : String
 @export var Icon : Texture2D
 @export_multiline var Description : String
+@export var SequenceSymbol : Label
 var tween
 var colorRed = Color("D0665A")
 var colorBlue = Color("65A7C1")
@@ -12,10 +13,21 @@ var mouseHold : bool = false
 var destructionProgress = 0
 var is_enabled = false
 
+
+@export var current_type = Globals.item_type.ADDITION
+
+func _ready() -> void:
+	assign_seq_sym()
+
+func ImmediateEffect():
+	print("activating pre-wager item effect")
+
 func AddToScore(coinValues = []):
 	print("coin values accepted!")
-	#_activation_animation()
 	return coinValues
+	
+func MultiplyScore():
+	print("multiplying score by condition...")
 	
 func _process(_delta: float) -> void:
 	if is_enabled == false: 
@@ -56,3 +68,16 @@ func _on_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed == false:
 		if event.button_index == MOUSE_BUTTON_LEFT :
 			mouseHold = false
+			
+#IMMEDIATE, ADDITION, POST_RUN, UTILITY
+func assign_seq_sym():
+	match current_type:
+		Globals.item_type.IMMEDIATE:
+			SequenceSymbol.text = "!"
+		Globals.item_type.ADDITION:
+			SequenceSymbol.text = "#"
+		Globals.item_type.POST_RUN:
+			SequenceSymbol.text = "*"
+		Globals.item_type.UTILITY:
+			SequenceSymbol.text = "@"
+		

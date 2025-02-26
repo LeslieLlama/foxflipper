@@ -9,6 +9,7 @@ script = ExtResource("2_3h5sw")
 Name = "Spatula Head (Active)"
 Icon = ExtResource("3_imi25")
 Description = "Click this item 1 time(s) per turn to flip the previous coin value to the opposite value "
+current_type = 3
 
 [node name="TextureRect" parent="." index="0"]
 texture = ExtResource("3_imi25")

@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://tgc6c4jx84gg" path="res://Sprites/Items_null.png" id="4_rg78n"]
 [ext_resource type="Texture2D" uid="uid://d0fhy1u2s5yap" path="res://Sprites/RadialProgressRed.png" id="4_uc5ph"]
 
-[node name="Template" type="Control"]
+[node name="Template" type="Control" node_paths=PackedStringArray("SequenceSymbol")]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -25,6 +25,7 @@ script = ExtResource("2_jx5r1")
 Name = "Empty"
 Icon = ExtResource("4_rg78n")
 Description = "Items can be purchased from the store"
+SequenceSymbol = NodePath("SequenceSymbolLabel")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 1
@@ -55,6 +56,23 @@ max_value = 200.0
 fill_mode = 4
 nine_patch_stretch = true
 texture_progress = ExtResource("4_uc5ph")
+
+[node name="SequenceSymbolLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -28.0
+offset_top = -29.0
+offset_right = 1.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.870588, 0.666667, 0.54902, 1)
+text = "n"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="gui_input" from="." to="." method="_on_gui_input"]
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]

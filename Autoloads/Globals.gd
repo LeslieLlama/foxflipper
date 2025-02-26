@@ -17,6 +17,7 @@ var headsThreshhold : float = 0.5
 var totalWeight = 0.05
 
 #var LuckyCharms = []
+enum item_type {IMMEDIATE, ADDITION, POST_RUN, UTILITY}
 
 var purchases = 0
 var maxPurchases = 2
