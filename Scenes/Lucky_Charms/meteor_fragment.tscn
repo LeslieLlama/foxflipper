@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://d3af7hsqi26cr"]
+
+[ext_resource type="PackedScene" uid="uid://c5gtsyminudgp" path="res://Scenes/Lucky_Charms/template.tscn" id="1_plqe6"]
+[ext_resource type="Script" path="res://meteor_fragment.gd" id="2_t8mee"]
+
+[node name="meteor_fragment" instance=ExtResource("1_plqe6")]
+script = ExtResource("2_t8mee")
+Name = "Meteor Fragment"
+Description = "Coins gain value = the inverse of their chance of flipping. (ie heads with a 45% chance will award 55 value)"
+
+[node name="TextureRect" parent="." index="0"]
+modulate = Color(0.335737, 0.277248, 0.977192, 1)

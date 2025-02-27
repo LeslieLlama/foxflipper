@@ -227,7 +227,6 @@ func flip_coin(is_reflip : bool):
 		ReDoCoinButton.disabled = true
 	Signals.emit_signal("FlipCoin", Globals.coinCount)
 
-
 func pop_up_message(textToSay : String, pos : Vector2, move_to : Vector2, textColour : Color):
 	var message = Label.new()
 	message.text = textToSay

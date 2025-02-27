@@ -1,12 +1,18 @@
 extends LuckyCharm
 
-	
+var used : bool = false
+
+func _ready() -> void:
+	assign_seq_sym()
+	Signals.ResetTable.connect(_reset_table)
+
 func MultiplyScore():
+	if used == true:
+		return
 	print("boomerang trigger")
-	Globals.currentScore *= 2
+	Signals.emit_signal("ScoreCoins")
+	used = true
 	_activation_animation()
-	Signals.emit_signal("AddPointsToCoin") #for now use the add points to coin sound
-	#coinValues[c] = coinValues[c] + (Globals.headsValue * heads_count)
-	#var pos : Vector2 = Vector2(Globals.CoinHistorySprites[(c)].global_position.x,Globals.CoinHistorySprites[(c)].global_position.y+40)
-	#var new_pos : Vector2 = Vector2(pos.x, pos.y+50)
-	#Signals.emit_signal("PopupMessage", str(coinValues[c]),pos,new_pos,colorBlue)
+
+func _reset_table():
+	used = false
