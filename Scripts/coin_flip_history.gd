@@ -58,7 +58,7 @@ func _add_coin():
 	child_node.custom_minimum_size = Vector2(75,75)
 	child_node.expand_mode = TextureRect.EXPAND_FIT_WIDTH
 	child_node.stretch_mode = TextureRect.STRETCH_SCALE
-	child_node.Assign_number(Globals.coinsToThrow)
+	child_node.Assign_number(Globals.maxCoinCount)
 	#child_node.connect("mouse_entered",_coin_tooltip)
 	#child_node.mouse_entered.connect(_coin_tooltip.bind(child_node))
 	#player.hit.connect(_on_player_hit.bind("sword", 100))

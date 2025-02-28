@@ -11,12 +11,16 @@ func _ready() -> void:
 	Signals.PurchaseItem.connect(add_item)
 	Signals.RemoveItem.connect(_remove_item)
 	Signals.ResetGame.connect(_reset_game)
+	Signals.ResetTable.connect(_reset_table)
 
 func _reset_game():
 	for i in items:
 		i.queue_free()
 	items.clear()
 	Globals.itemNum = 0
+	
+func _reset_table():
+	Globals.CoinValues.clear()
 
 func add_item(new_item : Control):
 	#if items.size() >= 2:

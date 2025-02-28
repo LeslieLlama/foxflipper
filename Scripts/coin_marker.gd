@@ -11,19 +11,24 @@ func _on_mouse_exited() -> void:
 	Signals.emit_signal("Mouse_End")
 	
 func coinSide():
-	if Globals.CoinHistory.size() <= numInSequence-1:
-		return "Empty Coin Slot"
-	if Globals.CoinValues.size() < numInSequence-1:
+	if Globals.coinsToThrow + Globals.coinCount < numInSequence:
 		return "Busted Coin"
-	if Globals.CoinHistory[numInSequence-1] == 1:
+	elif Globals.CoinHistory.size() < numInSequence:
+		return "Empty Coin Slot"	
+	elif Globals.CoinHistory[numInSequence-1] == 1:
 		return "Heads"
-	else:
+	elif Globals.CoinHistory[numInSequence-1] == 0:
 		return "Tails"
+	else:
+		return "calc error"
+	
 	
 func coinValue():
-	if Globals.CoinValues.is_empty() == true:
+	if Globals.CoinValues.is_empty():
 		return "Not Yet Scored"
-	elif numInSequence-1 > Globals.CoinValues.size():
+	if Globals.coinsToThrow + Globals.coinCount < numInSequence:
 		return str("A reflip has been used, reducing the maxiumum coin count")
+	elif Globals.CoinHistory.size() < numInSequence:
+		return "Not Yet Scored"
 	else: 
 		return str("Value : ",Globals.CoinValues[numInSequence-1])
