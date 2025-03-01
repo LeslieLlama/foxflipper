@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://c5gtsyminudgp" path="res://Scenes/Lucky_Charms/template.tscn" id="1_2eb5b"]
 [ext_resource type="Script" path="res://Scripts/LuckyCharms/train_stub.gd" id="2_7pcr1"]
-[ext_resource type="Texture2D" uid="uid://ctkd1kyw1os4l" path="res://Sprites/items_trainTicketStub.png" id="3_38ddy"]
+[ext_resource type="Texture2D" uid="uid://ctkd1kyw1os4l" path="res://Sprites/lucky_charms/items_trainTicketStub.png" id="3_38ddy"]
 
 [node name="Train_Stub" instance=ExtResource("1_2eb5b")]
 script = ExtResource("2_7pcr1")

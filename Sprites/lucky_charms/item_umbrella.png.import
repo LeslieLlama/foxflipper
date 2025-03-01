@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dvb4n4sj8i755"
-path="res://.godot/imported/item_boomerang.png-ab65561e7392708ffdb156e4649bfca8.ctex"
+uid="uid://by67wheekph8h"
+path="res://.godot/imported/item_umbrella.png-0e6f2cf78eebd6871bbce8d1574f83a0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/item_boomerang.png"
-dest_files=["res://.godot/imported/item_boomerang.png-ab65561e7392708ffdb156e4649bfca8.ctex"]
+source_file="res://Sprites/lucky_charms/item_umbrella.png"
+dest_files=["res://.godot/imported/item_umbrella.png-0e6f2cf78eebd6871bbce8d1574f83a0.ctex"]
 
 [params]
 

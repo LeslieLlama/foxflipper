@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://c5gtsyminudgp" path="res://Scenes/Lucky_Charms/template.tscn" id="1_008n3"]
 [ext_resource type="Script" path="res://Scripts/LuckyCharms/birthday_candle.gd" id="2_xxs8h"]
-[ext_resource type="Texture2D" uid="uid://fhulm2mqdimo" path="res://Sprites/item_birthdayCandle.png" id="3_arwts"]
+[ext_resource type="Texture2D" uid="uid://fhulm2mqdimo" path="res://Sprites/lucky_charms/item_birthdayCandle.png" id="3_arwts"]
 
 [node name="birthday_candle" instance=ExtResource("1_008n3")]
 script = ExtResource("2_xxs8h")

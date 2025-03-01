@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://by67wheekph8h"
-path="res://.godot/imported/item_umbrella.png-aa4fce508401f3e7d000f345730b332c.ctex"
+uid="uid://cpu1uw25x5efk"
+path="res://.godot/imported/item_meteor_fragment.png-6e6a9335b98f336cfa68b1eae279209a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/item_umbrella.png"
-dest_files=["res://.godot/imported/item_umbrella.png-aa4fce508401f3e7d000f345730b332c.ctex"]
+source_file="res://Sprites/lucky_charms/item_meteor_fragment.png"
+dest_files=["res://.godot/imported/item_meteor_fragment.png-6e6a9335b98f336cfa68b1eae279209a.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://3khmb1e2yfg1"
-path="res://.godot/imported/item_snakeEye.png-c3e84864fd28e518df734ee44466bfe3.ctex"
+uid="uid://c73kay71o7pb2"
+path="res://.godot/imported/item_mini_pinball.png-fbe26728f4376f5f34df154195c257e4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/item_snakeEye.png"
-dest_files=["res://.godot/imported/item_snakeEye.png-c3e84864fd28e518df734ee44466bfe3.ctex"]
+source_file="res://Sprites/lucky_charms/item_mini_pinball.png"
+dest_files=["res://.godot/imported/item_mini_pinball.png-fbe26728f4376f5f34df154195c257e4.ctex"]
 
 [params]
 

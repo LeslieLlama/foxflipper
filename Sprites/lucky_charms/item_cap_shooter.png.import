@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bbf1wkp30uhnt"
-path="res://.godot/imported/Items_Bottlecap.png-dbe1cae4844c6502139f948e6337a405.ctex"
+uid="uid://c3ql5k77ymshr"
+path="res://.godot/imported/item_cap_shooter.png-ee46e341f6763a7a82c75bcbb08dd854.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Items_Bottlecap.png"
-dest_files=["res://.godot/imported/Items_Bottlecap.png-dbe1cae4844c6502139f948e6337a405.ctex"]
+source_file="res://Sprites/lucky_charms/item_cap_shooter.png"
+dest_files=["res://.godot/imported/item_cap_shooter.png-ee46e341f6763a7a82c75bcbb08dd854.ctex"]
 
 [params]
 

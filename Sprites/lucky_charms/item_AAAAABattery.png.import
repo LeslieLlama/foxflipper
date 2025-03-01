@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c6oqqdyxxflnt"
-path="res://.godot/imported/item_wetMatches.png-47909e31dbdfa45a86fd7c6b30831ece.ctex"
+uid="uid://bj27qw0p3ck1d"
+path="res://.godot/imported/item_AAAAABattery.png-bdc6fd3fdaca9e56e3424799eb06d152.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/item_wetMatches.png"
-dest_files=["res://.godot/imported/item_wetMatches.png-47909e31dbdfa45a86fd7c6b30831ece.ctex"]
+source_file="res://Sprites/lucky_charms/item_AAAAABattery.png"
+dest_files=["res://.godot/imported/item_AAAAABattery.png-bdc6fd3fdaca9e56e3424799eb06d152.ctex"]
 
 [params]
 

@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://c5gtsyminudgp" path="res://Scenes/Lucky_Charms/template.tscn" id="1_nmtv8"]
 [ext_resource type="Script" path="res://Scripts/LuckyCharms/snake_eye.gd" id="2_t7r6h"]
-[ext_resource type="Texture2D" uid="uid://3khmb1e2yfg1" path="res://Sprites/item_snakeEye.png" id="3_gn0yw"]
+[ext_resource type="Texture2D" uid="uid://3khmb1e2yfg1" path="res://Sprites/lucky_charms/item_snakeEye.png" id="3_gn0yw"]
 
 [node name="snake_eye" instance=ExtResource("1_nmtv8")]
 script = ExtResource("2_t7r6h")

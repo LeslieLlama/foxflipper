@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://c5gtsyminudgp" path="res://Scenes/Lucky_Charms/template.tscn" id="1_l12c8"]
 [ext_resource type="Script" path="res://Scripts/wet_matches.gd" id="2_7umu0"]
-[ext_resource type="Texture2D" uid="uid://c6oqqdyxxflnt" path="res://Sprites/item_wetMatches.png" id="3_hmws6"]
+[ext_resource type="Texture2D" uid="uid://c6oqqdyxxflnt" path="res://Sprites/lucky_charms/item_wetMatches.png" id="3_hmws6"]
 
 [node name="Wet Matches" instance=ExtResource("1_l12c8")]
 script = ExtResource("2_7umu0")

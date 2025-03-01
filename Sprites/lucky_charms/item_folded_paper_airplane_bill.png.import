@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://fhulm2mqdimo"
-path="res://.godot/imported/item_birthdayCandle.png-f92bb35346e9ec792415f09a5b342878.ctex"
+uid="uid://nxe3uwk1jw05"
+path="res://.godot/imported/item_folded_paper_airplane_bill.png-dce60cfbb9fc1f04545281cb589eff7f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/item_birthdayCandle.png"
-dest_files=["res://.godot/imported/item_birthdayCandle.png-f92bb35346e9ec792415f09a5b342878.ctex"]
+source_file="res://Sprites/lucky_charms/item_folded_paper_airplane_bill.png"
+dest_files=["res://.godot/imported/item_folded_paper_airplane_bill.png-dce60cfbb9fc1f04545281cb589eff7f.ctex"]
 
 [params]
 

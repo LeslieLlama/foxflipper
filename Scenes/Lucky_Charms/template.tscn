@@ -2,7 +2,7 @@
 
 [ext_resource type="Theme" uid="uid://dsk5olnx1e77u" path="res://FancyTheme.tres" id="1_ir6qt"]
 [ext_resource type="Script" path="res://Scripts/lucky_charm.gd" id="2_jx5r1"]
-[ext_resource type="Texture2D" uid="uid://tgc6c4jx84gg" path="res://Sprites/Items_null.png" id="4_rg78n"]
+[ext_resource type="Texture2D" uid="uid://tgc6c4jx84gg" path="res://Sprites/lucky_charms/Items_null.png" id="4_rg78n"]
 [ext_resource type="Texture2D" uid="uid://d0fhy1u2s5yap" path="res://Sprites/RadialProgressRed.png" id="4_uc5ph"]
 
 [node name="Template" type="Control" node_paths=PackedStringArray("SequenceSymbol")]

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bj27qw0p3ck1d"
-path="res://.godot/imported/item_AAAAABattery.png-1f6310554e6f29d33ab9e8d8822d01ca.ctex"
+uid="uid://diqt642pul7ff"
+path="res://.godot/imported/item_moai_head.png-50a36d6d7c4765fa0bdf18f73be0def7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/item_AAAAABattery.png"
-dest_files=["res://.godot/imported/item_AAAAABattery.png-1f6310554e6f29d33ab9e8d8822d01ca.ctex"]
+source_file="res://Sprites/lucky_charms/item_moai_head.png"
+dest_files=["res://.godot/imported/item_moai_head.png-50a36d6d7c4765fa0bdf18f73be0def7.ctex"]
 
 [params]
 

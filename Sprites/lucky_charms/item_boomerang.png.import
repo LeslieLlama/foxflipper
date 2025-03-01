@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b1frc6l261eyu"
-path="res://.godot/imported/items_emojiBracelet.png-6ac85ec37ae7457a28822b425a52d439.ctex"
+uid="uid://dvb4n4sj8i755"
+path="res://.godot/imported/item_boomerang.png-31c04c6a803e6cc86c8f1f088ade6548.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/items_emojiBracelet.png"
-dest_files=["res://.godot/imported/items_emojiBracelet.png-6ac85ec37ae7457a28822b425a52d439.ctex"]
+source_file="res://Sprites/lucky_charms/item_boomerang.png"
+dest_files=["res://.godot/imported/item_boomerang.png-31c04c6a803e6cc86c8f1f088ade6548.ctex"]
 
 [params]
 
