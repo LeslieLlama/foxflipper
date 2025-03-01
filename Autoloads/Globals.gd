@@ -22,3 +22,6 @@ enum item_type {IMMEDIATE, ADDITION, POST_RUN, UTILITY}
 var purchases = 0
 var maxPurchases = 2
 var itemNum = 0
+
+var score_loop = 1
+var reverse_score_direction = false

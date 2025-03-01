@@ -8,7 +8,7 @@
 script = ExtResource("2_xa1aj")
 Name = "Toy Boomerang"
 Icon = ExtResource("3_rk222")
-Description = "Score coins again, in reverse! "
+Description = "Score coins 1 more time, in reverse!"
 current_type = 2
 
 [node name="TextureRect" parent="." index="0"]

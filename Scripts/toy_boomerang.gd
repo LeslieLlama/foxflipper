@@ -7,12 +7,17 @@ func _ready() -> void:
 	Signals.ResetTable.connect(_reset_table)
 
 func MultiplyScore():
+	Globals.reverse_score_direction = false
 	if used == true:
 		return
 	print("boomerang trigger")
-	Signals.emit_signal("ScoreCoins")
+	Globals.score_loop += 1
+	Globals.reverse_score_direction = true
 	used = true
 	_activation_animation()
+	
 
 func _reset_table():
 	used = false
+	Globals.score_loop = 1
+	Globals.reverse_score_direction = false

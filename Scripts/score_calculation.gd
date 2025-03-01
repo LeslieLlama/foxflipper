@@ -5,6 +5,7 @@ extends Control
 var colorRed = Color("D0665A")
 var colorBlue = Color("65A7C1")
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Signals.ScoreCoins.connect(scoring_sequence)
@@ -37,34 +38,58 @@ func _remove_item(_item : Control):
 	items.erase(_item)
 	Globals.itemNum -= 1
 
+#surely there has to be a better way to change the order of a functions operation based on a bool than this branching if statement. 
 func scoring_sequence():
-	for i in items: 
-		if i != null and i.current_type == Globals.item_type.IMMEDIATE:
-			await i.ImmediateEffect()
-	Globals.CoinValues = await add_wager_to_coins()
-	for i in items:
-		if i != null and i.current_type == Globals.item_type.ADDITION:
-			Globals.CoinValues = await i.AddToScore(Globals.CoinValues)
-	await coin_pattern_searcher()
-	for i in items: 
-		if i != null and i.current_type == Globals.item_type.POST_RUN:
-			await i.MultiplyScore()
+	var y = 0
+	if Globals.reverse_score_direction == true:
+		while y < Globals.score_loop:
+			for i in items: 
+				if i != null and i.current_type == Globals.item_type.POST_RUN:
+					await i.MultiplyScore()
+			for i in items:
+				if i != null and i.current_type == Globals.item_type.ADDITION:
+					Globals.CoinValues = await i.AddToScore(Globals.CoinValues)
+			for i in items: #nested loops seems like it could induce overhead, but since the current item max is like, two, I think it's fine. 
+				if i != null and i.current_type == Globals.item_type.IMMEDIATE:
+					await i.ImmediateEffect()
+			Globals.CoinValues = await add_wager_to_coins()
+			await coin_pattern_searcher()
+			y += 1
+	else:
+		while y < Globals.score_loop:
+			for i in items: 
+				if i != null and i.current_type == Globals.item_type.IMMEDIATE:
+					await i.ImmediateEffect()
+			Globals.CoinValues = await add_wager_to_coins()
+			for i in items:
+				if i != null and i.current_type == Globals.item_type.ADDITION:
+					Globals.CoinValues = await i.AddToScore(Globals.CoinValues)
+			await coin_pattern_searcher()
+			for i in items: 
+				if i != null and i.current_type == Globals.item_type.POST_RUN:
+					await i.MultiplyScore()
+			y += 1
 	Signals.emit_signal("AllCoinsScored")
 	
 func add_wager_to_coins():
 	Globals.CoinValues.clear()
 	for c in Globals.CoinHistory.size():
 		await get_tree().create_timer(0.1).timeout
-		var negative_c = (Globals.CoinHistory.size()-1) - c
-		var pos : Vector2 = Vector2(Globals.CoinHistorySprites[(negative_c)].global_position.x,Globals.CoinHistorySprites[(negative_c)].global_position.y+40)
+		var coin = 0
+		if Globals.reverse_score_direction == false:
+			coin = (Globals.CoinHistory.size()-1) - c
+		else: 
+			coin = c
+		#var negative_c = (Globals.CoinHistory.size()-1) - c
+		var pos : Vector2 = Vector2(Globals.CoinHistorySprites[(coin)].global_position.x,Globals.CoinHistorySprites[(coin)].global_position.y+40)
 		var new_pos : Vector2 = Vector2(pos.x, pos.y+50)
-		if Globals.CoinHistory[negative_c] == 0: #tails
+		if Globals.CoinHistory[coin] == 0: #tails
 			Globals.CoinValues.append(Globals.tailsValue)
 			Signals.emit_signal("PopupMessage", str(Globals.CoinValues[c]),pos,new_pos,colorBlue)
 		else: #heads
 			Globals.CoinValues.append(Globals.headsValue)
 			Signals.emit_signal("PopupMessage", str(Globals.CoinValues[c]),pos,new_pos,colorRed)
-		Signals.emit_signal("MiniCoinAnimation",negative_c)
+		Signals.emit_signal("MiniCoinAnimation",coin)
 		Signals.emit_signal("AddPointsToCoin")
 	await get_tree().create_timer(0.3).timeout
 	return Globals.CoinValues
