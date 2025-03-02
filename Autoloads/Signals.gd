@@ -5,7 +5,8 @@ extends Node
 
 signal ResetTable()
 signal ResetGame()
-signal FlipCoin(coin_count : int)
+signal FlipCoin(is_reflip : bool)
+signal FlippedCoin(coin_count : int)
 
 signal PurchasePoints()
 signal PurchaseCoin()

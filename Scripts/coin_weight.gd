@@ -10,7 +10,7 @@ func _ready() -> void:
 	Signals.PurchaseWeight.connect(_add_total_weight)
 	Signals.ResetGame.connect(_reset_game)
 	Signals.ResetTable.connect(_reset_table)
-	Signals.FlipCoin.connect(_flip_coin)
+	Signals.FlippedCoin.connect(_flipped_coin)
 	Signals.HoldingTrainStub.connect(_holding_train_stub)
 	WeightSlider.max_value = startingMax;
 	WeightSlider.min_value = startingMin;
@@ -20,7 +20,7 @@ func _ready() -> void:
 func _reset_table():
 	WeightSlider.editable = true
 
-func _flip_coin(coinCount : int):
+func _flipped_coin(coinCount : int):
 	if adjustDuringPlay == true:
 		return
 	if coinCount > 0:

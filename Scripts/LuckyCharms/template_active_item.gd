@@ -10,6 +10,7 @@ func _ready() -> void:
 	_update_charge_counter()
 	Signals.ResetTable.connect(_reset_table)
 	Signals.ScoreCoins.connect(_score_coins)
+	assign_seq_sym()
 
 func _on_mouse_entered() -> void:
 	Signals.emit_signal("Mouse_Over", Name, Description)

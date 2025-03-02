@@ -43,6 +43,7 @@ func _ready() -> void:
 	Signals.AllCoinsScored.connect(check_round_won)
 	Signals.Mouse_Over.connect(_tool_tip_on)
 	Signals.Mouse_End.connect(_tool_tip_off)
+	Signals.FlipCoin.connect(_flip_coin)
 	for i in 4:
 		Signals.emit_signal("PurchaseCoin")
 	RequiredScoreLabel.text = str(RequiredScore[0])
@@ -123,7 +124,7 @@ func _on_next_coin_button_button_up() -> void:
 			ReDoCoinButton.disabled = true
 			NextCoinButton.text = "Shop"
 			return
-		flip_coin(false)
+		Signals.emit_signal("FlipCoin", false)
 	if CurrentGameState == GameState.SCORING:
 		_shop_animation(true)
 		CurrentGameState = GameState.SHOP
@@ -166,55 +167,12 @@ func _on_HelpButton_toggled(toggled_on: bool) -> void:
 func _generic_move_tween(nodeToMove : Control, whereToMove : Vector2):
 	var tween = get_tree().create_tween().bind_node(self)
 	tween.tween_property(nodeToMove, "position", whereToMove, 1).set_trans(Tween.TRANS_QUINT)
-		
-func _coin_flip_animation(heads : bool):
-	if coinTween:
-		if coinTween.is_running() == true: #if the player mashes the flip button, update the history vissually. and kill/restart the tween. 
-			_update_coin_history()
-		coinTween.kill()
-	coinTween = get_tree().create_tween().bind_node(self)
-	if heads == true:
-		coinTween.tween_property(CoinTailsSide, "scale", coinFlatSize, 0.1).set_trans(Tween.TRANS_QUINT)
-		coinTween.tween_property(CoinHeadsSide, "scale", coinFullSize, 0.1).set_trans(Tween.TRANS_QUINT)
-		coinTween.tween_property(CoinHeadsSide, "scale", coinFlatSize, 0.1).set_trans(Tween.TRANS_QUINT)
-		coinTween.tween_property(CoinTailsSide, "scale", coinFullSize, 0.1).set_trans(Tween.TRANS_QUINT)
-		coinTween.tween_property(CoinTailsSide, "scale", coinFlatSize, 0.2).set_trans(Tween.TRANS_QUINT)
-		coinTween.tween_property(CoinHeadsSide, "scale", Vector2(0.8,0.8), 0.1).set_trans(Tween.TRANS_QUINT)
-		coinTween.tween_property(CoinHeadsSide, "scale", coinFullSize, 0.2).set_trans(Tween.TRANS_QUINT)
-		coinTween.tween_callback(_update_coin_history)
-	else: 
-		coinTween.tween_property(CoinHeadsSide, "scale", coinFlatSize, 0.1).set_trans(Tween.TRANS_QUINT)
-		coinTween.tween_property(CoinTailsSide, "scale", coinFullSize, 0.1).set_trans(Tween.TRANS_QUINT)
-		coinTween.tween_property(CoinTailsSide, "scale", coinFlatSize, 0.1).set_trans(Tween.TRANS_QUINT)
-		coinTween.tween_property(CoinHeadsSide, "scale", coinFullSize, 0.1).set_trans(Tween.TRANS_QUINT)
-		coinTween.tween_property(CoinHeadsSide, "scale", coinFlatSize, 0.2).set_trans(Tween.TRANS_QUINT)
-		coinTween.tween_property(CoinTailsSide, "scale", Vector2(0.8,0.8), 0.1).set_trans(Tween.TRANS_QUINT)
-		coinTween.tween_property(CoinTailsSide, "scale", coinFullSize, 0.2).set_trans(Tween.TRANS_QUINT)
-		coinTween.tween_callback(_update_coin_history)
-		
-func _update_coin_history():
-	Signals.emit_signal("CoinHistoryDisplayUpdate")
 	
 func _on_re_do_coin_button_button_up() -> void:
-	flip_coin(true)
+	Signals.emit_signal("FlipCoin", true)
 		
-func flip_coin(is_reflip : bool):
-	Globals.coinsToThrow -= 1
+func _flip_coin(is_reflip : bool):
 	$Layoutbox/Bottom/Center/LargeCoinZone/CoinCount.text = str("Coins:\nx",Globals.coinsToThrow)
-	if is_reflip == true:
-		Globals.CoinHistory.pop_back()
-		reflipCount -= 1
-		Globals.coinCount -= 1
-	
-	var flip_value = rng.randf_range(0, 1)
-	if flip_value <= Globals.headsThreshhold:
-		_coin_flip_animation(false)
-		Globals.CoinHistory.append(0)
-		Globals.coinCount += 1
-	else: 
-		_coin_flip_animation(true)
-		Globals.CoinHistory.append(1)
-		Globals.coinCount += 1
 	if Globals.coinCount == 1:
 		ReDoCoinButton.disabled = false
 	#update the UI
@@ -225,7 +183,6 @@ func flip_coin(is_reflip : bool):
 	if Globals.coinsToThrow <= 0:
 		NextCoinButton.text = "Score Coins"
 		ReDoCoinButton.disabled = true
-	Signals.emit_signal("FlipCoin", Globals.coinCount)
 
 func pop_up_message(textToSay : String, pos : Vector2, move_to : Vector2, textColour : Color):
 	var message = Label.new()
@@ -309,8 +266,6 @@ func reset_table():
 	CoinAmmount.text = str(Globals.coinCount,"/",Globals.maxCoinCount)
 	NextCoinButton.text = "Flip"
 	_shop_animation(false)
-	
-	
 	CurrentGameState = GameState.MENU
 	
 

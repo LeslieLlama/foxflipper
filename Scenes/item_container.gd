@@ -3,13 +3,9 @@ extends Panel
 class_name ItemContainer
 signal itemBought
 @export var item : LuckyCharm
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
+
 
 func NewItem(newItem : LuckyCharm):
-	#item = newItem
-	#SetDisplay()
 	var child_node = newItem.duplicate()
 	$HBoxContainer.add_child(child_node)
 	$HBoxContainer.move_child(child_node, 0)

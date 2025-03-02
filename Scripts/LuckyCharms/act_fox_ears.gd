@@ -14,11 +14,8 @@ func _active_use():
 	if is_useable == false:
 		return
 	print("item activated")
-	if Globals.CoinHistory[Globals.coinCount-1] == 0:
-		Globals.CoinHistory[Globals.coinCount-1] = 1
-	else: 
-		Globals.CoinHistory[Globals.coinCount-1] = 0
-	Signals.emit_signal("CoinHistoryDisplayUpdate")
+	Globals.coinsToThrow += 1
+	Signals.emit_signal("FlipCoin", true)
 	_activation_animation()
 	charges -= 1
 	_update_charge_counter()
@@ -37,5 +34,15 @@ func _reset_table():
 func _update_charge_counter():
 	$ChargeCounter.text = str("🗲",charges)
 	Description = str(
-		"Click this item, ",charges," time(s) per turn to flip the previous coin value to the opposite value "
+		"Click this item to reflip the last flipped coin, ",charges," times per round"
 	)
+	
+func _activation_animation():
+	if tween:
+		tween.kill()
+	tween = get_tree().create_tween().set_parallel(true).bind_node(self)
+	tween.tween_property($TextureRect, "rotation_degrees", -20, 0.1).set_trans(Tween.TRANS_SPRING)
+	tween.tween_property($TextureRect, "scale", Vector2(1.3,1.3), 0.1).set_trans(Tween.TRANS_SINE)
+	tween.chain().tween_property($TextureRect, "rotation_degrees", 0, 0.1).set_trans(Tween.TRANS_SPRING)
+	tween.tween_property($TextureRect, "scale", Vector2(1,1), 0.1).set_trans(Tween.TRANS_SINE)
+	tween.chain().tween_callback(_coin_flipped.bind(Globals.coinCount))

@@ -12,7 +12,7 @@ var colorBlue = Color("65A7C1")
 
 func _ready() -> void:
 	Signals.ResetTable.connect(_reset_table)
-	Signals.FlipCoin.connect(_flip_coin)
+	Signals.FlippedCoin.connect(_flipped_coin)
 	Signals.PurchasePoints.connect(_add_points)
 	update_coin_betting_ui()
 
@@ -22,7 +22,7 @@ func _reset_table():
 	AddHeads.disabled = false
 	
 	
-func _flip_coin(coinCount : int):
+func _flipped_coin(coinCount : int):
 	if coinCount > 0:
 		AddTails.disabled = true
 		AddHeads.disabled = true
