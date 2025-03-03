@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bil8em6cgriyo"]
+[gd_scene load_steps=20 format=3 uid="uid://bil8em6cgriyo"]
 
 [ext_resource type="Theme" uid="uid://dsk5olnx1e77u" path="res://FancyTheme.tres" id="1_28apw"]
 [ext_resource type="Script" path="res://Scripts/shop_panel.gd" id="2_w6x2w"]
@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://b8cww7l0aqu2b" path="res://Scenes/Lucky_Charms/toy_boomerang.tscn" id="15_synq4"]
 [ext_resource type="PackedScene" uid="uid://d3af7hsqi26cr" path="res://Scenes/Lucky_Charms/meteor_fragment.tscn" id="16_o3xye"]
 [ext_resource type="PackedScene" uid="uid://btink48x47fy0" path="res://Scenes/Lucky_Charms/act_fox_ears.tscn" id="17_eioog"]
+[ext_resource type="PackedScene" uid="uid://br6typ7vki6qx" path="res://Scenes/Lucky_Charms/paper_crown.tscn" id="18_nxlew"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_geymj"]
 bg_color = Color(0.870588, 0.666667, 0.54902, 1)
@@ -249,6 +250,14 @@ theme_override_font_sizes/font_size = 60
 text = "+"
 metadata/_edit_use_anchors_ = true
 
+[node name="ACT_fox_ears" parent="." instance=ExtResource("17_eioog")]
+visible = false
+layout_mode = 1
+offset_left = -635.5
+offset_top = -606.5
+offset_right = -496.5
+offset_bottom = -467.5
+
 [node name="ACT_spatula_head" parent="." instance=ExtResource("14_fxn1g")]
 visible = false
 layout_mode = 1
@@ -266,14 +275,6 @@ offset_right = -496.5
 offset_bottom = -467.5
 
 [node name="UFOcharm" parent="." instance=ExtResource("12_1wtim")]
-visible = false
-layout_mode = 1
-offset_left = -635.5
-offset_top = -606.5
-offset_right = -496.5
-offset_bottom = -467.5
-
-[node name="emoji_bracelet" parent="." instance=ExtResource("11_e880d")]
 visible = false
 layout_mode = 1
 offset_left = -635.5
@@ -313,16 +314,20 @@ offset_left = -635.5
 offset_top = -606.5
 offset_right = -496.5
 offset_bottom = -467.5
+Description = "Coins get multiplied value equal to reflips used"
 
-[node name="bottlecap" parent="." instance=ExtResource("5_225ia")]
+[node name="ToothpickUmbrella" parent="." instance=ExtResource("6_owq85")]
 visible = false
 layout_mode = 2
 anchors_preset = 0
+offset_left = -635.5
+offset_top = -606.5
+offset_right = -496.5
+offset_bottom = -467.5
 
-[node name="CocktailUmbrella" parent="." instance=ExtResource("6_owq85")]
+[node name="emoji_bracelet" parent="." instance=ExtResource("11_e880d")]
 visible = false
-layout_mode = 2
-anchors_preset = 0
+layout_mode = 1
 offset_left = -635.5
 offset_top = -606.5
 offset_right = -496.5
@@ -335,6 +340,7 @@ offset_left = -635.5
 offset_top = -606.5
 offset_right = -496.5
 offset_bottom = -467.5
+Description = "Coins gain value equal to the inverse of their chance of flipping. (ie heads with a 45% chance will award 55 value)"
 
 [node name="toy_boomerang" parent="." instance=ExtResource("15_synq4")]
 visible = false
@@ -344,12 +350,17 @@ offset_top = -606.5
 offset_right = -496.5
 offset_bottom = -467.5
 
+[node name="bottlecap" parent="." instance=ExtResource("5_225ia")]
+visible = false
+layout_mode = 2
+anchors_preset = 0
+
 [node name="ItemPool" type="Control" parent="."]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="act_fox_ears" parent="ItemPool" instance=ExtResource("17_eioog")]
+[node name="paper_crown" parent="ItemPool" instance=ExtResource("18_nxlew")]
 visible = false
 layout_mode = 1
 

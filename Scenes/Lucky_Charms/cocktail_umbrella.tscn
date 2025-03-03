@@ -4,9 +4,9 @@
 [ext_resource type="Script" path="res://Scripts/LuckyCharms/cocktail_umbrella.gd" id="2_n3f3h"]
 [ext_resource type="Texture2D" uid="uid://by67wheekph8h" path="res://Sprites/lucky_charms/item_umbrella.png" id="3_0qqsj"]
 
-[node name="CocktailUmbrella" instance=ExtResource("1_6kwad")]
+[node name="ToothpickUmbrella" instance=ExtResource("1_6kwad")]
 script = ExtResource("2_n3f3h")
-Name = "Cocktail Umbrella"
+Name = "Toothpick Umbrella"
 Icon = ExtResource("3_0qqsj")
 Description = "Tails coins gain heads value multiplied by heads coins flipped."
 

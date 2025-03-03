@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://d317fxd2yh7ju"]
+
+[ext_resource type="PackedScene" uid="uid://cod0g2y8sswbm" path="res://Scenes/Lucky_Charms/template_active_item.tscn" id="1_uww2h"]
+[ext_resource type="Script" path="res://Scripts/LuckyCharms/act_red_eye_photo.gd" id="2_cy5hi"]
+[ext_resource type="Texture2D" uid="uid://ck3g8p3o5ysyp" path="res://Sprites/lucky_charms/item_RedEyePhoto.png" id="3_gr0sp"]
+
+[node name="ACT_red_eye_photo" instance=ExtResource("1_uww2h")]
+script = ExtResource("2_cy5hi")
+Name = "Red Eye Photo"
+Icon = ExtResource("3_gr0sp")
+Description = "Click this charm to return all coins and clear coin history (once per round)"
+current_type = 3
+
+[node name="TextureRect" parent="." index="0"]
+texture = ExtResource("3_gr0sp")

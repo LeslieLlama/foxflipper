@@ -14,11 +14,18 @@ func _active_use():
 	if is_useable == false:
 		return
 	print("item activated")
-	if Globals.CoinHistory[Globals.coinCount-1] == 0:
-		Globals.CoinHistory[Globals.coinCount-1] = 1
-	else: 
-		Globals.CoinHistory[Globals.coinCount-1] = 0
-	Signals.emit_signal("CoinHistoryDisplayUpdate")
+	if Globals.CoinHistory[Globals.coinCount-1] == 0: #tails
+		Globals.coinsToThrow += 1
+		var current_heads_threshhold = Globals.headsThreshhold
+		Globals.headsThreshhold = 0
+		Signals.emit_signal("FlipCoin", true)
+		Globals.headsThreshhold = current_heads_threshhold
+	else: #heads
+		Globals.coinsToThrow += 1
+		var current_heads_threshhold = Globals.headsThreshhold
+		Globals.headsThreshhold = 100
+		Signals.emit_signal("FlipCoin", true)
+		Globals.headsThreshhold = current_heads_threshhold
 	_activation_animation()
 	charges -= 1
 	_update_charge_counter()

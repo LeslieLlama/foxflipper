@@ -171,7 +171,7 @@ func _generic_move_tween(nodeToMove : Control, whereToMove : Vector2):
 func _on_re_do_coin_button_button_up() -> void:
 	Signals.emit_signal("FlipCoin", true)
 		
-func _flip_coin(is_reflip : bool):
+func _flip_coin(_is_reflip : bool):
 	$Layoutbox/Bottom/Center/LargeCoinZone/CoinCount.text = str("Coins:\nx",Globals.coinsToThrow)
 	if Globals.coinCount == 1:
 		ReDoCoinButton.disabled = false

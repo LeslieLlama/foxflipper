@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://Scripts/LuckyCharms/act_fox_ears.gd" id="2_uxf48"]
 [ext_resource type="Texture2D" uid="uid://biikuv76a04j3" path="res://Sprites/lucky_charms/item_fox_ear_headband.png" id="2_yahj4"]
 
-[node name="act_fox_ears" instance=ExtResource("1_1vtc8")]
+[node name="ACT_fox_ears" instance=ExtResource("1_1vtc8")]
 script = ExtResource("2_uxf48")
 maxCharges = 3
 Name = "Fox Ears (Active)"
