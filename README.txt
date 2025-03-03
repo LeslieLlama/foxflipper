@@ -16,3 +16,6 @@ https://freesound.org/people/FenrirFangs/sounds/213982/
 
 Background Music: 
 https://freesound.org/people/Erokia/sounds/648987/
+
+Gunshot Sound: Pistol or Hand Gun Firing at wood.wav by Rock Savage
+https://freesound.org/people/Rock%20Savage/sounds/81045/

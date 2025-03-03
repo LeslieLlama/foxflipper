@@ -25,3 +25,4 @@ var itemNum = 0
 
 var score_loop = 1
 var reverse_score_direction = false
+var currentScoreRequirement = 0
