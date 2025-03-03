@@ -6,7 +6,7 @@
 
 [node name="ACT_red_eye_photo" instance=ExtResource("1_uww2h")]
 script = ExtResource("2_cy5hi")
-Name = "Red Eye Photo"
+Name = "Red Eye Photo (Active)"
 Icon = ExtResource("3_gr0sp")
 Description = "Click this charm to return all coins and clear coin history (once per round)"
 current_type = 3
