@@ -1,15 +1,22 @@
 extends Panel
 
 var itemPool = [] 
+var itemPoolRarities = []
 @export var itemContainers: Array[ItemContainer] = []
+var rng = RandomNumberGenerator.new()
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	itemPool = $ItemPool.get_children()
-	print(itemPool)
+	_reset_item_pool_rarities()
 	Signals.ResetTable.connect(reset_table)
 	for i in itemContainers:
 		i.itemBought.connect(add_purchase)
 	RefreshItems()
+
+func _reset_item_pool_rarities():
+	itemPoolRarities.clear()
+	for i in itemPool:
+		itemPoolRarities.append(i.rarity)
 
 func _add_coin():
 	Signals.emit_signal("PurchaseCoin")
@@ -19,7 +26,6 @@ func _add_weight():
 	
 func _add_points():
 	Signals.emit_signal("PurchasePoints")
-
 
 func add_purchase():
 	Globals.purchases += 1
@@ -36,14 +42,29 @@ func disable_buy_buttons(disable_value : bool):
 	
 func reset_table():
 	disable_buy_buttons(false)
+	_reset_item_pool_rarities()
 	Globals.purchases = 0
 	$PurchaseCount.text = str("Purchases: ",Globals.purchases,"/",Globals.maxPurchases)
 	RefreshItems()
 	
+func RandomPickItem():
+	var sum_of_weight = 0
+	for i in itemPoolRarities.size():
+		sum_of_weight += itemPoolRarities[i]
+	var rnd = rng.randi_range(0, sum_of_weight-1)
+	for i in itemPool.size():
+		if rnd < itemPoolRarities[i]:
+			return itemPool[i];
+		rnd -= itemPoolRarities[i]
 func RefreshItems():
-	var rng = RandomNumberGenerator.new()
+	print(str("item rarities : ", itemPoolRarities))
+	var previousItem
 	for i in itemContainers:
-		var newItem = itemPool[rng.randi_range(0, itemPool.size()-1)]
+		#var newItem = itemPool[rng.randi_range(0, itemPool.size()-1)]
+		var newItem = RandomPickItem()
+		while newItem == previousItem:
+			newItem = RandomPickItem()
+		previousItem = newItem
 		SetItem(i,newItem)
 	
 func SetItem(container : ItemContainer, item : LuckyCharm):

@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://cvxdjuqp6ax2d"]
+[gd_scene load_steps=8 format=3 uid="uid://cvxdjuqp6ax2d"]
 
 [ext_resource type="AudioStream" uid="uid://mvaoira7v6jm" path="res://Audio/276152__littlerobotsoundfactory__coins_single_08.wav" id="1_a6d24"]
 [ext_resource type="Script" path="res://Scripts/AudioManagement.gd" id="1_rc30o"]
+[ext_resource type="AudioStream" uid="uid://67vtdeqk83xw" path="res://Audio/221530__unfa__glass-break-4.wav" id="3_5m48k"]
 [ext_resource type="AudioStream" uid="uid://bno5x6g1jhhuy" path="res://Audio/495642__robbeman__coin-2.wav" id="3_5tqjv"]
 [ext_resource type="AudioStream" uid="uid://djupfq3q42sd7" path="res://Audio/MiniTick.wav" id="3_ae535"]
 [ext_resource type="AudioStream" uid="uid://u7iauir1hroy" path="res://Audio/213982__fenrirfangs__coin-clatter-8.wav" id="3_b0667"]
@@ -12,6 +13,9 @@ script = ExtResource("1_rc30o")
 
 [node name="CoinScoringSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("1_a6d24")
+
+[node name="DestroyItemSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_5m48k")
 
 [node name="CoinAddPointsSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_ae535")

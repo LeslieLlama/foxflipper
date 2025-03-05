@@ -25,8 +25,6 @@ var highest_score : int
 @export var ReDoCoinButton : Button
 @export var CoinAmmount : Label
 @export var ReflipAmmount : Label
-@export var CoinTailsSide : TextureRect
-@export var CoinHeadsSide : TextureRect
 @export var Title : Control
 @export var TitleAnchor : Control
 @export var CurrentRoundLabel : Label
@@ -73,6 +71,7 @@ func _tool_tip_off():
 	$Tooltip.hide()
 	
 func _update_score_requirement_ui():
+	RoundScoreLabel.text = str(Globals.currentScore,"/")
 	RequiredScoreLabel.text = str(Globals.currentScoreRequirement)
 	
 func _tool_tip_position():

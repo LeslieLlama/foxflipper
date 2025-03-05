@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://bil8em6cgriyo"]
+[gd_scene load_steps=23 format=3 uid="uid://bil8em6cgriyo"]
 
 [ext_resource type="Theme" uid="uid://dsk5olnx1e77u" path="res://FancyTheme.tres" id="1_28apw"]
 [ext_resource type="Script" path="res://Scripts/shop_panel.gd" id="2_w6x2w"]
@@ -20,6 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://br6typ7vki6qx" path="res://Scenes/Lucky_Charms/paper_crown.tscn" id="18_nxlew"]
 [ext_resource type="PackedScene" uid="uid://d317fxd2yh7ju" path="res://Scenes/Lucky_Charms/act_red_eye_photo.tscn" id="19_h6jf6"]
 [ext_resource type="PackedScene" uid="uid://rbc4yv2cmo35" path="res://Scenes/Lucky_Charms/cap_shooter.tscn" id="20_mby3f"]
+[ext_resource type="PackedScene" uid="uid://c22pimuivtqot" path="res://Scenes/Lucky_Charms/rock_carin.tscn" id="21_6kled"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_geymj"]
 bg_color = Color(0.870588, 0.666667, 0.54902, 1)
@@ -38,6 +39,7 @@ script = ExtResource("2_w6x2w")
 itemContainers = [NodePath("VBoxContainer2/Item1"), NodePath("VBoxContainer2/Item2")]
 
 [node name="ShopTitle" type="Label" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -56,13 +58,12 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -112.0
-offset_top = 37.5
-offset_right = 126.0
-offset_bottom = 84.5
+offset_left = -119.0
+offset_right = 119.0
+offset_bottom = 47.0
 grow_horizontal = 2
 theme = ExtResource("1_28apw")
-theme_override_font_sizes/font_size = 22
+theme_override_font_sizes/font_size = 26
 text = "Purchases: 0/2"
 horizontal_alignment = 1
 
@@ -300,14 +301,6 @@ offset_top = -606.5
 offset_right = -496.5
 offset_bottom = -467.5
 
-[node name="snake_eye" parent="." instance=ExtResource("8_7d8rk")]
-visible = false
-layout_mode = 1
-offset_left = -635.5
-offset_top = -606.5
-offset_right = -496.5
-offset_bottom = -467.5
-
 [node name="birthday_candle" parent="." instance=ExtResource("7_fn0t4")]
 visible = false
 layout_mode = 2
@@ -378,7 +371,15 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
+[node name="rock_carin" parent="ItemPool" instance=ExtResource("21_6kled")]
+visible = false
+layout_mode = 1
+
 [node name="cap_shooter" parent="ItemPool" instance=ExtResource("20_mby3f")]
+visible = false
+layout_mode = 1
+
+[node name="snake_eye" parent="ItemPool" instance=ExtResource("8_7d8rk")]
 visible = false
 layout_mode = 1
 
@@ -386,7 +387,7 @@ layout_mode = 1
 [connection signal="button_up" from="VBoxContainer/BuyPointsPanel/Button" to="." method="add_purchase"]
 [connection signal="button_up" from="VBoxContainer/BuyCoinsPanel/Button" to="." method="_add_coin"]
 [connection signal="button_up" from="VBoxContainer/BuyCoinsPanel/Button" to="." method="add_purchase"]
-[connection signal="button_up" from="VBoxContainer/BuyWeight/Button" to="." method="add_purchase"]
 [connection signal="button_up" from="VBoxContainer/BuyWeight/Button" to="." method="_add_weight"]
+[connection signal="button_up" from="VBoxContainer/BuyWeight/Button" to="." method="add_purchase"]
 [connection signal="button_up" from="VBoxContainer2/Item1/HBoxContainer/Button" to="VBoxContainer2/Item1" method="_add_item"]
 [connection signal="button_up" from="VBoxContainer2/Item2/HBoxContainer/Button" to="VBoxContainer2/Item2" method="_add_item"]

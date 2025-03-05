@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://c22pimuivtqot"]
+
+[ext_resource type="PackedScene" uid="uid://c5gtsyminudgp" path="res://Scenes/Lucky_Charms/template.tscn" id="1_grd1t"]
+[ext_resource type="Script" path="res://Scripts/LuckyCharms/rock_carin.gd" id="2_fb511"]
+[ext_resource type="Texture2D" uid="uid://cwa14nyfe1hrg" path="res://Sprites/lucky_charms/item_rock_cairn.png" id="3_6ccvo"]
+[ext_resource type="AudioStream" uid="uid://bgqfokkdbds11" path="res://Audio/crystal_clink_sound.wav" id="4_2ixv4"]
+
+[node name="rock_carin" instance=ExtResource("1_grd1t")]
+script = ExtResource("2_fb511")
+charm_value = 300
+Name = "Rock Cairn"
+Icon = ExtResource("3_6ccvo")
+Description = "+300 Points
+Chuck this item to give an additional +300 value when bought again. (Rock Cairn becomes common in shops) "
+current_type = 0
+
+[node name="TextureRect" parent="." index="0"]
+texture = ExtResource("3_6ccvo")
+
+[node name="RockActivationSound" type="AudioStreamPlayer" parent="." index="3"]
+stream = ExtResource("4_2ixv4")

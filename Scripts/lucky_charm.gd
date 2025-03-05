@@ -6,6 +6,8 @@ class_name LuckyCharm
 @export var Icon : Texture2D
 @export_multiline var Description : String
 @export var SequenceSymbol : Label
+##determines how likely an item is to show up in the shop. 1 is the base, 2 would be twice as likely to show up. 
+@export var rarity = 1
 var tween
 var colorRed = Color("D0665A")
 var colorBlue = Color("65A7C1")

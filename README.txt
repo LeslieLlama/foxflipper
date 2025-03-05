@@ -17,5 +17,11 @@ https://freesound.org/people/FenrirFangs/sounds/213982/
 Background Music: 
 https://freesound.org/people/Erokia/sounds/648987/
 
+Item Destruction Sound: Glass Break 4 by unfa 
+https://freesound.org/people/unfa/sounds/221530/
+
 Gunshot Sound: Pistol or Hand Gun Firing at wood.wav by Rock Savage
 https://freesound.org/people/Rock%20Savage/sounds/81045/
+
+Crystal Clinking sound: flick switch crystal glass lights on.wav by martian
+https://freesound.org/people/martian/sounds/393856/

@@ -9,6 +9,7 @@ func _ready() -> void:
 	Signals.AllCoinsScored.connect(MinusBackgroundMusicPitch)
 	Signals.ComboScored.connect(PlayCoinComboSound)
 	Signals.AddPointsToCoin.connect(PlayAddPointsSound)
+	Signals.RemoveItem.connect(PlayDestroyItemSound)
 	AddBackgroundMusicPitch()
 	$BackgroundMusic.play()
 
@@ -29,7 +30,14 @@ func PlayAddPointsSound():
 	var pitchRandomisation = rng.randf_range(1, 2)
 	$CoinAddPointsSound.pitch_scale = pitchRandomisation
 	$CoinAddPointsSound.play()
+func PlayDestroyItemSound(_item):
+	var pitchRandomisation = rng.randf_range(1, 2)
+	$DestroyItemSound.pitch_scale = pitchRandomisation
+	$DestroyItemSound.play()
 func AddBackgroundMusicPitch():
 	$BackgroundMusic.pitch_scale += 0.05
 func MinusBackgroundMusicPitch():
 	$BackgroundMusic.pitch_scale -= 0.05
+
+	
+	
