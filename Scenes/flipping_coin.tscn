@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://bgtr52vop7nix"]
 
-[ext_resource type="Script" path="res://Scripts/flipping_coin.gd" id="1_reaav"]
+[ext_resource type="Script" uid="uid://dhj6a5y177yfd" path="res://Scripts/flipping_coin.gd" id="1_reaav"]
 [ext_resource type="Theme" uid="uid://dsk5olnx1e77u" path="res://FancyTheme.tres" id="2_t3fvn"]
 [ext_resource type="Texture2D" uid="uid://ckhk7e4lj27yr" path="res://Sprites/FoxCoinConcepts_Heads.png" id="3_umjvi"]
 [ext_resource type="Texture2D" uid="uid://dyayargx7nk40" path="res://Sprites/FoxCoinConcepts_Tails.png" id="4_8d0gl"]

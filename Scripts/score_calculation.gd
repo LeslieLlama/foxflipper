@@ -5,7 +5,7 @@ extends Control
 @export var swapButton : Button;
 var colorRed = Color("D0665A")
 var colorBlue = Color("65A7C1")
-
+var tween
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -14,6 +14,8 @@ func _ready() -> void:
 	Signals.RemoveItem.connect(_remove_item)
 	Signals.ResetGame.connect(_reset_game)
 	Signals.ResetTable.connect(_reset_table)
+	Signals.ScoreCoins.connect(_turn_off_swap_button)
+	Signals.AllCoinsScored.connect(_turn_on_swap_button)
 
 func _reset_game():
 	for i in items:
@@ -24,30 +26,36 @@ func _reset_game():
 func _reset_table():
 	Globals.CoinValues.clear()
 	
+func _turn_off_swap_button():
+	swapButton.disabled = true
+func _turn_on_swap_button():
+	swapButton.disabled = false
+	
 func _swap_items():
+	if Globals.itemNum < 2:
+		return
 	var item0 = itemContainer.get_child(0)
 	var item1 = itemContainer.get_child(1)
 	var center = item0.position.x + (item1.position.x/2)
 
-	items.reverse()
+	
 	#$Layoutbox/Bottom/Left/HistoryZone.move_child($Layoutbox/Bottom/Left/HistoryZone/ItemZone, 0)
-	var subtween = create_tween()
-	subtween.tween_property(item0, "position:y", center,0.5)
-	subtween.tween_property(item0, "position:y", 0,0.5)
+	var subtween0 = create_tween()
+	subtween0.tween_property(item0, "position:y", center,0.10).set_trans(Tween.TRANS_SINE)
+	subtween0.tween_property(item0, "position:y", 0,0.10).set_trans(Tween.TRANS_SINE)
+	var subtween1 = create_tween()
+	subtween1.tween_property(item1, "position:y", -center,0.10).set_trans(Tween.TRANS_SINE)
+	subtween1.tween_property(item1, "position:y", 0,0.10).set_trans(Tween.TRANS_SINE)
 	
-	var tween = get_tree().create_tween().bind_node(self).set_parallel(true)
-	tween.tween_property(item0, "position:x", item1.position.x, 0.5).set_trans(Tween.TRANS_QUINT)
-	#I think subtweens were added in 4.4 so need to update the software. 
-
-	tween.tween_property(item1, "position:x", item0.position.x, 0.5).set_trans(Tween.TRANS_QUINT)
-	tween.tween_property(item1, "position:y", -center,0.5)
-
-	
+	if tween:
+		tween.kill()
+	tween = get_tree().create_tween().bind_node(self).set_parallel(true)
+	tween.tween_property(item0, "position:x", item1.position.x, 0.20).set_trans(Tween.TRANS_SINE)
+	tween.tween_subtween(subtween0)
+	tween.tween_property(item1, "position:x", item0.position.x, 0.20).set_trans(Tween.TRANS_SINE)
+	tween.tween_subtween(subtween1)
 	tween.chain().tween_callback(itemContainer.move_child.bind(itemContainer.get_child(0), 1))
-	
-
-	
-
+	tween.chain().tween_callback(items.reverse)
 
 func add_item(new_item : Control):
 	#if items.size() >= 2:

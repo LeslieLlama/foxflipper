@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://rbc4yv2cmo35"]
 
 [ext_resource type="PackedScene" uid="uid://c5gtsyminudgp" path="res://Scenes/Lucky_Charms/template.tscn" id="1_c6diw"]
-[ext_resource type="Script" path="res://Scripts/LuckyCharms/cap_shooter.gd" id="2_nucqt"]
+[ext_resource type="Script" uid="uid://bjtchgh1t66q6" path="res://Scripts/LuckyCharms/cap_shooter.gd" id="2_nucqt"]
 [ext_resource type="Texture2D" uid="uid://c3ql5k77ymshr" path="res://Sprites/lucky_charms/item_cap_shooter.png" id="3_wln30"]
 [ext_resource type="AudioStream" uid="uid://drx4j3et3qnat" path="res://Audio/81045__rock-savage__pistol-or-hand-gun-firing-at-wood.wav" id="4_fw4h8"]
 

@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cod0g2y8sswbm"]
 
 [ext_resource type="PackedScene" uid="uid://c5gtsyminudgp" path="res://Scenes/Lucky_Charms/template.tscn" id="1_j3obh"]
-[ext_resource type="Script" path="res://Scripts/LuckyCharms/template_active_item.gd" id="2_7n5rw"]
+[ext_resource type="Script" uid="uid://rt3iashjy1q7" path="res://Scripts/LuckyCharms/template_active_item.gd" id="2_7n5rw"]
 
 [node name="Template_activeItem" instance=ExtResource("1_j3obh")]
 script = ExtResource("2_7n5rw")

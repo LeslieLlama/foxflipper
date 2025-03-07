@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://5pyiidp58syb"]
 
 [ext_resource type="PackedScene" uid="uid://c5gtsyminudgp" path="res://Scenes/Lucky_Charms/template.tscn" id="1_6kwad"]
-[ext_resource type="Script" path="res://Scripts/LuckyCharms/cocktail_umbrella.gd" id="2_n3f3h"]
+[ext_resource type="Script" uid="uid://ch4jhobq8p3et" path="res://Scripts/LuckyCharms/cocktail_umbrella.gd" id="2_n3f3h"]
 [ext_resource type="Texture2D" uid="uid://by67wheekph8h" path="res://Sprites/lucky_charms/item_umbrella.png" id="3_0qqsj"]
 
 [node name="ToothpickUmbrella" instance=ExtResource("1_6kwad")]

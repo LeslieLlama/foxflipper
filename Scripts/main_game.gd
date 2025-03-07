@@ -98,13 +98,13 @@ func resize():
 		$Layoutbox/Bottom/Left/HistoryZone.vertical = true
 		#$LayoutBox/Left/SpacerPanel.show()
 		$Layoutbox/Bottom/Left.size_flags_stretch_ratio = 1
-		$Layoutbox/Bottom/Left/HistoryZone.move_child($Layoutbox/Bottom/Left/HistoryZone/ItemZone, 0)
+		$Layoutbox/Bottom/Left/HistoryZone.move_child($Layoutbox/Bottom/Left/HistoryZone/ScoreCalculation, 0)
 	else: #Vertical
 		$Layoutbox/Bottom.vertical = true 
 		$Layoutbox/Bottom/Left/HistoryZone.vertical = false
 		#$LayoutBox/Left/SpacerPanel.hide()
 		$Layoutbox/Bottom/Left.size_flags_stretch_ratio = 0.6
-		$Layoutbox/Bottom/Left/HistoryZone.move_child($Layoutbox/Bottom/Left/HistoryZone/ItemZone, 1)
+		$Layoutbox/Bottom/Left/HistoryZone.move_child($Layoutbox/Bottom/Left/HistoryZone/ScoreCalculation, 1)
 
 	if CurrentGameState != GameState.SHOP:
 		ShopPanel.position = Vector2(ShopAnchor.position.x+ShopPanel.size.x,0)

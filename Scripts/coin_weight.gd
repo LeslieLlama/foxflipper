@@ -31,7 +31,7 @@ func _holding_train_stub(val : bool):
 
 func _update_weight_ui():
 	$AvailableWeightLabel.text = str("Available Weight: ",Globals.totalWeight*100,"%")
-	$OddsLabel.text = str("[center][color=#65A7C1]",Globals.headsThreshhold*100,"[/color]/",((1-Globals.headsThreshhold)*100),"[/center]")
+	$OddsLabel.text = str("[center][color=#65A7C1]",int(Globals.headsThreshhold*100),"[/color]/",int(((1-Globals.headsThreshhold)*100)),"[/center]")
 
 func _add_total_weight():
 	Globals.totalWeight += 0.05

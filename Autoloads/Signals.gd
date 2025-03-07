@@ -33,4 +33,4 @@ signal PopupMessage(textToSay : String, pos : Vector2, move_to : Vector2, textCo
 
 #item spesific signals
 signal HoldingTrainStub(isHolding : bool)
-signal UpdateScoreUI()
+signal UpdateScoreUI() #used by six shooter but it's applicable anywhere you need to update the score display

@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://nqgsdso58vfx"]
 
 [ext_resource type="Texture2D" uid="uid://po8fo44gcqw0" path="res://Sprites/FoxCoins_empty.png" id="1_5mx61"]
-[ext_resource type="Script" path="res://Scripts/coin_marker.gd" id="2_u3wmd"]
+[ext_resource type="Script" uid="uid://c0fyp2hl5sgvt" path="res://Scripts/coin_marker.gd" id="2_u3wmd"]
 
 [node name="CoinMarker" type="TextureRect"]
 custom_minimum_size = Vector2(75, 75)

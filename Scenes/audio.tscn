@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://cvxdjuqp6ax2d"]
 
 [ext_resource type="AudioStream" uid="uid://mvaoira7v6jm" path="res://Audio/276152__littlerobotsoundfactory__coins_single_08.wav" id="1_a6d24"]
-[ext_resource type="Script" path="res://Scripts/AudioManagement.gd" id="1_rc30o"]
+[ext_resource type="Script" uid="uid://dfls7cyvo26c2" path="res://Scripts/AudioManagement.gd" id="1_rc30o"]
 [ext_resource type="AudioStream" uid="uid://67vtdeqk83xw" path="res://Audio/221530__unfa__glass-break-4.wav" id="3_5m48k"]
 [ext_resource type="AudioStream" uid="uid://bno5x6g1jhhuy" path="res://Audio/495642__robbeman__coin-2.wav" id="3_5tqjv"]
 [ext_resource type="AudioStream" uid="uid://djupfq3q42sd7" path="res://Audio/MiniTick.wav" id="3_ae535"]
