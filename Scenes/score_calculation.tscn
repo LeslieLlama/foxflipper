@@ -1,10 +1,39 @@
-[gd_scene load_steps=2 format=3 uid="uid://cv5owtbs3alpe"]
+[gd_scene load_steps=3 format=3 uid="uid://cv5owtbs3alpe"]
 
 [ext_resource type="Script" path="res://Scripts/score_calculation.gd" id="1_26op4"]
+[ext_resource type="Theme" uid="uid://dsk5olnx1e77u" path="res://FancyTheme.tres" id="1_h76dq"]
 
-[node name="ScoreCalculation" type="Control"]
+[node name="ScoreCalculation" type="Control" node_paths=PackedStringArray("itemContainer", "swapButton")]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 187.0
+offset_bottom = 94.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("1_h76dq")
 script = ExtResource("1_26op4")
+itemContainer = NodePath("Items")
+swapButton = NodePath("Button")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.691
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 0.0459976
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 21
+text = "⇄"
+
+[node name="Items" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.688
+offset_bottom = -0.672005
+grow_horizontal = 2
+grow_vertical = 2
+
+[connection signal="button_up" from="Button" to="." method="_swap_items"]

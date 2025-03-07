@@ -1,7 +1,8 @@
 extends Control
 
 @export var items : Array[LuckyCharm] = []
-
+@export var itemContainer : HBoxContainer;
+@export var swapButton : Button;
 var colorRed = Color("D0665A")
 var colorBlue = Color("65A7C1")
 
@@ -22,13 +23,38 @@ func _reset_game():
 	
 func _reset_table():
 	Globals.CoinValues.clear()
+	
+func _swap_items():
+	var item0 = itemContainer.get_child(0)
+	var item1 = itemContainer.get_child(1)
+	var center = item0.position.x + (item1.position.x/2)
+
+	items.reverse()
+	#$Layoutbox/Bottom/Left/HistoryZone.move_child($Layoutbox/Bottom/Left/HistoryZone/ItemZone, 0)
+	var subtween = create_tween()
+	subtween.tween_property(item0, "position:y", center,0.5)
+	subtween.tween_property(item0, "position:y", 0,0.5)
+	
+	var tween = get_tree().create_tween().bind_node(self).set_parallel(true)
+	tween.tween_property(item0, "position:x", item1.position.x, 0.5).set_trans(Tween.TRANS_QUINT)
+	#I think subtweens were added in 4.4 so need to update the software. 
+
+	tween.tween_property(item1, "position:x", item0.position.x, 0.5).set_trans(Tween.TRANS_QUINT)
+	tween.tween_property(item1, "position:y", -center,0.5)
+
+	
+	tween.chain().tween_callback(itemContainer.move_child.bind(itemContainer.get_child(0), 1))
+	
+
+	
+
 
 func add_item(new_item : Control):
 	#if items.size() >= 2:
 		#Signals.emit_signal("PopupMessage", "Inventory Full!", global_position, global_position, colorRed)
 	if items.size() < 2:
 		var child_node = new_item.duplicate()
-		self.add_child(child_node)
+		itemContainer.add_child(child_node)
 		items.append(child_node)
 		child_node.show()
 		child_node.item_enabled(true)
