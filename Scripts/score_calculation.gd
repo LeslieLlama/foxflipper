@@ -57,8 +57,8 @@ func _swap_items():
 	tween.chain().tween_callback(reset_item_internal_positions)
 	
 func reset_item_internal_positions():
-	itemContainer.get_child(0).itemSlot = items.find(itemContainer.get_child(0))
-	itemContainer.get_child(1).itemSlot = items.find(itemContainer.get_child(1))
+	for i in items.size():
+		items[i].itemSlot = i
 
 func add_item(new_item : Control):
 	#if items.size() >= 2:
@@ -75,6 +75,7 @@ func add_item(new_item : Control):
 func _remove_item(_item : Control):
 	items.erase(_item)
 	Globals.itemNum -= 1
+	reset_item_internal_positions()
 
 #surely there has to be a better way to change the order of a functions operation based on a bool than this branching if statement. 
 func scoring_sequence():

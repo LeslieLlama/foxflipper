@@ -6,6 +6,9 @@ func AddToScore(coinValues = []):
 		if itemSlot == 0:  #left slot, coin is tails 
 			if Globals.CoinHistory[c] == 0:
 				await _AddThePoints(c, colorBlue, coinValues)
+			if Globals.itemNum <= 1: #secret effect, if the item is in the middle of two slots it gets both effects.
+				if Globals.CoinHistory[c] == 1: #coin is heads 
+					await _AddThePoints(c, colorRed, coinValues)
 		else: #right or other slot
 			if Globals.CoinHistory[c] == 1: #coin is heads 
 				await _AddThePoints(c, colorRed, coinValues)

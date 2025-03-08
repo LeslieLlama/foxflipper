@@ -367,7 +367,7 @@ offset_top = -606.5
 offset_right = -496.5
 offset_bottom = -467.5
 
-[node name="ACT_red_eye_photo" parent="." instance=ExtResource("19_h6jf6")]
+[node name="snake_eye" parent="." instance=ExtResource("8_7d8rk")]
 visible = false
 layout_mode = 1
 offset_left = -635.5
@@ -375,7 +375,7 @@ offset_top = -606.5
 offset_right = -496.5
 offset_bottom = -467.5
 
-[node name="snake_eye" parent="." instance=ExtResource("8_7d8rk")]
+[node name="toy_boomerang" parent="." instance=ExtResource("15_synq4")]
 visible = false
 layout_mode = 1
 offset_left = -635.5
@@ -388,11 +388,11 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="toy_boomerang" parent="ItemPool" instance=ExtResource("15_synq4")]
+[node name="Pendulum" parent="ItemPool" instance=ExtResource("22_xtjei")]
 visible = false
 layout_mode = 1
 
-[node name="Pendulum" parent="ItemPool" instance=ExtResource("22_xtjei")]
+[node name="ACT_red_eye_photo" parent="ItemPool" instance=ExtResource("19_h6jf6")]
 visible = false
 layout_mode = 1
 
