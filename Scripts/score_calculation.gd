@@ -37,9 +37,7 @@ func _swap_items():
 	var item0 = itemContainer.get_child(0)
 	var item1 = itemContainer.get_child(1)
 	var center = item0.position.x + (item1.position.x/2)
-
 	
-	#$Layoutbox/Bottom/Left/HistoryZone.move_child($Layoutbox/Bottom/Left/HistoryZone/ItemZone, 0)
 	var subtween0 = create_tween()
 	subtween0.tween_property(item0, "position:y", center,0.10).set_trans(Tween.TRANS_SINE)
 	subtween0.tween_property(item0, "position:y", 0,0.10).set_trans(Tween.TRANS_SINE)
@@ -56,6 +54,11 @@ func _swap_items():
 	tween.tween_subtween(subtween1)
 	tween.chain().tween_callback(itemContainer.move_child.bind(itemContainer.get_child(0), 1))
 	tween.chain().tween_callback(items.reverse)
+	tween.chain().tween_callback(reset_item_internal_positions)
+	
+func reset_item_internal_positions():
+	itemContainer.get_child(0).itemSlot = items.find(itemContainer.get_child(0))
+	itemContainer.get_child(1).itemSlot = items.find(itemContainer.get_child(1))
 
 func add_item(new_item : Control):
 	#if items.size() >= 2:
@@ -67,6 +70,7 @@ func add_item(new_item : Control):
 		child_node.show()
 		child_node.item_enabled(true)
 		Globals.itemNum += 1
+		child_node.itemSlot = items.find(child_node)
 
 func _remove_item(_item : Control):
 	items.erase(_item)

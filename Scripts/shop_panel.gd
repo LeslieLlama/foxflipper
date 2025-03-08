@@ -62,6 +62,9 @@ func RefreshItems():
 	for i in itemContainers:
 		#var newItem = itemPool[rng.randi_range(0, itemPool.size()-1)]
 		var newItem = RandomPickItem()
+		if itemPool.size() <= 1:
+			SetItem(i,newItem)
+			return
 		while newItem == previousItem:
 			newItem = RandomPickItem()
 		previousItem = newItem

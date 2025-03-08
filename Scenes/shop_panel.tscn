@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://bil8em6cgriyo"]
+[gd_scene load_steps=24 format=3 uid="uid://bil8em6cgriyo"]
 
 [ext_resource type="Theme" uid="uid://dsk5olnx1e77u" path="res://FancyTheme.tres" id="1_28apw"]
 [ext_resource type="Script" uid="uid://c4i4efn8kbsrh" path="res://Scripts/shop_panel.gd" id="2_w6x2w"]
@@ -21,6 +21,7 @@
 [ext_resource type="PackedScene" uid="uid://d317fxd2yh7ju" path="res://Scenes/Lucky_Charms/act_red_eye_photo.tscn" id="19_h6jf6"]
 [ext_resource type="PackedScene" uid="uid://rbc4yv2cmo35" path="res://Scenes/Lucky_Charms/cap_shooter.tscn" id="20_mby3f"]
 [ext_resource type="PackedScene" uid="uid://c22pimuivtqot" path="res://Scenes/Lucky_Charms/rock_carin.tscn" id="21_6kled"]
+[ext_resource type="PackedScene" uid="uid://dk5a5n15x0inp" path="res://Scenes/Lucky_Charms/pendulum.tscn" id="22_xtjei"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_geymj"]
 bg_color = Color(0.870588, 0.666667, 0.54902, 1)
@@ -350,7 +351,31 @@ offset_top = -606.5
 offset_right = -496.5
 offset_bottom = -467.5
 
+[node name="rock_carin" parent="." instance=ExtResource("21_6kled")]
+visible = false
+layout_mode = 1
+offset_left = -635.5
+offset_top = -606.5
+offset_right = -496.5
+offset_bottom = -467.5
+
+[node name="cap_shooter" parent="." instance=ExtResource("20_mby3f")]
+visible = false
+layout_mode = 1
+offset_left = -635.5
+offset_top = -606.5
+offset_right = -496.5
+offset_bottom = -467.5
+
 [node name="ACT_red_eye_photo" parent="." instance=ExtResource("19_h6jf6")]
+visible = false
+layout_mode = 1
+offset_left = -635.5
+offset_top = -606.5
+offset_right = -496.5
+offset_bottom = -467.5
+
+[node name="snake_eye" parent="." instance=ExtResource("8_7d8rk")]
 visible = false
 layout_mode = 1
 offset_left = -635.5
@@ -363,26 +388,18 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="snake_eye" parent="ItemPool" instance=ExtResource("8_7d8rk")]
-visible = false
-layout_mode = 1
-
 [node name="toy_boomerang" parent="ItemPool" instance=ExtResource("15_synq4")]
 visible = false
 layout_mode = 1
 
-[node name="rock_carin" parent="ItemPool" instance=ExtResource("21_6kled")]
+[node name="Pendulum" parent="ItemPool" instance=ExtResource("22_xtjei")]
 visible = false
 layout_mode = 1
 
-[node name="cap_shooter" parent="ItemPool" instance=ExtResource("20_mby3f")]
-visible = false
-layout_mode = 1
-
-[connection signal="button_up" from="VBoxContainer/BuyPointsPanel/Button" to="." method="add_purchase"]
 [connection signal="button_up" from="VBoxContainer/BuyPointsPanel/Button" to="." method="_add_points"]
-[connection signal="button_up" from="VBoxContainer/BuyCoinsPanel/Button" to="." method="add_purchase"]
+[connection signal="button_up" from="VBoxContainer/BuyPointsPanel/Button" to="." method="add_purchase"]
 [connection signal="button_up" from="VBoxContainer/BuyCoinsPanel/Button" to="." method="_add_coin"]
+[connection signal="button_up" from="VBoxContainer/BuyCoinsPanel/Button" to="." method="add_purchase"]
 [connection signal="button_up" from="VBoxContainer/BuyWeight/Button" to="." method="_add_weight"]
 [connection signal="button_up" from="VBoxContainer/BuyWeight/Button" to="." method="add_purchase"]
 [connection signal="button_up" from="VBoxContainer2/Item1/HBoxContainer/Button" to="VBoxContainer2/Item1" method="_add_item"]
