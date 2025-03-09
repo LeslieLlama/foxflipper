@@ -242,6 +242,7 @@ func reset_game():
 	Globals.headsThreshhold = 0.5
 	Globals.maxCoinCount = 0
 	Globals.coinsToThrow = 0
+	Globals.maxPurchases = 2
 	await get_tree().create_timer(0.01).timeout #this is so dumb but if you don't stall it slightly both loops happen concurrently and it screws them up
 	for i in 4:
 		Signals.emit_signal("PurchaseCoin")

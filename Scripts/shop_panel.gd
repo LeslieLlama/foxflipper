@@ -9,6 +9,7 @@ func _ready() -> void:
 	itemPool = $ItemPool.get_children()
 	_reset_item_pool_rarities()
 	Signals.ResetTable.connect(reset_table)
+	Signals.RemoveItem.connect(item_removed)
 	for i in itemContainers:
 		i.itemBought.connect(add_purchase)
 	RefreshItems()
@@ -29,22 +30,28 @@ func _add_points():
 
 func add_purchase():
 	Globals.purchases += 1
+	update_purchase_ui()
+		
+func update_purchase_ui():
 	$PurchaseCount.text = str("Purchases: ",Globals.purchases,"/",Globals.maxPurchases)
 	if Globals.purchases >= Globals.maxPurchases:
 		disable_buy_buttons(true)
+	
+func item_removed(_item):
+	update_purchase_ui()
 
 func disable_buy_buttons(disable_value : bool):
 	$VBoxContainer/BuyPointsPanel/Button.disabled = disable_value
 	$VBoxContainer/BuyCoinsPanel/Button.disabled = disable_value
 	$VBoxContainer/BuyWeight/Button.disabled = disable_value
-	$VBoxContainer2/Item1/HBoxContainer/Button.disabled = disable_value
-	$VBoxContainer2/Item2/HBoxContainer/Button.disabled = disable_value
+	$VBoxContainer2/Item1/Button.disabled = disable_value
+	$VBoxContainer2/Item2/Button.disabled = disable_value
 	
 func reset_table():
 	disable_buy_buttons(false)
 	_reset_item_pool_rarities()
 	Globals.purchases = 0
-	$PurchaseCount.text = str("Purchases: ",Globals.purchases,"/",Globals.maxPurchases)
+	update_purchase_ui()
 	RefreshItems()
 	
 func RandomPickItem():

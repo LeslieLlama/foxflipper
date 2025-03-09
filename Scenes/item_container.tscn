@@ -1,0 +1,46 @@
+[gd_scene load_steps=4 format=3 uid="uid://cqbodrhfp5gb0"]
+
+[ext_resource type="Theme" uid="uid://dsk5olnx1e77u" path="res://FancyTheme.tres" id="1_c7tmh"]
+[ext_resource type="Script" uid="uid://cyaffjjiev67f" path="res://Scenes/item_container.gd" id="2_yxetu"]
+[ext_resource type="PackedScene" uid="uid://dk5a5n15x0inp" path="res://Scenes/Lucky_Charms/pendulum.tscn" id="3_c7tmh"]
+
+[node name="Item1" type="Panel" node_paths=PackedStringArray("item")]
+anchors_preset = -1
+anchor_right = 0.344
+anchor_bottom = 0.105
+offset_right = 0.47998
+offset_bottom = -0.400002
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("1_c7tmh")
+script = ExtResource("2_yxetu")
+item = NodePath("The_Item/Pendulum2")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 2
+anchor_left = 0.459677
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 5.0
+offset_right = -5.0
+offset_bottom = -5.0
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 60
+icon_alignment = 1
+expand_icon = true
+metadata/_edit_use_anchors_ = true
+
+[node name="The_Item" type="Control" parent="."]
+layout_mode = 1
+anchor_right = 0.46
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = -0.12001
+offset_bottom = -5.0
+metadata/_edit_use_anchors_ = true
+
+[node name="Pendulum2" parent="The_Item" instance=ExtResource("3_c7tmh")]
+layout_mode = 1
+
+[connection signal="button_up" from="Button" to="." method="_add_item"]

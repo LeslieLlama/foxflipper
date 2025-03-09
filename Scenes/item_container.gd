@@ -7,8 +7,8 @@ signal itemBought
 
 func NewItem(newItem : LuckyCharm):
 	var child_node = newItem.duplicate()
-	$HBoxContainer.add_child(child_node)
-	$HBoxContainer.move_child(child_node, 0)
+	$The_Item.add_child(child_node)
+	$The_Item.move_child(child_node, 0)
 	item.queue_free()
 	item = child_node
 	child_node.show()

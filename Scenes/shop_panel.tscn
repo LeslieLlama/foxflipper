@@ -2,8 +2,7 @@
 
 [ext_resource type="Theme" uid="uid://dsk5olnx1e77u" path="res://FancyTheme.tres" id="1_28apw"]
 [ext_resource type="Script" uid="uid://c4i4efn8kbsrh" path="res://Scripts/shop_panel.gd" id="2_w6x2w"]
-[ext_resource type="Script" uid="uid://cyaffjjiev67f" path="res://Scenes/item_container.gd" id="3_00x7n"]
-[ext_resource type="PackedScene" uid="uid://c5gtsyminudgp" path="res://Scenes/Lucky_Charms/template.tscn" id="4_wksgb"]
+[ext_resource type="PackedScene" uid="uid://cqbodrhfp5gb0" path="res://Scenes/item_container.tscn" id="3_xtjei"]
 [ext_resource type="PackedScene" uid="uid://b8q55jh7fky56" path="res://Scenes/Lucky_Charms/bottlecap.tscn" id="5_225ia"]
 [ext_resource type="PackedScene" uid="uid://5pyiidp58syb" path="res://Scenes/Lucky_Charms/cocktail_umbrella.tscn" id="6_owq85"]
 [ext_resource type="PackedScene" uid="uid://6xalfccty4pn" path="res://Scenes/Lucky_Charms/birthday_candle.tscn" id="7_fn0t4"]
@@ -22,6 +21,7 @@
 [ext_resource type="PackedScene" uid="uid://rbc4yv2cmo35" path="res://Scenes/Lucky_Charms/cap_shooter.tscn" id="20_mby3f"]
 [ext_resource type="PackedScene" uid="uid://c22pimuivtqot" path="res://Scenes/Lucky_Charms/rock_carin.tscn" id="21_6kled"]
 [ext_resource type="PackedScene" uid="uid://dk5a5n15x0inp" path="res://Scenes/Lucky_Charms/pendulum.tscn" id="22_xtjei"]
+[ext_resource type="PackedScene" uid="uid://be8tgujw8w8et" path="res://Scenes/Lucky_Charms/folded_bill.tscn" id="23_fae02"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_geymj"]
 bg_color = Color(0.870588, 0.666667, 0.54902, 1)
@@ -30,6 +30,8 @@ bg_color = Color(0.870588, 0.666667, 0.54902, 1)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = -3.0
+offset_bottom = -4.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 3
@@ -37,7 +39,7 @@ mouse_filter = 1
 theme = ExtResource("1_28apw")
 theme_override_styles/panel = SubResource("StyleBoxFlat_geymj")
 script = ExtResource("2_w6x2w")
-itemContainers = [NodePath("VBoxContainer2/Item1"), NodePath("VBoxContainer2/Item2")]
+itemContainers = [NodePath("VBoxContainer2/Item1"), NodePath("VBoxContainer2/Item2"), NodePath("VBoxContainer2/Item3"), NodePath("VBoxContainer2/Item4")]
 
 [node name="ShopTitle" type="Label" parent="."]
 visible = false
@@ -87,32 +89,26 @@ theme = ExtResource("1_28apw")
 [node name="Label" type="Label" parent="VBoxContainer/BuyPointsPanel"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.017
-anchor_right = 0.677
-anchor_bottom = 1.0
-offset_left = 0.0559998
-offset_right = -0.0640106
+anchor_right = 1.0
+anchor_bottom = 0.688623
 grow_horizontal = 2
-grow_vertical = 2
 theme = ExtResource("1_28apw")
 theme_override_font_sizes/font_size = 30
 text = "+50 points"
 vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="Button" type="Button" parent="VBoxContainer/BuyPointsPanel"]
-layout_mode = 2
-anchor_left = 0.715517
-anchor_top = 0.025
-anchor_right = 1.0
-anchor_bottom = 0.974522
-offset_top = 0.075
-offset_right = -5.0
-grow_horizontal = 0
-grow_vertical = 2
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.646707
+anchor_right = 0.998986
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
 size_flags_horizontal = 3
 theme = ExtResource("1_28apw")
 theme_override_font_sizes/font_size = 40
-text = "+"
 autowrap_mode = 3
 metadata/_edit_use_anchors_ = true
 
@@ -149,7 +145,6 @@ grow_horizontal = 0
 grow_vertical = 2
 theme = ExtResource("1_28apw")
 theme_override_font_sizes/font_size = 40
-text = "+"
 metadata/_edit_use_anchors_ = true
 
 [node name="BuyWeight" type="Panel" parent="VBoxContainer"]
@@ -185,78 +180,38 @@ grow_horizontal = 0
 grow_vertical = 2
 theme = ExtResource("1_28apw")
 theme_override_font_sizes/font_size = 40
-text = "+"
 metadata/_edit_use_anchors_ = true
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+[node name="VBoxContainer2" type="GridContainer" parent="."]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.0537037
 anchor_top = 0.575926
 anchor_right = 0.962963
 anchor_bottom = 0.97037
+columns = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="Item1" type="Panel" parent="VBoxContainer2" node_paths=PackedStringArray("item")]
+[node name="Item1" parent="VBoxContainer2" instance=ExtResource("3_xtjei")]
 layout_mode = 2
-size_flags_vertical = 3
-theme = ExtResource("1_28apw")
-script = ExtResource("3_00x7n")
-item = NodePath("HBoxContainer/Template")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer2/Item1"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Template" parent="VBoxContainer2/Item1/HBoxContainer" instance=ExtResource("4_wksgb")]
+[node name="Item2" parent="VBoxContainer2" instance=ExtResource("3_xtjei")]
 layout_mode = 2
-size_flags_stretch_ratio = 0.8
 
-[node name="Button" type="Button" parent="VBoxContainer2/Item1/HBoxContainer"]
+[node name="Item3" parent="VBoxContainer2" instance=ExtResource("3_xtjei")]
 layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 60
-text = "+"
-metadata/_edit_use_anchors_ = true
 
-[node name="Item2" type="Panel" parent="VBoxContainer2" node_paths=PackedStringArray("item")]
+[node name="Item4" parent="VBoxContainer2" instance=ExtResource("3_xtjei")]
 layout_mode = 2
-size_flags_vertical = 3
-mouse_filter = 1
-theme = ExtResource("1_28apw")
-script = ExtResource("3_00x7n")
-item = NodePath("HBoxContainer/Template")
-
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer2/Item2"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 4.0
-offset_top = 4.0
-offset_right = -4.0
-offset_bottom = -5.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Template" parent="VBoxContainer2/Item2/HBoxContainer" instance=ExtResource("4_wksgb")]
-layout_mode = 2
-size_flags_stretch_ratio = 0.8
-
-[node name="Button" type="Button" parent="VBoxContainer2/Item2/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 60
-text = "+"
-metadata/_edit_use_anchors_ = true
 
 [node name="ACT_fox_ears" parent="." instance=ExtResource("17_eioog")]
 visible = false
 layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
 offset_left = -635.5
 offset_top = -606.5
 offset_right = -496.5
@@ -265,6 +220,11 @@ offset_bottom = -467.5
 [node name="ACT_spatula_head" parent="." instance=ExtResource("14_fxn1g")]
 visible = false
 layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
 offset_left = -635.5
 offset_top = -606.5
 offset_right = -496.5
@@ -273,6 +233,11 @@ offset_bottom = -467.5
 [node name="Wet Matches" parent="." instance=ExtResource("13_vmlhg")]
 visible = false
 layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
 offset_left = -635.5
 offset_top = -606.5
 offset_right = -496.5
@@ -281,6 +246,11 @@ offset_bottom = -467.5
 [node name="UFOcharm" parent="." instance=ExtResource("12_1wtim")]
 visible = false
 layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
 offset_left = -635.5
 offset_top = -606.5
 offset_right = -496.5
@@ -289,6 +259,11 @@ offset_bottom = -467.5
 [node name="Train_Stub" parent="." instance=ExtResource("10_83lca")]
 visible = false
 layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
 offset_left = -635.5
 offset_top = -606.5
 offset_right = -496.5
@@ -297,6 +272,11 @@ offset_bottom = -467.5
 [node name="Switchblade_Comb" parent="." instance=ExtResource("9_olyri")]
 visible = false
 layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
 offset_left = -635.5
 offset_top = -606.5
 offset_right = -496.5
@@ -306,6 +286,10 @@ offset_bottom = -467.5
 visible = false
 layout_mode = 2
 anchors_preset = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
 offset_left = -635.5
 offset_top = -606.5
 offset_right = -496.5
@@ -316,6 +300,10 @@ Description = "Coins get multiplied value equal to reflips used"
 visible = false
 layout_mode = 2
 anchors_preset = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
 offset_left = -635.5
 offset_top = -606.5
 offset_right = -496.5
@@ -324,6 +312,11 @@ offset_bottom = -467.5
 [node name="emoji_bracelet" parent="." instance=ExtResource("11_e880d")]
 visible = false
 layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
 offset_left = -635.5
 offset_top = -606.5
 offset_right = -496.5
@@ -332,6 +325,11 @@ offset_bottom = -467.5
 [node name="meteor_fragment" parent="." instance=ExtResource("16_o3xye")]
 visible = false
 layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
 offset_left = -635.5
 offset_top = -606.5
 offset_right = -496.5
@@ -342,10 +340,23 @@ Description = "Coins gain value equal to the inverse of their chance of flipping
 visible = false
 layout_mode = 2
 anchors_preset = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -115.5
+offset_top = -86.5
+offset_right = 23.5
+offset_bottom = 52.5
 
 [node name="paper_crown" parent="." instance=ExtResource("18_nxlew")]
 visible = false
 layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
 offset_left = -635.5
 offset_top = -606.5
 offset_right = -496.5
@@ -354,6 +365,11 @@ offset_bottom = -467.5
 [node name="rock_carin" parent="." instance=ExtResource("21_6kled")]
 visible = false
 layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
 offset_left = -635.5
 offset_top = -606.5
 offset_right = -496.5
@@ -362,14 +378,11 @@ offset_bottom = -467.5
 [node name="cap_shooter" parent="." instance=ExtResource("20_mby3f")]
 visible = false
 layout_mode = 1
-offset_left = -635.5
-offset_top = -606.5
-offset_right = -496.5
-offset_bottom = -467.5
-
-[node name="snake_eye" parent="." instance=ExtResource("8_7d8rk")]
-visible = false
-layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
 offset_left = -635.5
 offset_top = -606.5
 offset_right = -496.5
@@ -378,6 +391,24 @@ offset_bottom = -467.5
 [node name="toy_boomerang" parent="." instance=ExtResource("15_synq4")]
 visible = false
 layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -635.5
+offset_top = -606.5
+offset_right = -496.5
+offset_bottom = -467.5
+
+[node name="ACT_red_eye_photo" parent="." instance=ExtResource("19_h6jf6")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
 offset_left = -635.5
 offset_top = -606.5
 offset_right = -496.5
@@ -391,10 +422,41 @@ offset_bottom = 40.0
 [node name="Pendulum" parent="ItemPool" instance=ExtResource("22_xtjei")]
 visible = false
 layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -115.5
+offset_top = -86.5
+offset_right = 23.5
+offset_bottom = 52.5
 
-[node name="ACT_red_eye_photo" parent="ItemPool" instance=ExtResource("19_h6jf6")]
+[node name="folded_bill" parent="ItemPool" instance=ExtResource("23_fae02")]
 visible = false
 layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -115.5
+offset_top = -86.5
+offset_right = 23.5
+offset_bottom = 52.5
+
+[node name="snake_eye" parent="ItemPool" instance=ExtResource("8_7d8rk")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -115.5
+offset_top = -86.5
+offset_right = 23.5
+offset_bottom = 52.5
 
 [connection signal="button_up" from="VBoxContainer/BuyPointsPanel/Button" to="." method="_add_points"]
 [connection signal="button_up" from="VBoxContainer/BuyPointsPanel/Button" to="." method="add_purchase"]
@@ -402,5 +464,3 @@ layout_mode = 1
 [connection signal="button_up" from="VBoxContainer/BuyCoinsPanel/Button" to="." method="add_purchase"]
 [connection signal="button_up" from="VBoxContainer/BuyWeight/Button" to="." method="_add_weight"]
 [connection signal="button_up" from="VBoxContainer/BuyWeight/Button" to="." method="add_purchase"]
-[connection signal="button_up" from="VBoxContainer2/Item1/HBoxContainer/Button" to="VBoxContainer2/Item1" method="_add_item"]
-[connection signal="button_up" from="VBoxContainer2/Item2/HBoxContainer/Button" to="VBoxContainer2/Item2" method="_add_item"]
