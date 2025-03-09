@@ -13,6 +13,7 @@ func _ready() -> void:
 	for i in itemContainers:
 		i.itemBought.connect(add_purchase)
 	RefreshItems()
+	get_tree().get_root().size_changed.connect(resize)
 
 func _reset_item_pool_rarities():
 	itemPoolRarities.clear()
@@ -41,11 +42,18 @@ func item_removed(_item):
 	update_purchase_ui()
 
 func disable_buy_buttons(disable_value : bool):
-	$VBoxContainer/BuyPointsPanel/Button.disabled = disable_value
-	$VBoxContainer/BuyCoinsPanel/Button.disabled = disable_value
-	$VBoxContainer/BuyWeight/Button.disabled = disable_value
-	$VBoxContainer2/Item1/Button.disabled = disable_value
-	$VBoxContainer2/Item2/Button.disabled = disable_value
+	$BoxContainer/StatPurchase/BuyPointsPanel/Button.disabled = disable_value
+	$BoxContainer/StatPurchase/BuyCoinsPanel/Button.disabled = disable_value
+	$BoxContainer/StatPurchase/BuyWeight/Button.disabled = disable_value
+	for i in itemContainers:
+		i._disable_buy_button(disable_value)
+	
+func resize():
+	var ensize = get_viewport_rect().size
+	if ensize.x > (ensize.y-400): #horizontal 
+		$BoxContainer.vertical = true
+	else:
+		$BoxContainer.vertical = false
 	
 func reset_table():
 	disable_buy_buttons(false)

@@ -93,7 +93,7 @@ func _reset_node_positions():
 
 func resize():
 	var ensize = get_viewport_rect().size
-	if ensize.x > (size.y-400): #horizontal 
+	if ensize.x > (ensize.y-400): #horizontal 
 		$Layoutbox/Bottom.vertical = false
 		$Layoutbox/Bottom/Left/HistoryZone.vertical = true
 		#$LayoutBox/Left/SpacerPanel.show()

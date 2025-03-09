@@ -39,7 +39,7 @@ mouse_filter = 1
 theme = ExtResource("1_28apw")
 theme_override_styles/panel = SubResource("StyleBoxFlat_geymj")
 script = ExtResource("2_w6x2w")
-itemContainers = [NodePath("VBoxContainer2/Item1"), NodePath("VBoxContainer2/Item2"), NodePath("VBoxContainer2/Item3"), NodePath("VBoxContainer2/Item4")]
+itemContainers = [NodePath("BoxContainer/ItemPurchase/Item1"), NodePath("BoxContainer/ItemPurchase/Item2"), NodePath("BoxContainer/ItemPurchase/Item3"), NodePath("BoxContainer/ItemPurchase/Item4")]
 
 [node name="ShopTitle" type="Label" parent="."]
 visible = false
@@ -58,150 +58,106 @@ horizontal_alignment = 1
 
 [node name="PurchaseCount" type="Label" parent="."]
 layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -119.0
-offset_right = 119.0
-offset_bottom = 47.0
+anchors_preset = -1
+anchor_left = 0.389044
+anchor_right = 0.610028
+anchor_bottom = 0.0734201
 grow_horizontal = 2
 theme = ExtResource("1_28apw")
 theme_override_font_sizes/font_size = 26
 text = "Purchases: 0/2"
 horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
 
-[node name="VBoxContainer" type="BoxContainer" parent="."]
-layout_mode = 2
-anchor_left = 0.0502092
-anchor_top = 0.0814815
-anchor_right = 0.966527
-anchor_bottom = 0.55463
+[node name="BoxContainer" type="BoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0482823
+anchor_top = 0.080855
+anchor_right = 0.963788
+anchor_bottom = 0.97026
+grow_horizontal = 2
 grow_vertical = 2
 vertical = true
 metadata/_edit_use_anchors_ = true
 
-[node name="BuyPointsPanel" type="Panel" parent="VBoxContainer"]
+[node name="StatPurchase" type="GridContainer" parent="BoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+metadata/_edit_use_anchors_ = true
+
+[node name="BuyPointsPanel" type="Panel" parent="BoxContainer/StatPurchase"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("1_28apw")
 
-[node name="Label" type="Label" parent="VBoxContainer/BuyPointsPanel"]
+[node name="Button" type="Button" parent="BoxContainer/StatPurchase/BuyPointsPanel"]
 layout_mode = 1
-anchors_preset = -1
+anchors_preset = 15
 anchor_right = 1.0
-anchor_bottom = 0.688623
-grow_horizontal = 2
-theme = ExtResource("1_28apw")
-theme_override_font_sizes/font_size = 30
-text = "+50 points"
-vertical_alignment = 1
-metadata/_edit_use_anchors_ = true
-
-[node name="Button" type="Button" parent="VBoxContainer/BuyPointsPanel"]
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 0.646707
-anchor_right = 0.998986
 anchor_bottom = 1.0
 grow_horizontal = 2
-grow_vertical = 0
+grow_vertical = 2
 size_flags_horizontal = 3
 theme = ExtResource("1_28apw")
 theme_override_font_sizes/font_size = 40
+text = "+ 50 Points"
 autowrap_mode = 3
-metadata/_edit_use_anchors_ = true
 
-[node name="BuyCoinsPanel" type="Panel" parent="VBoxContainer"]
+[node name="BuyCoinsPanel" type="Panel" parent="BoxContainer/StatPurchase"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("1_28apw")
 
-[node name="Label" type="Label" parent="VBoxContainer/BuyCoinsPanel"]
+[node name="Button" type="Button" parent="BoxContainer/StatPurchase/BuyCoinsPanel"]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.0215517
-anchor_top = 0.0318471
-anchor_right = 0.711207
-anchor_bottom = 0.968153
-grow_vertical = 2
-theme = ExtResource("1_28apw")
-theme_override_font_sizes/font_size = 30
-text = "+1 Coin"
-vertical_alignment = 1
-metadata/_edit_use_anchors_ = true
-
-[node name="Button" type="Button" parent="VBoxContainer/BuyCoinsPanel"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.719828
-anchor_top = 0.025
+anchors_preset = 15
 anchor_right = 1.0
-anchor_bottom = 0.968153
-offset_top = 0.075
-offset_right = -4.0
-grow_horizontal = 0
-grow_vertical = 2
-theme = ExtResource("1_28apw")
-theme_override_font_sizes/font_size = 40
-metadata/_edit_use_anchors_ = true
-
-[node name="BuyWeight" type="Panel" parent="VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme = ExtResource("1_28apw")
-
-[node name="Label" type="Label" parent="VBoxContainer/BuyWeight"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.0258621
-anchor_right = 0.724138
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_28apw")
-theme_override_font_sizes/font_size = 30
-text = "+5% Weight"
-vertical_alignment = 1
-metadata/_edit_use_anchors_ = true
+theme_override_font_sizes/font_size = 40
+text = "+1 Coin"
 
-[node name="Button" type="Button" parent="VBoxContainer/BuyWeight"]
+[node name="BuyWeight" type="Panel" parent="BoxContainer/StatPurchase"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("1_28apw")
+
+[node name="Button" type="Button" parent="BoxContainer/StatPurchase/BuyWeight"]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.715517
-anchor_top = 0.032
+anchors_preset = 15
 anchor_right = 1.0
-anchor_bottom = 0.974684
-offset_top = -0.0560002
-offset_right = -5.0
-grow_horizontal = 0
+anchor_bottom = 1.0
+grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_28apw")
 theme_override_font_sizes/font_size = 40
-metadata/_edit_use_anchors_ = true
+text = "+5% Weight"
 
-[node name="VBoxContainer2" type="GridContainer" parent="."]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.0537037
-anchor_top = 0.575926
-anchor_right = 0.962963
-anchor_bottom = 0.97037
+[node name="ItemPurchase" type="GridContainer" parent="BoxContainer"]
+clip_contents = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 columns = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="Item1" parent="VBoxContainer2" instance=ExtResource("3_xtjei")]
+[node name="Item1" parent="BoxContainer/ItemPurchase" instance=ExtResource("3_xtjei")]
 layout_mode = 2
 
-[node name="Item2" parent="VBoxContainer2" instance=ExtResource("3_xtjei")]
+[node name="Item2" parent="BoxContainer/ItemPurchase" instance=ExtResource("3_xtjei")]
 layout_mode = 2
 
-[node name="Item3" parent="VBoxContainer2" instance=ExtResource("3_xtjei")]
+[node name="Item3" parent="BoxContainer/ItemPurchase" instance=ExtResource("3_xtjei")]
 layout_mode = 2
 
-[node name="Item4" parent="VBoxContainer2" instance=ExtResource("3_xtjei")]
+[node name="Item4" parent="BoxContainer/ItemPurchase" instance=ExtResource("3_xtjei")]
 layout_mode = 2
 
 [node name="ACT_fox_ears" parent="." instance=ExtResource("17_eioog")]
@@ -458,9 +414,9 @@ offset_top = -86.5
 offset_right = 23.5
 offset_bottom = 52.5
 
-[connection signal="button_up" from="VBoxContainer/BuyPointsPanel/Button" to="." method="_add_points"]
-[connection signal="button_up" from="VBoxContainer/BuyPointsPanel/Button" to="." method="add_purchase"]
-[connection signal="button_up" from="VBoxContainer/BuyCoinsPanel/Button" to="." method="_add_coin"]
-[connection signal="button_up" from="VBoxContainer/BuyCoinsPanel/Button" to="." method="add_purchase"]
-[connection signal="button_up" from="VBoxContainer/BuyWeight/Button" to="." method="_add_weight"]
-[connection signal="button_up" from="VBoxContainer/BuyWeight/Button" to="." method="add_purchase"]
+[connection signal="button_up" from="BoxContainer/StatPurchase/BuyPointsPanel/Button" to="." method="_add_points"]
+[connection signal="button_up" from="BoxContainer/StatPurchase/BuyPointsPanel/Button" to="." method="add_purchase"]
+[connection signal="button_up" from="BoxContainer/StatPurchase/BuyCoinsPanel/Button" to="." method="_add_coin"]
+[connection signal="button_up" from="BoxContainer/StatPurchase/BuyCoinsPanel/Button" to="." method="add_purchase"]
+[connection signal="button_up" from="BoxContainer/StatPurchase/BuyWeight/Button" to="." method="_add_weight"]
+[connection signal="button_up" from="BoxContainer/StatPurchase/BuyWeight/Button" to="." method="add_purchase"]
