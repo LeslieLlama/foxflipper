@@ -26,3 +26,10 @@ func _add_item():
 		
 func _disable_buy_button(val : bool):
 	$Button.disabled = val
+	
+func _on_mouse_entered() -> void:
+	Signals.emit_signal("Mouse_Over_Shop", item.Name, item.Description)
+
+func _on_mouse_exited() -> void:
+	if not Rect2(Vector2(), self.size).has_point(get_viewport().get_mouse_position()):
+		Signals.emit_signal("Mouse_End_Shop")

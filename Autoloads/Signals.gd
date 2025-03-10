@@ -18,6 +18,8 @@ signal CoinHistoryDisplayUpdate()
 
 signal Mouse_Over(title : String, desc : String)
 signal Mouse_End()
+signal Mouse_Over_Shop(title : String, desc : String)
+signal Mouse_End_Shop()
 
 signal ScoreCoins()
 signal CoinScored()

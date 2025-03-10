@@ -10,10 +10,20 @@ func _ready() -> void:
 	_reset_item_pool_rarities()
 	Signals.ResetTable.connect(reset_table)
 	Signals.RemoveItem.connect(item_removed)
+	Signals.Mouse_Over_Shop.connect(_tool_tip_on)
+	Signals.Mouse_End_Shop.connect(_tool_tip_off)
 	for i in itemContainers:
 		i.itemBought.connect(add_purchase)
 	RefreshItems()
 	get_tree().get_root().size_changed.connect(resize)
+
+func _tool_tip_on(iname, desc):
+	$Tooltip.show()
+	$Tooltip/VBoxContainer/itemName.text = iname
+	$Tooltip/VBoxContainer/itemDescription.text = desc
+	
+func _tool_tip_off():
+	$Tooltip.hide()
 
 func _reset_item_pool_rarities():
 	itemPoolRarities.clear()
@@ -34,7 +44,7 @@ func add_purchase():
 	update_purchase_ui()
 		
 func update_purchase_ui():
-	$PurchaseCount.text = str("Purchases: ",Globals.purchases,"/",Globals.maxPurchases)
+	$BoxContainer/PurchaseCount.text = str("Purchases: ",Globals.purchases,"/",Globals.maxPurchases)
 	if Globals.purchases >= Globals.maxPurchases:
 		disable_buy_buttons(true)
 	

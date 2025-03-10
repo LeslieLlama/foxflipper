@@ -443,7 +443,6 @@ offset_bottom = -4.0
 size_flags_horizontal = 0
 
 [node name="ShopPanel" parent="Layoutbox/Bottom/Right/ShopStuffs" instance=ExtResource("13_765k4")]
-visible = false
 layout_mode = 1
 
 [node name="Credits" type="Label" parent="Layoutbox/Bottom/Right"]
