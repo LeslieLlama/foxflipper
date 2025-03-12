@@ -2,6 +2,7 @@ extends Panel
 
 var itemPool = [] 
 var itemPoolRarities = []
+@export var itemContainerPrefab : PackedScene 
 @export var itemContainers: Array[ItemContainer] = []
 var rng = RandomNumberGenerator.new()
 # Called when the node enters the scene tree for the first time.
@@ -9,11 +10,13 @@ func _ready() -> void:
 	itemPool = $ItemPool.get_children()
 	_reset_item_pool_rarities()
 	Signals.ResetTable.connect(reset_table)
+	Signals.ResetGame.connect(reset_game)
 	Signals.RemoveItem.connect(item_removed)
 	Signals.Mouse_Over_Shop.connect(_tool_tip_on)
 	Signals.Mouse_End_Shop.connect(_tool_tip_off)
-	for i in itemContainers:
-		i.itemBought.connect(add_purchase)
+	Signals.AddItemPurchaseSlot.connect(_folded_bill_reciver)
+	for i in 2:
+		_create_item_container()
 	RefreshItems()
 	get_tree().get_root().size_changed.connect(resize)
 
@@ -21,6 +24,25 @@ func _tool_tip_on(iname, desc):
 	$Tooltip.show()
 	$Tooltip/VBoxContainer/itemName.text = iname
 	$Tooltip/VBoxContainer/itemDescription.text = desc
+	
+func _folded_bill_reciver(add : bool):
+	if add == true:
+		_create_item_container()
+	else: 
+		_remove_item_container()
+	
+func _create_item_container():
+	var child_node = itemContainerPrefab.instantiate()
+	$BoxContainer/ItemPurchase.add_child(child_node)
+	itemContainers.append(child_node)
+	child_node.itemBought.connect(add_purchase)
+	var newItem = RandomPickItem()
+	SetItem(child_node,newItem)
+	
+func _remove_item_container():
+	var child_node = $BoxContainer/ItemPurchase.get_child(itemContainers.size()-1)
+	itemContainers.pop_back()
+	child_node.queue_free()
 	
 func _tool_tip_off():
 	$Tooltip.hide()
@@ -70,6 +92,13 @@ func reset_table():
 	_reset_item_pool_rarities()
 	Globals.purchases = 0
 	update_purchase_ui()
+	RefreshItems()
+func reset_game():
+	for i in itemContainers.size():
+		_remove_item_container()
+	#await get_tree().create_timer(0.01).timeout
+	for i in 2:
+		_create_item_container()
 	RefreshItems()
 	
 func RandomPickItem():

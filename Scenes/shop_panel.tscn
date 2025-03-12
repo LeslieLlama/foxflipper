@@ -26,7 +26,7 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_geymj"]
 bg_color = Color(0.870588, 0.666667, 0.54902, 1)
 
-[node name="ShopPanel" type="Panel" node_paths=PackedStringArray("itemContainers")]
+[node name="ShopPanel" type="Panel"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -37,7 +37,7 @@ mouse_filter = 1
 theme = ExtResource("1_28apw")
 theme_override_styles/panel = SubResource("StyleBoxFlat_geymj")
 script = ExtResource("2_w6x2w")
-itemContainers = [NodePath("BoxContainer/ItemPurchase/Item1"), NodePath("BoxContainer/ItemPurchase/Item2"), NodePath("BoxContainer/ItemPurchase/Item3"), NodePath("BoxContainer/ItemPurchase/Item4")]
+itemContainerPrefab = ExtResource("3_xtjei")
 
 [node name="ShopTitle" type="Label" parent="."]
 visible = false
@@ -96,7 +96,7 @@ grow_vertical = 2
 size_flags_horizontal = 3
 theme = ExtResource("1_28apw")
 theme_override_font_sizes/font_size = 40
-text = "+ 50 Points"
+text = "+50 Points"
 autowrap_mode = 3
 
 [node name="BuyCoinsPanel" type="Panel" parent="BoxContainer/StatPurchase"]
@@ -140,18 +140,6 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 columns = 2
 metadata/_edit_use_anchors_ = true
-
-[node name="Item1" parent="BoxContainer/ItemPurchase" instance=ExtResource("3_xtjei")]
-layout_mode = 2
-
-[node name="Item2" parent="BoxContainer/ItemPurchase" instance=ExtResource("3_xtjei")]
-layout_mode = 2
-
-[node name="Item3" parent="BoxContainer/ItemPurchase" instance=ExtResource("3_xtjei")]
-layout_mode = 2
-
-[node name="Item4" parent="BoxContainer/ItemPurchase" instance=ExtResource("3_xtjei")]
-layout_mode = 2
 
 [node name="Tooltip" type="PanelContainer" parent="."]
 visible = false
@@ -440,8 +428,8 @@ offset_top = -86.5
 offset_right = 23.5
 offset_bottom = 52.5
 
-[connection signal="button_up" from="BoxContainer/StatPurchase/BuyPointsPanel/Button" to="." method="add_purchase"]
 [connection signal="button_up" from="BoxContainer/StatPurchase/BuyPointsPanel/Button" to="." method="_add_points"]
+[connection signal="button_up" from="BoxContainer/StatPurchase/BuyPointsPanel/Button" to="." method="add_purchase"]
 [connection signal="button_up" from="BoxContainer/StatPurchase/BuyCoinsPanel/Button" to="." method="_add_coin"]
 [connection signal="button_up" from="BoxContainer/StatPurchase/BuyCoinsPanel/Button" to="." method="add_purchase"]
 [connection signal="button_up" from="BoxContainer/StatPurchase/BuyWeight/Button" to="." method="_add_weight"]
