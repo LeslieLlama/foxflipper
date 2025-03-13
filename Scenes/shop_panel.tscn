@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://bil8em6cgriyo"]
+[gd_scene load_steps=25 format=3 uid="uid://bil8em6cgriyo"]
 
 [ext_resource type="Theme" uid="uid://dsk5olnx1e77u" path="res://FancyTheme.tres" id="1_28apw"]
 [ext_resource type="Script" uid="uid://c4i4efn8kbsrh" path="res://Scripts/shop_panel.gd" id="2_w6x2w"]
@@ -22,6 +22,7 @@
 [ext_resource type="PackedScene" uid="uid://c22pimuivtqot" path="res://Scenes/Lucky_Charms/rock_carin.tscn" id="21_6kled"]
 [ext_resource type="PackedScene" uid="uid://dk5a5n15x0inp" path="res://Scenes/Lucky_Charms/pendulum.tscn" id="22_xtjei"]
 [ext_resource type="PackedScene" uid="uid://be8tgujw8w8et" path="res://Scenes/Lucky_Charms/folded_bill.tscn" id="23_fae02"]
+[ext_resource type="PackedScene" uid="uid://cvm5amlmgd0vi" path="res://Scenes/Lucky_Charms/act_inverted_snowman.tscn" id="23_rjh3o"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_geymj"]
 bg_color = Color(0.870588, 0.666667, 0.54902, 1)
@@ -157,11 +158,13 @@ metadata/_edit_use_anchors_ = true
 layout_mode = 2
 
 [node name="itemName" type="Label" parent="Tooltip/VBoxContainer"]
+custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_colors/font_color = Color(0.396078, 0.654902, 0.756863, 1)
 theme_override_font_sizes/font_size = 42
 text = "Item Name"
+autowrap_mode = 3
 metadata/_edit_use_anchors_ = true
 
 [node name="itemDescription" type="Label" parent="Tooltip/VBoxContainer"]
@@ -384,36 +387,36 @@ offset_top = -606.5
 offset_right = -496.5
 offset_bottom = -467.5
 
+[node name="folded_bill" parent="." instance=ExtResource("23_fae02")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -635.5
+offset_top = -606.5
+offset_right = -496.5
+offset_bottom = -467.5
+
+[node name="Pendulum" parent="." instance=ExtResource("22_xtjei")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -635.5
+offset_top = -606.5
+offset_right = -496.5
+offset_bottom = -467.5
+
 [node name="ItemPool" type="Control" parent="."]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
-
-[node name="Pendulum" parent="ItemPool" instance=ExtResource("22_xtjei")]
-visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -115.5
-offset_top = -86.5
-offset_right = 23.5
-offset_bottom = 52.5
-
-[node name="folded_bill" parent="ItemPool" instance=ExtResource("23_fae02")]
-visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -115.5
-offset_top = -86.5
-offset_right = 23.5
-offset_bottom = 52.5
 
 [node name="snake_eye" parent="ItemPool" instance=ExtResource("8_7d8rk")]
 visible = false
@@ -428,9 +431,13 @@ offset_top = -86.5
 offset_right = 23.5
 offset_bottom = 52.5
 
+[node name="act_inverted_snowman" parent="ItemPool" instance=ExtResource("23_rjh3o")]
+visible = false
+layout_mode = 1
+
 [connection signal="button_up" from="BoxContainer/StatPurchase/BuyPointsPanel/Button" to="." method="_add_points"]
 [connection signal="button_up" from="BoxContainer/StatPurchase/BuyPointsPanel/Button" to="." method="add_purchase"]
 [connection signal="button_up" from="BoxContainer/StatPurchase/BuyCoinsPanel/Button" to="." method="_add_coin"]
 [connection signal="button_up" from="BoxContainer/StatPurchase/BuyCoinsPanel/Button" to="." method="add_purchase"]
-[connection signal="button_up" from="BoxContainer/StatPurchase/BuyWeight/Button" to="." method="_add_weight"]
 [connection signal="button_up" from="BoxContainer/StatPurchase/BuyWeight/Button" to="." method="add_purchase"]
+[connection signal="button_up" from="BoxContainer/StatPurchase/BuyWeight/Button" to="." method="_add_weight"]

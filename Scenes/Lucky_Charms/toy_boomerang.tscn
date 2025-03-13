@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://b8cww7l0aqu2b"]
 
 [ext_resource type="PackedScene" uid="uid://c5gtsyminudgp" path="res://Scenes/Lucky_Charms/template.tscn" id="1_wy680"]
-[ext_resource type="Script" uid="uid://m30llwff58vh" path="res://Scripts/toy_boomerang.gd" id="2_xa1aj"]
+[ext_resource type="Script" uid="uid://m30llwff58vh" path="res://Scripts/LuckyCharms/toy_boomerang.gd" id="2_xa1aj"]
 [ext_resource type="Texture2D" uid="uid://dvb4n4sj8i755" path="res://Sprites/lucky_charms/item_boomerang.png" id="3_rk222"]
 
 [node name="toy_boomerang" instance=ExtResource("1_wy680")]

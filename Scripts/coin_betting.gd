@@ -14,6 +14,7 @@ func _ready() -> void:
 	Signals.ResetTable.connect(_reset_table)
 	Signals.FlippedCoin.connect(_flipped_coin)
 	Signals.PurchasePoints.connect(_add_points)
+	Signals.UpdateScoreUI.connect(update_coin_betting_ui)
 	update_coin_betting_ui()
 
 func _reset_table():
@@ -30,6 +31,7 @@ func _flipped_coin(coinCount : int):
 func update_coin_betting_ui():
 	TotalPoints.text = str("Total Points: ",Globals.totalValue)
 	SplitPoints.text = str("[center][color=#65A7C1]",Globals.tailsValue,"[/color]/",Globals.headsValue,"[/center]")
+	_divy_points()
 		
 func _on_add_tails_button_up() -> void:
 	AddHeads.disabled = false
@@ -61,3 +63,11 @@ func _add_points():
 		Globals.headsValue += 10
 		Globals.tailsValue += 40
 	update_coin_betting_ui()
+	
+func _divy_points():
+	var glob = Globals.totalValue/10
+	var glob_remainder = glob%2
+	var even_glob = glob + glob_remainder
+	var divy_glob = even_glob/2
+	print(str("heads = ",divy_glob*10))
+	print(str("tails = ",(divy_glob-glob_remainder)*10))
