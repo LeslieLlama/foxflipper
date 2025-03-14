@@ -64,7 +64,7 @@ func _add_points():
 		Globals.tailsValue += 40
 	update_coin_betting_ui()
 	
-func _divy_points():
+func _divy_points(): #evenly in base 10
 	var glob = Globals.totalValue/10
 	var glob_remainder = glob%2
 	var even_glob = glob + glob_remainder
