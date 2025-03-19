@@ -30,8 +30,10 @@ func _flipped_coin(coinCount : int):
 		
 func update_coin_betting_ui():
 	TotalPoints.text = str("Total Points: ",Globals.totalValue)
-	SplitPoints.text = str("[center][color=#65A7C1]",Globals.tailsValue,"[/color]/",Globals.headsValue,"[/center]")
-	_divy_points()
+	if Globals.tailsValue + Globals.headsValue != Globals.totalValue:
+		SplitPoints.text = str("[center][color=#b487d0]",Globals.tailsValue,"/",Globals.headsValue,"[/color][/center]")
+	else:
+		SplitPoints.text = str("[center][color=#65A7C1]",Globals.tailsValue,"[/color]/",Globals.headsValue,"[/center]")
 		
 func _on_add_tails_button_up() -> void:
 	AddHeads.disabled = false
@@ -64,7 +66,7 @@ func _add_points():
 		Globals.tailsValue += 40
 	update_coin_betting_ui()
 	
-func _divy_points(): #evenly in base 10
+func _divy_points(): #function to divide points evenly between heads and tails based on the global
 	var glob = Globals.totalValue/10
 	var glob_remainder = glob%2
 	var even_glob = glob + glob_remainder

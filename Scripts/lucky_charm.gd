@@ -15,12 +15,20 @@ var colorBlue = Color("65A7C1")
 var mouseHold : bool = false
 var destructionProgress = 0
 var is_enabled = false
+var scoring_is_ongoing : bool = false
 
 
 @export var current_type = Globals.item_type.ADDITION
 
 func _ready() -> void:
 	assign_seq_sym()
+	Signals.ScoreCoins.connect(_scoring_begins)
+	Signals.AllCoinsScored.connect(_scoring_ends)
+	
+func _scoring_begins():
+	scoring_is_ongoing = true
+func _scoring_ends():
+	scoring_is_ongoing = false
 
 func ImmediateEffect():
 	print("activating pre-wager item effect")
@@ -34,6 +42,8 @@ func MultiplyScore():
 	
 func _process(_delta: float) -> void:
 	if is_enabled == false: 
+		return
+	if scoring_is_ongoing:
 		return
 	if mouseHold == true:
 		destructionProgress += 1

@@ -8,6 +8,8 @@ var is_useable : bool = false
 func _ready() -> void:
 	charges = maxCharges
 	_update_charge_counter()
+	Signals.ScoreCoins.connect(_scoring_begins)
+	Signals.AllCoinsScored.connect(_scoring_ends)
 	Signals.ResetTable.connect(_reset_table)
 	Signals.ScoreCoins.connect(_score_coins)
 	assign_seq_sym()

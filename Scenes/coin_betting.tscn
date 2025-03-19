@@ -1,10 +1,16 @@
-[gd_scene load_steps=6 format=3 uid="uid://g7r0abvn0dli"]
+[gd_scene load_steps=8 format=3 uid="uid://g7r0abvn0dli"]
 
 [ext_resource type="Theme" uid="uid://dsk5olnx1e77u" path="res://FancyTheme.tres" id="1_yei7e"]
 [ext_resource type="Script" uid="uid://lp5jvxqje3ol" path="res://Scripts/coin_betting.gd" id="2_2hpvi"]
 [ext_resource type="FontFile" uid="uid://c3obv6undlrdy" path="res://Fonts/CaviarDreams_Bold.ttf" id="3_d0jd3"]
 [ext_resource type="Texture2D" uid="uid://cfsfmhokr0lvf" path="res://Sprites/FoxCoins_headsSmall.png" id="3_ousco"]
 [ext_resource type="Texture2D" uid="uid://rbhka5f6qjh5" path="res://Sprites/FoxCoins_tailsSmall.png" id="4_7k6rv"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hnpqd"]
+bg_color = Color(0.470588, 0.741176, 0.847059, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w2qmm"]
+bg_color = Color(0.396078, 0.654902, 0.756863, 1)
 
 [node name="CoinBetting" type="Panel" node_paths=PackedStringArray("AddTails", "AddHeads", "TotalPoints", "SplitPoints")]
 anchors_preset = 15
@@ -75,6 +81,8 @@ size_flags_vertical = 3
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("1_yei7e")
+theme_override_styles/hover = SubResource("StyleBoxFlat_hnpqd")
+theme_override_styles/normal = SubResource("StyleBoxFlat_w2qmm")
 text = "+Tails"
 metadata/_edit_use_anchors_ = true
 
