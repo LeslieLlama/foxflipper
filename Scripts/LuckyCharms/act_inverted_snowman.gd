@@ -13,6 +13,8 @@ func _ready() -> void:
 	Signals.FlippedCoin.connect(_coin_flipped)
 	Signals.ScoreCoins.connect(_scoring_begins)
 	Signals.AllCoinsScored.connect(_scoring_ends)
+	savedHeads = Globals.headsValue
+	savedTails = Globals.tailsValue
 	
 func _active_use():
 	if is_enabled == false:
@@ -46,9 +48,10 @@ func _process(_delta: float) -> void:
 		destructionProgress = 0
 	$TextureProgressBar.value = destructionProgress
 	if destructionProgress >= $TextureProgressBar.max_value:
-		Globals.headsValue = savedHeads
-		Globals.tailsValue = savedTails
-		Signals.emit_signal("UpdateScoreUI")
+		if charges < maxCharges:
+			Globals.headsValue = savedHeads
+			Globals.tailsValue = savedTails
+			Signals.emit_signal("UpdateScoreUI")
 		Signals.emit_signal("RemoveItem", self)
 		queue_free()
 	

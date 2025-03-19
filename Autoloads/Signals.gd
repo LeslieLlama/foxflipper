@@ -13,6 +13,7 @@ signal PurchaseCoin()
 signal PurchaseWeight()
 signal PurchaseItem(item : Control)
 signal RemoveItem(item : Control)
+signal SwapItems()
 
 signal CoinHistoryDisplayUpdate()
 

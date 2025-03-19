@@ -59,6 +59,7 @@ func _swap_items():
 func reset_item_internal_positions():
 	for i in items.size():
 		items[i].itemSlot = i
+	Signals.emit_signal("SwapItems")
 
 func add_item(new_item : Control):
 	#if items.size() >= 2:

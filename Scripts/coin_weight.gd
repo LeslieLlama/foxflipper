@@ -30,12 +30,12 @@ func _holding_train_stub(val : bool):
 	adjustDuringPlay = val
 
 func _update_weight_ui():
-	$AvailableWeightLabel.text = str("Available Weight: ",Globals.totalWeight*100,"%")
+	$AvailableWeightLabel.text = str("Sway: ",Globals.totalWeight*100,"%")
 	$OddsLabel.text = str("[center][color=#65A7C1]",int(Globals.headsThreshhold*100),"[/color]/",int(((1-Globals.headsThreshhold)*100)),"[/center]")
 
 func _add_total_weight():
 	Globals.totalWeight += 0.05
-	$AvailableWeightLabel.text = str("Available Weight: ",Globals.totalWeight*100,"%")
+	$AvailableWeightLabel.text = str("Sway: ",Globals.totalWeight*100,"%")
 	WeightSlider.max_value += 0.05
 	WeightSlider.min_value -= 0.05
 

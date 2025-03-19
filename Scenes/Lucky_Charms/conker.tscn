@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://cc4rld4ncwdue"]
+
+[ext_resource type="PackedScene" uid="uid://c5gtsyminudgp" path="res://Scenes/Lucky_Charms/template.tscn" id="1_awxvb"]
+[ext_resource type="Script" uid="uid://c1k2pndcpsitp" path="res://Scripts/LuckyCharms/conker.gd" id="2_owryu"]
+[ext_resource type="Texture2D" uid="uid://8qaq57ek6gl2" path="res://Sprites/lucky_charms/item_conker.png" id="3_djyhw"]
+[ext_resource type="AudioStream" uid="uid://crqe1icslrg5e" path="res://Audio/ConkerCrack.wav" id="4_owryu"]
+
+[node name="Conker" instance=ExtResource("1_awxvb")]
+script = ExtResource("2_owryu")
+Name = "Conker"
+Icon = ExtResource("3_djyhw")
+Description = "+20 points
+5% chance of breaking when swapped. 
+Swap charm positions to add +30 points to this charm, and +2% chance of breaking "
+current_type = 0
+
+[node name="TextureRect" parent="." index="0"]
+texture = ExtResource("3_djyhw")
+
+[node name="ConkerCrackSound" type="AudioStreamPlayer" parent="." index="3"]
+stream = ExtResource("4_owryu")

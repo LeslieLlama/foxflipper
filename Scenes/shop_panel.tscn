@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://bil8em6cgriyo"]
+[gd_scene load_steps=27 format=3 uid="uid://bil8em6cgriyo"]
 
 [ext_resource type="Theme" uid="uid://dsk5olnx1e77u" path="res://FancyTheme.tres" id="1_28apw"]
 [ext_resource type="Script" uid="uid://c4i4efn8kbsrh" path="res://Scripts/shop_panel.gd" id="2_w6x2w"]
@@ -24,6 +24,7 @@
 [ext_resource type="PackedScene" uid="uid://be8tgujw8w8et" path="res://Scenes/Lucky_Charms/folded_bill.tscn" id="23_fae02"]
 [ext_resource type="PackedScene" uid="uid://cvm5amlmgd0vi" path="res://Scenes/Lucky_Charms/act_inverted_snowman.tscn" id="23_rjh3o"]
 [ext_resource type="PackedScene" uid="uid://c2ce0m1snnulf" path="res://Scenes/Lucky_Charms/moai_head.tscn" id="24_rjh3o"]
+[ext_resource type="PackedScene" uid="uid://cc4rld4ncwdue" path="res://Scenes/Lucky_Charms/conker.tscn" id="25_1evpe"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_geymj"]
 bg_color = Color(0.870588, 0.666667, 0.54902, 1)
@@ -427,6 +428,10 @@ offset_top = -606.5
 offset_right = -496.5
 offset_bottom = -467.5
 
+[node name="MoaiHead" parent="." instance=ExtResource("24_rjh3o")]
+visible = false
+layout_mode = 1
+
 [node name="ItemPool" type="Control" parent="."]
 anchors_preset = 0
 offset_right = 40.0
@@ -436,7 +441,7 @@ offset_bottom = 40.0
 visible = false
 layout_mode = 1
 
-[node name="MoaiHead" parent="ItemPool" instance=ExtResource("24_rjh3o")]
+[node name="Conker" parent="ItemPool" instance=ExtResource("25_1evpe")]
 visible = false
 layout_mode = 1
 

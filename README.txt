@@ -25,3 +25,6 @@ https://freesound.org/people/Rock%20Savage/sounds/81045/
 
 Crystal Clinking sound: flick switch crystal glass lights on.wav by martian
 https://freesound.org/people/martian/sounds/393856/
+
+Conker Cracking Sound: finger crack by Duramen4
+https://freesound.org/people/Duramen4/sounds/769664/
