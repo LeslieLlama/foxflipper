@@ -17,7 +17,7 @@ func AddToScore(coinValues = []):
 				await get_tree().create_timer(0.2).timeout
 				_activation_animation()
 				Signals.emit_signal("AddPointsToCoin")
-				coinValues[c] += 200
+				coinValues[c] *= 3
 				var pos : Vector2 = Vector2(Globals.CoinHistorySprites[(c)].global_position.x,Globals.CoinHistorySprites[(c)].global_position.y+40)
 				var new_pos : Vector2 = Vector2(pos.x, pos.y+50)
 				var newCol : Color

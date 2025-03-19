@@ -8,7 +8,7 @@
 script = ExtResource("2_t7r6h")
 Name = "Snake Eye"
 Icon = ExtResource("3_gn0yw")
-Description = "Breaking a combo adds +200 to the breaking coin"
+Description = "Breaking a combo multiplies the value of the breaking coin by 3x"
 
 [node name="TextureRect" parent="." index="0"]
 texture = ExtResource("3_gn0yw")
