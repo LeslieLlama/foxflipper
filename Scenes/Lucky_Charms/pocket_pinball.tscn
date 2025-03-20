@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://bn1d7x86qanta"]
+
+[ext_resource type="PackedScene" uid="uid://c5gtsyminudgp" path="res://Scenes/Lucky_Charms/template.tscn" id="1_52o1l"]
+[ext_resource type="Script" uid="uid://bt4ky6qd7nd22" path="res://Scripts/LuckyCharms/pocket_pinball.gd" id="2_1fhd8"]
+[ext_resource type="Texture2D" uid="uid://c73kay71o7pb2" path="res://Sprites/lucky_charms/item_mini_pinball.png" id="3_1fhd8"]
+
+[node name="PocketPinball" instance=ExtResource("1_52o1l")]
+script = ExtResource("2_1fhd8")
+Name = ""
+Icon = ExtResource("3_1fhd8")
+Description = "+0 Points
+Create this chain : HHH/TTT, TTT/HHH to add +1000 points to this charm 
+"
+current_type = 0
+
+[node name="TextureRect" parent="." index="0"]
+texture = ExtResource("3_1fhd8")
