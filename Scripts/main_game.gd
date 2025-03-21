@@ -46,6 +46,7 @@ func _ready() -> void:
 	for i in 4:
 		Signals.emit_signal("PurchaseCoin")
 	Globals.currentScoreRequirement = RequiredScore[0]
+	Globals.score_position = $Layoutbox/Top/DealerZone/Dealer/RoundScoreLabel.global_position
 	_update_score_requirement_ui()
 	_reset_node_positions()
 	ReDoCoinButton.disabled = true

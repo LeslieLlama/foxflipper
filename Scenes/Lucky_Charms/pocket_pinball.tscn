@@ -1,17 +1,26 @@
-[gd_scene load_steps=4 format=3 uid="uid://bn1d7x86qanta"]
+[gd_scene load_steps=6 format=3 uid="uid://bn1d7x86qanta"]
 
 [ext_resource type="PackedScene" uid="uid://c5gtsyminudgp" path="res://Scenes/Lucky_Charms/template.tscn" id="1_52o1l"]
 [ext_resource type="Script" uid="uid://bt4ky6qd7nd22" path="res://Scripts/LuckyCharms/pocket_pinball.gd" id="2_1fhd8"]
 [ext_resource type="Texture2D" uid="uid://c73kay71o7pb2" path="res://Sprites/lucky_charms/item_mini_pinball.png" id="3_1fhd8"]
+[ext_resource type="AudioStream" uid="uid://dp6cw12yf6giv" path="res://Audio/404144__theshaggyfreak__classic-pinball-gameplay.wav" id="4_thlfr"]
+[ext_resource type="AudioStream" uid="uid://c8bq8jbe7r4cq" path="res://Audio/71542__timbre__simulation-of-pinball-free-game-knock-solenoid.wav" id="5_30ef6"]
 
 [node name="PocketPinball" instance=ExtResource("1_52o1l")]
 script = ExtResource("2_1fhd8")
-Name = ""
+Name = "Pocket Pinball"
 Icon = ExtResource("3_1fhd8")
 Description = "+0 Points
 Create this chain : HHH/TTT, TTT/HHH to add +1000 points to this charm 
 "
-current_type = 0
+current_type = 2
 
 [node name="TextureRect" parent="." index="0"]
 texture = ExtResource("3_1fhd8")
+
+[node name="AddPointsToSelfSound" type="AudioStreamPlayer" parent="." index="3"]
+stream = ExtResource("4_thlfr")
+volume_db = -6.638
+
+[node name="AddPointsToScoreSound" type="AudioStreamPlayer" parent="." index="4"]
+stream = ExtResource("5_30ef6")

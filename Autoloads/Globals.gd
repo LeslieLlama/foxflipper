@@ -16,6 +16,8 @@ var tailsValue = 50
 var headsThreshhold : float = 0.5
 var totalWeight = 0.05
 
+var score_position : Vector2 = Vector2(0,0)
+
 #var LuckyCharms = []
 enum item_type {IMMEDIATE, ADDITION, POST_RUN, UTILITY}
 

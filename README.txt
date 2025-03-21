@@ -28,3 +28,9 @@ https://freesound.org/people/martian/sounds/393856/
 
 Conker Cracking Sound: finger crack by Duramen4
 https://freesound.org/people/Duramen4/sounds/769664/
+
+Pinball adding points sound: Simulation of Pinball free-game knock by Timbre
+https://freesound.org/people/Timbre/sounds/71542/
+
+Pinball combo sound: Classic Pinball Gameplay by theshaggyfreak
+https://freesound.org/people/theshaggyfreak/sounds/404144/
