@@ -25,6 +25,9 @@ func _tool_tip_on(iname, desc):
 	$Tooltip/VBoxContainer/itemName.text = iname
 	$Tooltip/VBoxContainer/itemDescription.text = desc
 	
+func _tool_tip_off():
+	$Tooltip.hide()
+	
 func _folded_bill_reciver(add : bool):
 	if add == true:
 		_create_item_container()
@@ -44,8 +47,7 @@ func _remove_item_container():
 	itemContainers.pop_back()
 	child_node.queue_free()
 	
-func _tool_tip_off():
-	$Tooltip.hide()
+
 
 func _reset_item_pool_rarities():
 	itemPoolRarities.clear()

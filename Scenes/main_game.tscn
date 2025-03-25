@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bn0o5gyjoo4un"]
+[gd_scene load_steps=45 format=3 uid="uid://bn0o5gyjoo4un"]
 
 [ext_resource type="Script" uid="uid://c3ki014x5ycdk" path="res://Scripts/main_game.gd" id="1_k015l"]
 [ext_resource type="Texture2D" uid="uid://dl66pahmplk71" path="res://Sprites/FoxCoin_Dealer.png" id="3_1sbty"]
@@ -12,6 +12,33 @@
 [ext_resource type="PackedScene" uid="uid://g7r0abvn0dli" path="res://Scenes/coin_betting.tscn" id="9_rbtme"]
 [ext_resource type="PackedScene" uid="uid://bgtr52vop7nix" path="res://Scenes/flipping_coin.tscn" id="10_ogcto"]
 [ext_resource type="PackedScene" uid="uid://bil8em6cgriyo" path="res://Scenes/shop_panel.tscn" id="13_765k4"]
+[ext_resource type="PackedScene" uid="uid://cqbodrhfp5gb0" path="res://Scenes/item_container.tscn" id="13_c78sm"]
+[ext_resource type="Script" uid="uid://c4ngfotsf8sx2" path="res://Scripts/item_compendium.gd" id="13_sftma"]
+[ext_resource type="PackedScene" uid="uid://dk5a5n15x0inp" path="res://Scenes/Lucky_Charms/pendulum.tscn" id="14_i47ox"]
+[ext_resource type="PackedScene" uid="uid://btink48x47fy0" path="res://Scenes/Lucky_Charms/act_fox_ears.tscn" id="15_7oxt3"]
+[ext_resource type="PackedScene" uid="uid://5pyiidp58syb" path="res://Scenes/Lucky_Charms/cocktail_umbrella.tscn" id="15_erobn"]
+[ext_resource type="PackedScene" uid="uid://b8q55jh7fky56" path="res://Scenes/Lucky_Charms/bottlecap.tscn" id="15_hm1wn"]
+[ext_resource type="PackedScene" uid="uid://cvm5amlmgd0vi" path="res://Scenes/Lucky_Charms/act_inverted_snowman.tscn" id="16_n28rm"]
+[ext_resource type="PackedScene" uid="uid://6bup4gcsv3ab" path="res://Scenes/Lucky_Charms/snake_eye.tscn" id="16_vc13p"]
+[ext_resource type="PackedScene" uid="uid://d317fxd2yh7ju" path="res://Scenes/Lucky_Charms/act_red_eye_photo.tscn" id="17_glqx2"]
+[ext_resource type="PackedScene" uid="uid://rbc4yv2cmo35" path="res://Scenes/Lucky_Charms/cap_shooter.tscn" id="17_ry2jr"]
+[ext_resource type="PackedScene" uid="uid://bn1d7x86qanta" path="res://Scenes/Lucky_Charms/pocket_pinball.tscn" id="18_gpk8t"]
+[ext_resource type="PackedScene" uid="uid://dpw5tk0uab5p1" path="res://Scenes/Lucky_Charms/act_spatula_head.tscn" id="18_gy1md"]
+[ext_resource type="PackedScene" uid="uid://6xalfccty4pn" path="res://Scenes/Lucky_Charms/birthday_candle.tscn" id="19_h0kr5"]
+[ext_resource type="PackedScene" uid="uid://cc4rld4ncwdue" path="res://Scenes/Lucky_Charms/conker.tscn" id="23_8k7o2"]
+[ext_resource type="PackedScene" uid="uid://c8rwlqbhcxwi2" path="res://Scenes/Lucky_Charms/emoji_bracelet.tscn" id="24_3kmrm"]
+[ext_resource type="PackedScene" uid="uid://be8tgujw8w8et" path="res://Scenes/Lucky_Charms/folded_bill.tscn" id="25_b8haf"]
+[ext_resource type="PackedScene" uid="uid://d3af7hsqi26cr" path="res://Scenes/Lucky_Charms/meteor_fragment.tscn" id="26_dsbp1"]
+[ext_resource type="PackedScene" uid="uid://c2ce0m1snnulf" path="res://Scenes/Lucky_Charms/moai_head.tscn" id="27_rgo3w"]
+[ext_resource type="PackedScene" uid="uid://br6typ7vki6qx" path="res://Scenes/Lucky_Charms/paper_crown.tscn" id="28_0goto"]
+[ext_resource type="PackedScene" uid="uid://c22pimuivtqot" path="res://Scenes/Lucky_Charms/rock_carin.tscn" id="31_nqvgg"]
+[ext_resource type="PackedScene" uid="uid://b81qkps3wolif" path="res://Scenes/Lucky_Charms/switchblade_comb.tscn" id="33_byo8y"]
+[ext_resource type="PackedScene" uid="uid://c5gtsyminudgp" path="res://Scenes/Lucky_Charms/template.tscn" id="34_c8pbd"]
+[ext_resource type="PackedScene" uid="uid://cod0g2y8sswbm" path="res://Scenes/Lucky_Charms/template_active_item.tscn" id="35_pp62r"]
+[ext_resource type="PackedScene" uid="uid://b8cww7l0aqu2b" path="res://Scenes/Lucky_Charms/toy_boomerang.tscn" id="36_cqxut"]
+[ext_resource type="PackedScene" uid="uid://cu4lr6p2nfxb8" path="res://Scenes/Lucky_Charms/train_stub.tscn" id="37_n0tam"]
+[ext_resource type="PackedScene" uid="uid://c34llx7e7sl0n" path="res://Scenes/Lucky_Charms/ufo_charm.tscn" id="38_6w8yb"]
+[ext_resource type="PackedScene" uid="uid://dn2fgscby15kw" path="res://Scenes/Lucky_Charms/wet_matches.tscn" id="39_4rx7b"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dbx8f"]
 bg_color = Color(0.470588, 0.741176, 0.847059, 1)
@@ -620,7 +647,79 @@ theme_override_font_sizes/font_size = 30
 autowrap_mode = 3
 metadata/_edit_use_anchors_ = true
 
+[node name="ItemCompendium" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("13_sftma")
+itemContainerPrefab = ExtResource("13_c78sm")
+itemList = Array[PackedScene]([ExtResource("15_7oxt3"), ExtResource("16_n28rm"), ExtResource("17_glqx2"), ExtResource("18_gy1md"), ExtResource("19_h0kr5"), ExtResource("15_hm1wn"), ExtResource("17_ry2jr"), ExtResource("15_erobn"), ExtResource("23_8k7o2"), ExtResource("24_3kmrm"), ExtResource("25_b8haf"), ExtResource("26_dsbp1"), ExtResource("27_rgo3w"), ExtResource("28_0goto"), ExtResource("14_i47ox"), ExtResource("18_gpk8t"), ExtResource("31_nqvgg"), ExtResource("16_vc13p"), ExtResource("33_byo8y"), ExtResource("34_c8pbd"), ExtResource("35_pp62r"), ExtResource("36_cqxut"), ExtResource("37_n0tam"), ExtResource("38_6w8yb"), ExtResource("39_4rx7b")])
+
+[node name="Panel" type="Panel" parent="ItemCompendium"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Tooltip" type="PanelContainer" parent="ItemCompendium"]
+z_index = 1
+layout_mode = 0
+anchor_left = 0.0555556
+anchor_top = 0.075
+anchor_right = 0.933333
+anchor_bottom = 0.341667
+mouse_filter = 1
+theme = ExtResource("5_cxspc")
+metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ItemCompendium/Tooltip"]
+layout_mode = 2
+
+[node name="itemName" type="Label" parent="ItemCompendium/Tooltip/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(0.396078, 0.654902, 0.756863, 1)
+theme_override_font_sizes/font_size = 42
+text = "Item Name"
+metadata/_edit_use_anchors_ = true
+
+[node name="itemDescription" type="Label" parent="ItemCompendium/Tooltip/VBoxContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(0.396078, 0.654902, 0.756863, 1)
+theme_override_font_sizes/font_size = 30
+autowrap_mode = 3
+metadata/_edit_use_anchors_ = true
+
+[node name="GridContainer" type="GridContainer" parent="ItemCompendium"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0537037
+anchor_top = 0.35
+anchor_right = 0.933333
+anchor_bottom = 0.897222
+grow_horizontal = 2
+grow_vertical = 2
+columns = 5
+metadata/_edit_use_anchors_ = true
+
+[node name="ItemCompendiumButton" type="Button" parent="."]
+layout_mode = 0
+offset_right = 86.0
+offset_bottom = 86.0
+theme = ExtResource("5_cxspc")
+toggle_mode = true
+text = "!@#*"
+
 [connection signal="button_up" from="Layoutbox/Bottom/Center/LargeCoinZone/NextCoinButton" to="." method="_on_next_coin_button_button_up"]
 [connection signal="button_up" from="Layoutbox/Bottom/Center/LargeCoinZone/ReDoCoinButton" to="." method="_on_re_do_coin_button_button_up"]
 [connection signal="toggled" from="ExplanationPanel/Button" to="." method="_on_HelpButton_toggled"]
 [connection signal="button_up" from="GameOverPanel/RetryButton" to="." method="_on_retry_button_button_up"]
+[connection signal="toggled" from="ItemCompendiumButton" to="." method="_on_item_compendium_button_toggled"]

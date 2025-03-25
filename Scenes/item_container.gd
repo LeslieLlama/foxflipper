@@ -4,6 +4,13 @@ class_name ItemContainer
 signal itemBought
 @export var item : LuckyCharm
 
+var is_shop = true
+
+func _ready() -> void:
+	if item != null:
+		$Button.icon = item.Icon
+		$Label.text = item.Name
+		$Label2.text = item.Name
 
 func NewItem(newItem : LuckyCharm):
 	var child_node = newItem.duplicate()
@@ -16,8 +23,11 @@ func NewItem(newItem : LuckyCharm):
 	#$Button.text = child_node.Name
 	$Label.text = child_node.Name
 	$Label2.text = child_node.Name
+	item.visible = false
 	
 func _add_item():
+	if is_shop == false:
+		return
 	if Globals.itemNum < 2:
 		Signals.emit_signal("PurchaseItem", item)
 		emit_signal("itemBought")

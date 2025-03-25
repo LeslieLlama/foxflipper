@@ -273,6 +273,6 @@ func reset_table():
 	NextCoinButton.text = "Flip"
 	_shop_animation(false)
 	CurrentGameState = GameState.MENU
-	
 
-	
+func _on_item_compendium_button_toggled(toggled_on: bool) -> void:
+	$ItemCompendium.visible = toggled_on
