@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://bil8em6cgriyo"]
+[gd_scene load_steps=29 format=3 uid="uid://bil8em6cgriyo"]
 
 [ext_resource type="Theme" uid="uid://dsk5olnx1e77u" path="res://FancyTheme.tres" id="1_28apw"]
 [ext_resource type="Script" uid="uid://c4i4efn8kbsrh" path="res://Scripts/shop_panel.gd" id="2_w6x2w"]
@@ -26,6 +26,7 @@
 [ext_resource type="PackedScene" uid="uid://c2ce0m1snnulf" path="res://Scenes/Lucky_Charms/moai_head.tscn" id="24_rjh3o"]
 [ext_resource type="PackedScene" uid="uid://cc4rld4ncwdue" path="res://Scenes/Lucky_Charms/conker.tscn" id="25_1evpe"]
 [ext_resource type="PackedScene" uid="uid://bn1d7x86qanta" path="res://Scenes/Lucky_Charms/pocket_pinball.tscn" id="26_v6mex"]
+[ext_resource type="PackedScene" uid="uid://d3uq6368d56vk" path="res://Scenes/Lucky_Charms/act_fish_hook.tscn" id="27_jnspp"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_geymj"]
 bg_color = Color(0.870588, 0.666667, 0.54902, 1)
@@ -433,6 +434,10 @@ offset_bottom = -467.5
 visible = false
 layout_mode = 1
 
+[node name="act_inverted_snowman" parent="." instance=ExtResource("23_rjh3o")]
+visible = false
+layout_mode = 1
+
 [node name="Conker" parent="." instance=ExtResource("25_1evpe")]
 visible = false
 layout_mode = 1
@@ -442,17 +447,16 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="act_inverted_snowman" parent="ItemPool" instance=ExtResource("23_rjh3o")]
+[node name="PocketPinball" parent="ItemPool" instance=ExtResource("26_v6mex")]
 visible = false
 layout_mode = 1
 
-[node name="PocketPinball" parent="ItemPool" instance=ExtResource("26_v6mex")]
-visible = false
+[node name="act_fish_hook" parent="ItemPool" instance=ExtResource("27_jnspp")]
 layout_mode = 1
 
 [connection signal="button_up" from="BoxContainer/StatPurchase/BuyPointsPanel/Button" to="." method="_add_points"]
 [connection signal="button_up" from="BoxContainer/StatPurchase/BuyPointsPanel/Button" to="." method="add_purchase"]
 [connection signal="button_up" from="BoxContainer/StatPurchase/BuyCoinsPanel/Button" to="." method="_add_coin"]
 [connection signal="button_up" from="BoxContainer/StatPurchase/BuyCoinsPanel/Button" to="." method="add_purchase"]
-[connection signal="button_up" from="BoxContainer/StatPurchase/BuyWeight/Button" to="." method="add_purchase"]
 [connection signal="button_up" from="BoxContainer/StatPurchase/BuyWeight/Button" to="." method="_add_weight"]
+[connection signal="button_up" from="BoxContainer/StatPurchase/BuyWeight/Button" to="." method="add_purchase"]
