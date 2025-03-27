@@ -17,6 +17,8 @@ func _ready() -> void:
 	savedTails = Globals.tailsValue
 	
 func _active_use():
+	if charges <= 0:
+		return
 	if is_enabled == false:
 		return
 	if is_useable == false:

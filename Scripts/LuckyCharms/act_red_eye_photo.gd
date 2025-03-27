@@ -10,6 +10,8 @@ func _ready() -> void:
 	Signals.FlippedCoin.connect(_coin_flipped)
 	
 func _active_use():
+	if charges <= 0:
+		return
 	if is_enabled == false:
 		return
 	if is_useable == false:

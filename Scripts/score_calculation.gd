@@ -16,6 +16,7 @@ func _ready() -> void:
 	Signals.ResetTable.connect(_reset_table)
 	Signals.ScoreCoins.connect(_turn_off_swap_button)
 	Signals.AllCoinsScored.connect(_turn_on_swap_button)
+	Signals.ForceTriggerItems.connect(force_activation)
 
 func _reset_game():
 	for i in items:
@@ -112,7 +113,6 @@ func scoring_sequence():
 	Signals.emit_signal("AllCoinsScored")
 	
 func add_wager_to_coins():
-	Globals.CoinValues.clear()
 	for c in Globals.CoinHistory.size():
 		await get_tree().create_timer(0.1).timeout
 		var coin = 0
@@ -124,10 +124,12 @@ func add_wager_to_coins():
 		var pos : Vector2 = Vector2(Globals.CoinHistorySprites[(coin)].global_position.x,Globals.CoinHistorySprites[(coin)].global_position.y+40)
 		var new_pos : Vector2 = Vector2(pos.x, pos.y+50)
 		if Globals.CoinHistory[coin] == 0: #tails
-			Globals.CoinValues.append(Globals.tailsValue)
+			#Globals.CoinValues.append(Globals.tailsValue)
+			Globals.CoinValues[c] += Globals.tailsValue
 			Signals.emit_signal("PopupMessage", str(Globals.CoinValues[c]),pos,new_pos,colorBlue)
 		else: #heads
-			Globals.CoinValues.append(Globals.headsValue)
+			#Globals.CoinValues.append(Globals.headsValue)
+			Globals.CoinValues[c] += Globals.headsValue
 			Signals.emit_signal("PopupMessage", str(Globals.CoinValues[c]),pos,new_pos,colorRed)
 		Signals.emit_signal("MiniCoinAnimation",coin)
 		Signals.emit_signal("AddPointsToCoin")
@@ -190,3 +192,22 @@ func pattern_payoff(runCount : int, runArray, c : int, colorToUse : Color):
 		var pos : Vector2 = Vector2(Globals.CoinHistorySprites[middleOfArray].global_position.x,Globals.CoinHistorySprites[middleOfArray].global_position.y-10)
 		var new_pos : Vector2 = Vector2(pos.x, pos.y-30)
 		Signals.emit_signal("PopupMessage",(str("Run! +",scoreToAdd,"!")), pos,new_pos, colorToUse)
+		
+#forcibly activate the item effects outside of normal scoring
+func force_activation():
+	var y = 0
+	while y < Globals.score_loop:
+		for i in items:
+			if i!= null and i.current_type == Globals.item_type.UTILITY:
+				await i._active_use()
+		for i in items: 
+			if i != null and i.current_type == Globals.item_type.IMMEDIATE:
+				await i.ImmediateEffect()
+		for i in items:
+			if i != null and i.current_type == Globals.item_type.ADDITION:
+				Globals.CoinValues = await i.AddToScore(Globals.CoinValues)
+		for i in items: 
+			if i != null and i.current_type == Globals.item_type.POST_RUN:
+				await i.MultiplyScore()
+		y += 1
+	Signals.emit_signal("ScoreCoins")

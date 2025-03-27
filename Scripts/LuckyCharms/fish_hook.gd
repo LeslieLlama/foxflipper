@@ -9,16 +9,17 @@ func _ready() -> void:
 	Signals.FlippedCoin.connect(_coin_flipped)
 	
 func _active_use():
+	if charges <= 0:
+		return
 	if is_enabled == false:
 		return
 	if is_useable == false:
 		return
 	print("item activated")
-	
-	Signals.emit_signal("ScoreCoins")
-	
-	_activation_animation()
 	charges -= 1
+	Signals.emit_signal("ForceTriggerItems")
+	#Signals.emit_signal("ScoreCoins")
+	_activation_animation()
 	_update_charge_counter()
 	
 func _coin_flipped(coinCount):

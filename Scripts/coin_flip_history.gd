@@ -31,6 +31,7 @@ func coin_history_display_update():
 			Globals.CoinHistorySprites[Globals.coinCount-1].texture = tailsCoinSprite
 		if Globals.coinsToThrow + Globals.coinCount != Globals.maxCoinCount:
 			Globals.CoinHistorySprites[Globals.coinsToThrow + Globals.coinCount].texture = canceledCoinSprite
+	print(Globals.CoinValues)
 	mini_coin_trigger_animation(Globals.coinCount-1)
 
 func mini_coin_trigger_animation(c : int):

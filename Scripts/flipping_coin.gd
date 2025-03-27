@@ -20,10 +20,12 @@ func _flip_coin(is_reflip : bool):
 	if flip_value <= Globals.headsThreshhold:
 		_coin_flip_animation(false)
 		Globals.CoinHistory.append(0)
+		Globals.CoinValues.append(0)
 		Globals.coinCount += 1
 	else: 
 		_coin_flip_animation(true)
 		Globals.CoinHistory.append(1)
+		Globals.CoinValues.append(0)
 		Globals.coinCount += 1
 	Signals.emit_signal("FlippedCoin", Globals.coinCount)
 	

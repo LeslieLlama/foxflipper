@@ -42,11 +42,12 @@ func _on_gui_input(event: InputEvent) -> void:
 			mouseHold = true
 	if event is InputEventMouseButton and event.pressed == false:
 		if event.button_index == MOUSE_BUTTON_LEFT :
-			if charges > 0 and is_useable == true:
-				_active_use()
+			_active_use()
 			mouseHold = false
 			
 func _active_use():
+	if charges <= 0:
+		return
 	if is_enabled == false:
 		return
 	if is_useable == false:

@@ -350,9 +350,7 @@ size_flags_vertical = 3
 
 [node name="TiltPanel" parent="Layoutbox/Bottom/Left/HistoryZone" instance=ExtResource("4_cyt0w")]
 layout_mode = 2
-startingMax = 1.0
-startingMin = 0.0
-adjustDuringPlay = true
+startingMin = 0.44
 
 [node name="Center" type="VBoxContainer" parent="Layoutbox/Bottom"]
 layout_mode = 2

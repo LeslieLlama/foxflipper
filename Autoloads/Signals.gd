@@ -38,3 +38,4 @@ signal PopupMessage(textToSay : String, pos : Vector2, move_to : Vector2, textCo
 signal HoldingTrainStub(isHolding : bool)
 signal UpdateScoreUI() #used by six shooter but it's applicable anywhere you need to update the score display
 signal AddItemPurchaseSlot(add : bool) #used by folded bill to add another item slot to the shop, might be used by other items or a challenge mode
+signal ForceTriggerItems() #used by fish hook, runs through the scoring sequence before coins are offically scored.

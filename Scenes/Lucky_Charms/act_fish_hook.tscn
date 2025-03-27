@@ -17,6 +17,7 @@ current_type = 3
 texture = ExtResource("3_cdhi4")
 
 [node name="ChargeCounter" type="Label" parent="." index="3"]
+layout_mode = 0
 offset_right = 40.0
 offset_bottom = 31.0
 text = "🗲3"
