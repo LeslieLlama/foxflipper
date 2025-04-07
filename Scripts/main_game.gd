@@ -43,6 +43,7 @@ func _ready() -> void:
 	Signals.Mouse_End.connect(_tool_tip_off)
 	Signals.FlipCoin.connect(_flip_coin)
 	Signals.UpdateScoreUI.connect(_update_score_requirement_ui)
+	Signals.ScoreCoins.connect(_coins_scoring)
 	for i in 4:
 		Signals.emit_signal("PurchaseCoin")
 	Globals.currentScoreRequirement = RequiredScore[0]
@@ -61,6 +62,7 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if Input.is_key_pressed(KEY_SPACE):
 		pass #testing function
+	$StateIndicator.text = str(CurrentGameState)
 	
 func _tool_tip_on(iname, desc):
 	$Tooltip.position = _tool_tip_position()
@@ -110,6 +112,9 @@ func resize():
 	if CurrentGameState != GameState.SHOP:
 		ShopPanel.position = Vector2(ShopAnchor.position.x+ShopPanel.size.x,0)
 
+func _coins_scoring():
+	NextCoinButton.disabled = true
+
 func _on_next_coin_button_button_up() -> void:
 	##should probably change this to a match statement
 	SpeechBubble.hide()
@@ -126,7 +131,8 @@ func _on_next_coin_button_button_up() -> void:
 			CurrentGameState = GameState.SCORING
 			Signals.emit_signal("ScoreCoins")
 			ReDoCoinButton.disabled = true
-			NextCoinButton.text = "Shop"
+			NextCoinButton.text = "---"
+			
 			return
 		Signals.emit_signal("FlipCoin", false)
 	if CurrentGameState == GameState.SCORING:
@@ -136,7 +142,7 @@ func _on_next_coin_button_button_up() -> void:
 	if CurrentGameState == GameState.GAME_OVER:
 		reset_game()
 		_title_animation(true)
-		
+
 func _shop_animation(slide_in : bool):
 	if slide_in == true:
 		_set_shop_visible(true)
@@ -206,11 +212,16 @@ func _create_speech_bubble(textToSay : String):
 	
 	
 func check_round_won():
+	#contingency if the round is force ended
+	if CurrentGameState == GameState.BETTING:
+		CurrentGameState = GameState.SCORING
+		ReDoCoinButton.disabled = true
+		NextCoinButton.disabled = true
+	#the regular scoring check resumes here
 	if Globals.currentScore >= Globals.currentScoreRequirement:
 		RoundNumber += 1
-		#pop_up_message(str("Round Cleared!"),Vector2(660,120) , colorRed)
-		#pop_up_message(str("Well Done"),Vector2(660,140) , colorBlue)
 		_create_speech_bubble("Round Cleared!\nWell Done")
+		NextCoinButton.text = "Shop"
 	else: 
 		print("Game Over!")
 		game_over()
@@ -218,6 +229,7 @@ func check_round_won():
 	RoundScoreLabel.text = str(Globals.currentScore,"/")
 	if CurrentGameState != GameState.GAME_OVER && RoundNumber == 7:
 		game_won()
+	NextCoinButton.disabled = false
 	
 func game_over():
 	#$GameOverPanel.show()

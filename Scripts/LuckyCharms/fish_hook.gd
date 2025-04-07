@@ -26,6 +26,9 @@ func _coin_flipped(coinCount):
 	if coinCount >= 1 and charges > 0:
 		_ready_animation()
 		is_useable = true
+	if coinCount >= Globals.maxCoinCount:
+		tween.kill()
+		is_useable = false
 	
 func _reset_table():
 	if is_enabled == true:

@@ -350,7 +350,9 @@ size_flags_vertical = 3
 
 [node name="TiltPanel" parent="Layoutbox/Bottom/Left/HistoryZone" instance=ExtResource("4_cyt0w")]
 layout_mode = 2
-startingMin = 0.44
+startingMax = 1.0
+startingMin = 0.0
+adjustDuringPlay = true
 
 [node name="Center" type="VBoxContainer" parent="Layoutbox/Bottom"]
 layout_mode = 2
@@ -715,6 +717,15 @@ offset_bottom = 86.0
 theme = ExtResource("5_cxspc")
 toggle_mode = true
 text = "!@#*"
+
+[node name="StateIndicator" type="Label" parent="."]
+layout_mode = 0
+offset_left = 901.0
+offset_top = 442.0
+offset_right = 981.0
+offset_bottom = 471.0
+theme = ExtResource("5_cxspc")
+text = "Scoring"
 
 [connection signal="button_up" from="Layoutbox/Bottom/Center/LargeCoinZone/NextCoinButton" to="." method="_on_next_coin_button_button_up"]
 [connection signal="button_up" from="Layoutbox/Bottom/Center/LargeCoinZone/ReDoCoinButton" to="." method="_on_re_do_coin_button_button_up"]

@@ -124,11 +124,9 @@ func add_wager_to_coins():
 		var pos : Vector2 = Vector2(Globals.CoinHistorySprites[(coin)].global_position.x,Globals.CoinHistorySprites[(coin)].global_position.y+40)
 		var new_pos : Vector2 = Vector2(pos.x, pos.y+50)
 		if Globals.CoinHistory[coin] == 0: #tails
-			#Globals.CoinValues.append(Globals.tailsValue)
 			Globals.CoinValues[c] += Globals.tailsValue
 			Signals.emit_signal("PopupMessage", str(Globals.CoinValues[c]),pos,new_pos,colorBlue)
 		else: #heads
-			#Globals.CoinValues.append(Globals.headsValue)
 			Globals.CoinValues[c] += Globals.headsValue
 			Signals.emit_signal("PopupMessage", str(Globals.CoinValues[c]),pos,new_pos,colorRed)
 		Signals.emit_signal("MiniCoinAnimation",coin)
