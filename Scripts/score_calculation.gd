@@ -116,7 +116,7 @@ func add_wager_to_coins():
 	for c in Globals.CoinHistory.size():
 		await get_tree().create_timer(0.1).timeout
 		var coin = 0
-		if Globals.reverse_score_direction == false:
+		if Globals.reverse_score_direction == true:
 			coin = (Globals.CoinHistory.size()-1) - c
 		else: 
 			coin = c
@@ -124,10 +124,10 @@ func add_wager_to_coins():
 		var pos : Vector2 = Vector2(Globals.CoinHistorySprites[(coin)].global_position.x,Globals.CoinHistorySprites[(coin)].global_position.y+40)
 		var new_pos : Vector2 = Vector2(pos.x, pos.y+50)
 		if Globals.CoinHistory[coin] == 0: #tails
-			Globals.CoinValues[c] += Globals.tailsValue
+			Globals.CoinValues[coin] += Globals.tailsValue
 			Signals.emit_signal("PopupMessage", str(Globals.CoinValues[c]),pos,new_pos,colorBlue)
 		else: #heads
-			Globals.CoinValues[c] += Globals.headsValue
+			Globals.CoinValues[coin] += Globals.headsValue
 			Signals.emit_signal("PopupMessage", str(Globals.CoinValues[c]),pos,new_pos,colorRed)
 		Signals.emit_signal("MiniCoinAnimation",coin)
 		Signals.emit_signal("AddPointsToCoin")
