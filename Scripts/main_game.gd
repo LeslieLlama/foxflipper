@@ -259,12 +259,8 @@ func reset_game():
 	await get_tree().create_timer(0.01).timeout #this is so dumb but if you don't stall it slightly both loops happen concurrently and it screws them up
 	for i in 4:
 		Signals.emit_signal("PurchaseCoin")
-	Globals.totalValue = 100
 	$GameOverPanel.hide()
 	$GameWonPanel.hide()
-	Globals.headsValue = 50
-	Globals.tailsValue = 50
-	Globals.totalValue = 100
 	highest_score = 0
 	reset_table()
 	

@@ -11,9 +11,9 @@ func _process(_delta: float) -> void:
 	$TextureProgressBar.value = destructionProgress
 	if destructionProgress >= $TextureProgressBar.max_value:
 		Signals.emit_signal("RemoveItem", self)
-		Signals.emit_signal("HoldingTrainStub", false)
+		Signals.emit_signal("HoldingHotelSoap", false)
 		queue_free()
 	
 func item_enabled(val : bool):
 	is_enabled = val
-	Signals.emit_signal("HoldingTrainStub", val)
+	Signals.emit_signal("HoldingHotelSoap", val)

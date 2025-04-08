@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://bil8em6cgriyo"]
+[gd_scene load_steps=30 format=3 uid="uid://bil8em6cgriyo"]
 
 [ext_resource type="Theme" uid="uid://dsk5olnx1e77u" path="res://FancyTheme.tres" id="1_28apw"]
 [ext_resource type="Script" uid="uid://c4i4efn8kbsrh" path="res://Scripts/shop_panel.gd" id="2_w6x2w"]
@@ -27,6 +27,7 @@
 [ext_resource type="PackedScene" uid="uid://cc4rld4ncwdue" path="res://Scenes/Lucky_Charms/conker.tscn" id="25_1evpe"]
 [ext_resource type="PackedScene" uid="uid://bn1d7x86qanta" path="res://Scenes/Lucky_Charms/pocket_pinball.tscn" id="26_v6mex"]
 [ext_resource type="PackedScene" uid="uid://d3uq6368d56vk" path="res://Scenes/Lucky_Charms/act_fish_hook.tscn" id="27_jnspp"]
+[ext_resource type="PackedScene" uid="uid://cb4jhq8mjnx8v" path="res://Scenes/Lucky_Charms/hotel_soap.tscn" id="28_61h5j"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_geymj"]
 bg_color = Color(0.870588, 0.666667, 0.54902, 1)
@@ -181,19 +182,6 @@ text = "Item Description"
 autowrap_mode = 3
 metadata/_edit_use_anchors_ = true
 
-[node name="UFOcharm" parent="." instance=ExtResource("12_1wtim")]
-visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -635.5
-offset_top = -606.5
-offset_right = -496.5
-offset_bottom = -467.5
-
 [node name="ACT_fox_ears" parent="." instance=ExtResource("17_eioog")]
 visible = false
 layout_mode = 1
@@ -338,19 +326,6 @@ offset_top = -606.5
 offset_right = -496.5
 offset_bottom = -467.5
 
-[node name="toy_boomerang" parent="." instance=ExtResource("15_synq4")]
-visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -635.5
-offset_top = -606.5
-offset_right = -496.5
-offset_bottom = -467.5
-
 [node name="ACT_red_eye_photo" parent="." instance=ExtResource("19_h6jf6")]
 visible = false
 layout_mode = 1
@@ -432,19 +407,46 @@ offset_top = -86.5
 offset_right = 23.5
 offset_bottom = 52.5
 
+[node name="birthday_candle" parent="." instance=ExtResource("7_fn0t4")]
+visible = false
+layout_mode = 2
+anchors_preset = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -635.5
+offset_top = -606.5
+offset_right = -496.5
+offset_bottom = -467.5
+Description = "Coins get multiplied value equal to reflips used"
+
+[node name="act_fish_hook" parent="." instance=ExtResource("27_jnspp")]
+visible = false
+layout_mode = 1
+
+[node name="UFOcharm" parent="." instance=ExtResource("12_1wtim")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -635.5
+offset_top = -606.5
+offset_right = -496.5
+offset_bottom = -467.5
+
 [node name="ItemPool" type="Control" parent="."]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="act_fish_hook" parent="ItemPool" instance=ExtResource("27_jnspp")]
+[node name="toy_boomerang" parent="ItemPool" instance=ExtResource("15_synq4")]
 visible = false
 layout_mode = 1
-
-[node name="birthday_candle" parent="ItemPool" instance=ExtResource("7_fn0t4")]
-visible = false
-layout_mode = 2
-anchors_preset = 0
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -453,11 +455,18 @@ offset_left = -115.5
 offset_top = -86.5
 offset_right = 23.5
 offset_bottom = 52.5
-Description = "Coins get multiplied value equal to reflips used"
+
+[node name="hotel_soap" parent="ItemPool" instance=ExtResource("28_61h5j")]
+visible = false
+layout_mode = 1
+offset_left = -95.5
+offset_top = -66.5
+offset_right = -95.5
+offset_bottom = -66.5
 
 [connection signal="button_up" from="BoxContainer/StatPurchase/BuyPointsPanel/Button" to="." method="_add_points"]
 [connection signal="button_up" from="BoxContainer/StatPurchase/BuyPointsPanel/Button" to="." method="add_purchase"]
 [connection signal="button_up" from="BoxContainer/StatPurchase/BuyCoinsPanel/Button" to="." method="_add_coin"]
 [connection signal="button_up" from="BoxContainer/StatPurchase/BuyCoinsPanel/Button" to="." method="add_purchase"]
-[connection signal="button_up" from="BoxContainer/StatPurchase/BuyWeight/Button" to="." method="_add_weight"]
 [connection signal="button_up" from="BoxContainer/StatPurchase/BuyWeight/Button" to="." method="add_purchase"]
+[connection signal="button_up" from="BoxContainer/StatPurchase/BuyWeight/Button" to="." method="_add_weight"]
