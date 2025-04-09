@@ -6,7 +6,7 @@ extends Control
 var colorRed = Color("D0665A")
 var colorBlue = Color("65A7C1")
 var tween
-
+var wager_added_to_coins : bool = false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Signals.ScoreCoins.connect(scoring_sequence)
@@ -111,8 +111,11 @@ func scoring_sequence():
 					await i.MultiplyScore()
 			y += 1
 	Signals.emit_signal("AllCoinsScored")
+	wager_added_to_coins = false
 	
 func add_wager_to_coins():
+	if wager_added_to_coins == true:
+		return Globals.CoinValues
 	for c in Globals.CoinHistory.size():
 		await get_tree().create_timer(0.1).timeout
 		var coin = 0
@@ -132,6 +135,7 @@ func add_wager_to_coins():
 		Signals.emit_signal("MiniCoinAnimation",coin)
 		Signals.emit_signal("AddPointsToCoin")
 	await get_tree().create_timer(0.3).timeout
+	wager_added_to_coins = true
 	return Globals.CoinValues
 
 func coin_pattern_searcher():
@@ -195,12 +199,10 @@ func pattern_payoff(runCount : int, runArray, c : int, colorToUse : Color):
 func force_activation():
 	var y = 0
 	while y < Globals.score_loop:
-		for i in items:
-			if i!= null and i.current_type == Globals.item_type.UTILITY:
-				await i._active_use()
 		for i in items: 
 			if i != null and i.current_type == Globals.item_type.IMMEDIATE:
 				await i.ImmediateEffect()
+		Globals.CoinValues = await add_wager_to_coins()
 		for i in items:
 			if i != null and i.current_type == Globals.item_type.ADDITION:
 				Globals.CoinValues = await i.AddToScore(Globals.CoinValues)

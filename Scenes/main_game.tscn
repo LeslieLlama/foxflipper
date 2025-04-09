@@ -719,6 +719,7 @@ toggle_mode = true
 text = "!@#*"
 
 [node name="StateIndicator" type="Label" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 901.0
 offset_top = 442.0
