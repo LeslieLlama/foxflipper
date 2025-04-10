@@ -21,8 +21,8 @@ func NewItem(newItem : LuckyCharm):
 	item = child_node
 	$Button.icon = child_node.Icon
 	#$Button.text = child_node.Name
+	$Label2.text = match_seq_sym(child_node.current_type)
 	$Label.text = child_node.Name
-	$Label2.text = child_node.Name
 	item.visible = false
 	
 func _add_item():
@@ -43,3 +43,15 @@ func _on_mouse_entered() -> void:
 func _on_mouse_exited() -> void:
 	if not Rect2(Vector2(), self.size).has_point(get_viewport().get_mouse_position()):
 		Signals.emit_signal("Mouse_End_Shop")
+		
+#IMMEDIATE, ADDITION, POST_RUN, UTILITY
+func match_seq_sym(current_type):
+	match current_type:
+		Globals.item_type.IMMEDIATE:
+			return "!"
+		Globals.item_type.ADDITION:
+			return "#"
+		Globals.item_type.POST_RUN:
+			return "*"
+		Globals.item_type.UTILITY:
+			return "@"

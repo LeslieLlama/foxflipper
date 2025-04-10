@@ -18,6 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://btink48x47fy0" path="res://Scenes/Lucky_Charms/act_fox_ears.tscn" id="15_7oxt3"]
 [ext_resource type="PackedScene" uid="uid://5pyiidp58syb" path="res://Scenes/Lucky_Charms/cocktail_umbrella.tscn" id="15_erobn"]
 [ext_resource type="PackedScene" uid="uid://b8q55jh7fky56" path="res://Scenes/Lucky_Charms/bottlecap.tscn" id="15_hm1wn"]
+[ext_resource type="PackedScene" uid="uid://d3uq6368d56vk" path="res://Scenes/Lucky_Charms/act_fish_hook.tscn" id="15_n28rm"]
 [ext_resource type="PackedScene" uid="uid://cvm5amlmgd0vi" path="res://Scenes/Lucky_Charms/act_inverted_snowman.tscn" id="16_n28rm"]
 [ext_resource type="PackedScene" uid="uid://6bup4gcsv3ab" path="res://Scenes/Lucky_Charms/snake_eye.tscn" id="16_vc13p"]
 [ext_resource type="PackedScene" uid="uid://d317fxd2yh7ju" path="res://Scenes/Lucky_Charms/act_red_eye_photo.tscn" id="17_glqx2"]
@@ -29,12 +30,11 @@
 [ext_resource type="PackedScene" uid="uid://c8rwlqbhcxwi2" path="res://Scenes/Lucky_Charms/emoji_bracelet.tscn" id="24_3kmrm"]
 [ext_resource type="PackedScene" uid="uid://be8tgujw8w8et" path="res://Scenes/Lucky_Charms/folded_bill.tscn" id="25_b8haf"]
 [ext_resource type="PackedScene" uid="uid://d3af7hsqi26cr" path="res://Scenes/Lucky_Charms/meteor_fragment.tscn" id="26_dsbp1"]
+[ext_resource type="PackedScene" uid="uid://cb4jhq8mjnx8v" path="res://Scenes/Lucky_Charms/hotel_soap.tscn" id="27_glqx2"]
 [ext_resource type="PackedScene" uid="uid://c2ce0m1snnulf" path="res://Scenes/Lucky_Charms/moai_head.tscn" id="27_rgo3w"]
 [ext_resource type="PackedScene" uid="uid://br6typ7vki6qx" path="res://Scenes/Lucky_Charms/paper_crown.tscn" id="28_0goto"]
 [ext_resource type="PackedScene" uid="uid://c22pimuivtqot" path="res://Scenes/Lucky_Charms/rock_carin.tscn" id="31_nqvgg"]
 [ext_resource type="PackedScene" uid="uid://b81qkps3wolif" path="res://Scenes/Lucky_Charms/switchblade_comb.tscn" id="33_byo8y"]
-[ext_resource type="PackedScene" uid="uid://c5gtsyminudgp" path="res://Scenes/Lucky_Charms/template.tscn" id="34_c8pbd"]
-[ext_resource type="PackedScene" uid="uid://cod0g2y8sswbm" path="res://Scenes/Lucky_Charms/template_active_item.tscn" id="35_pp62r"]
 [ext_resource type="PackedScene" uid="uid://b8cww7l0aqu2b" path="res://Scenes/Lucky_Charms/toy_boomerang.tscn" id="36_cqxut"]
 [ext_resource type="PackedScene" uid="uid://cu4lr6p2nfxb8" path="res://Scenes/Lucky_Charms/train_stub.tscn" id="37_n0tam"]
 [ext_resource type="PackedScene" uid="uid://c34llx7e7sl0n" path="res://Scenes/Lucky_Charms/ufo_charm.tscn" id="38_6w8yb"]
@@ -657,7 +657,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("13_sftma")
 itemContainerPrefab = ExtResource("13_c78sm")
-itemList = Array[PackedScene]([ExtResource("15_7oxt3"), ExtResource("16_n28rm"), ExtResource("17_glqx2"), ExtResource("18_gy1md"), ExtResource("19_h0kr5"), ExtResource("15_hm1wn"), ExtResource("17_ry2jr"), ExtResource("15_erobn"), ExtResource("23_8k7o2"), ExtResource("24_3kmrm"), ExtResource("25_b8haf"), ExtResource("26_dsbp1"), ExtResource("27_rgo3w"), ExtResource("28_0goto"), ExtResource("14_i47ox"), ExtResource("18_gpk8t"), ExtResource("31_nqvgg"), ExtResource("16_vc13p"), ExtResource("33_byo8y"), ExtResource("34_c8pbd"), ExtResource("35_pp62r"), ExtResource("36_cqxut"), ExtResource("37_n0tam"), ExtResource("38_6w8yb"), ExtResource("39_4rx7b")])
+itemList = Array[PackedScene]([ExtResource("15_7oxt3"), ExtResource("16_n28rm"), ExtResource("17_glqx2"), ExtResource("18_gy1md"), ExtResource("19_h0kr5"), ExtResource("15_hm1wn"), ExtResource("17_ry2jr"), ExtResource("15_erobn"), ExtResource("23_8k7o2"), ExtResource("24_3kmrm"), ExtResource("25_b8haf"), ExtResource("26_dsbp1"), ExtResource("27_rgo3w"), ExtResource("28_0goto"), ExtResource("14_i47ox"), ExtResource("18_gpk8t"), ExtResource("31_nqvgg"), ExtResource("16_vc13p"), ExtResource("33_byo8y"), ExtResource("36_cqxut"), ExtResource("37_n0tam"), ExtResource("38_6w8yb"), ExtResource("39_4rx7b"), ExtResource("27_glqx2"), ExtResource("15_n28rm")])
 
 [node name="Panel" type="Panel" parent="ItemCompendium"]
 layout_mode = 1
