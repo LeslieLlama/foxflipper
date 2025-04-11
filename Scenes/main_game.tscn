@@ -710,6 +710,104 @@ grow_vertical = 2
 columns = 5
 metadata/_edit_use_anchors_ = true
 
+[node name="HowToPlay" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MenuUI" type="Control" parent="HowToPlay"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="HowToPlay/MenuUI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PageCountLabel" type="Label" parent="HowToPlay/MenuUI"]
+layout_mode = 0
+offset_left = 507.0
+offset_top = 1012.0
+offset_right = 547.0
+offset_bottom = 1061.0
+text = "Page
+1/5"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NextMenuButton" type="Button" parent="HowToPlay/MenuUI"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.543519
+anchor_top = 0.907407
+anchor_right = 0.762037
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 0
+theme = ExtResource("5_cxspc")
+theme_override_font_sizes/font_size = 40
+text = "Next"
+metadata/_edit_use_anchors_ = true
+
+[node name="PrevMenuButton" type="Button" parent="HowToPlay/MenuUI"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.217593
+anchor_top = 0.907407
+anchor_right = 0.436111
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("5_cxspc")
+theme_override_font_sizes/font_size = 40
+text = "Prev"
+metadata/_edit_use_anchors_ = true
+
+[node name="Pages" type="Control" parent="HowToPlay"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Page1" type="Control" parent="HowToPlay/Pages"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="HowToPlay/Pages/Page1"]
+layout_mode = 0
+offset_left = 119.0
+offset_top = 265.0
+offset_right = 948.0
+offset_bottom = 705.0
+theme = ExtResource("5_cxspc")
+
+[node name="Label" type="Label" parent="HowToPlay/Pages/Page1/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 45
+text = "Welcome to Fox Flipper! a Coin Flipping rougelike. The game is played by flipping coins with the flip button, which is currently being obscured by the \"Next\" button in this UI menu. It'll be under it when you close out of this tutorial."
+autowrap_mode = 3
+
 [node name="ItemCompendiumButton" type="Button" parent="."]
 layout_mode = 0
 offset_right = 86.0
@@ -717,6 +815,15 @@ offset_bottom = 86.0
 theme = ExtResource("5_cxspc")
 toggle_mode = true
 text = "!@#*"
+
+[node name="HelpButton" type="Button" parent="."]
+layout_mode = 0
+offset_top = 89.0
+offset_right = 86.0
+offset_bottom = 175.0
+theme = ExtResource("5_cxspc")
+toggle_mode = true
+text = "?"
 
 [node name="StateIndicator" type="Label" parent="."]
 visible = false
@@ -733,3 +840,4 @@ text = "Scoring"
 [connection signal="toggled" from="ExplanationPanel/Button" to="." method="_on_HelpButton_toggled"]
 [connection signal="button_up" from="GameOverPanel/RetryButton" to="." method="_on_retry_button_button_up"]
 [connection signal="toggled" from="ItemCompendiumButton" to="." method="_on_item_compendium_button_toggled"]
+[connection signal="toggled" from="HelpButton" to="." method="_on_help_button_toggled"]
