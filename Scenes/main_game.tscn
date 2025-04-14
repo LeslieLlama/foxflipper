@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://bn0o5gyjoo4un"]
+[gd_scene load_steps=52 format=3 uid="uid://bn0o5gyjoo4un"]
 
 [ext_resource type="Script" uid="uid://c3ki014x5ycdk" path="res://Scripts/main_game.gd" id="1_k015l"]
 [ext_resource type="Texture2D" uid="uid://dl66pahmplk71" path="res://Sprites/FoxCoin_Dealer.png" id="3_1sbty"]
@@ -39,6 +39,11 @@
 [ext_resource type="PackedScene" uid="uid://cu4lr6p2nfxb8" path="res://Scenes/Lucky_Charms/train_stub.tscn" id="37_n0tam"]
 [ext_resource type="PackedScene" uid="uid://c34llx7e7sl0n" path="res://Scenes/Lucky_Charms/ufo_charm.tscn" id="38_6w8yb"]
 [ext_resource type="PackedScene" uid="uid://dn2fgscby15kw" path="res://Scenes/Lucky_Charms/wet_matches.tscn" id="39_4rx7b"]
+[ext_resource type="Script" uid="uid://btgotx5hlpn2o" path="res://Scripts/how_to_play.gd" id="40_8k7o2"]
+[ext_resource type="Texture2D" uid="uid://cfsfmhokr0lvf" path="res://Sprites/FoxCoins_headsSmall.png" id="40_h0kr5"]
+[ext_resource type="Texture2D" uid="uid://rbhka5f6qjh5" path="res://Sprites/FoxCoins_tailsSmall.png" id="41_8k7o2"]
+[ext_resource type="Texture2D" uid="uid://po8fo44gcqw0" path="res://Sprites/FoxCoins_empty.png" id="42_3kmrm"]
+[ext_resource type="Texture2D" uid="uid://qrwcd5pa1llb" path="res://Sprites/FoxCoins_Canceled.png" id="43_b8haf"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dbx8f"]
 bg_color = Color(0.470588, 0.741176, 0.847059, 1)
@@ -66,6 +71,12 @@ corner_radius_bottom_left = 5
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q0t8k"]
 bg_color = Color(0.815686, 0.396078, 0.34902, 1)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_8k7o2"]
+blend_mode = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3kmrm"]
+bg_color = Color(1, 1, 1, 0.470588)
 
 [node name="MainGame" type="Control" node_paths=PackedStringArray("NextCoinButton", "ReDoCoinButton", "CoinAmmount", "ReflipAmmount", "Title", "TitleAnchor", "CurrentRoundLabel", "ShopPanel", "ShopAnchor", "RoundScoreLabel", "RequiredScoreLabel", "SpeechBubble", "credits")]
 layout_mode = 3
@@ -717,8 +728,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("40_8k7o2")
 
-[node name="MenuUI" type="Control" parent="HowToPlay"]
+[node name="Panel" type="Panel" parent="HowToPlay"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -726,7 +738,370 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Panel" type="Panel" parent="HowToPlay/MenuUI"]
+[node name="Pages" type="Control" parent="HowToPlay"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Page1" type="Control" parent="HowToPlay/Pages"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="HowToPlay/Pages/Page1"]
+layout_mode = 0
+offset_left = 119.0
+offset_top = 265.0
+offset_right = 948.0
+offset_bottom = 705.0
+theme = ExtResource("5_cxspc")
+
+[node name="Label" type="Label" parent="HowToPlay/Pages/Page1/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 9.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 45
+text = "Welcome to Fox Flipper! a Coin Flipping rougelike. The game is played by flipping coins with the flip button, which is currently being obscured by the \"Next\" button in this UI menu. It'll be under it when you close out of this tutorial."
+autowrap_mode = 3
+
+[node name="Page2" type="Control" parent="HowToPlay/Pages"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="HowToPlay/Pages/Page2"]
+layout_mode = 0
+offset_left = 113.0
+offset_top = 342.0
+offset_right = 831.0
+offset_bottom = 549.0
+theme = ExtResource("5_cxspc")
+
+[node name="Label" type="Label" parent="HowToPlay/Pages/Page2/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 45
+text = "When a coin is flipped, the result shows up here, in coin history ↓"
+autowrap_mode = 3
+
+[node name="Panel2" type="Panel" parent="HowToPlay/Pages/Page2"]
+layout_mode = 0
+offset_left = 585.0
+offset_top = 583.0
+offset_right = 1077.0
+offset_bottom = 941.0
+theme = ExtResource("5_cxspc")
+
+[node name="Label" type="Label" parent="HowToPlay/Pages/Page2/Panel2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 6.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 35
+text = "Heads 
+Tails
+Empty - Result has yet to be decided
+Canceled - A reflip has been used, reducing the final possible coin ammount."
+autowrap_mode = 3
+
+[node name="Panel3" type="Panel" parent="HowToPlay/Pages/Page2/Panel2"]
+layout_mode = 0
+offset_left = -58.0
+offset_top = -4.0
+offset_right = -3.0
+offset_bottom = 49.0
+theme = ExtResource("5_cxspc")
+
+[node name="TextureRect5" type="TextureRect" parent="HowToPlay/Pages/Page2/Panel2/Panel3"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -22.0
+offset_top = -22.0
+offset_right = 22.0
+offset_bottom = 22.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("40_h0kr5")
+expand_mode = 1
+
+[node name="Panel4" type="Panel" parent="HowToPlay/Pages/Page2/Panel2"]
+layout_mode = 0
+offset_left = -58.0
+offset_top = 45.0
+offset_right = -3.0
+offset_bottom = 98.0
+theme = ExtResource("5_cxspc")
+
+[node name="TextureRect5" type="TextureRect" parent="HowToPlay/Pages/Page2/Panel2/Panel4"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -22.0
+offset_top = -22.0
+offset_right = 22.0
+offset_bottom = 22.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("41_8k7o2")
+expand_mode = 1
+
+[node name="Panel5" type="Panel" parent="HowToPlay/Pages/Page2/Panel2"]
+layout_mode = 0
+offset_left = -58.0
+offset_top = 94.0
+offset_right = -3.0
+offset_bottom = 147.0
+theme = ExtResource("5_cxspc")
+
+[node name="TextureRect5" type="TextureRect" parent="HowToPlay/Pages/Page2/Panel2/Panel5"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -22.0
+offset_top = -22.0
+offset_right = 22.0
+offset_bottom = 22.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("42_3kmrm")
+expand_mode = 1
+
+[node name="Panel6" type="Panel" parent="HowToPlay/Pages/Page2/Panel2"]
+layout_mode = 0
+offset_left = -58.0
+offset_top = 188.0
+offset_right = -3.0
+offset_bottom = 241.0
+theme = ExtResource("5_cxspc")
+
+[node name="TextureRect5" type="TextureRect" parent="HowToPlay/Pages/Page2/Panel2/Panel6"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -22.0
+offset_top = -22.0
+offset_right = 22.0
+offset_bottom = 22.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("43_b8haf")
+expand_mode = 1
+
+[node name="TextureRect" type="TextureRect" parent="HowToPlay/Pages/Page2"]
+layout_mode = 0
+offset_left = 216.0
+offset_top = 560.0
+offset_right = 284.0
+offset_bottom = 628.0
+texture = ExtResource("40_h0kr5")
+expand_mode = 1
+
+[node name="TextureRect2" type="TextureRect" parent="HowToPlay/Pages/Page2"]
+layout_mode = 0
+offset_left = 290.0
+offset_top = 560.0
+offset_right = 358.0
+offset_bottom = 628.0
+texture = ExtResource("41_8k7o2")
+expand_mode = 1
+
+[node name="TextureRect3" type="TextureRect" parent="HowToPlay/Pages/Page2"]
+layout_mode = 0
+offset_left = 363.0
+offset_top = 560.0
+offset_right = 431.0
+offset_bottom = 628.0
+texture = ExtResource("40_h0kr5")
+expand_mode = 1
+
+[node name="TextureRect4" type="TextureRect" parent="HowToPlay/Pages/Page2"]
+layout_mode = 0
+offset_left = 436.0
+offset_top = 560.0
+offset_right = 504.0
+offset_bottom = 628.0
+texture = ExtResource("42_3kmrm")
+expand_mode = 1
+
+[node name="Page3" type="Control" parent="HowToPlay/Pages"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel2" type="Panel" parent="HowToPlay/Pages/Page3"]
+z_as_relative = false
+material = SubResource("CanvasItemMaterial_8k7o2")
+layout_mode = 0
+offset_left = -1.0
+offset_top = 721.0
+offset_right = 233.0
+offset_bottom = 900.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_3kmrm")
+
+[node name="Panel" type="Panel" parent="HowToPlay/Pages/Page3"]
+layout_mode = 0
+offset_left = 247.0
+offset_top = 458.0
+offset_right = 1076.0
+offset_bottom = 898.0
+theme = ExtResource("5_cxspc")
+
+[node name="Label" type="Label" parent="HowToPlay/Pages/Page3/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 9.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 45
+text = "Once you've flipped all of your available coins you can score them by again, pressing the flip button. Coins gain value equal to the value set on the wager. "
+autowrap_mode = 3
+
+[node name="Label2" type="Label" parent="HowToPlay/Pages/Page3/Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0301568
+anchor_top = 0.761364
+anchor_right = 0.334138
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 60
+text = "=    +50"
+autowrap_mode = 3
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect" type="TextureRect" parent="HowToPlay/Pages/Page3/Panel/Label2"]
+offset_left = 45.0
+offset_top = 6.0
+offset_right = 113.0
+offset_bottom = 74.0
+texture = ExtResource("40_h0kr5")
+expand_mode = 1
+
+[node name="Label3" type="Label" parent="HowToPlay/Pages/Page3/Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.393245
+anchor_top = 0.761364
+anchor_right = 0.566948
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.396078, 0.654902, 0.756863, 1)
+theme_override_font_sizes/font_size = 60
+text = "+50"
+autowrap_mode = 3
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect" type="TextureRect" parent="HowToPlay/Pages/Page3/Panel/Label3"]
+offset_left = -68.0
+offset_top = 6.0
+offset_bottom = 74.0
+texture = ExtResource("41_8k7o2")
+expand_mode = 1
+
+[node name="Page4" type="Control" parent="HowToPlay/Pages"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HighlightPanel" type="Panel" parent="HowToPlay/Pages/Page4"]
+z_as_relative = false
+material = SubResource("CanvasItemMaterial_8k7o2")
+layout_mode = 0
+offset_left = 356.0
+offset_top = 495.0
+offset_right = 503.0
+offset_bottom = 564.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_3kmrm")
+
+[node name="Panel" type="Panel" parent="HowToPlay/Pages/Page4"]
+layout_mode = 0
+offset_left = 137.0
+offset_top = 163.0
+offset_right = 961.0
+offset_bottom = 384.0
+theme = ExtResource("5_cxspc")
+
+[node name="Label" type="Label" parent="HowToPlay/Pages/Page4/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 9.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 45
+text = "Once coins have value added to them, they are tallied up and added to the round score. "
+autowrap_mode = 3
+
+[node name="Panel2" type="Panel" parent="HowToPlay/Pages/Page4"]
+layout_mode = 0
+offset_left = 66.0
+offset_top = 587.0
+offset_right = 961.0
+offset_bottom = 954.0
+theme = ExtResource("5_cxspc")
+
+[node name="Label" type="Label" parent="HowToPlay/Pages/Page4/Panel2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 9.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 45
+text = "If 3 or more coins are flipped that have identical values in a row, eg Heads, Heads, Heads, this is called a \"Combo\" and their values are multiplied by the length of the combo. at 50 value:
+H + H + H = (50x3)x3 = 450"
+autowrap_mode = 3
+
+[node name="MenuUI" type="Control" parent="HowToPlay"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -773,41 +1148,6 @@ theme_override_font_sizes/font_size = 40
 text = "Prev"
 metadata/_edit_use_anchors_ = true
 
-[node name="Pages" type="Control" parent="HowToPlay"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Page1" type="Control" parent="HowToPlay/Pages"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Panel" type="Panel" parent="HowToPlay/Pages/Page1"]
-layout_mode = 0
-offset_left = 119.0
-offset_top = 265.0
-offset_right = 948.0
-offset_bottom = 705.0
-theme = ExtResource("5_cxspc")
-
-[node name="Label" type="Label" parent="HowToPlay/Pages/Page1/Panel"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 45
-text = "Welcome to Fox Flipper! a Coin Flipping rougelike. The game is played by flipping coins with the flip button, which is currently being obscured by the \"Next\" button in this UI menu. It'll be under it when you close out of this tutorial."
-autowrap_mode = 3
-
 [node name="ItemCompendiumButton" type="Button" parent="."]
 layout_mode = 0
 offset_right = 86.0
@@ -839,5 +1179,7 @@ text = "Scoring"
 [connection signal="button_up" from="Layoutbox/Bottom/Center/LargeCoinZone/ReDoCoinButton" to="." method="_on_re_do_coin_button_button_up"]
 [connection signal="toggled" from="ExplanationPanel/Button" to="." method="_on_HelpButton_toggled"]
 [connection signal="button_up" from="GameOverPanel/RetryButton" to="." method="_on_retry_button_button_up"]
+[connection signal="button_up" from="HowToPlay/MenuUI/NextMenuButton" to="HowToPlay" method="_on_next_menu_button_button_up"]
+[connection signal="button_up" from="HowToPlay/MenuUI/PrevMenuButton" to="HowToPlay" method="_on_prev_menu_button_button_up"]
 [connection signal="toggled" from="ItemCompendiumButton" to="." method="_on_item_compendium_button_toggled"]
 [connection signal="toggled" from="HelpButton" to="." method="_on_help_button_toggled"]
