@@ -8,7 +8,7 @@
 script = ExtResource("2_xxs8h")
 Name = "Birthday Candle"
 Icon = ExtResource("3_arwts")
-Description = "coins get multiplied value = #canceled coins"
+Description = "Coins get multiplied value equal to the number of canceled coins."
 
 [node name="TextureRect" parent="." index="0"]
 texture = ExtResource("3_arwts")

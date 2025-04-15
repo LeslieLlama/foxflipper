@@ -284,6 +284,8 @@ func reset_table():
 
 func _on_item_compendium_button_toggled(toggled_on: bool) -> void:
 	$ItemCompendium.visible = toggled_on
+	$HelpButton.disabled = toggled_on
 
 func _on_help_button_toggled(toggled_on: bool) -> void:
 	$HowToPlay.visible = toggled_on
+	$ItemCompendiumButton.disabled = toggled_on
