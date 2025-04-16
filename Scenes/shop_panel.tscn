@@ -182,266 +182,6 @@ text = "Item Description"
 autowrap_mode = 3
 metadata/_edit_use_anchors_ = true
 
-[node name="ACT_fox_ears" parent="." instance=ExtResource("17_eioog")]
-visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -635.5
-offset_top = -606.5
-offset_right = -496.5
-offset_bottom = -467.5
-
-[node name="ACT_spatula_head" parent="." instance=ExtResource("14_fxn1g")]
-visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -635.5
-offset_top = -606.5
-offset_right = -496.5
-offset_bottom = -467.5
-
-[node name="Wet Matches" parent="." instance=ExtResource("13_vmlhg")]
-visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -635.5
-offset_top = -606.5
-offset_right = -496.5
-offset_bottom = -467.5
-
-[node name="Train_Stub" parent="." instance=ExtResource("10_83lca")]
-visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -635.5
-offset_top = -606.5
-offset_right = -496.5
-offset_bottom = -467.5
-
-[node name="Switchblade_Comb" parent="." instance=ExtResource("9_olyri")]
-visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -635.5
-offset_top = -606.5
-offset_right = -496.5
-offset_bottom = -467.5
-
-[node name="ToothpickUmbrella" parent="." instance=ExtResource("6_owq85")]
-visible = false
-layout_mode = 2
-anchors_preset = 0
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -635.5
-offset_top = -606.5
-offset_right = -496.5
-offset_bottom = -467.5
-
-[node name="emoji_bracelet" parent="." instance=ExtResource("11_e880d")]
-visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -635.5
-offset_top = -606.5
-offset_right = -496.5
-offset_bottom = -467.5
-
-[node name="meteor_fragment" parent="." instance=ExtResource("16_o3xye")]
-visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -635.5
-offset_top = -606.5
-offset_right = -496.5
-offset_bottom = -467.5
-Description = "Coins gain value equal to the inverse of their chance of flipping. (ie heads with a 45% chance will award 55 value)"
-
-[node name="paper_crown" parent="." instance=ExtResource("18_nxlew")]
-visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -635.5
-offset_top = -606.5
-offset_right = -496.5
-offset_bottom = -467.5
-
-[node name="rock_carin" parent="." instance=ExtResource("21_6kled")]
-visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -635.5
-offset_top = -606.5
-offset_right = -496.5
-offset_bottom = -467.5
-
-[node name="ACT_red_eye_photo" parent="." instance=ExtResource("19_h6jf6")]
-visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -635.5
-offset_top = -606.5
-offset_right = -496.5
-offset_bottom = -467.5
-
-[node name="folded_bill" parent="." instance=ExtResource("23_fae02")]
-visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -635.5
-offset_top = -606.5
-offset_right = -496.5
-offset_bottom = -467.5
-
-[node name="birthday_candle" parent="." instance=ExtResource("7_fn0t4")]
-visible = false
-layout_mode = 2
-anchors_preset = 0
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -635.5
-offset_top = -606.5
-offset_right = -496.5
-offset_bottom = -467.5
-Description = "Coins get multiplied value equal to reflips used"
-
-[node name="Pendulum" parent="." instance=ExtResource("22_xtjei")]
-visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -635.5
-offset_top = -606.5
-offset_right = -496.5
-offset_bottom = -467.5
-
-[node name="snake_eye" parent="." instance=ExtResource("8_7d8rk")]
-visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -635.5
-offset_top = -606.5
-offset_right = -496.5
-offset_bottom = -467.5
-
-[node name="Conker" parent="." instance=ExtResource("25_1evpe")]
-visible = false
-layout_mode = 1
-
-[node name="PocketPinball" parent="." instance=ExtResource("26_v6mex")]
-visible = false
-layout_mode = 1
-
-[node name="bottlecap" parent="." instance=ExtResource("5_225ia")]
-visible = false
-layout_mode = 2
-anchors_preset = 0
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -115.5
-offset_top = -86.5
-offset_right = 23.5
-offset_bottom = 52.5
-
-[node name="MoaiHead" parent="." instance=ExtResource("24_rjh3o")]
-visible = false
-layout_mode = 1
-
-[node name="toy_boomerang" parent="." instance=ExtResource("15_synq4")]
-visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -635.5
-offset_top = -606.5
-offset_right = -496.5
-offset_bottom = -467.5
-
-[node name="UFOcharm" parent="." instance=ExtResource("12_1wtim")]
-visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -635.5
-offset_top = -606.5
-offset_right = -496.5
-offset_bottom = -467.5
-
-[node name="act_inverted_snowman" parent="." instance=ExtResource("23_rjh3o")]
-visible = false
-layout_mode = 1
-
-[node name="hotel_soap" parent="." instance=ExtResource("28_61h5j")]
-visible = false
-layout_mode = 1
-offset_left = -95.5
-offset_top = -66.5
-offset_right = -95.5
-offset_bottom = -66.5
-
 [node name="ItemPool" type="Control" parent="."]
 anchors_preset = 0
 offset_right = 40.0
@@ -464,9 +204,269 @@ offset_top = -86.5
 offset_right = 23.5
 offset_bottom = 52.5
 
-[connection signal="button_up" from="BoxContainer/StatPurchase/BuyPointsPanel/Button" to="." method="_add_points"]
+[node name="ACT_fox_ears" parent="ItemPool" instance=ExtResource("17_eioog")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -115.5
+offset_top = -86.5
+offset_right = 23.5
+offset_bottom = 52.5
+
+[node name="ACT_spatula_head" parent="ItemPool" instance=ExtResource("14_fxn1g")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -115.5
+offset_top = -86.5
+offset_right = 23.5
+offset_bottom = 52.5
+
+[node name="Wet Matches" parent="ItemPool" instance=ExtResource("13_vmlhg")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -115.5
+offset_top = -86.5
+offset_right = 23.5
+offset_bottom = 52.5
+
+[node name="Train_Stub" parent="ItemPool" instance=ExtResource("10_83lca")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -115.5
+offset_top = -86.5
+offset_right = 23.5
+offset_bottom = 52.5
+
+[node name="Switchblade_Comb" parent="ItemPool" instance=ExtResource("9_olyri")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -115.5
+offset_top = -86.5
+offset_right = 23.5
+offset_bottom = 52.5
+
+[node name="ToothpickUmbrella" parent="ItemPool" instance=ExtResource("6_owq85")]
+visible = false
+layout_mode = 2
+anchors_preset = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -115.5
+offset_top = -86.5
+offset_right = 23.5
+offset_bottom = 52.5
+
+[node name="emoji_bracelet" parent="ItemPool" instance=ExtResource("11_e880d")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -115.5
+offset_top = -86.5
+offset_right = 23.5
+offset_bottom = 52.5
+
+[node name="meteor_fragment" parent="ItemPool" instance=ExtResource("16_o3xye")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -115.5
+offset_top = -86.5
+offset_right = 23.5
+offset_bottom = 52.5
+Description = "Coins gain value equal to the inverse of their chance of flipping. (ie heads with a 45% chance will award 55 value)"
+
+[node name="paper_crown" parent="ItemPool" instance=ExtResource("18_nxlew")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -115.5
+offset_top = -86.5
+offset_right = 23.5
+offset_bottom = 52.5
+
+[node name="rock_carin" parent="ItemPool" instance=ExtResource("21_6kled")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -115.5
+offset_top = -86.5
+offset_right = 23.5
+offset_bottom = 52.5
+
+[node name="ACT_red_eye_photo" parent="ItemPool" instance=ExtResource("19_h6jf6")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -115.5
+offset_top = -86.5
+offset_right = 23.5
+offset_bottom = 52.5
+
+[node name="folded_bill" parent="ItemPool" instance=ExtResource("23_fae02")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -115.5
+offset_top = -86.5
+offset_right = 23.5
+offset_bottom = 52.5
+
+[node name="birthday_candle" parent="ItemPool" instance=ExtResource("7_fn0t4")]
+visible = false
+layout_mode = 2
+anchors_preset = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -115.5
+offset_top = -86.5
+offset_right = 23.5
+offset_bottom = 52.5
+Description = "Coins get multiplied value equal to reflips used"
+
+[node name="Pendulum" parent="ItemPool" instance=ExtResource("22_xtjei")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -115.5
+offset_top = -86.5
+offset_right = 23.5
+offset_bottom = 52.5
+
+[node name="snake_eye" parent="ItemPool" instance=ExtResource("8_7d8rk")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -115.5
+offset_top = -86.5
+offset_right = 23.5
+offset_bottom = 52.5
+
+[node name="Conker" parent="ItemPool" instance=ExtResource("25_1evpe")]
+visible = false
+layout_mode = 1
+
+[node name="PocketPinball" parent="ItemPool" instance=ExtResource("26_v6mex")]
+visible = false
+layout_mode = 1
+
+[node name="bottlecap" parent="ItemPool" instance=ExtResource("5_225ia")]
+visible = false
+layout_mode = 2
+anchors_preset = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 404.5
+offset_top = 433.5
+offset_right = 543.5
+offset_bottom = 572.5
+
+[node name="MoaiHead" parent="ItemPool" instance=ExtResource("24_rjh3o")]
+visible = false
+layout_mode = 1
+
+[node name="toy_boomerang" parent="ItemPool" instance=ExtResource("15_synq4")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -115.5
+offset_top = -86.5
+offset_right = 23.5
+offset_bottom = 52.5
+
+[node name="UFOcharm" parent="ItemPool" instance=ExtResource("12_1wtim")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -115.5
+offset_top = -86.5
+offset_right = 23.5
+offset_bottom = 52.5
+
+[node name="act_inverted_snowman" parent="ItemPool" instance=ExtResource("23_rjh3o")]
+visible = false
+layout_mode = 1
+
+[node name="hotel_soap" parent="ItemPool" instance=ExtResource("28_61h5j")]
+visible = false
+layout_mode = 1
+offset_left = -95.5
+offset_top = -66.5
+offset_right = -95.5
+offset_bottom = -66.5
+
 [connection signal="button_up" from="BoxContainer/StatPurchase/BuyPointsPanel/Button" to="." method="add_purchase"]
-[connection signal="button_up" from="BoxContainer/StatPurchase/BuyCoinsPanel/Button" to="." method="_add_coin"]
+[connection signal="button_up" from="BoxContainer/StatPurchase/BuyPointsPanel/Button" to="." method="_add_points"]
 [connection signal="button_up" from="BoxContainer/StatPurchase/BuyCoinsPanel/Button" to="." method="add_purchase"]
+[connection signal="button_up" from="BoxContainer/StatPurchase/BuyCoinsPanel/Button" to="." method="_add_coin"]
 [connection signal="button_up" from="BoxContainer/StatPurchase/BuyWeight/Button" to="." method="add_purchase"]
 [connection signal="button_up" from="BoxContainer/StatPurchase/BuyWeight/Button" to="." method="_add_weight"]

@@ -1,10 +1,10 @@
-[gd_scene load_steps=56 format=3 uid="uid://bn0o5gyjoo4un"]
+[gd_scene load_steps=58 format=3 uid="uid://bn0o5gyjoo4un"]
 
 [ext_resource type="Script" uid="uid://c3ki014x5ycdk" path="res://Scripts/main_game.gd" id="1_k015l"]
-[ext_resource type="Texture2D" uid="uid://dl66pahmplk71" path="res://Sprites/FoxCoin_Dealer.png" id="3_1sbty"]
 [ext_resource type="PackedScene" uid="uid://cpai247vjxym3" path="res://Scenes/confetti.tscn" id="3_uvxce"]
 [ext_resource type="PackedScene" uid="uid://bbcrabknbbhrs" path="res://Scenes/coin_weight.tscn" id="4_cyt0w"]
 [ext_resource type="Theme" uid="uid://dsk5olnx1e77u" path="res://FancyTheme.tres" id="5_cxspc"]
+[ext_resource type="Texture2D" uid="uid://dwbcqb3v8yovq" path="res://Sprites/Fox_Sprites/FoxFlipperDealer_Test.png" id="6_0goto"]
 [ext_resource type="PackedScene" uid="uid://cv5owtbs3alpe" path="res://Scenes/score_calculation.tscn" id="6_jca5c"]
 [ext_resource type="Texture2D" uid="uid://b2sm2i7ll25ar" path="res://Sprites/Speechbubble.png" id="6_vewqb"]
 [ext_resource type="PackedScene" uid="uid://t6mev4v78cwu" path="res://Scenes/coin_flip_history.tscn" id="6_yecaa"]
@@ -48,6 +48,12 @@
 [ext_resource type="Texture2D" uid="uid://by67wheekph8h" path="res://Sprites/lucky_charms/item_umbrella.png" id="46_0goto"]
 [ext_resource type="Texture2D" uid="uid://dlh8eqc03lli2" path="res://Sprites/lucky_charms/item_paper_crown.png" id="47_nqvgg"]
 [ext_resource type="Texture2D" uid="uid://cwglbq5sw0qaf" path="res://Sprites/lucky_charms/item_fishing_hook.png" id="48_byo8y"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rgo3w"]
+bg_color = Color(0.356863, 0.0784314, 0.109804, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0goto"]
+bg_color = Color(0.1936, 0.0268026, 0.0444014, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dbx8f"]
 bg_color = Color(0.470588, 0.741176, 0.847059, 1)
@@ -116,6 +122,32 @@ grow_vertical = 2
 theme = ExtResource("5_cxspc")
 color = Color(0.862745, 0.862745, 0.8, 1)
 
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.000925926
+anchor_top = 0.484259
+anchor_right = 1.0
+anchor_bottom = 1.00093
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("5_cxspc")
+theme_override_styles/panel = SubResource("StyleBoxFlat_rgo3w")
+metadata/_edit_use_anchors_ = true
+
+[node name="Panel2" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.000925926
+anchor_top = 0.437037
+anchor_right = 1.0
+anchor_bottom = 0.488889
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("5_cxspc")
+theme_override_styles/panel = SubResource("StyleBoxFlat_0goto")
+metadata/_edit_use_anchors_ = true
+
 [node name="Layoutbox" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
@@ -146,7 +178,6 @@ offset_bottom = 108.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("5_cxspc")
-texture = ExtResource("3_1sbty")
 expand_mode = 3
 stretch_mode = 3
 
@@ -336,6 +367,17 @@ text = "Game Over!~"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect" type="TextureRect" parent="Layoutbox/Top/DealerZone"]
+layout_mode = 0
+anchor_left = 0.259259
+anchor_top = 0.0148699
+anchor_right = 0.747222
+anchor_bottom = 0.994424
+texture = ExtResource("6_0goto")
+expand_mode = 1
+stretch_mode = 5
 metadata/_edit_use_anchors_ = true
 
 [node name="Bottom" type="BoxContainer" parent="Layoutbox"]
