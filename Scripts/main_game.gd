@@ -47,7 +47,7 @@ func _ready() -> void:
 	for i in 4:
 		Signals.emit_signal("PurchaseCoin")
 	Globals.currentScoreRequirement = RequiredScore[0]
-	Globals.score_position = $Layoutbox/Top/DealerZone/Dealer/RoundScoreLabel.global_position
+	Globals.score_position = $Layoutbox/Top/DealerZone/AdjacentUI/RoundScoreLabel.global_position
 	_update_score_requirement_ui()
 	_reset_node_positions()
 	ReDoCoinButton.disabled = true
@@ -138,6 +138,7 @@ func _on_next_coin_button_button_up() -> void:
 	if CurrentGameState == GameState.SCORING:
 		_shop_animation(true)
 		CurrentGameState = GameState.SHOP
+		Signals.emit_signal("EnterShop")
 		NextCoinButton.text = "Next Round"
 	if CurrentGameState == GameState.GAME_OVER:
 		reset_game()
@@ -219,6 +220,7 @@ func check_round_won():
 		NextCoinButton.disabled = true
 	#the regular scoring check resumes here
 	if Globals.currentScore >= Globals.currentScoreRequirement:
+		Signals.emit_signal("RoundWon")
 		RoundNumber += 1
 		_create_speech_bubble("Round Cleared!\nWell Done")
 		NextCoinButton.text = "Shop"
@@ -233,6 +235,7 @@ func check_round_won():
 	
 func game_over():
 	#$GameOverPanel.show()
+	Signals.emit_signal("RoundLost")
 	_create_speech_bubble("Game Over!~")
 	CurrentGameState = GameState.GAME_OVER
 	NextCoinButton.text = "Play Again?"

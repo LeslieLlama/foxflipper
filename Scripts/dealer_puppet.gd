@@ -1,0 +1,55 @@
+extends TextureRect
+
+@export var BettingSprite : Texture2D
+@export var ScoringSprite : Texture2D
+@export var ShoppingSprite : Texture2D
+@export var RoundWonSprite : Texture2D
+@export var RoundLostSprite : Texture2D
+@export var GameWonSprite : Texture2D
+
+func _ready() -> void:
+	texture = BettingSprite
+	Signals.ScoreCoins.connect(scoring_begin)
+	Signals.NextRound.connect(betting_begin)
+	Signals.ResetGame.connect(betting_begin)
+	Signals.EnterShop.connect(enter_shop)
+	Signals.RoundWon.connect(round_won)
+	Signals.RoundLost.connect(round_lost)
+	Signals.GameWon.connect(game_won)
+	
+	
+func betting_begin():
+	_switch_sprite(0)
+	
+func scoring_begin():
+	_switch_sprite(1)
+	
+func enter_shop():
+	_switch_sprite(2)
+
+func round_won():
+	_switch_sprite(3)
+	
+func round_lost():
+	_switch_sprite(4)
+	
+func game_won():
+	_switch_sprite(5)
+	
+func _switch_sprite(spr : int):
+	match spr:
+		0: 
+			texture = BettingSprite
+		1: 
+			texture = ScoringSprite
+		2: 
+			texture = ShoppingSprite
+		3:
+			texture = RoundWonSprite
+		4:
+			texture = RoundLostSprite
+		5:
+			texture = GameWonSprite
+		_:
+			texture = BettingSprite
+			print("ERROR : SWITCH SPRITE CALLED WITH INVALID INT")

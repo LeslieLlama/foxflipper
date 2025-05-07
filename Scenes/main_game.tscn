@@ -1,16 +1,22 @@
-[gd_scene load_steps=58 format=3 uid="uid://bn0o5gyjoo4un"]
+[gd_scene load_steps=64 format=3 uid="uid://bn0o5gyjoo4un"]
 
 [ext_resource type="Script" uid="uid://c3ki014x5ycdk" path="res://Scripts/main_game.gd" id="1_k015l"]
+[ext_resource type="Texture2D" uid="uid://l5jysee0fk2i" path="res://Sprites/Fox_Sprites/FoxFlipperDealer_Betting.png" id="3_0goto"]
 [ext_resource type="PackedScene" uid="uid://cpai247vjxym3" path="res://Scenes/confetti.tscn" id="3_uvxce"]
 [ext_resource type="PackedScene" uid="uid://bbcrabknbbhrs" path="res://Scenes/coin_weight.tscn" id="4_cyt0w"]
 [ext_resource type="Theme" uid="uid://dsk5olnx1e77u" path="res://FancyTheme.tres" id="5_cxspc"]
-[ext_resource type="Texture2D" uid="uid://dwbcqb3v8yovq" path="res://Sprites/Fox_Sprites/FoxFlipperDealer_Test.png" id="6_0goto"]
+[ext_resource type="Script" uid="uid://c0st40x6kesnx" path="res://Scripts/dealer_puppet.gd" id="6_cqxut"]
 [ext_resource type="PackedScene" uid="uid://cv5owtbs3alpe" path="res://Scenes/score_calculation.tscn" id="6_jca5c"]
 [ext_resource type="Texture2D" uid="uid://b2sm2i7ll25ar" path="res://Sprites/Speechbubble.png" id="6_vewqb"]
 [ext_resource type="PackedScene" uid="uid://t6mev4v78cwu" path="res://Scenes/coin_flip_history.tscn" id="6_yecaa"]
+[ext_resource type="Texture2D" uid="uid://ce00nlhabmbfr" path="res://Sprites/Fox_Sprites/FoxFlipperDealer_Scoring.png" id="7_n0tam"]
+[ext_resource type="Texture2D" uid="uid://b64o42do5p1sg" path="res://Sprites/Fox_Sprites/FoxFlipperDealer_Shopping.png" id="8_6w8yb"]
 [ext_resource type="PackedScene" uid="uid://cvxdjuqp6ax2d" path="res://Scenes/audio.tscn" id="9_2ujpw"]
+[ext_resource type="Texture2D" uid="uid://b5mae2ndn2rmf" path="res://Sprites/Fox_Sprites/FoxFlipperDealer_RoundWon.png" id="9_4rx7b"]
 [ext_resource type="PackedScene" uid="uid://g7r0abvn0dli" path="res://Scenes/coin_betting.tscn" id="9_rbtme"]
+[ext_resource type="Texture2D" uid="uid://bdp84q32b453g" path="res://Sprites/Fox_Sprites/FoxFlipperDealer_RoundLost.png" id="10_c63pe"]
 [ext_resource type="PackedScene" uid="uid://bgtr52vop7nix" path="res://Scenes/flipping_coin.tscn" id="10_ogcto"]
+[ext_resource type="Texture2D" uid="uid://digg8tppjpkys" path="res://Sprites/Fox_Sprites/FoxFlipperDealer_GameWon.png" id="11_siqoq"]
 [ext_resource type="PackedScene" uid="uid://bil8em6cgriyo" path="res://Scenes/shop_panel.tscn" id="13_765k4"]
 [ext_resource type="PackedScene" uid="uid://cqbodrhfp5gb0" path="res://Scenes/item_container.tscn" id="13_c78sm"]
 [ext_resource type="Script" uid="uid://c4ngfotsf8sx2" path="res://Scripts/item_compendium.gd" id="13_sftma"]
@@ -101,14 +107,14 @@ NextCoinButton = NodePath("Layoutbox/Bottom/Center/LargeCoinZone/NextCoinButton"
 ReDoCoinButton = NodePath("Layoutbox/Bottom/Center/LargeCoinZone/ReDoCoinButton")
 CoinAmmount = NodePath("Layoutbox/Bottom/Center/LargeCoinZone/NextCoinButton/CoinAmmount")
 ReflipAmmount = NodePath("Layoutbox/Bottom/Center/LargeCoinZone/ReDoCoinButton/ReflipAmmount")
-Title = NodePath("Layoutbox/Top/DealerZone/Dealer/Title")
-TitleAnchor = NodePath("Layoutbox/Top/DealerZone/Dealer/TitleAnchor")
-CurrentRoundLabel = NodePath("Layoutbox/Top/DealerZone/Dealer/CurrentRoundLabel")
+Title = NodePath("Layoutbox/Top/DealerZone/AdjacentUI/Title")
+TitleAnchor = NodePath("Layoutbox/Top/DealerZone/AdjacentUI/TitleAnchor")
+CurrentRoundLabel = NodePath("Layoutbox/Top/DealerZone/AdjacentUI/CurrentRoundLabel")
 ShopPanel = NodePath("Layoutbox/Bottom/Right/ShopStuffs/ShopPanel")
 ShopAnchor = NodePath("Layoutbox/Bottom/Right/ShopStuffs/ShopAnchor")
-RoundScoreLabel = NodePath("Layoutbox/Top/DealerZone/Dealer/RoundScoreLabel")
-RequiredScoreLabel = NodePath("Layoutbox/Top/DealerZone/Dealer/RequiredScoreLabel")
-SpeechBubble = NodePath("Layoutbox/Top/DealerZone/Dealer/SpeechBubble")
+RoundScoreLabel = NodePath("Layoutbox/Top/DealerZone/AdjacentUI/RoundScoreLabel")
+RequiredScoreLabel = NodePath("Layoutbox/Top/DealerZone/AdjacentUI/RequiredScoreLabel")
+SpeechBubble = NodePath("Layoutbox/Top/DealerZone/AdjacentUI/SpeechBubble")
 credits = NodePath("Layoutbox/Bottom/Right/Credits")
 
 [node name="BackgroundColour" type="ColorRect" parent="."]
@@ -165,23 +171,25 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Dealer" type="TextureRect" parent="Layoutbox/Top/DealerZone"]
+[node name="AdjacentUI" type="TextureRect" parent="Layoutbox/Top/DealerZone"]
 custom_minimum_size = Vector2(260, 260)
 layout_mode = 1
-anchors_preset = 14
-anchor_top = 0.5
+anchors_preset = -1
+anchor_left = -0.001
+anchor_top = 0.871
 anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -1.0
-offset_top = -152.0
-offset_bottom = 108.0
+anchor_bottom = 0.871
+offset_left = 4.08
+offset_top = -460.598
+offset_right = 4.0
+offset_bottom = 66.402
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("5_cxspc")
-expand_mode = 3
-stretch_mode = 3
+expand_mode = 1
+stretch_mode = 5
 
-[node name="ConfettiPosition1" type="Control" parent="Layoutbox/Top/DealerZone/Dealer"]
+[node name="ConfettiPosition1" type="Control" parent="Layoutbox/Top/DealerZone/AdjacentUI"]
 show_behind_parent = true
 layout_mode = 1
 anchors_preset = 8
@@ -196,11 +204,11 @@ offset_bottom = 251.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Confetti" parent="Layoutbox/Top/DealerZone/Dealer/ConfettiPosition1" instance=ExtResource("3_uvxce")]
+[node name="Confetti" parent="Layoutbox/Top/DealerZone/AdjacentUI/ConfettiPosition1" instance=ExtResource("3_uvxce")]
 position = Vector2(0, 6.10352e-05)
 scale = Vector2(7.5, 7.5)
 
-[node name="ConfettiPosition2" type="Control" parent="Layoutbox/Top/DealerZone/Dealer"]
+[node name="ConfettiPosition2" type="Control" parent="Layoutbox/Top/DealerZone/AdjacentUI"]
 show_behind_parent = true
 layout_mode = 1
 anchors_preset = 8
@@ -215,11 +223,11 @@ offset_bottom = 251.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Confetti" parent="Layoutbox/Top/DealerZone/Dealer/ConfettiPosition2" instance=ExtResource("3_uvxce")]
+[node name="Confetti" parent="Layoutbox/Top/DealerZone/AdjacentUI/ConfettiPosition2" instance=ExtResource("3_uvxce")]
 position = Vector2(0, 6.10352e-05)
 scale = Vector2(7.5, 7.5)
 
-[node name="RoundScoreLabel" type="Label" parent="Layoutbox/Top/DealerZone/Dealer"]
+[node name="RoundScoreLabel" type="Label" parent="Layoutbox/Top/DealerZone/AdjacentUI"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -238,7 +246,7 @@ theme_override_font_sizes/font_size = 50
 text = "0/"
 horizontal_alignment = 2
 
-[node name="RequiredScoreLabel" type="Label" parent="Layoutbox/Top/DealerZone/Dealer"]
+[node name="RequiredScoreLabel" type="Label" parent="Layoutbox/Top/DealerZone/AdjacentUI"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -256,7 +264,7 @@ theme_override_colors/font_color = Color(0.396078, 0.654902, 0.756863, 1)
 theme_override_font_sizes/font_size = 50
 text = "0"
 
-[node name="TitleAnchor" type="Control" parent="Layoutbox/Top/DealerZone/Dealer"]
+[node name="TitleAnchor" type="Control" parent="Layoutbox/Top/DealerZone/AdjacentUI"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -270,7 +278,7 @@ offset_bottom = -173.75
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="Layoutbox/Top/DealerZone/Dealer/TitleAnchor"]
+[node name="Label" type="Label" parent="Layoutbox/Top/DealerZone/AdjacentUI/TitleAnchor"]
 visible = false
 layout_mode = 0
 offset_right = 40.0
@@ -278,7 +286,7 @@ offset_bottom = 29.0
 theme_override_colors/font_color = Color(0.273135, 0.442775, 0, 1)
 text = "Anchor"
 
-[node name="Title" type="Control" parent="Layoutbox/Top/DealerZone/Dealer"]
+[node name="Title" type="Control" parent="Layoutbox/Top/DealerZone/AdjacentUI"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -292,7 +300,7 @@ offset_bottom = -8.75
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TitleFox" type="Label" parent="Layoutbox/Top/DealerZone/Dealer/Title"]
+[node name="TitleFox" type="Label" parent="Layoutbox/Top/DealerZone/AdjacentUI/Title"]
 layout_mode = 1
 offset_left = -65.0
 offset_right = 231.0
@@ -302,7 +310,7 @@ theme_override_colors/font_color = Color(0.815686, 0.396078, 0.34902, 1)
 theme_override_font_sizes/font_size = 140
 text = "FOX"
 
-[node name="TitleFlipper" type="Label" parent="Layoutbox/Top/DealerZone/Dealer/Title"]
+[node name="TitleFlipper" type="Label" parent="Layoutbox/Top/DealerZone/AdjacentUI/Title"]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -316,7 +324,7 @@ theme_override_colors/font_color = Color(0.396078, 0.654902, 0.756863, 1)
 theme_override_font_sizes/font_size = 140
 text = "FLIPPER"
 
-[node name="CurrentRoundLabel" type="Label" parent="Layoutbox/Top/DealerZone/Dealer"]
+[node name="CurrentRoundLabel" type="Label" parent="Layoutbox/Top/DealerZone/AdjacentUI"]
 modulate = Color(0.815686, 0.396078, 0.34902, 1)
 layout_mode = 1
 anchors_preset = 8
@@ -335,7 +343,7 @@ theme_override_font_sizes/font_size = 50
 text = "Round 
 1/6"
 
-[node name="SpeechBubble" type="TextureRect" parent="Layoutbox/Top/DealerZone/Dealer"]
+[node name="SpeechBubble" type="TextureRect" parent="Layoutbox/Top/DealerZone/AdjacentUI"]
 visible = false
 layout_mode = 1
 anchors_preset = 8
@@ -352,7 +360,7 @@ grow_vertical = 2
 texture = ExtResource("6_vewqb")
 expand_mode = 1
 
-[node name="Label" type="Label" parent="Layoutbox/Top/DealerZone/Dealer/SpeechBubble"]
+[node name="Label" type="Label" parent="Layoutbox/Top/DealerZone/AdjacentUI/SpeechBubble"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.0402542
@@ -369,15 +377,27 @@ vertical_alignment = 1
 autowrap_mode = 3
 metadata/_edit_use_anchors_ = true
 
-[node name="TextureRect" type="TextureRect" parent="Layoutbox/Top/DealerZone"]
-layout_mode = 0
-anchor_left = 0.259259
-anchor_top = 0.0148699
-anchor_right = 0.747222
-anchor_bottom = 0.994424
-texture = ExtResource("6_0goto")
+[node name="DealerPuppet" type="TextureRect" parent="Layoutbox/Top/DealerZone"]
+modulate = Color(1, 1, 1, 0.862745)
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.855
+anchor_right = 1.0
+anchor_bottom = 0.855
+offset_left = 280.0
+offset_top = -451.99
+offset_right = -273.0
+offset_bottom = 75.0101
+texture = ExtResource("3_0goto")
 expand_mode = 1
 stretch_mode = 5
+script = ExtResource("6_cqxut")
+BettingSprite = ExtResource("3_0goto")
+ScoringSprite = ExtResource("7_n0tam")
+ShoppingSprite = ExtResource("8_6w8yb")
+RoundWonSprite = ExtResource("9_4rx7b")
+RoundLostSprite = ExtResource("10_c63pe")
+GameWonSprite = ExtResource("11_siqoq")
 metadata/_edit_use_anchors_ = true
 
 [node name="Bottom" type="BoxContainer" parent="Layoutbox"]

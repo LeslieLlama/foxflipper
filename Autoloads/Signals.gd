@@ -29,6 +29,10 @@ signal AllCoinsScored()
 signal AddPointsToCoin()
 signal MiniCoinAnimation(c : int)
 
+#mostly for the dealers sprite and audio cues
+signal RoundWon()
+signal RoundLost()
+signal EnterShop()
 signal NextRound()
 signal GameWon()
 
