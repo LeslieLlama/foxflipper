@@ -7,6 +7,8 @@ extends TextureRect
 @export var RoundLostSprite : Texture2D
 @export var GameWonSprite : Texture2D
 
+@export var current_position : Vector2
+
 func _ready() -> void:
 	texture = BettingSprite
 	Signals.ScoreCoins.connect(scoring_begin)
@@ -16,6 +18,7 @@ func _ready() -> void:
 	Signals.RoundWon.connect(round_won)
 	Signals.RoundLost.connect(round_lost)
 	Signals.GameWon.connect(game_won)
+	current_position = Vector2(280,8)
 	
 	
 func betting_begin():
@@ -53,3 +56,8 @@ func _switch_sprite(spr : int):
 		_:
 			texture = BettingSprite
 			print("ERROR : SWITCH SPRITE CALLED WITH INVALID INT")
+	var tween = get_tree().create_tween().set_parallel(true)
+	tween.tween_property(self, "position:y", current_position.y-8, 0.1).set_trans(Tween.TRANS_SINE)
+	tween.tween_property(self, "scale", Vector2(1,1.05), 0.1).set_trans(Tween.TRANS_SINE)
+	tween.chain().tween_property(self, "position:y", current_position.y, 0.1).set_trans(Tween.TRANS_SINE)
+	tween.tween_property(self, "scale", Vector2(1,1), 0.1).set_trans(Tween.TRANS_SINE)
