@@ -1,7 +1,8 @@
-[gd_scene load_steps=64 format=3 uid="uid://bn0o5gyjoo4un"]
+[gd_scene load_steps=65 format=3 uid="uid://bn0o5gyjoo4un"]
 
 [ext_resource type="Script" uid="uid://c3ki014x5ycdk" path="res://Scripts/main_game.gd" id="1_k015l"]
 [ext_resource type="Texture2D" uid="uid://l5jysee0fk2i" path="res://Sprites/Fox_Sprites/FoxFlipperDealer_Betting.png" id="3_0goto"]
+[ext_resource type="Texture2D" uid="uid://du055jbjprtmk" path="res://Sprites/enviromentRough.png" id="3_n0tam"]
 [ext_resource type="PackedScene" uid="uid://cpai247vjxym3" path="res://Scenes/confetti.tscn" id="3_uvxce"]
 [ext_resource type="PackedScene" uid="uid://bbcrabknbbhrs" path="res://Scenes/coin_weight.tscn" id="4_cyt0w"]
 [ext_resource type="Theme" uid="uid://dsk5olnx1e77u" path="res://FancyTheme.tres" id="5_cxspc"]
@@ -171,6 +172,19 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
+[node name="BackgroundEnviroment" type="TextureRect" parent="Layoutbox/Top/DealerZone"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.876
+offset_left = -318.0
+offset_top = -5.0
+offset_right = 381.0
+offset_bottom = 55.712
+texture = ExtResource("3_n0tam")
+expand_mode = 3
+stretch_mode = 5
+
 [node name="AdjacentUI" type="TextureRect" parent="Layoutbox/Top/DealerZone"]
 custom_minimum_size = Vector2(260, 260)
 layout_mode = 1
@@ -338,7 +352,7 @@ grow_vertical = 2
 theme = ExtResource("5_cxspc")
 theme_override_font_sizes/font_size = 50
 text = "Round 
-1/6"
+1/8"
 metadata/_edit_use_anchors_ = true
 
 [node name="SpeechBubble" type="TextureRect" parent="Layoutbox/Top/DealerZone/AdjacentUI"]

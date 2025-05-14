@@ -101,9 +101,11 @@ func resize():
 		$Layoutbox/Bottom/Left/HistoryZone.vertical = true
 		#$LayoutBox/Left/SpacerPanel.show()
 		$Layoutbox/Bottom/Left.size_flags_stretch_ratio = 1
+		$Layoutbox/Bottom/Center.size_flags_stretch_ratio = 2.5
 		$Layoutbox/Bottom/Left/HistoryZone.move_child($Layoutbox/Bottom/Left/HistoryZone/ScoreCalculation, 0)
 	else: #Vertical
 		$Layoutbox/Bottom.vertical = true 
+		$Layoutbox/Bottom/Center.size_flags_stretch_ratio = 1.5
 		$Layoutbox/Bottom/Left/HistoryZone.vertical = false
 		#$LayoutBox/Left/SpacerPanel.hide()
 		$Layoutbox/Bottom/Left.size_flags_stretch_ratio = 0.6
@@ -229,7 +231,7 @@ func check_round_won():
 		game_over()
 	if Globals.currentScore >= highest_score : highest_score = Globals.currentScore
 	RoundScoreLabel.text = str(Globals.currentScore,"/")
-	if CurrentGameState != GameState.GAME_OVER && RoundNumber == 7:
+	if CurrentGameState != GameState.GAME_OVER && RoundNumber == 9:
 		game_won()
 	NextCoinButton.disabled = false
 	
@@ -274,7 +276,7 @@ func reset_table():
 	Globals.coinCount = 0
 	Globals.coinsToThrow = Globals.maxCoinCount
 	reflipCount = maxReflipCount
-	CurrentRoundLabel.text = str("Round","\n",RoundNumber,"/6")
+	CurrentRoundLabel.text = str("Round","\n",RoundNumber,"/8")
 	Globals.currentScoreRequirement = RequiredScore[RoundNumber-1]
 	_update_score_requirement_ui()
 	RoundScoreLabel.text = str(Globals.currentScore,"/")

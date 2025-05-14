@@ -16,6 +16,7 @@ var colorBlue = Color("65A7C1")
 var CoinValues = []
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	Signals.FlipCoin.connect(reflip_used)
 	Signals.CoinHistoryDisplayUpdate.connect(coin_history_display_update)
 	Signals.PurchaseCoin.connect(_add_coin)
 	Signals.ResetGame.connect(_reset_game)
@@ -27,12 +28,16 @@ func coin_history_display_update():
 	for c in Globals.CoinHistory:
 		if c == 1:
 			Globals.CoinHistorySprites[Globals.coinCount-1].texture = headsCoinSprite
-		else:
+		if c == 0:
 			Globals.CoinHistorySprites[Globals.coinCount-1].texture = tailsCoinSprite
-		if Globals.coinsToThrow + Globals.coinCount != Globals.maxCoinCount:
-			Globals.CoinHistorySprites[Globals.coinsToThrow + Globals.coinCount].texture = canceledCoinSprite
+		#if Globals.coinsToThrow + Globals.coinCount != Globals.maxCoinCount:
+			#Globals.CoinHistorySprites[Globals.coinsToThrow + Globals.coinCount].texture = canceledCoinSprite
 	print(Globals.CoinValues)
 	mini_coin_trigger_animation(Globals.coinCount-1)
+	
+func reflip_used(is_reflip : bool):
+	if is_reflip == true:
+		Globals.CoinHistorySprites[(Globals.coinsToThrow + Globals.coinCount)-1].texture = canceledCoinSprite
 
 func mini_coin_trigger_animation(c : int):
 	var tween = get_tree().create_tween().bind_node(self)
