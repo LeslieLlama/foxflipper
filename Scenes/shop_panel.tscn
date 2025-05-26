@@ -187,6 +187,33 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
+[node name="folded_bill" parent="ItemPool" instance=ExtResource("23_fae02")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -115.5
+offset_top = -86.5
+offset_right = 23.5
+offset_bottom = 52.5
+
+[node name="birthday_candle" parent="ItemPool" instance=ExtResource("7_fn0t4")]
+visible = false
+layout_mode = 2
+anchors_preset = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -115.5
+offset_top = -86.5
+offset_right = 23.5
+offset_bottom = 52.5
+Description = "Coins get multiplied value equal to reflips used"
+
 [node name="act_fish_hook" parent="ItemPool" instance=ExtResource("27_jnspp")]
 visible = false
 layout_mode = 1
@@ -348,33 +375,6 @@ offset_top = -86.5
 offset_right = 23.5
 offset_bottom = 52.5
 
-[node name="folded_bill" parent="ItemPool" instance=ExtResource("23_fae02")]
-visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -115.5
-offset_top = -86.5
-offset_right = 23.5
-offset_bottom = 52.5
-
-[node name="birthday_candle" parent="ItemPool" instance=ExtResource("7_fn0t4")]
-visible = false
-layout_mode = 2
-anchors_preset = 0
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -115.5
-offset_top = -86.5
-offset_right = 23.5
-offset_bottom = 52.5
-Description = "Coins get multiplied value equal to reflips used"
-
 [node name="Pendulum" parent="ItemPool" instance=ExtResource("22_xtjei")]
 visible = false
 layout_mode = 1
@@ -464,9 +464,9 @@ offset_top = -66.5
 offset_right = -95.5
 offset_bottom = -66.5
 
-[connection signal="button_up" from="BoxContainer/StatPurchase/BuyPointsPanel/Button" to="." method="add_purchase"]
 [connection signal="button_up" from="BoxContainer/StatPurchase/BuyPointsPanel/Button" to="." method="_add_points"]
-[connection signal="button_up" from="BoxContainer/StatPurchase/BuyCoinsPanel/Button" to="." method="add_purchase"]
+[connection signal="button_up" from="BoxContainer/StatPurchase/BuyPointsPanel/Button" to="." method="add_purchase"]
 [connection signal="button_up" from="BoxContainer/StatPurchase/BuyCoinsPanel/Button" to="." method="_add_coin"]
+[connection signal="button_up" from="BoxContainer/StatPurchase/BuyCoinsPanel/Button" to="." method="add_purchase"]
 [connection signal="button_up" from="BoxContainer/StatPurchase/BuyWeight/Button" to="." method="add_purchase"]
 [connection signal="button_up" from="BoxContainer/StatPurchase/BuyWeight/Button" to="." method="_add_weight"]

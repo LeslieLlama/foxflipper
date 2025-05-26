@@ -18,7 +18,12 @@ func _ready() -> void:
 	Signals.RoundWon.connect(round_won)
 	Signals.RoundLost.connect(round_lost)
 	Signals.GameWon.connect(game_won)
-	current_position = Vector2(280,8)
+	get_tree().get_root().size_changed.connect(on_resize)
+	await get_tree().create_timer(0.01).timeout
+	current_position = global_position
+	
+func on_resize():
+	current_position = global_position
 	
 	
 func betting_begin():

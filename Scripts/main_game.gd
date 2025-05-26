@@ -18,7 +18,10 @@ var coinFlatSize : Vector2 = Vector2(0.7,0)
 
 var colorRed = Color("D0665A")
 var colorBlue = Color("65A7C1")
-
+var colorWhite = Color("dcdccc")
+var colorBlack = Color("5b141c")
+var colorPalette = [colorWhite, colorBlue, colorRed, colorBlack]
+var currentColorTie = 0
 var highest_score : int
 
 @export var NextCoinButton : Button
@@ -213,6 +216,11 @@ func _create_speech_bubble(textToSay : String):
 	var txt = SpeechBubble.get_child(0)
 	txt.text = textToSay
 	
+func change_tie_button_down():
+	currentColorTie += 1
+	if currentColorTie >= 4: 
+		currentColorTie = 0
+	$Layoutbox/Top/DealerZone/DealerPuppet/ColorRect.color = colorPalette[currentColorTie]
 	
 func check_round_won():
 	#contingency if the round is force ended
