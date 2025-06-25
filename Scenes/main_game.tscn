@@ -1,4 +1,4 @@
-[gd_scene load_steps=69 format=3 uid="uid://bn0o5gyjoo4un"]
+[gd_scene load_steps=83 format=3 uid="uid://bn0o5gyjoo4un"]
 
 [ext_resource type="Script" uid="uid://c3ki014x5ycdk" path="res://Scripts/main_game.gd" id="1_k015l"]
 [ext_resource type="Texture2D" uid="uid://l5jysee0fk2i" path="res://Sprites/Fox_Sprites/FoxFlipperDealer_Betting.png" id="3_0goto"]
@@ -55,6 +55,7 @@
 [ext_resource type="Texture2D" uid="uid://by67wheekph8h" path="res://Sprites/lucky_charms/item_umbrella.png" id="46_0goto"]
 [ext_resource type="Texture2D" uid="uid://dlh8eqc03lli2" path="res://Sprites/lucky_charms/item_paper_crown.png" id="47_nqvgg"]
 [ext_resource type="Texture2D" uid="uid://cwglbq5sw0qaf" path="res://Sprites/lucky_charms/item_fishing_hook.png" id="48_byo8y"]
+[ext_resource type="Texture2D" uid="uid://dinov12vgcd24" path="res://Sprites/DeskItems.png" id="56_6w8yb"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rgo3w"]
 bg_color = Color(0.356863, 0.0784314, 0.109804, 1)
@@ -102,6 +103,53 @@ blend_mode = 1
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3kmrm"]
 bg_color = Color(1, 1, 1, 0.470588)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dvjst"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_siqoq"]
+texture = ExtResource("56_6w8yb")
+region_rect = Rect2(530.455, 520.111, 345.528, 219.615)
+modulate_color = Color(0.226707, 0.226707, 0.226707, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_t4cin"]
+texture = ExtResource("56_6w8yb")
+region_rect = Rect2(511.421, 124.804, 303.069, 305.997)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_bgujj"]
+texture = ExtResource("56_6w8yb")
+region_rect = Rect2(518.742, 126.268, 276.715, 305.997)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_r6hdb"]
+texture = ExtResource("56_6w8yb")
+region_rect = Rect2(530.455, 515.719, 346.992, 222.543)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_t4cin"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_pr8xe"]
+texture = ExtResource("56_6w8yb")
+region_rect = Rect2(966.757, 208.258, 202.046, 289.892)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rtvbi"]
+texture = ExtResource("56_6w8yb")
+region_rect = Rect2(963.828, 212.65, 204.974, 284.036)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_p73ju"]
+texture = ExtResource("56_6w8yb")
+region_rect = Rect2(1234.69, 215.578, 197.654, 282.571)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_siqoq"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4rx7b"]
+texture = ExtResource("56_6w8yb")
+region_rect = Rect2(23.8759, 140.909, 409.948, 269.395)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6w8yb"]
+texture = ExtResource("56_6w8yb")
+region_rect = Rect2(23.8759, 135.053, 411.412, 270.859)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_c63pe"]
+texture = ExtResource("56_6w8yb")
+region_rect = Rect2(32.6713, 476.866, 376.274, 250.361)
 
 [node name="MainGame" type="Control" node_paths=PackedStringArray("NextCoinButton", "ReDoCoinButton", "CoinAmmount", "ReflipAmmount", "Title", "TitleAnchor", "CurrentRoundLabel", "ShopPanel", "ShopAnchor", "RoundScoreLabel", "RequiredScoreLabel", "SpeechBubble", "credits")]
 layout_mode = 3
@@ -1558,15 +1606,33 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -102.0
-offset_top = -120.0
-offset_right = -16.0
-offset_bottom = -34.0
+offset_left = -176.0
+offset_top = -141.0
+offset_right = -3.0
+offset_bottom = 5.0
 grow_horizontal = 0
 grow_vertical = 2
 theme = ExtResource("5_cxspc")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_dvjst")
+theme_override_styles/disabled = SubResource("StyleBoxTexture_siqoq")
+theme_override_styles/hover = SubResource("StyleBoxTexture_t4cin")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_bgujj")
+theme_override_styles/normal = SubResource("StyleBoxTexture_r6hdb")
 toggle_mode = true
-text = "!@#*"
+
+[node name="SettingsButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -124.0
+offset_bottom = 169.0
+grow_horizontal = 0
+theme = ExtResource("5_cxspc")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_t4cin")
+theme_override_styles/hover = SubResource("StyleBoxTexture_pr8xe")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_rtvbi")
+theme_override_styles/normal = SubResource("StyleBoxTexture_p73ju")
 
 [node name="HelpButton" type="Button" parent="."]
 z_index = 4
@@ -1574,14 +1640,19 @@ layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_left = 32.0
-offset_top = -123.0
-offset_right = 118.0
-offset_bottom = -37.0
+offset_left = -1.0
+offset_top = -133.0
+offset_right = 173.0
+offset_bottom = 1.0
 grow_vertical = 2
 theme = ExtResource("5_cxspc")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_siqoq")
+theme_override_styles/hover = SubResource("StyleBoxTexture_4rx7b")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_6w8yb")
+theme_override_styles/normal = SubResource("StyleBoxTexture_c63pe")
 toggle_mode = true
-text = "?"
+text = "
+"
 
 [node name="StateIndicator" type="Label" parent="."]
 visible = false
