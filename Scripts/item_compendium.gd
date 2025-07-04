@@ -23,7 +23,7 @@ func _create_item_container():
 	for i in itemList.size():
 		var child_node = itemContainerPrefab.instantiate()
 		child_node.is_shop = false
-		$GridContainer.add_child(child_node)
+		$Panel/GridContainer.add_child(child_node)
 		itemContainers.append(child_node)
 		var newItem = itemList[i].instantiate()
 		child_node.NewItem(newItem)

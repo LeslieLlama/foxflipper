@@ -1,9 +1,12 @@
-[gd_resource type="Theme" load_steps=13 format=3 uid="uid://dsk5olnx1e77u"]
+[gd_resource type="Theme" load_steps=16 format=3 uid="uid://dsk5olnx1e77u"]
 
 [ext_resource type="FontFile" uid="uid://c3obv6undlrdy" path="res://Fonts/CaviarDreams_Bold.ttf" id="1_660fd"]
 [ext_resource type="Texture2D" uid="uid://b488lm0xnf3hk" path="res://Sprites/Scrollbar.png" id="1_xl40i"]
+[ext_resource type="FontFile" uid="uid://csalmtqwgin8w" path="res://Fonts/CaviarDreams.ttf" id="1_yldkq"]
 [ext_resource type="Texture2D" uid="uid://yorqtgmaheqy" path="res://Sprites/Scrollbar_Disabled.png" id="2_suvmg"]
 [ext_resource type="Texture2D" uid="uid://lo4hef683yyq" path="res://Sprites/Scrollbar_Highlight.png" id="3_0fyxg"]
+[ext_resource type="FontFile" uid="uid://i3l6a5refibe" path="res://Fonts/CaviarDreams_BoldItalic.ttf" id="6_ar7s8"]
+[ext_resource type="FontFile" uid="uid://c3v1fdo6y54kl" path="res://Fonts/CaviarDreams_Italic.ttf" id="7_t8mqo"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_njusy"]
 bg_color = Color(0.952941, 0.462745, 0.407843, 1)
@@ -75,6 +78,7 @@ corner_radius_bottom_left = 10
 default_font = ExtResource("1_660fd")
 default_font_size = 22
 Button/colors/font_color = Color(0.862745, 0.862745, 0.8, 1)
+Button/fonts/font = ExtResource("1_yldkq")
 Button/styles/hover = SubResource("StyleBoxFlat_njusy")
 Button/styles/normal = SubResource("StyleBoxFlat_b7wyi")
 Button/styles/pressed = SubResource("StyleBoxFlat_cuhia")
@@ -85,5 +89,10 @@ HSlider/styles/grabber_area = SubResource("StyleBoxFlat_kwj43")
 HSlider/styles/grabber_area_highlight = SubResource("StyleBoxLine_578pu")
 HSlider/styles/slider = SubResource("StyleBoxLine_6rkq7")
 Label/colors/font_color = Color(0.815686, 0.396078, 0.34902, 1)
+Label/fonts/font = ExtResource("1_yldkq")
 Panel/styles/panel = SubResource("StyleBoxFlat_ja3rh")
 PanelContainer/styles/panel = SubResource("StyleBoxFlat_mkaf8")
+RichTextLabel/fonts/bold_font = ExtResource("1_660fd")
+RichTextLabel/fonts/bold_italics_font = ExtResource("6_ar7s8")
+RichTextLabel/fonts/italics_font = ExtResource("7_t8mqo")
+RichTextLabel/fonts/normal_font = ExtResource("1_yldkq")

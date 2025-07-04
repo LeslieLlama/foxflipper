@@ -8,9 +8,7 @@
 script = ExtResource("2_2xeng")
 Name = "Pendulum"
 Icon = ExtResource("3_2xeng")
-Description = "When this is your left-most item: Multiply Tails value by 2x 
-When this is your right-most item: Multiply Heads value by 2x 
-"
+Description = "Multiply tails values by 2x when in left slot, heads values by 2x when in right."
 
 [node name="TextureRect" parent="." index="0"]
 texture = ExtResource("3_2xeng")

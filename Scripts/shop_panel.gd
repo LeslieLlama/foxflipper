@@ -21,6 +21,8 @@ func _ready() -> void:
 	get_tree().get_root().size_changed.connect(resize)
 
 func _tool_tip_on(iname, desc):
+	return
+	#The dealer now describes items via textbox, so this is a legacy function. keeping it here incase it needs to be used again
 	$Tooltip.show()
 	$Tooltip/VBoxContainer/itemName.text = iname
 	$Tooltip/VBoxContainer/itemDescription.text = desc

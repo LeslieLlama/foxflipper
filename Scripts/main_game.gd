@@ -35,12 +35,14 @@ var highest_score : int
 @export var ShopAnchor : Control
 @export var RoundScoreLabel : Label
 @export var RequiredScoreLabel : Label
-@export var SpeechBubble : TextureRect
+@export var SpeechBubble : Control
 @export var credits : Label
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Signals.PopupMessage.connect(pop_up_message)
+	Signals.Mouse_Over_Shop.connect(_item_speech_bubble)
+	Signals.Mouse_End_Shop.connect(_close_speech_bubble)
 	Signals.AllCoinsScored.connect(check_round_won)
 	Signals.Mouse_Over.connect(_tool_tip_on)
 	Signals.Mouse_End.connect(_tool_tip_off)
@@ -122,7 +124,7 @@ func _coins_scoring():
 
 func _on_next_coin_button_button_up() -> void:
 	##should probably change this to a match statement
-	SpeechBubble.hide()
+	_close_speech_bubble()
 	if CurrentGameState == GameState.MENU:
 		_title_animation(false)
 		CurrentGameState = GameState.BETTING
@@ -211,10 +213,22 @@ func pop_up_message(textToSay : String, pos : Vector2, move_to : Vector2, textCo
 	tween.tween_property(message, "position", Vector2(move_to.x,move_to.y), 1).set_trans(tween.TRANS_QUAD)
 	tween.tween_callback(message.queue_free)
 	
+func _item_speech_bubble(item_name : String, item_desc : String):
+	$Layoutbox/Top/DealerZone/AdjacentUI/SpeechBubble/MarginContainer/Control/Label.add_theme_font_size_override("normal_font_size", 30)
+	$Layoutbox/Top/DealerZone/AdjacentUI/SpeechBubble/MarginContainer/Control/Label.add_theme_font_size_override("bold_font_size", 30)
+	var combined_str = str("[b]",item_name,"[/b]","\n",item_desc)
+	_create_speech_bubble(combined_str)
+	
+	
 func _create_speech_bubble(textToSay : String):
 	SpeechBubble.show()
-	var txt = SpeechBubble.get_child(0)
+	var txt = $Layoutbox/Top/DealerZone/AdjacentUI/SpeechBubble/MarginContainer/Control/Label
 	txt.text = textToSay
+	
+func _close_speech_bubble():
+	$Layoutbox/Top/DealerZone/AdjacentUI/SpeechBubble/MarginContainer/Control/Label.add_theme_font_size_override("normal_font_size", 40)
+	$Layoutbox/Top/DealerZone/AdjacentUI/SpeechBubble/MarginContainer/Control/Label.add_theme_font_size_override("bold_font_size", 40)
+	SpeechBubble.hide()
 	
 func change_tie_button_down():
 	currentColorTie += 1

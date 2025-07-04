@@ -9,9 +9,8 @@
 script = ExtResource("2_owryu")
 Name = "Conker"
 Icon = ExtResource("3_djyhw")
-Description = "+20 points
-5% chance of breaking when swapped. 
-Swap charm positions to add +30 points to this charm, and +2% chance of breaking "
+Description = "+20 value
+5% chance to break when swapped. Swapping adds +30 value to this charm, and +2% break chance "
 current_type = 0
 
 [node name="TextureRect" parent="." index="0"]
@@ -19,3 +18,4 @@ texture = ExtResource("3_djyhw")
 
 [node name="ConkerCrackSound" type="AudioStreamPlayer" parent="." index="3"]
 stream = ExtResource("4_owryu")
+bus = &"SFX"

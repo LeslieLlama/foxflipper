@@ -13,21 +13,27 @@ script = ExtResource("1_rc30o")
 
 [node name="CoinScoringSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("1_a6d24")
+bus = &"SFX"
 
 [node name="DestroyItemSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_5m48k")
+bus = &"SFX"
 
 [node name="CoinAddPointsSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_ae535")
+bus = &"SFX"
 
 [node name="CoinComboSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_5tqjv")
 volume_db = -10.0
+bus = &"SFX"
 
 [node name="CoinLandingSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_b0667")
 volume_db = -10.0
+bus = &"SFX"
 
 [node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_cvcc4")
 volume_db = -7.191
+bus = &"Music"

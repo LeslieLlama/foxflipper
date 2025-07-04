@@ -1,5 +1,7 @@
 extends ActiveLuckyCharm
 
+var rng = RandomNumberGenerator.new()
+
 
 func _ready() -> void:
 	assign_seq_sym()
@@ -23,7 +25,7 @@ func _active_use():
 	Globals.CoinHistory.clear()
 	Globals.coinCount = 0
 	Globals.coinsToThrow = Globals.maxCoinCount
-	
+	PlayItemUseSound()
 	_activation_animation()
 	charges -= 1
 	_update_charge_counter()
@@ -38,6 +40,10 @@ func _reset_table():
 		charges = maxCharges
 		_update_charge_counter()
 		
+func PlayItemUseSound():
+	var pitchRandomisation = rng.randf_range(1, 1.5)
+	$PhotoclickSoundEffect.pitch_scale = pitchRandomisation
+	$PhotoclickSoundEffect.play()
 	
 func _update_charge_counter():
 	$ChargeCounter.text = str("🗲",charges)

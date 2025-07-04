@@ -21,6 +21,8 @@ texture = ExtResource("3_1fhd8")
 [node name="AddPointsToSelfSound" type="AudioStreamPlayer" parent="." index="3"]
 stream = ExtResource("4_thlfr")
 volume_db = -6.638
+bus = &"SFX"
 
 [node name="AddPointsToScoreSound" type="AudioStreamPlayer" parent="." index="4"]
 stream = ExtResource("5_30ef6")
+bus = &"SFX"

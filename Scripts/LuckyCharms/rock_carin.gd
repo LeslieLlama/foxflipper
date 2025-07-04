@@ -35,7 +35,7 @@ func add_points_to_self(item : Control):
 		charm_value += 300
 		rarity = 10
 	Description = str(
-		"+",charm_value," Points\nChuck this item to give an additional +300 value when bought again. (Rock Cairn is more common in shops)"
+		"+",charm_value," Points\nChuck this item to add +300 value to above (more common once bought)"
 	)
 	
 func PlayCoinTriggerSound():
@@ -47,6 +47,6 @@ func _reset_game():
 	charm_value = 300
 	rarity = 1
 	Description = str(
-		"+",charm_value," Points\nChuck this item to give an additional +300 value when bought again. (Rock Cairn is more common in shops)"
+		"+",charm_value," Points\nChuck this item to add +300 value to above (more common once bought)"
 	)
 	

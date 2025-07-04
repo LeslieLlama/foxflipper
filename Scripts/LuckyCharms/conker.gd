@@ -27,7 +27,7 @@ func _items_swapped():
 		BreakConker()
 	ConkerPoints += 30
 	breakChance += 0.02
-	Description = str("+",ConkerPoints," points\n",int(breakChance*100),"% chance of breaking when swapped.\nSwap charm positions to add +30 points to this charm, and +2% chance of breaking")
+	Description = str("+",ConkerPoints," points\n",int(breakChance*100),"% chance to break when swapped. Swapping adds +30 value to this charm, and +2% break chance ")
 	
 func PlayCoinTriggerSound():
 	var pitchRandomisation = rng.randf_range(1, 1.5)

@@ -1,5 +1,7 @@
 Fox Flipper is a roguelike coin flipping game for web developed by Leslie Llama.
 
+Copyright ©2025 Leslie Crooks. All rights reserved. 
+
 Links to external assets:
 
 Coin Adding points sound: (labeled as "Minitick")
@@ -34,3 +36,6 @@ https://freesound.org/people/Timbre/sounds/71542/
 
 Pinball combo sound: Classic Pinball Gameplay by theshaggyfreak
 https://freesound.org/people/theshaggyfreak/sounds/404144/
+
+Photo click sound: shutter-photo by JanKoehl
+https://freesound.org/people/JanKoehl/sounds/72714/
