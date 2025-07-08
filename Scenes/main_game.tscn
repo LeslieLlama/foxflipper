@@ -158,7 +158,7 @@ region_rect = Rect2(23.8759, 135.053, 411.412, 270.859)
 texture = ExtResource("56_6w8yb")
 region_rect = Rect2(32.6713, 476.866, 376.274, 250.361)
 
-[node name="MainGame" type="Control" node_paths=PackedStringArray("NextCoinButton", "ReDoCoinButton", "CoinAmmount", "ReflipAmmount", "Title", "TitleAnchor", "CurrentRoundLabel", "ShopPanel", "ShopAnchor", "RoundScoreLabel", "RequiredScoreLabel", "SpeechBubble", "credits")]
+[node name="MainGame" type="Control" node_paths=PackedStringArray("NextCoinButton", "ReDoCoinButton", "CoinAmmount", "ReflipAmmount", "Title", "TitleAnchor", "CurrentRoundLabel", "ShopPanel", "ShopAnchor", "RoundScoreLabel", "SpeechBubble", "credits")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -177,7 +177,6 @@ CurrentRoundLabel = NodePath("Layoutbox/Top/DealerZone/AdjacentUI/CurrentRoundLa
 ShopPanel = NodePath("Layoutbox/Bottom/Right/ShopStuffs/ShopPanel")
 ShopAnchor = NodePath("Layoutbox/Bottom/Right/ShopStuffs/ShopAnchor")
 RoundScoreLabel = NodePath("Layoutbox/Top/DealerZone/AdjacentUI/RoundScoreLabel")
-RequiredScoreLabel = NodePath("Layoutbox/Top/DealerZone/AdjacentUI/RoundScoreLabel/RequiredScoreLabel")
 SpeechBubble = NodePath("Layoutbox/Top/DealerZone/AdjacentUI/SpeechBubble")
 credits = NodePath("Layoutbox/Bottom/Right/Credits")
 
@@ -323,35 +322,20 @@ grow_vertical = 2
 position = Vector2(0, 6.10352e-05)
 scale = Vector2(7.5, 7.5)
 
-[node name="RoundScoreLabel" type="Label" parent="Layoutbox/Top/DealerZone/AdjacentUI"]
+[node name="RoundScoreLabel" type="RichTextLabel" parent="Layoutbox/Top/DealerZone/AdjacentUI"]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 12.0
-offset_top = -66.0
-offset_right = 65.0
-offset_bottom = -1.0
+offset_top = -65.0
+offset_right = 423.0
 grow_vertical = 0
 theme = ExtResource("5_cxspc")
-theme_override_colors/font_color = Color(0.815686, 0.396078, 0.34902, 1)
-theme_override_font_sizes/font_size = 50
-text = "0000/"
-
-[node name="RequiredScoreLabel" type="Label" parent="Layoutbox/Top/DealerZone/AdjacentUI/RoundScoreLabel"]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 51.0
-offset_top = -33.5
-offset_right = 240.0
-offset_bottom = 31.5
-grow_vertical = 2
-theme = ExtResource("5_cxspc")
-theme_override_colors/font_color = Color(0.396078, 0.654902, 0.756863, 1)
-theme_override_font_sizes/font_size = 50
-text = "0"
+theme_override_font_sizes/normal_font_size = 50
+bbcode_enabled = true
+text = "400/300"
+scroll_active = false
+horizontal_alignment = 1
 
 [node name="TitleAnchor" type="Control" parent="Layoutbox/Top/DealerZone/AdjacentUI"]
 layout_mode = 1

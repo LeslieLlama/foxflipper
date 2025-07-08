@@ -33,8 +33,7 @@ var highest_score : int
 @export var CurrentRoundLabel : Label
 @export var ShopPanel : Panel 
 @export var ShopAnchor : Control
-@export var RoundScoreLabel : Label
-@export var RequiredScoreLabel : Label
+@export var RoundScoreLabel : RichTextLabel
 @export var SpeechBubble : Control
 @export var credits : Label
 
@@ -44,8 +43,8 @@ func _ready() -> void:
 	Signals.Mouse_Over_Shop.connect(_item_speech_bubble)
 	Signals.Mouse_End_Shop.connect(_close_speech_bubble)
 	Signals.AllCoinsScored.connect(check_round_won)
-	Signals.Mouse_Over.connect(_tool_tip_on)
-	Signals.Mouse_End.connect(_tool_tip_off)
+	Signals.Mouse_Over.connect(_item_speech_bubble)
+	Signals.Mouse_End.connect(_close_speech_bubble)
 	Signals.FlipCoin.connect(_flip_coin)
 	Signals.UpdateScoreUI.connect(_update_score_requirement_ui)
 	Signals.ScoreCoins.connect(_coins_scoring)
@@ -79,8 +78,7 @@ func _tool_tip_off():
 	$Tooltip.hide()
 	
 func _update_score_requirement_ui():
-	RoundScoreLabel.text = str(Globals.currentScore,"/")
-	RequiredScoreLabel.text = str(Globals.currentScoreRequirement)
+	RoundScoreLabel.text = str(Globals.currentScore,"/","[color=#65A7C1]",Globals.currentScoreRequirement,"[/color]")
 	
 func _tool_tip_position():
 	var cursor_pos = get_viewport().get_mouse_position()
@@ -252,7 +250,7 @@ func check_round_won():
 		print("Game Over!")
 		game_over()
 	if Globals.currentScore >= highest_score : highest_score = Globals.currentScore
-	RoundScoreLabel.text = str(Globals.currentScore,"/")
+	_update_score_requirement_ui()
 	if CurrentGameState != GameState.GAME_OVER && RoundNumber == 9:
 		game_won()
 	NextCoinButton.disabled = false
@@ -301,7 +299,6 @@ func reset_table():
 	CurrentRoundLabel.text = str("Round","\n",RoundNumber,"/8")
 	Globals.currentScoreRequirement = RequiredScore[RoundNumber-1]
 	_update_score_requirement_ui()
-	RoundScoreLabel.text = str(Globals.currentScore,"/")
 	ReflipAmmount.text = str(reflipCount,"x")
 	ReDoCoinButton.disabled = true
 	CoinAmmount.text = str(Globals.coinCount,"/",Globals.maxCoinCount)

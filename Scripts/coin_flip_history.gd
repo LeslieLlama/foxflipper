@@ -37,6 +37,10 @@ func coin_history_display_update():
 	
 func reflip_used(is_reflip : bool):
 	if is_reflip == true:
+		#this check is spesifically for reflipping items, they alter the number of remaining coins to act as "free" reflips and this causes a descrepancy with the number of flipped coins no longer aligning to the number of actual coins in the array
+		#to counter this, the below line checks for the descrepancy (ie using an reflipping item) and returns before the sprite updat code can run. 
+		if (Globals.coinsToThrow + Globals.coinCount)-1 >= Globals.CoinHistorySprites.size():
+			return
 		Globals.CoinHistorySprites[(Globals.coinsToThrow + Globals.coinCount)-1].texture = canceledCoinSprite
 
 func mini_coin_trigger_animation(c : int):
