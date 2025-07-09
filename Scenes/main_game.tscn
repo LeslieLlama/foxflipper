@@ -253,6 +253,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="BackgroundEnviroment" type="TextureRect" parent="Layoutbox/Top/DealerZone"]
+visible = false
 z_index = -1
 layout_mode = 1
 anchors_preset = -1
@@ -402,21 +403,21 @@ text = "FLIPPER"
 [node name="CurrentRoundLabel" type="Label" parent="Layoutbox/Top/DealerZone/AdjacentUI"]
 modulate = Color(0.815686, 0.396078, 0.34902, 1)
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.147086
-anchor_top = 0.626186
-anchor_right = 0.301573
-anchor_bottom = 0.878558
-offset_left = 1.52588e-05
-grow_horizontal = 2
-grow_vertical = 2
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 37.0
+offset_top = -121.0
+offset_right = 276.0
+offset_bottom = -62.0
+grow_vertical = 0
 theme = ExtResource("5_cxspc")
 theme_override_font_sizes/font_size = 50
-text = "Round 
-1/8"
-metadata/_edit_use_anchors_ = true
+text = "Round 1/8"
+horizontal_alignment = 1
 
 [node name="SpeechBubble" type="Control" parent="Layoutbox/Top/DealerZone/AdjacentUI"]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -507,14 +508,16 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_4rx7b")
 z_index = 1
 layout_mode = 1
 anchors_preset = -1
-anchor_left = -0.00462963
-anchor_top = 0.886598
-anchor_right = 0.99537
-anchor_bottom = 0.886599
-offset_left = 280.0
-offset_top = -451.99
-offset_right = -273.0
-offset_bottom = 75.0101
+anchor_left = 0.494
+anchor_top = 0.88
+anchor_right = 0.494
+anchor_bottom = 0.88
+offset_left = -270.52
+offset_top = -462.44
+offset_right = 271.48
+offset_bottom = 65.56
+grow_horizontal = 2
+grow_vertical = 0
 texture = ExtResource("3_0goto")
 expand_mode = 1
 stretch_mode = 5
@@ -525,7 +528,6 @@ ShoppingSprite = ExtResource("8_6w8yb")
 RoundWonSprite = ExtResource("9_4rx7b")
 RoundLostSprite = ExtResource("10_c63pe")
 GameWonSprite = ExtResource("11_siqoq")
-metadata/_edit_use_anchors_ = true
 
 [node name="ColorRect" type="ColorRect" parent="Layoutbox/Top/DealerZone/DealerPuppet"]
 z_as_relative = false
@@ -542,6 +544,10 @@ offset_bottom = 53.4999
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.356863, 0.0784314, 0.109804, 1)
+
+[node name="Timer" type="Timer" parent="Layoutbox/Top/DealerZone/DealerPuppet"]
+wait_time = 0.4
+one_shot = true
 
 [node name="Bottom" type="BoxContainer" parent="Layoutbox"]
 custom_minimum_size = Vector2(50, 50)
@@ -570,7 +576,6 @@ size_flags_vertical = 3
 
 [node name="TiltPanel" parent="Layoutbox/Bottom/Left/HistoryZone" instance=ExtResource("4_cyt0w")]
 layout_mode = 2
-adjustDuringPlay = true
 
 [node name="Center" type="VBoxContainer" parent="Layoutbox/Bottom"]
 layout_mode = 2
@@ -1848,6 +1853,7 @@ theme = ExtResource("5_cxspc")
 text = "Scoring"
 
 [connection signal="pressed" from="Layoutbox/Top/DealerZone/AdjacentUI/ChangeTieButton" to="." method="change_tie_button_down"]
+[connection signal="timeout" from="Layoutbox/Top/DealerZone/DealerPuppet/Timer" to="Layoutbox/Top/DealerZone/DealerPuppet" method="_on_timer_timeout"]
 [connection signal="button_up" from="Layoutbox/Bottom/Center/LargeCoinZone/NextCoinButton" to="." method="_on_next_coin_button_button_up"]
 [connection signal="button_up" from="Layoutbox/Bottom/Center/LargeCoinZone/ReDoCoinButton" to="." method="_on_re_do_coin_button_button_up"]
 [connection signal="toggled" from="ExplanationPanel/Button" to="." method="_on_HelpButton_toggled"]

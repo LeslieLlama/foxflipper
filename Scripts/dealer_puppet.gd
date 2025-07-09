@@ -20,11 +20,20 @@ func _ready() -> void:
 	Signals.GameWon.connect(game_won)
 	get_tree().get_root().size_changed.connect(on_resize)
 	await get_tree().create_timer(0.01).timeout
-	current_position = global_position
+	current_position = position
 	
+	
+#the godot signal on screen resize is too slow? or at least updates inconsistently enough that there can be a difference between the screen resize and the actual positon recording
+#so a timer function that delays the call until the window has stopped resizing, and records the position of the dealer 0.4 seconds after the fact makes capturing the current position for tweening purposes more accurate
+#0.4 might be a bit long but it seems to work consistently..?
 func on_resize():
-	current_position = global_position
+	$Timer.start()
+	if $Timer.time_left > 0:
+		return
 	
+func _on_timer_timeout() -> void:
+	print("resizing...")
+	current_position = position
 	
 func betting_begin():
 	_switch_sprite(0)

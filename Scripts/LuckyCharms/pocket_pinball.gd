@@ -15,7 +15,7 @@ func MultiplyScore():
 	await get_tree().create_timer(0.2).timeout
 	_activation_animation()
 	PlayAddPointsToScoreSound()
-	var pos = Vector2(-Globals.score_position.x, (Globals.score_position.y*2)+40)
+	var pos = Vector2(-Globals.score_position.x, (Globals.score_position.y))
 	var new_pos = Vector2(pos.x, pos.y-30)
 	Signals.emit_signal("PopupMessage", str("+",pinballPoints),pos,new_pos,colorRed)
 	Globals.currentScore += pinballPoints

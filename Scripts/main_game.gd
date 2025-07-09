@@ -296,7 +296,7 @@ func reset_table():
 	Globals.coinCount = 0
 	Globals.coinsToThrow = Globals.maxCoinCount
 	reflipCount = maxReflipCount
-	CurrentRoundLabel.text = str("Round","\n",RoundNumber,"/8")
+	CurrentRoundLabel.text = str("Round ",RoundNumber,"/8")
 	Globals.currentScoreRequirement = RequiredScore[RoundNumber-1]
 	_update_score_requirement_ui()
 	ReflipAmmount.text = str(reflipCount,"x")

@@ -10,6 +10,8 @@ func MultiplyScore():
 	Globals.reverse_score_direction = false
 	if used == true:
 		return
+	if Globals.CoinHistory.count(0) != Globals.CoinHistory.count(1):
+		return
 	print("boomerang trigger")
 	Globals.score_loop += 1
 	Globals.reverse_score_direction = true
